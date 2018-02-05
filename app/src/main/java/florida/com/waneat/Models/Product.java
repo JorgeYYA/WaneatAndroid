@@ -11,13 +11,13 @@ public class Product {
     private int id;
     private String nombre;
     private String descripcion;
-    private float precio;
+    private double precio;
     private ArrayList<Integer> imagen;
     private String categoria;
     private String comentariosAdicionales;
     private int cantidad;
 
-    public Product(int id, String nombre, String descripcion, float precio, ArrayList<Integer> imagen, String comentariosAdicionales, String categoria, int cantidad) {
+    public Product(int id, String nombre, String descripcion, double precio, ArrayList<Integer> imagen, String comentariosAdicionales, String categoria, int cantidad) {
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
@@ -54,11 +54,11 @@ public class Product {
         this.descripcion = descripcion;
     }
 
-    public float getPrecio() {
+    public double getPrecio() {
         return precio;
     }
 
-    public void setPrecio(float precio) {
+    public void setPrecio(double precio) {
         this.precio = precio;
     }
 

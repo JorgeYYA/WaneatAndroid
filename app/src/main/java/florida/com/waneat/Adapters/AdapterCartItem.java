@@ -2,9 +2,13 @@ package florida.com.waneat.Adapters;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.List;
@@ -19,11 +23,11 @@ import florida.com.waneat.R;
 public class AdapterCartItem  extends RecyclerView.Adapter<AdapterCartItem.MyViewHolder> {
 
     private List<Product> productosLista;
-    private RecyclerViewOnItemClickListener recyclerViewOnItemClickListener;
+    private BtnClickListener BtnClickListener;
 
-    public AdapterCartItem(List<Product> productosLista, @NonNull RecyclerViewOnItemClickListener recyclerViewOnItemClickListener) {
+    public AdapterCartItem(List<Product> productosLista, @NonNull BtnClickListener BtnClickListener) {
         this.productosLista = productosLista;
-        this.recyclerViewOnItemClickListener = recyclerViewOnItemClickListener;
+        this.BtnClickListener = BtnClickListener;
     }
 
     @Override
@@ -36,10 +40,15 @@ public class AdapterCartItem  extends RecyclerView.Adapter<AdapterCartItem.MyVie
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         Product producto = productosLista.get(position);
+        //le añadimos el id en el que se clicka al boton de añadir y de borrar respectivamente
+        holder.add.setTag(position);
+        holder.remove.setTag(position);
+
+
         holder.nombre.setText(producto.getNombre());
         holder.comentariosAdicionales.setText(producto.getComentariosAdicionales());
-        holder.cantidad.setText(producto.getCantidad());
-        holder.precio.setText(producto.getCantidad());
+        holder.cantidad.setText(Integer.toString(producto.getCantidad()));
+        holder.precio.setText(String.valueOf(producto.getPrecio()));
     }
 
     @Override
@@ -48,9 +57,11 @@ public class AdapterCartItem  extends RecyclerView.Adapter<AdapterCartItem.MyVie
     }
 
 
-    public class MyViewHolder extends RecyclerView.ViewHolder implements  View.OnClickListener{
+
+    public class MyViewHolder extends RecyclerView.ViewHolder{
 
         public TextView nombre, comentariosAdicionales, precio, cantidad;
+        public Button add, remove;
 
         public MyViewHolder(View view) {
             super(view);
@@ -58,20 +69,35 @@ public class AdapterCartItem  extends RecyclerView.Adapter<AdapterCartItem.MyVie
             comentariosAdicionales = (TextView) view.findViewById(R.id.comentariosAdicionalesProducto);
             precio = (TextView) view.findViewById(R.id.precioProducto);
             cantidad = (TextView) view.findViewById(R.id.cantidadProducto);
-
-            view.setOnClickListener(this);
+            add = (Button) view.findViewById(R.id.addProduct);
+            remove = (Button) view.findViewById(R.id.removeProduct);
+            addProducts();
+            removeProducts();
         }
 
-        @Override
-        public void onClick(View v) {
-            recyclerViewOnItemClickListener.onClick(v, getAdapterPosition());
+        private void addProducts(){
+            add.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    BtnClickListener.onAddProducts((Integer)view.getTag());
+                }
+            });
         }
-
+        private void removeProducts(){
+            remove.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    BtnClickListener.onRemoveProducts((Integer)view.getTag());
+                }
+            });
+        }
     }
 
 
-    public interface  RecyclerViewOnItemClickListener {
 
-        void onClick(View v, int position);
+
+    public interface BtnClickListener {
+        void onAddProducts(int position);
+        void onRemoveProducts(int position);
     }
 }
