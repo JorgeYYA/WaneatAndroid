@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp">
+
+    <ImageView
+        android:id="@+id/imagenProducto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/ic_launcher"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/nombreProducto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="19dp"
+            android:text="Spaguettis riquisimos"/>
+
+        <TextView
+            android:id="@+id/comentariosAdicionalesProducto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Comentarios: Sin salsa"/>
+
+        <TextView
+            android:id="@+id/precioProducto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Precio: 3,59€"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:layout_weight="400"
+        android:gravity="center">
+        <TextView
+            android:id="@+id/cantidadProducto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:textSize="20dp"
+            android:background="#F2F2F2"
+            android:text="12"/>
+        <Button
+            android:id="@+id/removeProduct"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/ic_remove_circle_outline_black_24dp"/>
+    </LinearLayout>
+
+</LinearLayout>
