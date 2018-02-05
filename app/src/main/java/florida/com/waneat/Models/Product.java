@@ -13,15 +13,19 @@ public class Product {
     private String descripcion;
     private float precio;
     private ArrayList<Integer> imagen;
+    private String categoria;
     private String comentariosAdicionales;
+    private int cantidad;
 
-    public Product(int id, String nombre, String descripcion, float precio, ArrayList<Integer> imagen, String comentariosAdicionales) {
+    public Product(int id, String nombre, String descripcion, float precio, ArrayList<Integer> imagen, String comentariosAdicionales, String categoria, int cantidad) {
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.precio = precio;
         this.imagen = imagen;
         this.comentariosAdicionales = comentariosAdicionales;
+        this.categoria = categoria;
+        this.cantidad = cantidad;
     }
 
     public Product(){}
@@ -72,5 +76,21 @@ public class Product {
 
     public void setComentariosAdicionales(String comentariosAdicionales) {
         this.comentariosAdicionales = comentariosAdicionales;
+    }
+
+    public String getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
+    }
+
+    public int getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
     }
 }
