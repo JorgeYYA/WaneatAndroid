@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Waneat.iml" filepath="$PROJECT_DIR$/Waneat.iml" />
+      <module fileurl="file://C:\Users\David\Documents\WaneatAndroid\Waneat.iml" filepath="C:\Users\David\Documents\WaneatAndroid\Waneat.iml" />
+      <module fileurl="file://$PROJECT_DIR$/WaneatAndroid.iml" filepath="$PROJECT_DIR$/WaneatAndroid.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://C:\Users\David\Documents\WaneatAndroid\app\app.iml" filepath="C:\Users\David\Documents\WaneatAndroid\app\app.iml" />
     </modules>
   </component>
 </project>
