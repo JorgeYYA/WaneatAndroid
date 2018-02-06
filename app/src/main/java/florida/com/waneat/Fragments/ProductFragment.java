@@ -12,9 +12,11 @@ import android.widget.Button;
 import android.widget.ImageSwitcher;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ViewSwitcher;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Timer;
 
 import florida.com.waneat.Models.Product;
@@ -47,6 +49,8 @@ public class ProductFragment extends Fragment {
     private String mParam2;
 
     TextView price, name, desc, note;
+
+    Button add;
 
     private OnFragmentInteractionListener mListener;
 
@@ -86,16 +90,16 @@ public class ProductFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+
         View v = inflater.inflate(R.layout.fragment_product, container, false);
 
         price = (TextView) v.findViewById(R.id.p_price);
         name = (TextView) v.findViewById(R.id.p_name);
         desc = (TextView) v.findViewById(R.id.p_desc);
         note = (TextView) v.findViewById(R.id.text_note);
+        add = (Button) v.findViewById(R.id.p_add);
 
         imagen = new ArrayList<>();
-
         imagen.add(R.drawable.test);
         imagen.add(R.drawable.test2);
 
@@ -145,9 +149,16 @@ public class ProductFragment extends Fragment {
             }
         });
 
+        //timer();
 
+        add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
+                Toast.makeText(getActivity(), "Mi polla", Toast.LENGTH_SHORT).show();
 
+            }
+        });
 
         return v;
     }
@@ -162,8 +173,61 @@ public class ProductFragment extends Fragment {
             position = 0;
         }
 
+    }
+
+    public void timer(){
+
+        //Cosas Joder Cosas
+        boolean bo = true;
+
+        int segun = 0;
+
+        int segundos = Calendar.getInstance().getTime().getSeconds();
+        int segundos2 = Calendar.getInstance().getTime().getSeconds()+5;
+
+        Calendar.getInstance().getTime();
+        Toast.makeText(getActivity(), segundos+"", Toast.LENGTH_SHORT).show();
+
+        do {
+            segun ++;
+            segundos = Calendar.getInstance().getTime().getSeconds();
+            Toast.makeText(getActivity(), segundos+"", Toast.LENGTH_SHORT).show();
+            price.setText(segun+"");
+
+            if (segundos == 0){
+
+                changeImage();
+                segundos = Calendar.getInstance().getTime().getSeconds();
+                segundos2 = Calendar.getInstance().getTime().getSeconds()+5;
+
+
+            }else{
+
+
+
+            }
+
+            if (segundos == segundos2){
+
+                changeImage();
+                segundos = Calendar.getInstance().getTime().getSeconds();
+                segundos2 = Calendar.getInstance().getTime().getSeconds()+5;
+
+
+            }else{
+
+
+
+            }
+
+
+
+        } while (bo);
+
 
     }
+
+
 
 
 
@@ -188,3 +252,5 @@ public class ProductFragment extends Fragment {
         void onFragmentInteraction(Uri uri);
     }
 }
+
+
