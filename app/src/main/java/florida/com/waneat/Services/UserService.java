@@ -28,7 +28,7 @@ public class UserService {
 
         if(this.prefs.getBoolean("isSignedIn", false)){
             //significa que esta logueado
-            
+
         }else{
             //no esta logueado
             Toast.makeText(context, "No estas logueado", Toast.LENGTH_SHORT).show();
