@@ -63,6 +63,7 @@ public class UserService {
         if(email.equalsIgnoreCase(u.getEmail()) && pwd.equalsIgnoreCase(u.getPassword())){
             Toast.makeText(context, "Inicio de sesión completado", Toast.LENGTH_SHORT).show();
             context.startActivity(new Intent(context,MainActivity.class));
+
         }else{
             Toast.makeText(context, "Fallo en inicio de sesión", Toast.LENGTH_SHORT).show();
         }
