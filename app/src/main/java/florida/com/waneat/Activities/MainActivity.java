@@ -1,20 +1,18 @@
 package florida.com.waneat.Activities;
 
-import android.app.Dialog;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.FragmentManager;
-import android.view.View;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import java.util.ArrayList;
 
@@ -22,6 +20,7 @@ import florida.com.waneat.Fragments.DialogFragment;
 import florida.com.waneat.Fragments.ProductFragment;
 import florida.com.waneat.Models.Product;
 import florida.com.waneat.R;
+import florida.com.waneat.Services.UserService;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -29,6 +28,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private android.app.FragmentManager fm;
     private FragmentTransaction ft;
+    private UserService service;
 
 
     @Override
@@ -37,6 +37,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        this.service = new UserService(MainActivity.this);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 
@@ -99,6 +101,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         } else if (id == R.id.nav_send) {
 
+        } else if (id == R.id.nav_login) {
+            startActivity(new Intent(MainActivity.this, LoginActivity.class));
+        } else if (id == R.id.nav_register) {
+            startActivity(new Intent(MainActivity.this, RegisterActivity.class));
+        } else if (id == R.id.nav_logout) {
+            this.service.signOut();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

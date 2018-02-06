@@ -13,6 +13,17 @@ public class User {
     private String email;
     private String password;
 
+    public User(String nombre, String apellidos, String direccion, String tfl, String email, String password) {
+        this.nombre = nombre;
+        this.apellidos = apellidos;
+        this.direccion = direccion;
+        this.tfl = tfl;
+        this.email = email;
+        this.password = password;
+    }
+
+
+
     @Override
     public String toString() {
         return "User{" +

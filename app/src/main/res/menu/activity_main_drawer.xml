@@ -20,6 +20,18 @@
             android:id="@+id/nav_manage"
             android:icon="@drawable/ic_menu_manage"
             android:title="Tools" />
+        <item
+            android:id="@+id/nav_login"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="Iniciar" />
+        <item
+            android:id="@+id/nav_register"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="Registro" />
+        <item
+            android:id="@+id/nav_logout"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="Cerrar Sesión" />
     </group>
 
     <item android:title="Communicate">
