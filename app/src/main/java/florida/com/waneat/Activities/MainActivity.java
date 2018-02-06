@@ -1,6 +1,7 @@
-package florida.com.waneat;
+package florida.com.waneat.Activities;
 
 import android.app.Dialog;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -18,11 +19,17 @@ import android.view.MenuItem;
 import java.util.ArrayList;
 
 import florida.com.waneat.Fragments.DialogFragment;
+import florida.com.waneat.Fragments.ProductFragment;
 import florida.com.waneat.Models.Product;
+import florida.com.waneat.R;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     public ArrayList<Product> productosCesta = new ArrayList<Product>();
+
+    private android.app.FragmentManager fm;
+    private FragmentTransaction ft;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +39,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setSupportActionBar(toolbar);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+
+        fm = getFragmentManager();
+        ft = fm.beginTransaction();
+        ft.replace(R.id.fragment, ProductFragment.newInstance(null,null)).addToBackStack(null);
+        ft.commit();
+
+
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

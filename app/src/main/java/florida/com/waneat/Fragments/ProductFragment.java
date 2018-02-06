@@ -2,7 +2,7 @@ package florida.com.waneat.Fragments;
 
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,10 +11,13 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageSwitcher;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.ViewSwitcher;
 
+import java.util.ArrayList;
 import java.util.Timer;
 
+import florida.com.waneat.Models.Product;
 import florida.com.waneat.R;
 
 /**
@@ -31,21 +34,19 @@ public class ProductFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
+    private ArrayList<Integer> imagen;
+
     private ImageSwitcher imageSwitcher;
 
-    private int[] gallery = { R.drawable.ic_launcher_background, R.drawable.ic_launcher_foreground, R.drawable.ic_menu_camera,
-            R.drawable.ic_menu_gallery, R.drawable.ic_menu_manage, R.drawable.ic_menu_send };
 
     private int position;
-
-    private static final Integer DURATION = 2500;
-
-    private Timer timer = null;
 
 
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    TextView price, name, desc, note;
 
     private OnFragmentInteractionListener mListener;
 
@@ -88,6 +89,17 @@ public class ProductFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_product, container, false);
 
+        price = (TextView) v.findViewById(R.id.p_price);
+        name = (TextView) v.findViewById(R.id.p_name);
+        desc = (TextView) v.findViewById(R.id.p_desc);
+        note = (TextView) v.findViewById(R.id.text_note);
+
+        imagen = new ArrayList<>();
+
+        imagen.add(R.drawable.test);
+        imagen.add(R.drawable.test2);
+
+        Product pro = new Product(1,"Screenshot","El buen Debugging",9,imagen," ","Debug",0);
 
         imageSwitcher = (ImageSwitcher) v.findViewById(R.id.imageSwitcher);
         imageSwitcher.setFactory(new ViewSwitcher.ViewFactory() {
@@ -99,23 +111,36 @@ public class ProductFragment extends Fragment {
 
         next = (Button) v.findViewById(R.id.next);
 
-        // Set animations
-        // https://danielme.com/2013/08/18/diseno-android-transiciones-entre-activities/
+
+        name.setText(pro.getNombre());
+        price.setText(pro.getPrecio()+"");
+        desc.setText(pro.getDescripcion());
+
+        // Establece la animación de transición entre fotos
         Animation fadeIn = AnimationUtils.loadAnimation(getActivity(), R.anim.zoom_forward_out);
-        Animation fadeOut = AnimationUtils.loadAnimation(getActivity(), R.anim.zoom_forward_out);
-        imageSwitcher.setInAnimation(fadeIn);
-        imageSwitcher.setOutAnimation(fadeOut);
+        Animation fadeOut = AnimationUtils.loadAnimation(getActivity(), R.anim.zoom_forward_in);
+        imageSwitcher.setInAnimation(fadeOut);
+        imageSwitcher.setOutAnimation(fadeIn);
 
 
-        next.setOnClickListener(new View.OnClickListener() {
+        //Pone la primera imagen
+        changeImage();
+
+       //En caso de haber más de una imagen muestra al usuario instrucciones de como alternar entre ellas
+        if(pro.getImagen().size() > 1){
+
+            note.setText("Tap on the image for view more");
+
+        }
+
+
+
+        //Establece que al pulsar sobre la imagen cambie a la siguiente
+        imageSwitcher.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                imageSwitcher.setImageResource(gallery[position]);
-                position++;
-                if (position == gallery.length) {
-                    position = 0;
-                }
+                changeImage();
 
             }
         });
@@ -125,6 +150,19 @@ public class ProductFragment extends Fragment {
 
 
         return v;
+    }
+
+
+    public void changeImage(){
+
+        //Un bucle simple para recorrer todas las imágenes
+        imageSwitcher.setImageResource(imagen.get(position));
+        position++;
+        if (position == imagen.size()) {
+            position = 0;
+        }
+
+
     }
 
 
@@ -144,16 +182,7 @@ public class ProductFragment extends Fragment {
         mListener = null;
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
+
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
