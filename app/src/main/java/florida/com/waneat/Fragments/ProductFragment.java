@@ -54,7 +54,6 @@ public class ProductFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    Button next;
 
     public ProductFragment() {
         // Required empty public constructor
@@ -105,6 +104,7 @@ public class ProductFragment extends Fragment {
 
         Product pro = new Product(1,"Screenshot","El buen Debugging",9,imagen," ","Debug",0);
 
+        //Crea el ImageSwitcher
         imageSwitcher = (ImageSwitcher) v.findViewById(R.id.imageSwitcher);
         imageSwitcher.setFactory(new ViewSwitcher.ViewFactory() {
 
@@ -113,9 +113,9 @@ public class ProductFragment extends Fragment {
             }
         });
 
-        next = (Button) v.findViewById(R.id.next);
 
 
+        //Muestra en pantalla los datos del producto recibido
         name.setText(pro.getNombre());
         price.setText(pro.getPrecio()+"");
         desc.setText(pro.getDescripcion());
@@ -174,6 +174,7 @@ public class ProductFragment extends Fragment {
         }
 
     }
+
 
     public void timer(){
 
