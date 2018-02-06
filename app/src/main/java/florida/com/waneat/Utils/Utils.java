@@ -24,6 +24,6 @@ public class Utils {
      * Método que nos permite desencriptar un valor
      */
     private void decrypt(){
-        
+
     }
 }
