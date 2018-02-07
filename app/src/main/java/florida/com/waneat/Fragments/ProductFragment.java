@@ -126,7 +126,7 @@ public class ProductFragment extends Fragment {
 
         //Muestra en pantalla los datos del producto recibido
         name.setText(pro.getNombre());
-        price.setText(pro.getPrecio()+"");
+        price.setText(pro.getPrecio()+""+getResources().getText(R.string.badge));
         desc.setText(pro.getDescripcion());
 
         // Establece la animación de transición entre fotos
@@ -144,7 +144,7 @@ public class ProductFragment extends Fragment {
        //En caso de haber más de una imagen muestra al usuario instrucciones de como alternar entre ellas
         if(pro.getImagen().size() > 1){
 
-            note.setText("Slide at the image for view more");
+            note.setText("Slide left and right at the image for view more");
             progres.setVisibility(View.VISIBLE);
 
         }
