@@ -26,6 +26,8 @@ import florida.com.waneat.Models.Product;
 import florida.com.waneat.R;
 
 import static android.view.animation.Animation.ZORDER_BOTTOM;
+import static florida.com.waneat.Fragments.ProductFragment.fadeInPred;
+import static florida.com.waneat.Fragments.ProductFragment.fadeOutPred;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -48,6 +50,9 @@ public class ProductFragment extends Fragment {
     static ProgressBar progres;
 
     static Product pro;
+
+    static Animation fadeInPred;
+    static Animation fadeOutPred;
 
 
     static int position = 0;
@@ -123,6 +128,10 @@ public class ProductFragment extends Fragment {
                 return new ImageView(getActivity());
             }
         });
+
+        //Establece las animaciones predeterminadas
+        fadeInPred = AnimationUtils.loadAnimation(getActivity(), R.anim.zoom_forward_in);
+        fadeOutPred = AnimationUtils.loadAnimation(getActivity(), R.anim.rigth_to_left);
 
 
 
@@ -403,7 +412,9 @@ class showImages extends AsyncTask<ImageSwitcher, ProgressBar, Product> {
         for (int i = 0; i < 1; i++) {
 
 
-            
+
+            imageSwitcher.setInAnimation(fadeInPred);
+            imageSwitcher.setOutAnimation(fadeOutPred);
             showImages sm= new showImages(imageSwitcher, progress, pro);
             sm.executeOnExecutor( AsyncTask.THREAD_POOL_EXECUTOR);
             imageSwitcher.setImageResource(pro.getImagen().get(ProductFragment.position));
