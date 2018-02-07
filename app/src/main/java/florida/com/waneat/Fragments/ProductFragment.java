@@ -126,7 +126,7 @@ public class ProductFragment extends Fragment {
 
         //Muestra en pantalla los datos del producto recibido
         name.setText(pro.getNombre());
-        price.setText(pro.getPrecio()+"");
+        price.setText(pro.getPrecio()+""+getResources().getText(R.string.badge));
         desc.setText(pro.getDescripcion());
 
         // Establece la animación de transición entre fotos
