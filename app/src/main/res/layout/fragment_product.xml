@@ -48,8 +48,20 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="@android:color/background_light"
+        android:background="@color/cardview_light_background"
         android:orientation="vertical">
+
+        <ProgressBar
+            android:id="@+id/image_progress"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="180dp"
+            android:layout_marginRight="180dp"
+            android:layout_weight="1"
+            android:max="5"
+            android:progress="5"
+            android:visibility="gone" />
 
         <TextView
             android:id="@+id/text_note"
@@ -66,88 +78,88 @@
             android:layout_weight="1"
             android:src="@drawable/header7" />
 
-        <Button
-            android:id="@+id/next"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:onClick="start"
-            android:text="start"
-            android:visibility="gone" />
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="5dp"
             android:layout_weight="1"
-            android:background="@android:color/background_light"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/p_name"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:background="@android:color/background_light"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/p_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="Nombre"
+                    android:textColor="@color/colorSecondaryDarkWaneat"
+                    android:textSize="30sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:background="@android:color/background_light"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/p_desc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="Decripcion"
+                    android:textColor="@color/colorSecondaryDarkWaneat"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:background="@android:color/background_light"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/p_com"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="@string/comments"
+                    android:textColor="@color/colorSecondaryDarkWaneat"
+                    android:textSize="20sp" />
+
+                <EditText
+                    android:id="@+id/com_box"
+                    android:layout_width="match_parent"
+                    android:layout_height="120dp"
+                    android:ems="10"
+                    android:inputType="textMultiLine"
+                    android:singleLine="false" />
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/p_add"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:text="Nombre"
-                android:textColor="@color/colorSecondaryDarkWaneat"
-                android:textSize="30sp" />
+                android:layout_weight="1"
+                android:background="@android:color/background_light"
+                android:onClick="stop"
+                android:text="@string/add_product"
+                android:textColor="@color/colorSecondaryDarkWaneat" />
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="5dp"
-            android:layout_weight="1"
-            android:background="@android:color/background_light"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/p_desc"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:text="Decripcion"
-                android:textColor="@color/colorSecondaryDarkWaneat"
-                android:textSize="20sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="5dp"
-            android:layout_weight="1"
-            android:background="@android:color/background_light"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/p_com"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:text="@string/comments"
-                android:textColor="@color/colorSecondaryDarkWaneat"
-                android:textSize="20sp" />
-
-            <EditText
-                android:id="@+id/com_box"
-                android:layout_width="match_parent"
-                android:layout_height="120dp"
-                android:ems="10"
-                android:inputType="textMultiLine"
-                android:singleLine="false" />
-
-        </LinearLayout>
-
-        <Button
-            android:id="@+id/p_add"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@android:color/background_light"
-            android:onClick="stop"
-            android:text="@string/add_product"
-            android:textColor="@color/colorSecondaryDarkWaneat" />
     </LinearLayout>
 
 </RelativeLayout>
