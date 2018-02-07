@@ -30,9 +30,9 @@
             android:layout_alignLeft="@+id/imageSwitcher"
             android:layout_alignParentStart="true"
             android:layout_alignRight="@+id/imageSwitcher"
-
             android:layout_alignTop="@+id/imageSwitcher"
             android:layout_below="@+id/imageSwitcher"
+
             android:layout_weight="1"
             android:foregroundGravity="center_vertical|center_horizontal"
             android:gravity="center_vertical|center_horizontal"
@@ -41,6 +41,23 @@
             android:textColor="@color/colorSecondaryDarkWaneat"
             android:textSize="50sp" />
 
+        <ProgressBar
+            android:id="@+id/image_progress"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="150dp"
+            android:layout_marginRight="150dp"
+            android:layout_weight="1"
+            android:max="5"
+            android:progress="5"
+            android:visibility="gone" />
+
     </RelativeLayout>
 
     <LinearLayout
@@ -48,7 +65,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="@android:color/background_light"
+        android:background="@color/cardview_light_background"
         android:orientation="vertical">
 
         <TextView
@@ -57,7 +74,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:textAlignment="center"
-            android:textColor="@color/colorSecondaryWaneat" />
+            android:textColor="@color/colorSecondaryWaneat"
+            android:visibility="visible" />
 
         <ImageView
             android:id="@+id/imageView3"
@@ -66,88 +84,88 @@
             android:layout_weight="1"
             android:src="@drawable/header7" />
 
-        <Button
-            android:id="@+id/next"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:onClick="start"
-            android:text="start"
-            android:visibility="gone" />
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="5dp"
             android:layout_weight="1"
-            android:background="@android:color/background_light"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/p_name"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:background="@android:color/background_light"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/p_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="Nombre"
+                    android:textColor="@color/colorSecondaryDarkWaneat"
+                    android:textSize="30sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:background="@android:color/background_light"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/p_desc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="Decripcion"
+                    android:textColor="@color/colorSecondaryWaneat"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:background="@android:color/background_light"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/p_com"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="@string/comments"
+                    android:textColor="@color/colorSecondaryWaneat"
+                    android:textSize="20sp" />
+
+                <EditText
+                    android:id="@+id/com_box"
+                    android:layout_width="match_parent"
+                    android:layout_height="120dp"
+                    android:ems="10"
+                    android:inputType="textMultiLine"
+                    android:singleLine="false" />
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/p_add"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:text="Nombre"
-                android:textColor="@color/colorSecondaryDarkWaneat"
-                android:textSize="30sp" />
+                android:layout_weight="1"
+                android:background="@color/colorPrimaryDarkWaneat"
+                android:onClick="stop"
+                android:text="@string/add_product"
+                android:textColor="@android:color/background_dark" />
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="5dp"
-            android:layout_weight="1"
-            android:background="@android:color/background_light"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/p_desc"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:text="Decripcion"
-                android:textColor="@color/colorSecondaryDarkWaneat"
-                android:textSize="20sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="5dp"
-            android:layout_weight="1"
-            android:background="@android:color/background_light"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/p_com"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:text="@string/comments"
-                android:textColor="@color/colorSecondaryDarkWaneat"
-                android:textSize="20sp" />
-
-            <EditText
-                android:id="@+id/com_box"
-                android:layout_width="match_parent"
-                android:layout_height="120dp"
-                android:ems="10"
-                android:inputType="textMultiLine"
-                android:singleLine="false" />
-
-        </LinearLayout>
-
-        <Button
-            android:id="@+id/p_add"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@android:color/background_light"
-            android:onClick="stop"
-            android:text="@string/add_product"
-            android:textColor="@color/colorSecondaryDarkWaneat" />
     </LinearLayout>
 
 </RelativeLayout>
