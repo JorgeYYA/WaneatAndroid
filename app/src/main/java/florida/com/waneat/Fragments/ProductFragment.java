@@ -23,6 +23,8 @@ import florida.com.waneat.Controllers.OnSwipeTouchListener;
 import florida.com.waneat.Models.Product;
 import florida.com.waneat.R;
 
+import static android.view.animation.Animation.ZORDER_BOTTOM;
+
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
