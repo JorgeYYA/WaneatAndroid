@@ -1,6 +1,7 @@
 package florida.com.waneat.Fragments;
 
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
@@ -19,11 +20,14 @@ import android.widget.ViewSwitcher;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import florida.com.waneat.Activities.MainActivity;
 import florida.com.waneat.Controllers.OnSwipeTouchListener;
 import florida.com.waneat.Models.Product;
 import florida.com.waneat.R;
 
 import static android.view.animation.Animation.ZORDER_BOTTOM;
+import static florida.com.waneat.Fragments.ProductFragment.fadeInPred;
+import static florida.com.waneat.Fragments.ProductFragment.fadeOutPred;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -41,14 +45,17 @@ public class ProductFragment extends Fragment {
 
     private ArrayList<Integer> imagen;
 
-    private ImageSwitcher imageSwitcher;
+    private static ImageSwitcher imageSwitcher;
 
-    ProgressBar progres;
+    static ProgressBar progres;
 
-    Product pro;
+    static Product pro;
+
+    static Animation fadeInPred;
+    static Animation fadeOutPred;
 
 
-    private int position = 0;
+    static int position = 0;
 
 
     // TODO: Rename and change types of parameters
@@ -122,6 +129,10 @@ public class ProductFragment extends Fragment {
             }
         });
 
+        //Establece las animaciones predeterminadas
+        fadeInPred = AnimationUtils.loadAnimation(getActivity(), R.anim.zoom_forward_in);
+        fadeOutPred = AnimationUtils.loadAnimation(getActivity(), R.anim.rigth_to_left);
+
 
 
         //Muestra en pantalla los datos del producto recibido
@@ -183,6 +194,39 @@ public class ProductFragment extends Fragment {
         });
 
         //timer();
+        //ASD
+        showImages sm= new showImages(imageSwitcher, progres, pro);
+        sm.executeOnExecutor( AsyncTask.THREAD_POOL_EXECUTOR);
+
+        /*if (isAdded()) {
+            getActivity().runOnUiThread(new Thread() {
+                @Override
+                public void run() {
+
+                    for (int i = 0; i < 5; i++) {
+
+                        position++;
+
+                        if (position == pro.getImagen().size()) {
+                            position = 0;
+                            //progres.setProgress(position);
+                        }
+                        progres.setProgress(position + 1);
+
+                        imageSwitcher.setImageResource(pro.getImagen().get(position));
+                        try {
+                            Thread.sleep(1000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                }
+            });
+        }*/
+
+
+
 
         add.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -197,7 +241,7 @@ public class ProductFragment extends Fragment {
     }
 
 
-    public void nextImage(){
+    public static void nextImage(){
         //Un bucle simple para recorrer todas las imágenes
 
         position++;
@@ -206,7 +250,7 @@ public class ProductFragment extends Fragment {
             position = 0;
             //progres.setProgress(position);
         }
-        progres.setProgress(position+1);
+        setProgress();
 
         imageSwitcher.setImageResource(pro.getImagen().get(position));
         //Toast.makeText(getActivity(), position+"next", Toast.LENGTH_SHORT).show();
@@ -229,7 +273,7 @@ public class ProductFragment extends Fragment {
         position--;
         imageSwitcher.setImageResource(pro.getImagen().get(position));
         //Toast.makeText(getActivity(), position+"prev", Toast.LENGTH_SHORT).show();
-        progres.setProgress(position+1);
+        setProgress();
 
 
 
@@ -237,6 +281,14 @@ public class ProductFragment extends Fragment {
 
     }
 
+
+    public static void setProgress(){
+
+        progres.setProgress(ProductFragment.position+1);//revisar
+
+
+
+    }
 
     public void timer(){
 
@@ -316,4 +368,61 @@ public class ProductFragment extends Fragment {
     }
 }
 
+class showImages extends AsyncTask<ImageSwitcher, ProgressBar, Product> {
+    ImageSwitcher imageSwitcher;
 
+    ProgressBar progress;
+
+    Product pro;
+
+    public showImages(ImageSwitcher imageSwitcher, ProgressBar progress, Product pro) {
+        this.imageSwitcher = imageSwitcher;
+        this.progress = progress;
+        this.pro = pro;
+    }
+
+    @Override
+    protected Product doInBackground(ImageSwitcher... imageSwitchers) {
+
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+
+        ProductFragment.position++;
+
+        if (ProductFragment.position == pro.getImagen().size()) {
+            ProductFragment.position = 0;
+            //progres.setProgress(position);
+        }
+
+
+
+
+        return null;
+    }
+
+
+
+    @Override
+    protected void onPostExecute(Product product) {
+        super.onPostExecute(product);
+        for (int i = 0; i < 1; i++) {
+
+
+
+            imageSwitcher.setInAnimation(fadeInPred);
+            imageSwitcher.setOutAnimation(fadeOutPred);
+            showImages sm= new showImages(imageSwitcher, progress, pro);
+            sm.executeOnExecutor( AsyncTask.THREAD_POOL_EXECUTOR);
+            imageSwitcher.setImageResource(pro.getImagen().get(ProductFragment.position));
+            ProductFragment.setProgress();
+
+        }
+
+
+
+    }
+}
