@@ -10,9 +10,9 @@
     tools:context="florida.com.waneat.Activities.RegisterActivity">
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@mipmap/ic_launcher_round"/>
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/logo" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -57,9 +57,18 @@
     <TextView
         android:id="@+id/alreadyRegistered"
         android:layout_width="wrap_content"
-        android:textColor="#ffff"
         android:layout_height="wrap_content"
-        android:text="¿Ya estás registrado? Accede a tu cuenta"/>
+        android:layout_marginTop="20dp"
+        android:text="¿Ya estás registrado? Accede a tu cuenta"
+        android:textColor="#ffff" />
+
+    <Button
+        android:id="@+id/inicarButton"
+        android:layout_width="105dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:backgroundTint="@color/colorPrimaryWaneat"
+        android:text="Button" />
 
 
 </LinearLayout>

@@ -29,6 +29,8 @@ public class LoginActivity extends AppCompatActivity {
         login = (Button) findViewById(R.id.buttonLogin);
         register = (Button) findViewById(R.id.buttonRegister);
 
+        service.isLoggedIn();
+
         login.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 //llamar metodo service

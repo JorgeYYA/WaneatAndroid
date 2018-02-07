@@ -11,6 +11,7 @@
         android:id="@+id/imageLogo"
         android:layout_width="match_parent"
         android:layout_height="208dp"
+        android:layout_margin="10dp"
         app:srcCompat="@drawable/logo" />
 
     <EditText
@@ -18,10 +19,12 @@
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:layout_margin="10dp"
         android:ems="10"
         android:gravity="center_vertical|center"
         android:hint="Email"
         android:inputType="textPersonName"
+        android:padding="10dp"
         android:textSize="24sp" />
 
     <EditText
@@ -29,29 +32,29 @@
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:layout_margin="10dp"
         android:ems="10"
         android:gravity="center_vertical|center"
         android:hint="Contraseña"
         android:inputType="textPersonName"
+        android:padding="10dp"
         android:textSize="24sp" />
-
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="20dp" />
 
     <Button
         android:id="@+id/buttonLogin"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="Iniciar"
-        android:background="@color/colorPrimaryWaneat"/>
+        android:layout_marginTop="10dp"
+        android:background="@color/colorPrimaryWaneat"
+        android:text="Iniciar" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="81dp"
         android:gravity="center_vertical|center_horizontal"
         android:text="¿Aún no tienes cuenta? ¡Regístrate aquí!"
+        android:textColor="@android:color/black"
         android:textSize="22sp" />
 
     <Button
@@ -59,6 +62,6 @@
         android:layout_width="170dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="Registrar"
-        android:background="@color/colorPrimaryDarkWaneat"/>
+        android:background="@color/colorPrimaryDarkWaneat"
+        android:text="Registrar" />
 </LinearLayout>
