@@ -4,14 +4,6 @@ import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.app.FragmentTransaction;
-import android.net.Uri;
-import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.FragmentManager;
-import android.util.Log;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
@@ -19,12 +11,13 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import florida.com.waneat.Adapters.AdapterCartItem;
 import florida.com.waneat.Fragments.DialogFragment;
 import florida.com.waneat.Fragments.ProductFragment;
 import florida.com.waneat.Models.Product;
@@ -38,6 +31,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private android.app.FragmentManager fm;
     private FragmentTransaction ft;
     private UserService service;
+    private TextView currentUsuario;
 
 
     @Override
@@ -77,6 +71,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        //Poner el email en el navigationdrawer
+        View headerView = navigationView.getHeaderView(0);
+
+        currentUsuario = (TextView) headerView.findViewById(R.id.current_user) ;
+        String correo = null;
+        currentUsuario.setText(service.setCorreo(correo));
 
         cargarProductosIniciales();
     }
@@ -148,22 +149,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        if (id == R.id.nav_miperfil) {
 
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.nav_mispedidos) {
 
-        } else if (id == R.id.nav_manage) {
+        } else if (id == R.id.nav_qr) {
 
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.nav_mistarjetas) {
 
         } else if (id == R.id.nav_login) {
             startActivity(new Intent(MainActivity.this, LoginActivity.class));
-        } else if (id == R.id.nav_register) {
-            startActivity(new Intent(MainActivity.this, RegisterActivity.class));
+
         } else if (id == R.id.nav_logout) {
             this.service.signOut();
             startActivity(new Intent(MainActivity.this, LoginActivity.class));
