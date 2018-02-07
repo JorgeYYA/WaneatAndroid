@@ -11,14 +11,15 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageSwitcher;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewSwitcher;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Timer;
 
+import florida.com.waneat.Controllers.OnSwipeTouchListener;
 import florida.com.waneat.Models.Product;
 import florida.com.waneat.R;
 
@@ -40,8 +41,12 @@ public class ProductFragment extends Fragment {
 
     private ImageSwitcher imageSwitcher;
 
+    ProgressBar progres;
 
-    private int position;
+    Product pro;
+
+
+    private int position = 0;
 
 
     // TODO: Rename and change types of parameters
@@ -97,12 +102,14 @@ public class ProductFragment extends Fragment {
         desc = (TextView) v.findViewById(R.id.p_desc);
         note = (TextView) v.findViewById(R.id.text_note);
         add = (Button) v.findViewById(R.id.p_add);
+        progres = (ProgressBar) v.findViewById(R.id.image_progress);
 
         imagen = new ArrayList<>();
         imagen.add(R.drawable.test);
         imagen.add(R.drawable.test2);
+        imagen.add(R.drawable.test);
 
-        Product pro = new Product(1,"Screenshot","El buen Debugging",9,imagen," ","Debug",0);
+        pro = new Product(1,"Screenshot","El buen Debugging",9,imagen," ","Debug",0);
 
         //Crea el ImageSwitcher
         imageSwitcher = (ImageSwitcher) v.findViewById(R.id.imageSwitcher);
@@ -121,32 +128,56 @@ public class ProductFragment extends Fragment {
         desc.setText(pro.getDescripcion());
 
         // Establece la animación de transición entre fotos
-        Animation fadeIn = AnimationUtils.loadAnimation(getActivity(), R.anim.zoom_forward_out);
-        Animation fadeOut = AnimationUtils.loadAnimation(getActivity(), R.anim.zoom_forward_in);
-        imageSwitcher.setInAnimation(fadeOut);
-        imageSwitcher.setOutAnimation(fadeIn);
+        Animation fadeOut = AnimationUtils.loadAnimation(getActivity(), R.anim.rigth_to_left);
+        Animation fadeIn = AnimationUtils.loadAnimation(getActivity(), R.anim.zoom_forward_in);
+       imageSwitcher.setInAnimation(fadeIn);
+       imageSwitcher.setOutAnimation(fadeOut);
 
 
         //Pone la primera imagen
-        changeImage();
+        imageSwitcher.setImageResource(pro.getImagen().get(0));
+        progres.setProgress(1);
+
 
        //En caso de haber más de una imagen muestra al usuario instrucciones de como alternar entre ellas
         if(pro.getImagen().size() > 1){
 
-            note.setText("Tap on the image for view more");
+            note.setText("Slide at the image for view more");
+            progres.setVisibility(View.VISIBLE);
 
         }
+
+        //Establece el máximo del progressBar
+        progres.setMax(pro.getImagen().size());
 
 
 
         //Establece que al pulsar sobre la imagen cambie a la siguiente
-        imageSwitcher.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
 
-                changeImage();
-
+        imageSwitcher.setOnTouchListener(new OnSwipeTouchListener(getActivity()) {
+            public void onSwipeTop() {
+                //Toast.makeText(getActivity(), "top", Toast.LENGTH_SHORT).show();
             }
+            public void onSwipeRight() {
+                //Toast.makeText(getActivity(), "right", Toast.LENGTH_SHORT).show();
+                Animation fadeIn = AnimationUtils.loadAnimation(getActivity(), R.anim.letf_to_right);
+                Animation fadeOut = AnimationUtils.loadAnimation(getActivity(), R.anim.zoom_forward_out);
+                imageSwitcher.setInAnimation(fadeIn);
+                imageSwitcher.setOutAnimation(fadeOut);
+                prevImage();
+            }
+            public void onSwipeLeft() {
+                //Toast.makeText(getActivity(), "left", Toast.LENGTH_SHORT).show();
+                Animation fadeIn = AnimationUtils.loadAnimation(getActivity(), R.anim.zoom_forward_in);
+                Animation fadeOut = AnimationUtils.loadAnimation(getActivity(), R.anim.rigth_to_left);
+                imageSwitcher.setInAnimation(fadeIn);
+                imageSwitcher.setOutAnimation(fadeOut);
+                nextImage();
+            }
+            public void onSwipeBottom() {
+                //Toast.makeText(getActivity(), "bottom", Toast.LENGTH_SHORT).show();
+            }
+
         });
 
         //timer();
@@ -164,14 +195,43 @@ public class ProductFragment extends Fragment {
     }
 
 
-    public void changeImage(){
+    public void nextImage(){
+        //Un bucle simple para recorrer todas las imágenes
+
+        position++;
+
+        if (position == pro.getImagen().size()) {
+            position = 0;
+            //progres.setProgress(position);
+        }
+        progres.setProgress(position+1);
+
+        imageSwitcher.setImageResource(pro.getImagen().get(position));
+        //Toast.makeText(getActivity(), position+"next", Toast.LENGTH_SHORT).show();
+
+    }
+
+    public void prevImage(){
 
         //Un bucle simple para recorrer todas las imágenes
-        imageSwitcher.setImageResource(imagen.get(position));
-        position++;
-        if (position == imagen.size()) {
-            position = 0;
+        //progres.setProgress(position);
+
+        if (position == 0) {
+            position = pro.getImagen().size();
+            //progres.setProgress(position);
+
+        }else{
+
+           // progres.setProgress(position+1);
         }
+        position--;
+        imageSwitcher.setImageResource(pro.getImagen().get(position));
+        //Toast.makeText(getActivity(), position+"prev", Toast.LENGTH_SHORT).show();
+        progres.setProgress(position+1);
+
+
+
+
 
     }
 
@@ -197,7 +257,7 @@ public class ProductFragment extends Fragment {
 
             if (segundos == 0){
 
-                changeImage();
+                nextImage();
                 segundos = Calendar.getInstance().getTime().getSeconds();
                 segundos2 = Calendar.getInstance().getTime().getSeconds()+5;
 
@@ -210,7 +270,7 @@ public class ProductFragment extends Fragment {
 
             if (segundos == segundos2){
 
-                changeImage();
+                nextImage();
                 segundos = Calendar.getInstance().getTime().getSeconds();
                 segundos2 = Calendar.getInstance().getTime().getSeconds()+5;
 

@@ -1,4 +1,4 @@
-package florida.com.waneat.Models;
+package florida.com.waneat.Controllers;
 
 import android.content.Context;
 import android.view.GestureDetector;
