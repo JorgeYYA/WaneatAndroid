@@ -76,8 +76,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         View headerView = navigationView.getHeaderView(0);
 
         currentUsuario = (TextView) headerView.findViewById(R.id.current_user) ;
-        String correo = null;
-        currentUsuario.setText(service.setCorreo(correo));
 
         cargarProductosIniciales();
     }
@@ -138,11 +136,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
 
-
-    public void añadirProducto(int index){
-
-    }
-
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -157,8 +150,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         } else if (id == R.id.nav_mistarjetas) {
 
-        } else if (id == R.id.nav_login) {
-            startActivity(new Intent(MainActivity.this, LoginActivity.class));
 
         } else if (id == R.id.nav_logout) {
             this.service.signOut();

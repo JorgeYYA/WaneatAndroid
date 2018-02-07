@@ -15,40 +15,16 @@
         <ImageSwitcher
             android:id="@+id/imageSwitcher"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_alignParentStart="true"
             android:layout_centerVertical="true">
-
         </ImageSwitcher>
-
-        <TextView
-            android:id="@+id/p_price"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-
-            android:layout_alignBottom="@+id/imageSwitcher"
-            android:layout_alignLeft="@+id/imageSwitcher"
-            android:layout_alignParentStart="true"
-            android:layout_alignRight="@+id/imageSwitcher"
-            android:layout_alignTop="@+id/imageSwitcher"
-            android:layout_below="@+id/imageSwitcher"
-
-            android:layout_weight="1"
-            android:foregroundGravity="center_vertical|center_horizontal"
-            android:gravity="center_vertical|center_horizontal"
-            android:text="TextView"
-            android:textAlignment="center"
-            android:textColor="@color/colorSecondaryDarkWaneat"
-            android:textSize="50sp" />
-
         <ProgressBar
             android:id="@+id/image_progress"
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-
-
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="30dp"
             android:layout_marginLeft="150dp"
@@ -66,38 +42,50 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="@color/altColor1"
         android:orientation="vertical">
 
-        <android.support.v7.widget.CardView
-            android:id="@+id/card_view"
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center">
+            <TextView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@drawable/rest"/>
+            <TextView
+                android:layout_marginLeft="10dp"
+                android:layout_width="wrap_content"
+                android:textStyle="bold"
+                android:textSize="25dp"
+                android:layout_height="wrap_content"
+                android:text="Restaurante Salas"/>
+
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="20dp"
-            android:layout_weight="1"
-            android:visibility="gone"
-            app:cardBackgroundColor="@color/colorPrimaryDarkWaneat"
-            app:cardCornerRadius="10dp">
-
+            android:gravity="center">
             <TextView
-                android:id="@+id/text_note"
-                android:layout_width="match_parent"
+                android:id="@+id/ratingNumberRestaurant"
+                android:layout_marginLeft="10dp"
+                android:layout_width="wrap_content"
+                android:textStyle="bold"
+                android:textColor="@color/colorPrimaryWaneat"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:textAlignment="center"
-                android:textColor="@color/colorSecondaryDarkWaneat"
-                android:visibility="visible" />
-        </android.support.v7.widget.CardView>
+                android:text="4,5"
+                android:textSize="20dp"/>
 
-        <ImageView
-            android:id="@+id/imageView3"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_weight="1"
-            android:src="@drawable/header7" />
+            <RatingBar
+                android:id="@+id/ratingRestaurant"
+                android:isIndicator="false"
+                style="?android:attr/ratingBarStyleIndicator"
+                android:backgroundTint="@color/colorPrimaryWaneat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -108,12 +96,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginBottom="5dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="5dp"
                 android:layout_weight="1"
-                android:background="@android:color/background_light"
+                android:padding="5dp"
                 android:orientation="vertical">
 
                 <TextView
@@ -121,60 +105,50 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
-                    android:text="Nombre"
+                    android:text="Lorem ipsum dolor sit amet"
+                    android:textStyle="bold"
                     android:textColor="@color/colorSecondaryDarkWaneat"
-                    android:textSize="30sp" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginBottom="5dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="5dp"
-                android:layout_weight="1"
-                android:background="@android:color/background_light"
-                android:orientation="vertical">
+                    android:textSize="20sp" />
 
                 <TextView
                     android:id="@+id/p_desc"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
-                    android:text="Decripcion"
-                    android:textColor="@color/colorSecondaryWaneat"
-                    android:textSize="20sp" />
+                    android:gravity="left"
+                    android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. "
+                    android:textColor="@android:color/darker_gray"
+                    android:textSize="15sp" />
+
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginBottom="10dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="5dp"
-                android:layout_weight="1"
-                android:background="@android:color/background_light"
-                android:orientation="vertical">
+                android:padding="10dp"
+                android:background="@color/lighGray">
 
                 <TextView
-                    android:id="@+id/p_com"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:text="@string/comments"
-                    android:textColor="@color/colorSecondaryWaneat"
-                    android:textSize="20sp" />
+                    android:id="@+id/categoriaProducto"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:textStyle="bold"
+                    android:background="@drawable/border_radius"
+                    android:padding="10dp"
+                    android:textColor="#fff"
+                    android:text="Pasta"/>
 
-                <EditText
-                    android:id="@+id/com_box"
-                    android:layout_width="match_parent"
-                    android:layout_height="120dp"
-                    android:ems="10"
-                    android:inputType="textMultiLine"
-                    android:singleLine="false" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/p_price"
+                    android:text="5,90€"
+                    android:textStyle="bold"
+                    android:layout_marginLeft="10dp"
+                    android:textColor="@color/colorSecondaryDarkWaneat"
+                    android:textSize="30dp"/>
+
 
             </LinearLayout>
 
@@ -183,10 +157,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@color/colorPrimaryDarkWaneat"
-                android:onClick="stop"
+                android:background="@color/colorSecondaryDarkWaneat"
                 android:text="@string/add_product"
-                android:textColor="@android:color/background_dark" />
+                android:textColor="@android:color/white" />
 
         </LinearLayout>
 

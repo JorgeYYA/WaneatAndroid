@@ -10,8 +10,8 @@
     tools:context="florida.com.waneat.Activities.RegisterActivity">
 
     <ImageView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:src="@drawable/logo" />
 
     <LinearLayout
@@ -40,7 +40,7 @@
             android:id="@+id/passwordRegister"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="numberPassword"
+            android:inputType="textPassword"
             android:layout_margin="10dp"
             android:background="@drawable/layout_edittext"
             android:padding="10dp"
@@ -62,13 +62,6 @@
         android:text="¿Ya estás registrado? Accede a tu cuenta"
         android:textColor="#ffff" />
 
-    <Button
-        android:id="@+id/inicarButton"
-        android:layout_width="105dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:backgroundTint="@color/colorPrimaryWaneat"
-        android:text="Button" />
 
 
 </LinearLayout>

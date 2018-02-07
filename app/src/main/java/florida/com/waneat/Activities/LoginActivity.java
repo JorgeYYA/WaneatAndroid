@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import florida.com.waneat.R;
 import florida.com.waneat.Services.UserService;
@@ -13,7 +14,8 @@ import florida.com.waneat.Services.UserService;
 public class LoginActivity extends AppCompatActivity {
 
     private EditText editLogEmail, editLogPass;
-    private Button login, register;
+    private Button login;
+    private TextView registerLabel;
     private UserService service;
 
     @Override
@@ -27,7 +29,7 @@ public class LoginActivity extends AppCompatActivity {
         editLogPass = (EditText)findViewById(R.id.editLogPass);
 
         login = (Button) findViewById(R.id.buttonLogin);
-        register = (Button) findViewById(R.id.buttonRegister);
+        registerLabel = (TextView) findViewById(R.id.registerLabel);
 
         service.isLoggedIn();
 
@@ -38,7 +40,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        register.setOnClickListener(new View.OnClickListener() {
+        registerLabel.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 //Inicia activity
                 startActivity(new Intent(LoginActivity.this, RegisterActivity.class));

@@ -5,5 +5,5 @@
     <color  name="colorSecondaryWaneat">#824eba</color>
     <color name="colorSecondaryDarkWaneat">#3d3784</color>
     <color name="altColor1">#F9F6F6</color>
-
+    <color name="lighGray">#e0e0e0</color>
 </resources>

@@ -3,6 +3,7 @@ package florida.com.waneat.Services;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.support.design.widget.Snackbar;
 import android.widget.Toast;
 
 import florida.com.waneat.Activities.MainActivity;
@@ -27,7 +28,6 @@ public class UserService {
     public UserService (Context context){
         this.context = context;
         this.prefs = context.getSharedPreferences(sharedName,Context.MODE_PRIVATE);
-        //SharedPreferences.Editor editor = this.prefs.edit();
     }
 
     /**
@@ -42,21 +42,8 @@ public class UserService {
             context.startActivity(new Intent(context,MainActivity.class));
         }else{
             //no esta logueado
-            Toast.makeText(context, "No estas logueado. Puedes iniciar sesión aquí.", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(context, "No estas logueado. Puedes iniciar sesión aquí.", Toast.LENGTH_SHORT).show();
         }
-    }
-
-    //Metodo que nos permite escribir el correo en nav
-
-   public String setCorreo(String correo){
-
-        if(this.prefs.getBoolean("isSignedIn", false)){
-            correo = this.prefs.getString("email", "No hay correos.");
-            return correo;
-        }else{
-            correo = "Sin iniciar sesión";
-        }
-        return correo;
     }
 
     /**
@@ -64,7 +51,7 @@ public class UserService {
      */
     public void signOut(){
         Toast.makeText(context, "Cerrando sesión", Toast.LENGTH_SHORT).show();
-        context.getSharedPreferences(sharedName, 0).edit().clear().commit();
+        context.getSharedPreferences(sharedName, 0).edit().clear().apply();
     }
 
     /**
@@ -77,11 +64,9 @@ public class UserService {
 
             SharedPreferences.Editor editor = this.prefs.edit();
 
-           editor.putBoolean("isSignedIn", true);
-           editor.putString("email", u.getEmail().toString());
-           editor.commit();
-
-
+            editor.putBoolean("isSignedIn", true);
+            editor.putString("email", u.getEmail().toString());
+            editor.apply();
         }else{
             Toast.makeText(context, "Fallo en inicio de sesión", Toast.LENGTH_SHORT).show();
         }

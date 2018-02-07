@@ -29,14 +29,7 @@ import static android.view.animation.Animation.ZORDER_BOTTOM;
 import static florida.com.waneat.Fragments.ProductFragment.fadeInPred;
 import static florida.com.waneat.Fragments.ProductFragment.fadeOutPred;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link ProductFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link ProductFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class ProductFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -62,7 +55,7 @@ public class ProductFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    TextView price, name, desc, note;
+    TextView price, name, desc,categoriaProducto;
 
     Button add;
 
@@ -73,15 +66,6 @@ public class ProductFragment extends Fragment {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment ProductFragment.
-     */
-    // TODO: Rename and change types and number of parameters
     public static ProductFragment newInstance(String param1, String param2) {
         ProductFragment fragment = new ProductFragment();
         Bundle args = new Bundle();
@@ -109,16 +93,15 @@ public class ProductFragment extends Fragment {
         price = (TextView) v.findViewById(R.id.p_price);
         name = (TextView) v.findViewById(R.id.p_name);
         desc = (TextView) v.findViewById(R.id.p_desc);
-        note = (TextView) v.findViewById(R.id.text_note);
         add = (Button) v.findViewById(R.id.p_add);
         progres = (ProgressBar) v.findViewById(R.id.image_progress);
+        categoriaProducto = (TextView) v.findViewById(R.id.categoriaProducto);
 
         imagen = new ArrayList<>();
-        imagen.add(R.drawable.test);
-        imagen.add(R.drawable.test2);
-        imagen.add(R.drawable.test);
+        imagen.add(R.drawable.plato1);
+        imagen.add(R.drawable.plato2);
 
-        pro = new Product(1,"Screenshot","El buen Debugging",9,imagen," ","Debug",0);
+        pro = new Product(1,"Lorem ipsum dolor sit amet","Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",9,imagen," ","Sushi",0);
 
         //Crea el ImageSwitcher
         imageSwitcher = (ImageSwitcher) v.findViewById(R.id.imageSwitcher);
@@ -139,6 +122,8 @@ public class ProductFragment extends Fragment {
         name.setText(pro.getNombre());
         price.setText(pro.getPrecio()+""+getResources().getText(R.string.badge));
         desc.setText(pro.getDescripcion());
+        categoriaProducto.setText(pro.getCategoria());
+
 
         // Establece la animación de transición entre fotos
         Animation fadeOut = AnimationUtils.loadAnimation(getActivity(), R.anim.rigth_to_left);
@@ -155,7 +140,7 @@ public class ProductFragment extends Fragment {
        //En caso de haber más de una imagen muestra al usuario instrucciones de como alternar entre ellas
         if(pro.getImagen().size() > 1){
 
-            note.setText("Slide left and right at the image for view more");
+            //note.setText("Slide left and right at the image for view more");
             progres.setVisibility(View.VISIBLE);
 
         }

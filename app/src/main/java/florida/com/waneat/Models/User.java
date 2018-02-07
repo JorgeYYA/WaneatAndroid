@@ -22,6 +22,7 @@ public class User {
         this.password = password;
     }
 
+    public User() {}
 
 
     @Override
@@ -85,6 +86,4 @@ public class User {
     }
 
 
-    public User() {
-    }
 }
