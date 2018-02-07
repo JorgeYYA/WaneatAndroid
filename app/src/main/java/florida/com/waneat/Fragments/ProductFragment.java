@@ -144,7 +144,7 @@ public class ProductFragment extends Fragment {
        //En caso de haber más de una imagen muestra al usuario instrucciones de como alternar entre ellas
         if(pro.getImagen().size() > 1){
 
-            note.setText("Slide at the image for view more");
+            note.setText("Slide left and right at the image for view more");
             progres.setVisibility(View.VISIBLE);
 
         }
