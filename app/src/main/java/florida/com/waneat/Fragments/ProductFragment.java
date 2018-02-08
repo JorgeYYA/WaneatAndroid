@@ -397,6 +397,7 @@ class showImages extends AsyncTask<ImageSwitcher, ProgressBar, Product> {
         for (int i = 0; i < 1; i++) {
 
 
+            
 
             imageSwitcher.setInAnimation(fadeInPred);
             imageSwitcher.setOutAnimation(fadeOutPred);

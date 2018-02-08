@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Los muertos.iml" filepath="$PROJECT_DIR$/Los muertos.iml" />
+      <module fileurl="file://C:\Users\JorgeYYA\AndroidStudioProjects\Waneat\Los muertos.iml" filepath="C:\Users\JorgeYYA\AndroidStudioProjects\Waneat\Los muertos.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Waneat.iml" filepath="$PROJECT_DIR$/Waneat.iml" />
       <module fileurl="file://C:\Users\2dam\Documents\Los muertos\Waneat.iml" filepath="C:\Users\2dam\Documents\Los muertos\Waneat.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
