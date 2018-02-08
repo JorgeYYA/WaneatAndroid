@@ -1,9 +1,11 @@
 package florida.com.waneat.Fragments;
 
+import android.content.Context;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,7 +39,8 @@ public class ProductFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    private ArrayList<Integer> imagen;
+    private ArrayList<Integer> imagen = new ArrayList<Integer>();
+
 
     private static ImageSwitcher imageSwitcher;
 
@@ -97,11 +100,12 @@ public class ProductFragment extends Fragment {
         progres = (ProgressBar) v.findViewById(R.id.image_progress);
         categoriaProducto = (TextView) v.findViewById(R.id.categoriaProducto);
 
-        imagen = new ArrayList<>();
-        imagen.add(R.drawable.plato1);
-        imagen.add(R.drawable.plato2);
+        this.imagen.add(R.drawable.plato1);
+        this.imagen.add(R.drawable.plato2);
 
-        pro = new Product(1,"Lorem ipsum dolor sit amet","Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",9,imagen," ","Sushi",0);
+
+        pro = mListener.getProductoSelected();
+
 
         //Crea el ImageSwitcher
         imageSwitcher = (ImageSwitcher) v.findViewById(R.id.imageSwitcher);
@@ -126,7 +130,11 @@ public class ProductFragment extends Fragment {
 
 
         //Pone la primera imagen
-        imageSwitcher.setImageResource(pro.getImagen().get(0));
+        try{
+            imageSwitcher.setImageResource(pro.getImagen().get(0));
+        }catch(NullPointerException ex){
+            ex.printStackTrace();
+        }
         progres.setProgress(1);
 
 
@@ -253,6 +261,15 @@ public class ProductFragment extends Fragment {
 
     }
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof OnFragmentInteractionListener) {
+            mListener = (OnFragmentInteractionListener) context;
+        } else {
+            throw new RuntimeException(context.toString() + " must implement OnFragmentInteractionListener");
+        }
+    }
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
@@ -268,8 +285,8 @@ public class ProductFragment extends Fragment {
     }
 
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+        Product getProductoSelected();
     }
 }
 

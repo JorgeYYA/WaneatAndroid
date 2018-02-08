@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white"
+    android:background="@color/colorSecondaryDarkWaneat"
     tools:context="florida.com.waneat.Fragments.TarjetasFragment">
 
     <LinearLayout
@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:text="Tu tarjeta:"
             android:padding="10dp"
-            android:textColor="#545454"
+            android:textColor="#fff"
             android:textStyle="bold"
             android:textSize="30dp"/>
 
@@ -125,11 +125,11 @@
 
         <Button
             android:id="@+id/guardarCredit"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/colorSecondaryDarkWaneat"
+            android:background="@drawable/border_radius"
             android:layout_marginTop="20dp"
-            android:textColor="@android:color/white"
+            android:textColor="@android:color/black"
             android:text="SIGUIENTE"/>
     </LinearLayout>
 

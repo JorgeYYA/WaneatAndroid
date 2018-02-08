@@ -1,6 +1,7 @@
 package florida.com.waneat.Activities;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -22,6 +23,8 @@ import java.util.ArrayList;
 
 import florida.com.waneat.Adapters.AdapterItemList;
 import florida.com.waneat.Fragments.DialogFragment;
+import florida.com.waneat.Fragments.ListProductFragment;
+import florida.com.waneat.Fragments.ProductFragment;
 import florida.com.waneat.Fragments.TarjetasFragment;
 import florida.com.waneat.Fragments.UsuarioFragment;
 import florida.com.waneat.Models.Product;
@@ -29,10 +32,15 @@ import florida.com.waneat.Models.User;
 import florida.com.waneat.R;
 import florida.com.waneat.Services.UserService;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, DialogFragment.CestaInterface, TarjetasFragment.OnFragmentInteractionListener, UsuarioFragment.UserProfileListener  {
+public class MainActivity extends AppCompatActivity implements
+        NavigationView.OnNavigationItemSelectedListener, DialogFragment.CestaInterface,
+        TarjetasFragment.OnFragmentInteractionListener, UsuarioFragment.UserProfileListener,
+        ListProductFragment.OnFragmentInteractionListener, ProductFragment.OnFragmentInteractionListener {
 
     public ArrayList<Product> productosCesta = new ArrayList<Product>();
     public ArrayList<Product> productosLista = new ArrayList<Product>();
+    ArrayList<Integer> imagen = new ArrayList<>();
+    public Product productoSelected = new Product();
 
     public User userLogged = new User();
 
@@ -61,17 +69,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
          */
         this.userLogged = this.service.getUserByEmail();
 
-        Log.d("JEJEJ", "onCreate: "+this.userLogged.getEmail());
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-
-        //Debug para poder probar ProductFragment
-        /*\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.fragment, ProductFragment.newInstance()).addToBackStack(null);
-        ft.commit();
-        *///\/\/\/\/\/\/\/\/\/\/\/\/\/\/\
-        //Debug para poder probar ProductFragment
 
 
         fab.setOnClickListener(new View.OnClickListener() {
@@ -100,17 +99,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         nombreUsuario.setText(userLogged.getNombre()+ " "+userLogged.getApellidos());
         emailUsuarioLogged.setText(userLogged.getEmail());
 
-
-        mRecyclerView = (RecyclerView) findViewById(R.id.listaRecyclerView);
-
-        LinearLayoutManager llm = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
-        mRecyclerView.setLayoutManager(llm);
-
-
-        cargarProductosLista();
-        AdapterItemList adapter = new AdapterItemList(productosLista);
-        mRecyclerView.setAdapter(adapter);
-
+        loadFragment();
         cargarProductosIniciales();
 
     }
@@ -149,27 +138,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private void cargarProductosIniciales(){
         //    public Product(int id, String nombre, String descripcion, float precio, ArrayList<Integer> imagen, String comentariosAdicionales, String categoria, int cantidad) {
-        Product producto = new Product(0, "spaguettis", "boloñesa, algo más", 2.0, null, "Sin salsa", "pasta", 3);
+        imagen.add(R.drawable.plato1);
+        imagen.add(R.drawable.plato2);
+        Product producto = new Product(0, "spaguettis", "boloñesa, algo más", 2.0, imagen, "Sin salsa", "pasta", 3);
         this.productosCesta.add(producto);
-        Product producto2 = new Product(1, "macarrones", "boloñesa, algo más", 3.0, null, "Con salsa", "pasta", 2);
-        this.productosCesta.add(producto2);
-        Log.d("prueba", "cargarProductosIniciales: "+this.productosCesta.get(0).getNombre());
-    }
-
-    private void cargarProductosLista(){
-        Product producto = new Product(0,"jamon y mozzarella",2);
         this.productosLista.add(producto);
-        Product producto2 = new Product(1,"carne",4.50);
+        Product producto2 = new Product(1, "macarrones", "boloñesa, algo más", 3.0, imagen, "Con salsa", "pasta", 2);
+        this.productosCesta.add(producto2);
         this.productosLista.add(producto2);
-        Log.d("prueba", "cargarProductosLista: "+this.productosLista.get(0).getNombre());
+        Log.d("prueba", "cargarProductosIniciales: "+this.productosCesta.get(0).getNombre());
     }
 
     @Override
     public ArrayList<Product> getProductosCesta() {
         return this.productosCesta;
     }
-
-
 
     @Override
     public double getCestaPrice() {
@@ -184,6 +167,40 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public User getUser() {
       return  this.userLogged;
     }
+
+    private void loadFragment(){
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+        ft.replace(R.id.fragment, new ListProductFragment());
+        ft.addToBackStack(null);
+        ft.commit();
+    }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
+    }
+
+    @Override
+    public ArrayList<Product> getProductos() {
+        return this.productosLista;
+    }
+
+    @Override
+    public Product getProductoSelected() {
+        return this.productoSelected;
+    }
+
+    @Override
+    public void verProducto(int position) {
+        this.productoSelected = this.productosLista.get(position);
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+        ft.replace(R.id.fragment, new ProductFragment());
+        ft.addToBackStack(null);
+        ft.commit();
+    }
+
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
