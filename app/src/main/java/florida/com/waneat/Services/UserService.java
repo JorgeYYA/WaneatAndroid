@@ -6,6 +6,8 @@ import android.content.SharedPreferences;
 import android.support.design.widget.Snackbar;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 import florida.com.waneat.Activities.MainActivity;
 import florida.com.waneat.Models.User;
 
@@ -23,6 +25,7 @@ public class UserService {
 
     User u = new User("David", "Florida", "C/Floraida",
             "123456789", "david@gmail.com", "david123");
+
 
 
     public UserService (Context context){
@@ -80,10 +83,11 @@ public class UserService {
     }
 
     /**
-     * Método que nos permite recuperar la información de un usuario
+     * Método que nos permite recuperar la información de un usuario a través de su email
+     * TODO: Pasar por paremetro el string del email, y recuperar la info de ese usuario
      */
-    public void getUserInformation(){
-
+    public User getUserByEmail(){
+        return u;
     }
 
 

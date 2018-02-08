@@ -21,17 +21,20 @@ import java.util.ArrayList;
 import florida.com.waneat.Fragments.DialogFragment;
 import florida.com.waneat.Fragments.ProductFragment;
 import florida.com.waneat.Models.Product;
+import florida.com.waneat.Models.User;
 import florida.com.waneat.R;
 import florida.com.waneat.Services.UserService;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, DialogFragment.CestaInterface {
 
     public ArrayList<Product> productosCesta = new ArrayList<Product>();
+    public User userLogged = null;
+
 
     private android.app.FragmentManager fm;
     private FragmentTransaction ft;
     private UserService service;
-    private TextView currentUsuario;
+    private TextView emailUsuarioLogged,nombreUsuario;
 
 
     @Override
@@ -42,6 +45,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setSupportActionBar(toolbar);
 
         this.service = new UserService(MainActivity.this);
+
+        /*
+        TODO:Cambiar al metodo de api
+         */
+        this.userLogged = this.service.getUserByEmail();
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 
@@ -74,8 +82,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         //Poner el email en el navigationdrawer
         View headerView = navigationView.getHeaderView(0);
+        emailUsuarioLogged = (TextView) headerView.findViewById(R.id.current_user);
+        nombreUsuario = (TextView) headerView.findViewById(R.id.nombreUsuarioHeader);
 
-        currentUsuario = (TextView) headerView.findViewById(R.id.current_user) ;
+        //metemos la info en el header
+        nombreUsuario.setText(userLogged.getNombre()+ " "+userLogged.getApellidos());
+        emailUsuarioLogged.setText(userLogged.getEmail());
+
 
         cargarProductosIniciales();
     }
