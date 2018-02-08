@@ -1,0 +1,154 @@
+package florida.com.waneat.Fragments;
+
+import android.content.Context;
+import android.net.Uri;
+import android.os.Bundle;
+import android.app.Fragment;
+import android.util.Log;
+import android.view.KeyEvent;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import florida.com.waneat.Models.CreditCard;
+import florida.com.waneat.R;
+
+
+public class TarjetasFragment extends Fragment {
+    private static final String ARG_PARAM1 = "param1";
+    private static final String ARG_PARAM2 = "param2";
+
+    private String mParam1;
+    private String mParam2;
+
+    private EditText number,month,year,cvc,holder;
+    private RelativeLayout cardFront, cardBack;
+    private Button nextButton;
+
+    private boolean isFront = false;
+
+    private OnFragmentInteractionListener mListener;
+
+    public TarjetasFragment() {
+        // Required empty public constructor
+    }
+
+    public static TarjetasFragment newInstance() {
+        TarjetasFragment fragment = new TarjetasFragment();
+        return fragment;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            mParam1 = getArguments().getString(ARG_PARAM1);
+            mParam2 = getArguments().getString(ARG_PARAM2);
+        }
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View v = inflater.inflate(R.layout.fragment_tarjetas, container, false);
+        this.number = v.findViewById(R.id.creditCardNumber);
+        this.cvc = v.findViewById(R.id.creditCardCVC);
+        this.month = v.findViewById(R.id.creditCardMonth);
+        this.year = v.findViewById(R.id.creditCardMonthYear);
+        this.holder = v.findViewById(R.id.creditCardHolderName);
+        this.cardBack = v.findViewById(R.id.backCard);
+        this.cardFront = v.findViewById(R.id.frontCard);
+        this.nextButton = v.findViewById(R.id.guardarCredit);
+
+
+        //METHODS
+        toggleCard();
+
+        return v;
+    }
+
+    private void toggleCard(){
+        this.cardFront.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                cardFront.setVisibility(View.GONE);
+                cardBack.setVisibility(View.VISIBLE);
+                checkButton();
+                isFront = true;
+                Log.d("Main", "onClick:"+isFront);
+
+            }
+        });
+
+        this.cardBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                cardFront.setVisibility(View.VISIBLE);
+                cardBack.setVisibility(View.GONE);
+                checkButton();
+                isFront = false;
+                Log.d("Main", "onClick:"+isFront);
+
+            }
+        });
+
+        this.nextButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+               if(isFront){
+                   Log.d("Main", "onClick: "+"Guardamos los datos");
+                   guardarDatos();
+               }else{
+                   Log.d("Main", "onClick: pasamos");
+                   cardFront.setVisibility(View.GONE);
+                   cardBack.setVisibility(View.VISIBLE);
+                   checkButton();
+                   isFront = true;
+               }
+            }
+        });
+    }
+
+    private void checkButton(){
+        if(!isFront){
+            //estamos en el back por lo tanto guardamos
+            this.nextButton.setText("GUARDAR");
+        }else{
+            this.nextButton.setText("SIGUIENTE");
+        }
+    }
+
+    private void guardarDatos(){
+        CreditCard card = new CreditCard(
+                this.number.getText().toString(),
+                this.holder.getText().toString(),
+                this.month.getText().toString(),
+                this.year.getText().toString(),
+                Integer.parseInt(this.cvc.getText().toString()));
+        Log.d("TAG", "guardarDatos: "+card.toString());
+    }
+
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof OnFragmentInteractionListener) {
+            mListener = (OnFragmentInteractionListener) context;
+        } else {
+            throw new RuntimeException(context.toString() + " must implement OnFragmentInteractionListener");
+        }
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mListener = null;
+    }
+
+    public interface OnFragmentInteractionListener {
+    }
+}

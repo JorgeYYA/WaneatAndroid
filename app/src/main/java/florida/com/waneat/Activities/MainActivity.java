@@ -15,18 +15,20 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
 import florida.com.waneat.Fragments.DialogFragment;
 import florida.com.waneat.Fragments.ProductFragment;
 import florida.com.waneat.Fragments.UsuarioFragment;
+import florida.com.waneat.Fragments.TarjetasFragment;
 import florida.com.waneat.Models.Product;
 import florida.com.waneat.Models.User;
 import florida.com.waneat.R;
 import florida.com.waneat.Services.UserService;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, DialogFragment.CestaInterface, UsuarioFragment.UserProfileListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, DialogFragment.CestaInterface, TarjetasFragment.OnFragmentInteractionListener, UsuarioFragment.UserProfileListener  {
 
     public ArrayList<Product> productosCesta = new ArrayList<Product>();
     public User userLogged = new User();
@@ -168,13 +170,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             ft.replace(R.id.fragment, UsuarioFragment.newInstance()).addToBackStack(null);
             ft.commit();
-        } else if (id == R.id.nav_mispedidos) {
+        }else if(id == R.id.inicio){
+            getFragmentManager().beginTransaction().remove(getFragmentManager().findFragmentById(R.id.fragment)).commit();
+        }else if (id == R.id.nav_mispedidos) {
 
         } else if (id == R.id.nav_qr) {
 
         } else if (id == R.id.nav_mistarjetas) {
-
-
+            getFragmentManager().beginTransaction().replace(R.id.fragment, TarjetasFragment.newInstance()).addToBackStack(null).commit();
         } else if (id == R.id.nav_logout) {
             this.service.signOut();
             startActivity(new Intent(MainActivity.this, LoginActivity.class));
