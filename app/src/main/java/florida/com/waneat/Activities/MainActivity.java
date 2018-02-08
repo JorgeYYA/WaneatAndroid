@@ -1,11 +1,11 @@
 package florida.com.waneat.Activities;
 
-import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -20,21 +20,23 @@ import java.util.ArrayList;
 
 import florida.com.waneat.Fragments.DialogFragment;
 import florida.com.waneat.Fragments.ProductFragment;
+import florida.com.waneat.Fragments.UsuarioFragment;
 import florida.com.waneat.Models.Product;
 import florida.com.waneat.Models.User;
 import florida.com.waneat.R;
 import florida.com.waneat.Services.UserService;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, DialogFragment.CestaInterface {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, DialogFragment.CestaInterface, UsuarioFragment.UserProfileListener {
 
     public ArrayList<Product> productosCesta = new ArrayList<Product>();
-    public User userLogged = null;
+    public User userLogged = new User();
 
 
     private android.app.FragmentManager fm;
     private FragmentTransaction ft;
     private UserService service;
-    private TextView emailUsuarioLogged,nombreUsuario;
+    private TextView emailUsuarioLogged, nombreUsuario;
+
 
 
     @Override
@@ -44,6 +46,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+
+
         this.service = new UserService(MainActivity.this);
 
         /*
@@ -51,13 +55,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
          */
         this.userLogged = this.service.getUserByEmail();
 
+        Log.d("JEJEJ", "onCreate: "+this.userLogged.getEmail());
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 
         //Debug para poder probar ProductFragment
         //\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
-        fm = getFragmentManager();
-        ft = fm.beginTransaction();
-        ft.replace(R.id.fragment, ProductFragment.newInstance(null,null)).addToBackStack(null);
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.fragment, ProductFragment.newInstance()).addToBackStack(null);
         ft.commit();
         ///\/\/\/\/\/\/\/\/\/\/\/\/\/\/\
         //Debug para poder probar ProductFragment
@@ -66,7 +71,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               openCart();
+                openCart();
 
             }
         });
@@ -148,6 +153,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return precioTotal;
     }
 
+    @Override
+    public User getUser() {
+      return  this.userLogged;
+    }
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
@@ -156,7 +165,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         int id = item.getItemId();
 
         if (id == R.id.nav_miperfil) {
-
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.fragment, UsuarioFragment.newInstance()).addToBackStack(null);
+            ft.commit();
         } else if (id == R.id.nav_mispedidos) {
 
         } else if (id == R.id.nav_qr) {

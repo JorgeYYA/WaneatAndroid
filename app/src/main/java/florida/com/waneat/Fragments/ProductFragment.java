@@ -3,7 +3,7 @@ package florida.com.waneat.Fragments;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,12 +20,10 @@ import android.widget.ViewSwitcher;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-import florida.com.waneat.Activities.MainActivity;
 import florida.com.waneat.Controllers.OnSwipeTouchListener;
 import florida.com.waneat.Models.Product;
 import florida.com.waneat.R;
 
-import static android.view.animation.Animation.ZORDER_BOTTOM;
 import static florida.com.waneat.Fragments.ProductFragment.fadeInPred;
 import static florida.com.waneat.Fragments.ProductFragment.fadeOutPred;
 
@@ -66,12 +64,8 @@ public class ProductFragment extends Fragment {
         // Required empty public constructor
     }
 
-    public static ProductFragment newInstance(String param1, String param2) {
+    public static ProductFragment newInstance() {
         ProductFragment fragment = new ProductFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
         return fragment;
     }
 
