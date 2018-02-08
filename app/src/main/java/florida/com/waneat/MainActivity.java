@@ -68,8 +68,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mRecyclerView.setLayoutManager(llm);
 
 
-        cargarProductosList
-        a();
+        cargarProductosLista();
         AdapterItemList adapter = new AdapterItemList(productosLista);
         mRecyclerView.setAdapter(adapter);
 
