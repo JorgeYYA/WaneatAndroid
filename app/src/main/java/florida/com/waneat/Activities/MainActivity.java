@@ -10,19 +10,20 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import florida.com.waneat.Adapters.AdapterItemList;
 import florida.com.waneat.Fragments.DialogFragment;
-import florida.com.waneat.Fragments.ProductFragment;
-import florida.com.waneat.Fragments.UsuarioFragment;
 import florida.com.waneat.Fragments.TarjetasFragment;
+import florida.com.waneat.Fragments.UsuarioFragment;
 import florida.com.waneat.Models.Product;
 import florida.com.waneat.Models.User;
 import florida.com.waneat.R;
@@ -31,6 +32,8 @@ import florida.com.waneat.Services.UserService;
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, DialogFragment.CestaInterface, TarjetasFragment.OnFragmentInteractionListener, UsuarioFragment.UserProfileListener  {
 
     public ArrayList<Product> productosCesta = new ArrayList<Product>();
+    public ArrayList<Product> productosLista = new ArrayList<Product>();
+
     public User userLogged = new User();
 
 
@@ -40,6 +43,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private TextView emailUsuarioLogged, nombreUsuario;
 
 
+    RecyclerView mRecyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,11 +66,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 
         //Debug para poder probar ProductFragment
-        //\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
+        /*\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.fragment, ProductFragment.newInstance()).addToBackStack(null);
         ft.commit();
-        ///\/\/\/\/\/\/\/\/\/\/\/\/\/\/\
+        *///\/\/\/\/\/\/\/\/\/\/\/\/\/\/\
         //Debug para poder probar ProductFragment
 
 
@@ -97,7 +101,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         emailUsuarioLogged.setText(userLogged.getEmail());
 
 
+        mRecyclerView = (RecyclerView) findViewById(R.id.listaRecyclerView);
+
+        LinearLayoutManager llm = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
+        mRecyclerView.setLayoutManager(llm);
+
+
+        cargarProductosLista();
+        AdapterItemList adapter = new AdapterItemList(productosLista);
+        mRecyclerView.setAdapter(adapter);
+
         cargarProductosIniciales();
+
     }
 
     @Override
@@ -141,10 +156,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Log.d("prueba", "cargarProductosIniciales: "+this.productosCesta.get(0).getNombre());
     }
 
+    private void cargarProductosLista(){
+        Product producto = new Product(0,"jamon y mozzarella",2);
+        this.productosLista.add(producto);
+        Product producto2 = new Product(1,"carne",4.50);
+        this.productosLista.add(producto2);
+        Log.d("prueba", "cargarProductosLista: "+this.productosLista.get(0).getNombre());
+    }
+
     @Override
     public ArrayList<Product> getProductosCesta() {
         return this.productosCesta;
     }
+
+
 
     @Override
     public double getCestaPrice() {
@@ -187,4 +212,5 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
 }
