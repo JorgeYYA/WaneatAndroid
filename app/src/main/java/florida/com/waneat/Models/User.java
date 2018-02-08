@@ -9,15 +9,15 @@ public class User {
     private String nombre;
     private String apellidos;
     private String direccion;
-    private String tfl;
+    private String tlf;
     private String email;
     private String password;
 
-    public User(String nombre, String apellidos, String direccion, String tfl, String email, String password) {
+    public User(String nombre, String apellidos, String direccion, String tlf, String email, String password) {
         this.nombre = nombre;
         this.apellidos = apellidos;
         this.direccion = direccion;
-        this.tfl = tfl;
+        this.tlf = tlf;
         this.email = email;
         this.password = password;
     }
@@ -31,7 +31,7 @@ public class User {
                 "nombre='" + nombre + '\'' +
                 ", apellidos='" + apellidos + '\'' +
                 ", direccion='" + direccion + '\'' +
-                ", tfl='" + tfl + '\'' +
+                ", tlf='" + tlf + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 '}';
@@ -61,12 +61,12 @@ public class User {
         this.direccion = direccion;
     }
 
-    public String getTfl() {
-        return tfl;
+    public String getTlf() {
+        return tlf;
     }
 
-    public void setTfl(String tfl) {
-        this.tfl = tfl;
+    public void setTlf(String tlf) {
+        this.tlf = tlf;
     }
 
     public String getEmail() {
