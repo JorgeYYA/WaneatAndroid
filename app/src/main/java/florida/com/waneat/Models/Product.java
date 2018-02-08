@@ -1,5 +1,8 @@
 package florida.com.waneat.Models;
 
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.DrawableWrapper;
+
 import java.util.ArrayList;
 
 /**
@@ -13,6 +16,7 @@ public class Product {
     private String descripcion;
     private double precio;
     private ArrayList<Integer> imagen;
+    private Drawable ImagenDrawable;
     private String categoria;
     private String comentariosAdicionales;
     private int cantidad;
@@ -26,6 +30,25 @@ public class Product {
         this.comentariosAdicionales = comentariosAdicionales;
         this.categoria = categoria;
         this.cantidad = cantidad;
+    }
+
+    /*public Drawable getImagenDrawable() {
+        return ImagenDrawable;
+    }*/
+
+    /*public void setImagenDrawable(Drawable imagenDrawable) {
+        ImagenDrawable = imagenDrawable;
+    }*/
+
+    public Product(int id,String nombre, double precio) {
+
+        this.id = id;
+        this.nombre = nombre;
+        this.precio = precio;
+
+
+
+
     }
 
     public Product(){}

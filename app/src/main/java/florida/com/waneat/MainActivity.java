@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -16,16 +18,21 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Adapter;
 
 import java.util.ArrayList;
 
 import florida.com.waneat.Adapters.AdapterCartItem;
+import florida.com.waneat.Adapters.AdapterItemList;
 import florida.com.waneat.Fragments.DialogFragment;
 import florida.com.waneat.Models.Product;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, DialogFragment.CestaInterface {
 
     public ArrayList<Product> productosCesta = new ArrayList<Product>();
+    public ArrayList<Product> productosLista = new ArrayList<Product>();
+
+    RecyclerView mRecyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +59,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        mRecyclerView = (RecyclerView) findViewById(R.id.rv);
+        mRecyclerView.setHasFixedSize(true);
+
+        LinearLayoutManager llm = new LinearLayoutManager(getApplicationContext());
+        mRecyclerView.setLayoutManager(llm);
+
+        AdapterItemList adapter = new AdapterItemList(productosLista);
+        mRecyclerView.setAdapter(adapter);
+
+        cargarProductosLista();
         cargarProductosIniciales();
     }
 
@@ -96,10 +113,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Log.d("prueba", "cargarProductosIniciales: "+this.productosCesta.get(0).getNombre());
     }
 
+    private void cargarProductosLista(){
+        Product producto = new Product(0,"jamon y mozzarella",2);
+        this.productosLista.add(producto);
+        Product producto2 = new Product(1,"carne",4.50);
+        this.productosLista.add(producto2);
+        Log.d("prueba", "cargarProductosLista: "+this.productosLista.get(0).getNombre());
+    }
+
     @Override
     public ArrayList<Product> getProductosCesta() {
         return this.productosCesta;
     }
+
+
 
     @Override
     public double getCestaPrice() {
@@ -140,4 +167,5 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
 }
