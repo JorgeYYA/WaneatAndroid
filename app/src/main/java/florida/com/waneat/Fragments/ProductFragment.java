@@ -26,11 +26,14 @@ import florida.com.waneat.R;
 
 import static florida.com.waneat.Fragments.ProductFragment.fadeInPred;
 import static florida.com.waneat.Fragments.ProductFragment.fadeOutPred;
+import static florida.com.waneat.Fragments.ProductFragment.pause;
+import static florida.com.waneat.Fragments.ProductFragment.sleeper;
 
 
 public class ProductFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+
+
+    //Inicialización de variables
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
@@ -45,6 +48,9 @@ public class ProductFragment extends Fragment {
     static Animation fadeInPred;
     static Animation fadeOutPred;
 
+    static int sleeper = 5000;
+
+    static boolean pause = false;
 
     static int position = 0;
 
@@ -61,7 +67,7 @@ public class ProductFragment extends Fragment {
 
 
     public ProductFragment() {
-        // Required empty public constructor
+
     }
 
     public static ProductFragment newInstance() {
@@ -111,19 +117,12 @@ public class ProductFragment extends Fragment {
         fadeOutPred = AnimationUtils.loadAnimation(getActivity(), R.anim.rigth_to_left);
 
 
-
         //Muestra en pantalla los datos del producto recibido
-        name.setText(pro.getNombre());
-        price.setText(pro.getPrecio()+""+getResources().getText(R.string.badge));
-        desc.setText(pro.getDescripcion());
-        categoriaProducto.setText(pro.getCategoria());
+        showData();
 
 
         // Establece la animación de transición entre fotos
-        Animation fadeOut = AnimationUtils.loadAnimation(getActivity(), R.anim.rigth_to_left);
-        Animation fadeIn = AnimationUtils.loadAnimation(getActivity(), R.anim.zoom_forward_in);
-       imageSwitcher.setInAnimation(fadeIn);
-       imageSwitcher.setOutAnimation(fadeOut);
+        setAnim();
 
 
         //Pone la primera imagen
@@ -131,82 +130,24 @@ public class ProductFragment extends Fragment {
         progres.setProgress(1);
 
 
-       //En caso de haber más de una imagen muestra al usuario instrucciones de como alternar entre ellas
-        if(pro.getImagen().size() > 1){
+       //En caso de haber más de una imagen muestra al usuario un progressbar que indica en que imagen se está mostrando
+        showBar();
 
-            //note.setText("Slide left and right at the image for view more");
-            progres.setVisibility(View.VISIBLE);
-
-        }
 
         //Establece el máximo del progressBar
         progres.setMax(pro.getImagen().size());
 
 
-
         //Establece que al pulsar sobre la imagen cambie a la siguiente
+        slideController();
 
-        imageSwitcher.setOnTouchListener(new OnSwipeTouchListener(getActivity()) {
-            public void onSwipeTop() {
-                //Toast.makeText(getActivity(), "top", Toast.LENGTH_SHORT).show();
-            }
-            public void onSwipeRight() {
-                //Toast.makeText(getActivity(), "right", Toast.LENGTH_SHORT).show();
-                Animation fadeIn = AnimationUtils.loadAnimation(getActivity(), R.anim.letf_to_right);
-                Animation fadeOut = AnimationUtils.loadAnimation(getActivity(), R.anim.zoom_forward_out);
-                imageSwitcher.setInAnimation(fadeIn);
-                imageSwitcher.setOutAnimation(fadeOut);
-                prevImage();
-            }
-            public void onSwipeLeft() {
-                //Toast.makeText(getActivity(), "left", Toast.LENGTH_SHORT).show();
-                Animation fadeIn = AnimationUtils.loadAnimation(getActivity(), R.anim.zoom_forward_in);
-                Animation fadeOut = AnimationUtils.loadAnimation(getActivity(), R.anim.rigth_to_left);
-                imageSwitcher.setInAnimation(fadeIn);
-                imageSwitcher.setOutAnimation(fadeOut);
-                nextImage();
-            }
-            public void onSwipeBottom() {
-                //Toast.makeText(getActivity(), "bottom", Toast.LENGTH_SHORT).show();
-            }
 
-        });
-
-        //timer();
-        //ASD
+        //Inicia el thread que controlla el loop de imagenes automático
         showImages sm= new showImages(imageSwitcher, progres, pro);
         sm.executeOnExecutor( AsyncTask.THREAD_POOL_EXECUTOR);
 
-        /*if (isAdded()) {
-            getActivity().runOnUiThread(new Thread() {
-                @Override
-                public void run() {
 
-                    for (int i = 0; i < 5; i++) {
-
-                        position++;
-
-                        if (position == pro.getImagen().size()) {
-                            position = 0;
-                            //progres.setProgress(position);
-                        }
-                        progres.setProgress(position + 1);
-
-                        imageSwitcher.setImageResource(pro.getImagen().get(position));
-                        try {
-                            Thread.sleep(1000);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-
-                    }
-                }
-            });
-        }*/
-
-
-
-
+        //Listener de "Añadir a la cesta"
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -219,110 +160,98 @@ public class ProductFragment extends Fragment {
         return v;
     }
 
-
     public static void nextImage(){
-        //Un bucle simple para recorrer todas las imágenes
 
+        //Un bucle simple para recorrer todas las imágenes
         position++;
 
         if (position == pro.getImagen().size()) {
             position = 0;
-            //progres.setProgress(position);
         }
         setProgress();
 
         imageSwitcher.setImageResource(pro.getImagen().get(position));
-        //Toast.makeText(getActivity(), position+"next", Toast.LENGTH_SHORT).show();
-
     }
 
     public void prevImage(){
 
         //Un bucle simple para recorrer todas las imágenes
-        //progres.setProgress(position);
-
         if (position == 0) {
             position = pro.getImagen().size();
-            //progres.setProgress(position);
 
-        }else{
-
-           // progres.setProgress(position+1);
         }
         position--;
         imageSwitcher.setImageResource(pro.getImagen().get(position));
-        //Toast.makeText(getActivity(), position+"prev", Toast.LENGTH_SHORT).show();
         setProgress();
+    }
 
+    public void showData(){
 
-
-
+        name.setText(pro.getNombre());
+        price.setText(pro.getPrecio()+""+getResources().getText(R.string.badge));
+        desc.setText(pro.getDescripcion());
+        categoriaProducto.setText(pro.getCategoria());
 
     }
 
+    public void setAnim(){
+
+        Animation fadeOut = AnimationUtils.loadAnimation(getActivity(), R.anim.rigth_to_left);
+        Animation fadeIn = AnimationUtils.loadAnimation(getActivity(), R.anim.zoom_forward_in);
+        imageSwitcher.setInAnimation(fadeIn);
+        imageSwitcher.setOutAnimation(fadeOut);
+
+    }
+
+    public void showBar(){
+
+        if(pro.getImagen().size() > 1){
+
+            progres.setVisibility(View.VISIBLE);
+
+        }
+
+    }
 
     public static void setProgress(){
 
-        progres.setProgress(ProductFragment.position+1);//revisar
-
-
-
-    }
-
-    public void timer(){
-
-        //Cosas Joder Cosas
-        boolean bo = true;
-
-        int segun = 0;
-
-        int segundos = Calendar.getInstance().getTime().getSeconds();
-        int segundos2 = Calendar.getInstance().getTime().getSeconds()+5;
-
-        Calendar.getInstance().getTime();
-        Toast.makeText(getActivity(), segundos+"", Toast.LENGTH_SHORT).show();
-
-        do {
-            segun ++;
-            segundos = Calendar.getInstance().getTime().getSeconds();
-            Toast.makeText(getActivity(), segundos+"", Toast.LENGTH_SHORT).show();
-            price.setText(segun+"");
-
-            if (segundos == 0){
-
-                nextImage();
-                segundos = Calendar.getInstance().getTime().getSeconds();
-                segundos2 = Calendar.getInstance().getTime().getSeconds()+5;
-
-
-            }else{
-
-
-
-            }
-
-            if (segundos == segundos2){
-
-                nextImage();
-                segundos = Calendar.getInstance().getTime().getSeconds();
-                segundos2 = Calendar.getInstance().getTime().getSeconds()+5;
-
-
-            }else{
-
-
-
-            }
-
-
-
-        } while (bo);
+        progres.setProgress(ProductFragment.position+1);
 
 
     }
 
+    public void slideController(){
+
+        imageSwitcher.setOnTouchListener(new OnSwipeTouchListener(getActivity()) {
+            public void onSwipeTop() {
+                //Innecesario
+            }
+            public void onSwipeRight() {
+
+                Animation fadeIn = AnimationUtils.loadAnimation(getActivity(), R.anim.letf_to_right);
+                Animation fadeOut = AnimationUtils.loadAnimation(getActivity(), R.anim.zoom_forward_out);
+                imageSwitcher.setInAnimation(fadeIn);
+                imageSwitcher.setOutAnimation(fadeOut);
+                pause = true;
+                prevImage();
+            }
+            public void onSwipeLeft() {
+
+                Animation fadeIn = AnimationUtils.loadAnimation(getActivity(), R.anim.zoom_forward_in);
+                Animation fadeOut = AnimationUtils.loadAnimation(getActivity(), R.anim.rigth_to_left);
+                imageSwitcher.setInAnimation(fadeIn);
+                imageSwitcher.setOutAnimation(fadeOut);
+                pause = true;
+                nextImage();
+            }
+            public void onSwipeBottom() {
+                //Innecesario
+            }
+
+        });
 
 
+    }
 
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -332,14 +261,11 @@ public class ProductFragment extends Fragment {
         }
     }
 
-
-
     @Override
     public void onDetach() {
         super.onDetach();
         mListener = null;
     }
-
 
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
@@ -364,25 +290,31 @@ class showImages extends AsyncTask<ImageSwitcher, ProgressBar, Product> {
     protected Product doInBackground(ImageSwitcher... imageSwitchers) {
 
         try {
-            Thread.sleep(5000);
+            Thread.sleep(sleeper);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
+        //comprueba si se ha interactuado con la imagen recientemente y en tal caso pausa la ejecucion del thread
+        if (pause) {
+
+            try {
+                Thread.sleep(sleeper);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            pause = false;
+        }
 
         ProductFragment.position++;
 
         if (ProductFragment.position == pro.getImagen().size()) {
             ProductFragment.position = 0;
-            //progres.setProgress(position);
+
         }
-
-
-
 
         return null;
     }
-
 
 
     @Override
@@ -390,19 +322,18 @@ class showImages extends AsyncTask<ImageSwitcher, ProgressBar, Product> {
         super.onPostExecute(product);
         for (int i = 0; i < 1; i++) {
 
-
-            
-
             imageSwitcher.setInAnimation(fadeInPred);
             imageSwitcher.setOutAnimation(fadeOutPred);
-            showImages sm= new showImages(imageSwitcher, progress, pro);
-            sm.executeOnExecutor( AsyncTask.THREAD_POOL_EXECUTOR);
+            showImages sm = new showImages(imageSwitcher, progress, pro);
+            sm.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
             imageSwitcher.setImageResource(pro.getImagen().get(ProductFragment.position));
             ProductFragment.setProgress();
-
         }
-
-
-
     }
 }
+
+
+
+
+
+
