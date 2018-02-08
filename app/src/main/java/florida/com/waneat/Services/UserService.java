@@ -37,15 +37,17 @@ public class UserService {
      * Método que nos permite comprobar si el usuario esta logueado o no
      */
 
-    public void isLoggedIn(){
+    public boolean isLoggedIn(){
 
         if(this.prefs.getBoolean("isSignedIn", false)){
             //significa que esta logueado
             Toast.makeText(context, "Ya estas logueado", Toast.LENGTH_SHORT).show();
             context.startActivity(new Intent(context,MainActivity.class));
+            return true;
         }else{
             //no esta logueado
             //Toast.makeText(context, "No estas logueado. Puedes iniciar sesión aquí.", Toast.LENGTH_SHORT).show();
+            return false;
         }
     }
 
@@ -63,10 +65,10 @@ public class UserService {
     public void signIn(String email, String pwd){
         if(email.equalsIgnoreCase(u.getEmail()) && pwd.equalsIgnoreCase(u.getPassword())){
             Toast.makeText(context, "Inicio de sesión completado", Toast.LENGTH_SHORT).show();
-            context.startActivity(new Intent(context,MainActivity.class));
-
+            Intent i = new Intent(context,MainActivity.class);
+            i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            context.startActivity(i);
             SharedPreferences.Editor editor = this.prefs.edit();
-
             editor.putBoolean("isSignedIn", true);
             editor.putString("email", u.getEmail().toString());
             editor.apply();

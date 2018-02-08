@@ -5,6 +5,12 @@
 
     <group android:checkableBehavior="single">
         <item
+            android:id="@+id/inicio"
+            android:icon="@drawable/border_radius"
+            android:title="Inicio">
+
+        </item>
+        <item
             android:id="@+id/nav_miperfil"
             android:icon="@drawable/miperfil"
             android:title="Mi perfil" />

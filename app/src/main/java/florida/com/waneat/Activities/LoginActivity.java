@@ -31,12 +31,16 @@ public class LoginActivity extends AppCompatActivity {
         login = (Button) findViewById(R.id.buttonLogin);
         registerLabel = (TextView) findViewById(R.id.registerLabel);
 
-        service.isLoggedIn();
+        if(service.isLoggedIn()){
+            finish();
+        }
+
 
         login.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 //llamar metodo service
                 service.signIn(editLogEmail.getText().toString(), editLogPass.getText().toString());
+                finish();
             }
         });
 
