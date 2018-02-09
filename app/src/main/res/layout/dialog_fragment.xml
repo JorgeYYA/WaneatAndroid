@@ -4,12 +4,15 @@
     android:layout_height="fill_parent"
     android:minWidth="300dp"
     android:minHeight="400dp"
-    tools:context="florida.com.waneat.Fragments.DialogFragment">
+    tools:context="florida.com.waneat.Fragments.DialogFragment"
+    android:id="@+id/dialog_fragment">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -37,18 +40,49 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
         </android.support.v7.widget.RecyclerView>
+
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="120dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Tarjeta de crédito:"
+                android:textColor="@android:color/black"
+                android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/buttonIntroducirTarj"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|end"
+                android:layout_weight="1"
+                android:text="Introducir tarjeta" />
+
+        </LinearLayout>
+
     </LinearLayout>
 
     <LinearLayout
         android:layout_gravity="bottom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <Button
-            android:layout_weight="3"
             android:id="@+id/checkoutButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:background="@color/colorPrimaryDarkWaneat"
-            android:text="IR A PAGAR"/>
+            android:text="IR A PAGAR" />
     </LinearLayout>
 </FrameLayout>

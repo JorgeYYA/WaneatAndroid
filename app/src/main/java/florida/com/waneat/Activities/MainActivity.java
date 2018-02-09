@@ -5,7 +5,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
@@ -18,21 +17,17 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
 import florida.com.waneat.Fragments.DialogFragment;
-
+import florida.com.waneat.Fragments.ListProductFragment;
 import florida.com.waneat.Fragments.OrderList;
 import florida.com.waneat.Fragments.ProductFragment;
 import florida.com.waneat.Fragments.ShowOrder;
-import florida.com.waneat.Models.Order;
-
-import florida.com.waneat.Fragments.ListProductFragment;
 import florida.com.waneat.Fragments.TarjetasFragment;
 import florida.com.waneat.Fragments.UsuarioFragment;
-
+import florida.com.waneat.Models.Order;
 import florida.com.waneat.Models.Product;
 import florida.com.waneat.Models.User;
 import florida.com.waneat.R;
