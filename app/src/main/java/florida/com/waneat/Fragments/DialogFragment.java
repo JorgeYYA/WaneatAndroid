@@ -1,26 +1,22 @@
 package florida.com.waneat.Fragments;
 
 
-import android.app.Activity;
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
 import florida.com.waneat.Adapters.AdapterCartItem;
+import florida.com.waneat.Adapters.AdapterFinalizarCompra;
 import florida.com.waneat.Models.Product;
 import florida.com.waneat.R;
 
@@ -30,6 +26,8 @@ public class DialogFragment extends android.support.v4.app.DialogFragment{
     private RecyclerView recyclerView;
     private TextView cestaTotal;
     private AdapterCartItem adapter;
+    private AdapterFinalizarCompra adapterCompra;
+    private Button checkoutButton;
 
     private ArrayList<Product> cesta = new ArrayList<Product>();
 
@@ -40,6 +38,7 @@ public class DialogFragment extends android.support.v4.app.DialogFragment{
         this.cesta = mListener.getProductosCesta();
         this.recyclerView = rootView.findViewById(R.id.cestaRecyclerView);
         this.cestaTotal = rootView.findViewById(R.id.cestaTotal);
+        this.checkoutButton = rootView.findViewById(R.id.checkoutButton);
 
         //cargamos los precios
         reloadPrecios();
@@ -67,6 +66,13 @@ public class DialogFragment extends android.support.v4.app.DialogFragment{
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(adapter);
 
+
+        checkoutButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+
+            }
+        });
+
         //Method related with this dialog
         return rootView;
     }
@@ -78,8 +84,7 @@ public class DialogFragment extends android.support.v4.app.DialogFragment{
         if (context instanceof CestaInterface) {
             mListener = (CestaInterface) context;
         } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
+            throw new RuntimeException(context.toString() + " must implement OnFragmentInteractionListener");
         }
     }
 
