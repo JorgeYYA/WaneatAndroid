@@ -230,8 +230,6 @@ public class MainActivity extends AppCompatActivity implements
             ft.replace(R.id.fragment, OrderList.newInstance(null,null)).addToBackStack(null);
             ft.commit();
 
-
-
         } else if (id == R.id.nav_qr) {
 
         } else if (id == R.id.nav_mistarjetas) {

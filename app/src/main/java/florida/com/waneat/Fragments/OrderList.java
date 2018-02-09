@@ -111,12 +111,9 @@ public class OrderList extends Fragment {
 
         recyclerOrders = (RecyclerView) v.findViewById(R.id.recycler_orders);
 
-
         LinearLayoutManager llm = new LinearLayoutManager(getActivity());
 
-
         recyclerOrders.setLayoutManager(llm);
-
 
         recyclerOrders.setAdapter(new AdapterOrderList(orders, new AdapterOrderList.OnItemClickListener() {
 
