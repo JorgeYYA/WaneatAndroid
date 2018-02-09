@@ -15,13 +15,11 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import florida.com.waneat.Adapters.AdapterLastVisited;
-import florida.com.waneat.Adapters.AdapterOrderList;
-import florida.com.waneat.Models.Order;
 import florida.com.waneat.Models.Restaurant;
 import florida.com.waneat.R;
 
 
-public class PrincipalScreen extends Fragment {
+public class RestaurantList extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
@@ -36,13 +34,13 @@ public class PrincipalScreen extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public PrincipalScreen() {
+    public RestaurantList() {
         // Required empty public constructor
     }
 
 
-    public static PrincipalScreen newInstance(String param1, String param2) {
-        PrincipalScreen fragment = new PrincipalScreen();
+    public static RestaurantList newInstance(String param1, String param2) {
+        RestaurantList fragment = new RestaurantList();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -63,7 +61,7 @@ public class PrincipalScreen extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v= inflater.inflate(R.layout.fragment_principal_screen, container, false);
+        View v= inflater.inflate(R.layout.fragment_restaurant_list, container, false);
 
         recyclerLasts = (RecyclerView) v.findViewById(R.id.recycler_lasts);
 
