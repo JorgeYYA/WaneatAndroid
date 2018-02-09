@@ -160,7 +160,7 @@ public class ProductFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
-                Toast.makeText(getActivity(), "マネルはバカだよ!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Abrir otra cosa {Debug 100% libre de palabras malsonantes}", Toast.LENGTH_SHORT).show();
 
             }
         });
