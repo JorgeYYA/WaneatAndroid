@@ -2,6 +2,8 @@ package florida.com.waneat.Models;
 
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.DrawableWrapper;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 import java.util.ArrayList;
 
@@ -9,7 +11,7 @@ import java.util.ArrayList;
  * Created by sergiomoreno on 5/2/18.
  */
 
-public class Product {
+public class Product implements Parcelable {
 
     private int id;
     private String nombre;
@@ -116,4 +118,57 @@ public class Product {
     public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
     }
+
+    protected Product(Parcel in) {
+        id = in.readInt();
+        nombre = in.readString();
+        descripcion = in.readString();
+        precio = in.readDouble();
+        if (in.readByte() == 0x01) {
+            imagen = new ArrayList<Integer>();
+            in.readList(imagen, Integer.class.getClassLoader());
+        } else {
+            imagen = null;
+        }
+        ImagenDrawable = (Drawable) in.readValue(Drawable.class.getClassLoader());
+        categoria = in.readString();
+        comentariosAdicionales = in.readString();
+        cantidad = in.readInt();
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(id);
+        dest.writeString(nombre);
+        dest.writeString(descripcion);
+        dest.writeDouble(precio);
+        if (imagen == null) {
+            dest.writeByte((byte) (0x00));
+        } else {
+            dest.writeByte((byte) (0x01));
+            dest.writeList(imagen);
+        }
+        dest.writeValue(ImagenDrawable);
+        dest.writeString(categoria);
+        dest.writeString(comentariosAdicionales);
+        dest.writeInt(cantidad);
+    }
+
+    @SuppressWarnings("unused")
+    public static final Parcelable.Creator<Product> CREATOR = new Parcelable.Creator<Product>() {
+        @Override
+        public Product createFromParcel(Parcel in) {
+            return new Product(in);
+        }
+
+        @Override
+        public Product[] newArray(int size) {
+            return new Product[size];
+        }
+    };
 }
