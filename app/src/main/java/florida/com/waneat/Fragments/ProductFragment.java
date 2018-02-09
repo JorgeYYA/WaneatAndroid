@@ -168,7 +168,7 @@ public class ProductFragment extends Fragment {
         return v;
     }
 
-    public static void nextImage(){
+    public void nextImage(){
 
         //Un bucle simple para recorrer todas las imágenes
         position++;
