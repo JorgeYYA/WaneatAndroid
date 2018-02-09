@@ -198,8 +198,6 @@ public class ShowOrder extends Fragment {
             }
             public void onSwipeRight() {
 
-                Toast.makeText(getActivity(), "asd", Toast.LENGTH_SHORT).show();
-
                 Animation fadeIn = AnimationUtils.loadAnimation(getActivity(), R.anim.letf_to_right);
                 Animation fadeOut = AnimationUtils.loadAnimation(getActivity(), R.anim.zoom_forward_out);
                 imageSwitcher.setInAnimation(fadeIn);
