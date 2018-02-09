@@ -65,8 +65,6 @@ public class RestaurantList extends Fragment {
 
         recyclerLasts = (RecyclerView) v.findViewById(R.id.recycler_lasts);
 
-        scanQr = (Button) v.findViewById(R.id.btn_no_content);
-
 
         restaurants = new ArrayList<>();
 
@@ -77,7 +75,7 @@ public class RestaurantList extends Fragment {
 
         recyclerLasts.setLayoutManager(llm);
 
-        //ESto es debug
+        //Esto es debug
         restaurants.add(new Restaurant(1,"私たちはファッケドです",3.5));
         restaurants.add(new Restaurant(2,"先生は本当にバカですね",4));
 
@@ -139,16 +137,7 @@ public class RestaurantList extends Fragment {
         mListener = null;
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
+
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
