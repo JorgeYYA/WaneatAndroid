@@ -18,24 +18,34 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
 import florida.com.waneat.Adapters.AdapterItemList;
 import florida.com.waneat.Fragments.DialogFragment;
+
+import florida.com.waneat.Fragments.OrderList;
+import florida.com.waneat.Fragments.ProductFragment;
+import florida.com.waneat.Fragments.ShowOrder;
+import florida.com.waneat.Models.Order;
+
 import florida.com.waneat.Fragments.ListProductFragment;
 import florida.com.waneat.Fragments.ProductFragment;
 import florida.com.waneat.Fragments.TarjetasFragment;
 import florida.com.waneat.Fragments.UsuarioFragment;
+
 import florida.com.waneat.Models.Product;
 import florida.com.waneat.Models.User;
 import florida.com.waneat.R;
 import florida.com.waneat.Services.UserService;
 
+
 public class MainActivity extends AppCompatActivity implements
         NavigationView.OnNavigationItemSelectedListener, DialogFragment.CestaInterface,
         TarjetasFragment.OnFragmentInteractionListener, UsuarioFragment.UserProfileListener,
-        ListProductFragment.OnFragmentInteractionListener, ProductFragment.OnFragmentInteractionListener {
+        ListProductFragment.OnFragmentInteractionListener, ProductFragment.OnFragmentInteractionListener, OrderList.interfaceOrder {
+
 
     public ArrayList<Product> productosCesta = new ArrayList<Product>();
     public ArrayList<Product> productosLista = new ArrayList<Product>();
@@ -225,6 +235,12 @@ public class MainActivity extends AppCompatActivity implements
             getFragmentManager().beginTransaction().remove(getFragmentManager().findFragmentById(R.id.fragment)).commit();
         }else if (id == R.id.nav_mispedidos) {
 
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.fragment, OrderList.newInstance(null,null)).addToBackStack(null);
+            ft.commit();
+
+
+
         } else if (id == R.id.nav_qr) {
 
         } else if (id == R.id.nav_mistarjetas) {
@@ -239,4 +255,15 @@ public class MainActivity extends AppCompatActivity implements
         return true;
     }
 
+
+    @Override
+    public void interfaceOrder(Order order) {
+
+
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.fragment, ShowOrder.newInstance(order)).addToBackStack(null);
+        ft.commit();
+
+
+    }
 }
