@@ -105,15 +105,7 @@ public class MainActivity extends AppCompatActivity implements
         emailUsuarioLogged = (TextView) headerView.findViewById(R.id.current_user);
         nombreUsuario = (TextView) headerView.findViewById(R.id.nombreUsuarioHeader);
 
-        mRecyclerView = (RecyclerView) findViewById(R.id.listaRecyclerView);
 
-        LinearLayoutManager llm = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
-        mRecyclerView.setLayoutManager(llm);
-
-
-        
-        AdapterItemList adapter = new AdapterItemList(productosLista);
-        mRecyclerView.setAdapter(adapter);
         //metemos la info en el header
         nombreUsuario.setText(userLogged.getNombre()+ " "+userLogged.getApellidos());
         emailUsuarioLogged.setText(userLogged.getEmail());
