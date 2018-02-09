@@ -104,19 +104,16 @@ public class OrderList extends Fragment {
 
         Order order = new Order(products,"10/2/2018","Restaurante Paco Mer",total);
 
-        Order order2 = new Order(products,"10/2/2018","Restaurante Mis Pelotas",total);
+        Order order2 = new Order(products,"10/2/2018","Restaurante Sin Trazas de Palabras Malsonantes",total);
 
         orders.add(order);
         orders.add(order2);
 
         recyclerOrders = (RecyclerView) v.findViewById(R.id.recycler_orders);
 
-
         LinearLayoutManager llm = new LinearLayoutManager(getActivity());
 
-
         recyclerOrders.setLayoutManager(llm);
-
 
         recyclerOrders.setAdapter(new AdapterOrderList(orders, new AdapterOrderList.OnItemClickListener() {
 
@@ -153,7 +150,6 @@ public class OrderList extends Fragment {
         super.onAttach(activity);
     }
 
-
     public double sumaPrecio(ArrayList<Product> products){
 
         double total = 0;
@@ -167,7 +163,6 @@ public class OrderList extends Fragment {
         }
 
         return total;
-
     }
 
     public interface OnFragmentInteractionListener {

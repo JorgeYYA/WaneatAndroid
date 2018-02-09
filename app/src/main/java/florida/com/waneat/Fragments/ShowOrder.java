@@ -83,7 +83,7 @@ public class ShowOrder extends Fragment {
     public static ShowOrder newInstance(Order order) {
         ShowOrder fragment = new ShowOrder();
         Bundle args = new Bundle();
-        args.putSerializable("PEDIDO", order);
+        args.putParcelable("PEDIDO", order);
         //args.putString(ARG_PARAM2, param2);
 
         fragment.setArguments(args);
@@ -94,7 +94,7 @@ public class ShowOrder extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-           order = (Order) getArguments().getSerializable("PEDIDO");
+           order = (Order) getArguments().getParcelable("PEDIDO");
            // mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
@@ -177,7 +177,7 @@ public class ShowOrder extends Fragment {
         return v;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
+
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
@@ -283,16 +283,7 @@ public class ShowOrder extends Fragment {
         super.onAttach(activity);
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
+
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);

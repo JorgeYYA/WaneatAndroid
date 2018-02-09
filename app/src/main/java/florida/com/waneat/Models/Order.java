@@ -1,5 +1,8 @@
 package florida.com.waneat.Models;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -7,7 +10,7 @@ import java.util.ArrayList;
  * Created by JorgeYYA on 08/02/2018.
  */
 
-public class Order implements Serializable {
+public class Order implements Parcelable {
 
     int id;
 
@@ -23,6 +26,26 @@ public class Order implements Serializable {
         this.resName = resName;
         this.total = total;
     }
+
+    protected Order(Parcel in) {
+        id = in.readInt();
+        products = in.createTypedArrayList(Product.CREATOR);
+        date = in.readString();
+        resName = in.readString();
+        total = in.readDouble();
+    }
+
+    public static final Creator<Order> CREATOR = new Creator<Order>() {
+        @Override
+        public Order createFromParcel(Parcel in) {
+            return new Order(in);
+        }
+
+        @Override
+        public Order[] newArray(int size) {
+            return new Order[size];
+        }
+    };
 
     public ArrayList<Product> getProducts() {
         return products;
@@ -54,5 +77,19 @@ public class Order implements Serializable {
 
     public void setTotal(double total) {
         this.total = total;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeInt(id);
+        parcel.writeTypedList(products);
+        parcel.writeString(date);
+        parcel.writeString(resName);
+        parcel.writeDouble(total);
     }
 }

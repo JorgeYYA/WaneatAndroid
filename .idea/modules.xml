@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/WaneatAndroid.iml" filepath="$PROJECT_DIR$/WaneatAndroid.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Waneat.iml" filepath="$PROJECT_DIR$/Waneat.iml" />
+      <module fileurl="file://C:\Users\JorgeYYA\AndroidStudioProjects\Waneat\WaneatAndroid.iml" filepath="C:\Users\JorgeYYA\AndroidStudioProjects\Waneat\WaneatAndroid.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
