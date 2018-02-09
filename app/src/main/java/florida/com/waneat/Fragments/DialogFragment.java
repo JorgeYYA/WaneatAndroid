@@ -3,6 +3,7 @@ package florida.com.waneat.Fragments;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
@@ -27,13 +28,13 @@ public class DialogFragment extends android.support.v4.app.DialogFragment{
     private TextView cestaTotal;
     private AdapterCartItem adapter;
     private AdapterFinalizarCompra adapterCompra;
-    private Button checkoutButton;
+    private Button checkoutButton, buttonIntroducirTarj;
 
     private ArrayList<Product> cesta = new ArrayList<Product>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.dialog_fragment, container, false);
+        final View rootView = inflater.inflate(R.layout.dialog_fragment, container, false);
         getDialog().setTitle("Cesta");
         this.cesta = mListener.getProductosCesta();
         this.recyclerView = rootView.findViewById(R.id.cestaRecyclerView);
@@ -69,6 +70,21 @@ public class DialogFragment extends android.support.v4.app.DialogFragment{
 
         checkoutButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+
+                buttonIntroducirTarj = (Button) rootView.findViewById(R.id.buttonIntroducirTarj);
+
+
+                adapterCompra = new AdapterFinalizarCompra(cesta);
+                recyclerView.setAdapter(adapterCompra);
+
+                buttonIntroducirTarj.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        FragmentTransaction ft = getFragmentManager().beginTransaction();
+                        ft.replace(R.id.fragment, TarjetasFragment.newInstance()).addToBackStack(null);
+                        ft.commit();
+                    }
+                });
 
             }
         });

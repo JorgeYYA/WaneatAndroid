@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
 import java.util.List;
 
 import florida.com.waneat.Models.Product;
@@ -14,65 +15,51 @@ import florida.com.waneat.R;
  * Created by 2dam on 09/02/2018.
  */
 
-public class AdapterFinalizarCompra
-        extends RecyclerView.Adapter<AdapterFinalizarCompra.ProductViewHolder>
-        implements View.OnClickListener {
-    private List<Product> items;
-    private View.OnClickListener listener;
+public class AdapterFinalizarCompra  extends RecyclerView.Adapter<AdapterFinalizarCompra.MyViewHolder> {
 
+    private List<Product> productosLista;
 
-    public AdapterFinalizarCompra(List<Product> items) {
-        this.items = items;
-    }
-
-    public void setOnClickListener(View.OnClickListener listener) {
-        this.listener = listener;
+    public AdapterFinalizarCompra(List<Product> productosLista) {
+        this.productosLista = productosLista;
     }
 
     @Override
-    public ProductViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        View v = LayoutInflater.from(viewGroup.getContext())
-                .inflate(R.layout.cesta_list, viewGroup, false);
-        v.setOnClickListener(this);
-        return new ProductViewHolder(v);
+    public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.cesta_list, parent, false);
+        return new MyViewHolder(itemView);
     }
 
+
     @Override
-    public void onBindViewHolder(ProductViewHolder viewHolder, int i) {
-       Product item = items.get(i);
-        viewHolder.bindProducto(item);
+    public void onBindViewHolder(MyViewHolder holder, int position) {
+        Product producto = productosLista.get(position);
+        //le añadimos el id en el que se clicka al boton de añadir y de borrar respectivamente
+
+
+        holder.cantidad.setText(Integer.toString(producto.getCantidad()));
+        holder.nombre_producto.setText(producto.getNombre());
+        holder.precio.setText(String.valueOf(producto.getPrecio())+"€");
     }
 
     @Override
     public int getItemCount() {
-        return items.size();
+        return productosLista.size();
     }
 
-    public static class ProductViewHolder extends RecyclerView.ViewHolder {
-        // Campos respectivos de un item
+
+
+    public class MyViewHolder extends RecyclerView.ViewHolder{
+
         public TextView cantidad, nombre_producto, precio;
 
-
-        public ProductViewHolder(View v) {
-            super(v);
-            cantidad = (TextView) v.findViewById(R.id.cantidad);
-            nombre_producto = (TextView) v.findViewById(R.id.nombre_producto);
-            precio = (TextView) v.findViewById(R.id.precio);
-
-        }
-
-        public void bindProducto(Product item) {
-            cantidad.setText(item.getCantidad());
-            nombre_producto.setText(item.getNombre());
-            precio.setText(String.valueOf(item.getPrecio()));
+        public MyViewHolder(View view) {
+            super(view);
+            cantidad = (TextView) view.findViewById(R.id.cantidad);
+            nombre_producto = (TextView) view.findViewById(R.id.nombre_producto);
+            precio = (TextView) view.findViewById(R.id.precio);
 
         }
     }
 
-    @Override
-    public void onClick(View view) {
-        if(listener != null)
-            listener.onClick(view);
-    }
 
 }
