@@ -55,8 +55,7 @@ public class MainActivity extends AppCompatActivity implements
     public User userLogged = new User();
     public FloatingActionButton fab;
 
-    private android.app.FragmentManager fm;
-    private FragmentTransaction ft;
+    private FragmentManager fm;
     private UserService service;
     private TextView emailUsuarioLogged, nombreUsuario;
 
@@ -113,6 +112,14 @@ public class MainActivity extends AppCompatActivity implements
         loadFragment();
         cargarProductosIniciales();
 
+        fm = getSupportFragmentManager();
+        fm.addOnBackStackChangedListener(new FragmentManager.OnBackStackChangedListener() {
+            @Override
+            public void onBackStackChanged() {
+                if(getSupportFragmentManager().getBackStackEntryCount() == 0) finish();
+            }
+        });
+
     }
 
     @Override
@@ -126,7 +133,7 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     private void openCart(){
-        FragmentManager fm = getSupportFragmentManager();
+        fm = getSupportFragmentManager();
         DialogFragment dialog = new DialogFragment();
         dialog.show(fm, "Cart");
     }
@@ -180,7 +187,7 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     private void loadFragment(){
-        FragmentManager fm = getSupportFragmentManager();
+        fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
         ft.replace(R.id.fragment, new ListProductFragment());
         ft.addToBackStack("MY_FRAGMENT");
@@ -205,7 +212,7 @@ public class MainActivity extends AppCompatActivity implements
     @Override
     public void verProducto(int position) {
         this.productoSelected = this.productosLista.get(position);
-        FragmentManager fm = getSupportFragmentManager();
+        fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
         ft.replace(R.id.fragment, new ProductFragment());
         ft.addToBackStack("MY_FRAGMENT");
@@ -267,7 +274,7 @@ public class MainActivity extends AppCompatActivity implements
                 ListProductFragment main = ListProductFragment.newInstance();
                 main.setArguments(bundle);
 
-                FragmentManager fm = getSupportFragmentManager();
+                fm = getSupportFragmentManager();
                 FragmentTransaction ft = fm.beginTransaction();
                 ft.replace(R.id.fragment, main, "MY_FRAGMENT");
                 ft.commitAllowingStateLoss();
