@@ -105,6 +105,7 @@ public class MainActivity extends AppCompatActivity implements
         emailUsuarioLogged = (TextView) headerView.findViewById(R.id.current_user);
         nombreUsuario = (TextView) headerView.findViewById(R.id.nombreUsuarioHeader);
 
+
         //metemos la info en el header
         nombreUsuario.setText(userLogged.getNombre()+ " "+userLogged.getApellidos());
         emailUsuarioLogged.setText(userLogged.getEmail());
