@@ -126,10 +126,11 @@ public class ShowOrder extends Fragment {
 
         resName.setText(order.getResName());
         date.setText(order.getDate());
-        totalPrize.setText(order.getTotal()+"");
+        totalPrize.setText("Total: "+order.getTotal()+"€");
 
 
         imageSwitcher.setImageResource(imagen.get(0));
+
 
         return v;
     }

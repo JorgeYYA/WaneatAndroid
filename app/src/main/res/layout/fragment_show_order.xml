@@ -1,23 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
     android:background="@color/altColor1">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@+id/principal"
-        android:gravity="center">
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/principal">
+
 
         <ImageSwitcher
             android:id="@+id/image_switcher"
-            android:layout_width="fill_parent"
-            android:layout_height="match_parent"
-            android:layout_alignParentStart="true"
-            android:layout_centerVertical="true"></ImageSwitcher>
+            android:layout_width="match_parent"
+            android:adjustViewBounds="true"
+            android:layout_alignParentTop="true"
+            android:scaleType="fitXY"
+            android:layout_height="wrap_content" />
+
         <ProgressBar
             android:id="@+id/image_progress"
             style="?android:attr/progressBarStyleHorizontal"
@@ -38,9 +40,9 @@
             android:id="@+id/res_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
             android:layout_marginLeft="10dp"
             android:text="NOMbre rest"
+            android:layout_below="@+id/image_switcher"
             android:textAlignment="center"
             android:textSize="25dp"
             android:textStyle="bold" />
@@ -134,4 +136,4 @@
 
     </LinearLayout>
 
-</RelativeLayout>
+</LinearLayout>

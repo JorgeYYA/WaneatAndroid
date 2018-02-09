@@ -5,13 +5,13 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -22,7 +22,6 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-import florida.com.waneat.Adapters.AdapterItemList;
 import florida.com.waneat.Fragments.DialogFragment;
 
 import florida.com.waneat.Fragments.OrderList;
@@ -31,7 +30,6 @@ import florida.com.waneat.Fragments.ShowOrder;
 import florida.com.waneat.Models.Order;
 
 import florida.com.waneat.Fragments.ListProductFragment;
-import florida.com.waneat.Fragments.ProductFragment;
 import florida.com.waneat.Fragments.TarjetasFragment;
 import florida.com.waneat.Fragments.UsuarioFragment;
 
@@ -44,16 +42,18 @@ import florida.com.waneat.Services.UserService;
 public class MainActivity extends AppCompatActivity implements
         NavigationView.OnNavigationItemSelectedListener, DialogFragment.CestaInterface,
         TarjetasFragment.OnFragmentInteractionListener, UsuarioFragment.UserProfileListener,
-        ListProductFragment.OnFragmentInteractionListener, ProductFragment.OnFragmentInteractionListener, OrderList.interfaceOrder {
+        ListProductFragment.OnFragmentInteractionListener, ProductFragment.OnFragmentInteractionListener,
+        OrderList.interfaceOrder{
 
 
     public ArrayList<Product> productosCesta = new ArrayList<Product>();
     public ArrayList<Product> productosLista = new ArrayList<Product>();
     ArrayList<Integer> imagen = new ArrayList<>();
     public Product productoSelected = new Product();
+    static final int PICK_CONTACT_REQUEST = 1;  // The request code
 
     public User userLogged = new User();
-
+    public FloatingActionButton fab;
 
     private android.app.FragmentManager fm;
     private FragmentTransaction ft;
@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity implements
         this.userLogged = this.service.getUserByEmail();
 
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab = (FloatingActionButton) findViewById(R.id.fab);
 
 
         fab.setOnClickListener(new View.OnClickListener() {
@@ -182,7 +182,7 @@ public class MainActivity extends AppCompatActivity implements
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
         ft.replace(R.id.fragment, new ListProductFragment());
-        ft.addToBackStack(null);
+        ft.addToBackStack("MY_FRAGMENT");
         ft.commit();
     }
 
@@ -207,7 +207,7 @@ public class MainActivity extends AppCompatActivity implements
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
         ft.replace(R.id.fragment, new ProductFragment());
-        ft.addToBackStack(null);
+        ft.addToBackStack("MY_FRAGMENT");
         ft.commit();
     }
 
@@ -220,22 +220,23 @@ public class MainActivity extends AppCompatActivity implements
 
         if (id == R.id.nav_miperfil) {
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-            ft.replace(R.id.fragment, UsuarioFragment.newInstance()).addToBackStack(null);
+            ft.replace(R.id.fragment, UsuarioFragment.newInstance()).addToBackStack("MY_FRAGMENT");
             ft.commit();
         }else if(id == R.id.inicio){
-            getFragmentManager().beginTransaction().remove(getFragmentManager().findFragmentById(R.id.fragment)).commit();
-        }else if (id == R.id.nav_mispedidos) {
-
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-            ft.replace(R.id.fragment, OrderList.newInstance(null,null)).addToBackStack(null);
+            ft.replace(R.id.fragment, ListProductFragment.newInstance()).addToBackStack("MY_FRAGMENT");
             ft.commit();
-
-
-
+        }else if (id == R.id.nav_mispedidos) {
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.fragment, OrderList.newInstance(null,null)).addToBackStack("MY_FRAGMENT");
+            ft.commit();
         } else if (id == R.id.nav_qr) {
+            startActivityForResult(new Intent(MainActivity.this, QRActivity.class), PICK_CONTACT_REQUEST);
 
         } else if (id == R.id.nav_mistarjetas) {
-            getFragmentManager().beginTransaction().replace(R.id.fragment, TarjetasFragment.newInstance()).addToBackStack(null).commit();
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.fragment, TarjetasFragment.newInstance()).addToBackStack("MY_FRAGMENT");
+            ft.commit();
         } else if (id == R.id.nav_logout) {
             this.service.signOut();
             startActivity(new Intent(MainActivity.this, LoginActivity.class));
@@ -246,15 +247,37 @@ public class MainActivity extends AppCompatActivity implements
         return true;
     }
 
+    public void showFloatingActionButton() {
+        fab.show();
+    };
+
+    public void hideFloatingActionButton() {
+        fab.hide();
+    };
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == PICK_CONTACT_REQUEST) {
+            if (resultCode == RESULT_OK) {
+                Bundle bundle = new Bundle();
+                String result=data.getStringExtra("read_qr");
+                bundle.putString("qr",result);
+                ListProductFragment main = ListProductFragment.newInstance();
+                main.setArguments(bundle);
+
+                FragmentManager fm = getSupportFragmentManager();
+                FragmentTransaction ft = fm.beginTransaction();
+                ft.replace(R.id.fragment, main, "MY_FRAGMENT");
+                ft.commitAllowingStateLoss();
+            }
+        }
+    }
 
     @Override
     public void interfaceOrder(Order order) {
-
-
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.fragment, ShowOrder.newInstance(order)).addToBackStack(null);
+        ft.replace(R.id.fragment, ShowOrder.newInstance(order)).addToBackStack("MY_FRAGMENT");
         ft.commit();
-
-
     }
 }
