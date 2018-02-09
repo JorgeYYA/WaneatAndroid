@@ -11,31 +11,24 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
-import florida.com.waneat.Adapters.AdapterItemList;
 import florida.com.waneat.Fragments.DialogFragment;
-
+import florida.com.waneat.Fragments.ListProductFragment;
 import florida.com.waneat.Fragments.OrderList;
 import florida.com.waneat.Fragments.PrincipalScreen;
 import florida.com.waneat.Fragments.ProductFragment;
 import florida.com.waneat.Fragments.ShowOrder;
-import florida.com.waneat.Models.Order;
-
-import florida.com.waneat.Fragments.ListProductFragment;
-import florida.com.waneat.Fragments.ProductFragment;
 import florida.com.waneat.Fragments.TarjetasFragment;
 import florida.com.waneat.Fragments.UsuarioFragment;
-
+import florida.com.waneat.Models.Order;
 import florida.com.waneat.Models.Product;
 import florida.com.waneat.Models.User;
 import florida.com.waneat.R;
@@ -45,7 +38,8 @@ import florida.com.waneat.Services.UserService;
 public class MainActivity extends AppCompatActivity implements
         NavigationView.OnNavigationItemSelectedListener, DialogFragment.CestaInterface,
         TarjetasFragment.OnFragmentInteractionListener, UsuarioFragment.UserProfileListener,
-        ListProductFragment.OnFragmentInteractionListener, ProductFragment.OnFragmentInteractionListener, OrderList.interfaceOrder,PrincipalScreen.OnFragmentInteractionListener {
+        ListProductFragment.OnFragmentInteractionListener, ProductFragment.OnFragmentInteractionListener,
+        OrderList.interfaceOrder,PrincipalScreen.OnFragmentInteractionListener {
 
 
     public ArrayList<Product> productosCesta = new ArrayList<Product>();
