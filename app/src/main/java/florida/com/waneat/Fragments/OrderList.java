@@ -86,7 +86,6 @@ public class OrderList extends Fragment {
         imagen.add(R.drawable.plato1);
         imagen.add(R.drawable.plato2);
 
-
         //DEBUGGING MUY FUERTE
         Product producto = new Product(0, "spaguettis", "boloñesa, algo más", 2.0,imagen, "Sin salsa", "pasta", 3);
 
@@ -103,17 +102,12 @@ public class OrderList extends Fragment {
 
         total = sumaPrecio(products);
 
-
         Order order = new Order(products,"10/2/2018","Restaurante Paco Mer",total);
 
         Order order2 = new Order(products,"10/2/2018","Restaurante Mis Pelotas",total);
 
-
-
         orders.add(order);
         orders.add(order2);
-
-       // AdapterOrderList ad = new AdapterOrderList(orders,orders, new AdapterOrderList.OnItemClickListener());
 
         recyclerOrders = (RecyclerView) v.findViewById(R.id.recycler_orders);
 
@@ -129,23 +123,13 @@ public class OrderList extends Fragment {
             @Override
             public void onItemClick(Order item) {
 
-
-                //Toast.makeText(getActivity(), item.getResName(), Toast.LENGTH_SHORT).show();
-
-
                 interfaz.interfaceOrder(item);
-
 
             }
 
         }));
 
-
-
-
         recyclerOrders.invalidate();
-
-
 
         return v;
     }
@@ -156,8 +140,6 @@ public class OrderList extends Fragment {
             mListener.onFragmentInteraction(uri);
         }
     }
-
-
 
     @Override
     public void onDetach() {
@@ -172,7 +154,6 @@ public class OrderList extends Fragment {
     }
 
 
-
     public double sumaPrecio(ArrayList<Product> products){
 
         double total = 0;
@@ -183,23 +164,12 @@ public class OrderList extends Fragment {
                 total = total + products.get(i).getPrecio();
             }
 
-
         }
 
         return total;
 
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
