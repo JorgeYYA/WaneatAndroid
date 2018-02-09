@@ -104,7 +104,7 @@ public class OrderList extends Fragment {
 
         Order order = new Order(products,"10/2/2018","Restaurante Paco Mer",total);
 
-        Order order2 = new Order(products,"10/2/2018","Restaurante Mis Pelotas",total);
+        Order order2 = new Order(products,"10/2/2018","Restaurante Sin Trazas de Palabras Malsonantes",total);
 
         orders.add(order);
         orders.add(order2);
