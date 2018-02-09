@@ -76,8 +76,8 @@ public class RestaurantList extends Fragment {
         recyclerLasts.setLayoutManager(llm);
 
         //Esto es debug
-        restaurants.add(new Restaurant(1,"私たちはファッケドです",3.5));
-        restaurants.add(new Restaurant(2,"先生は本当にバカですね",4));
+        restaurants.add(new Restaurant(1,"Esto aparentemente",3.5));
+        restaurants.add(new Restaurant(2,"No sirve para nada :3",4));
 
 
         recyclerLasts.setAdapter(new AdapterLastVisited(restaurants, new AdapterLastVisited.OnItemClickListener() {
