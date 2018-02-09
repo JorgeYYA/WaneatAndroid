@@ -87,6 +87,7 @@ public class OrderList extends Fragment {
         imagen.add(R.drawable.plato2);
 
 
+        //DEBUGGING MUY FUERTE
         Product producto = new Product(0, "spaguettis", "boloñesa, algo más", 2.0,imagen, "Sin salsa", "pasta", 3);
 
         Product producto2 = new Product(1, "macarrones", "boloñesa, algo más", 3.0, imagen, "Con salsa", "pasta", 2);
@@ -103,9 +104,9 @@ public class OrderList extends Fragment {
         total = sumaPrecio(products);
 
 
-        Order order = new Order(products,"10/2/2018","Restaurante mis pelotas",total);
+        Order order = new Order(products,"10/2/2018","Restaurante Paco Mer",total);
 
-        Order order2 = new Order(products,"10/2/2018","Restaurante mis pelotas bis",total);
+        Order order2 = new Order(products,"10/2/2018","Restaurante Mis Pelotas",total);
 
 
 

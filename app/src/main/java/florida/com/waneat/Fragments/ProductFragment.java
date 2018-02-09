@@ -160,7 +160,7 @@ public class ProductFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
-                Toast.makeText(getActivity(), "Mi polla", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "マネルはバカだよ!", Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -168,7 +168,7 @@ public class ProductFragment extends Fragment {
         return v;
     }
 
-    public static void nextImage(){
+    public void nextImage(){
 
         //Un bucle simple para recorrer todas las imágenes
         position++;
