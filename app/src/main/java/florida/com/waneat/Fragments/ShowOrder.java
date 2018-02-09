@@ -83,7 +83,7 @@ public class ShowOrder extends Fragment {
     public static ShowOrder newInstance(Order order) {
         ShowOrder fragment = new ShowOrder();
         Bundle args = new Bundle();
-        args.putSerializable("PEDIDO", order);
+        args.putParcelable("PEDIDO", order);
         //args.putString(ARG_PARAM2, param2);
 
         fragment.setArguments(args);
@@ -94,7 +94,7 @@ public class ShowOrder extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-           order = (Order) getArguments().getSerializable("PEDIDO");
+           order = (Order) getArguments().getParcelable("PEDIDO");
            // mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }

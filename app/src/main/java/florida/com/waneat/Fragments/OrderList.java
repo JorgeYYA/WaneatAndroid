@@ -150,7 +150,6 @@ public class OrderList extends Fragment {
         super.onAttach(activity);
     }
 
-
     public double sumaPrecio(ArrayList<Product> products){
 
         double total = 0;
@@ -164,7 +163,6 @@ public class OrderList extends Fragment {
         }
 
         return total;
-
     }
 
     public interface OnFragmentInteractionListener {
