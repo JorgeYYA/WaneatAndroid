@@ -86,7 +86,7 @@ public class OrderList extends Fragment {
         imagen.add(R.drawable.plato1);
         imagen.add(R.drawable.plato2);
 
-
+        //DEBUGGING MUY FUERTE
         Product producto = new Product(0, "spaguettis", "boloñesa, algo más", 2.0,imagen, "Sin salsa", "pasta", 3);
 
         Product producto2 = new Product(1, "macarrones", "boloñesa, algo más", 3.0, imagen, "Con salsa", "pasta", 2);
@@ -102,49 +102,31 @@ public class OrderList extends Fragment {
 
         total = sumaPrecio(products);
 
+        Order order = new Order(products,"10/2/2018","Restaurante Paco Mer",total);
 
-        Order order = new Order(products,"10/2/2018","Restaurante mis pelotas",total);
-
-        Order order2 = new Order(products,"10/2/2018","Restaurante mis pelotas bis",total);
-
-
+        Order order2 = new Order(products,"10/2/2018","Restaurante Sin Trazas de Palabras Malsonantes",total);
 
         orders.add(order);
         orders.add(order2);
 
-       // AdapterOrderList ad = new AdapterOrderList(orders,orders, new AdapterOrderList.OnItemClickListener());
-
         recyclerOrders = (RecyclerView) v.findViewById(R.id.recycler_orders);
-
 
         LinearLayoutManager llm = new LinearLayoutManager(getActivity());
 
-
         recyclerOrders.setLayoutManager(llm);
-
 
         recyclerOrders.setAdapter(new AdapterOrderList(orders, new AdapterOrderList.OnItemClickListener() {
 
             @Override
             public void onItemClick(Order item) {
 
-
-                //Toast.makeText(getActivity(), item.getResName(), Toast.LENGTH_SHORT).show();
-
-
                 interfaz.interfaceOrder(item);
-
 
             }
 
         }));
 
-
-
-
         recyclerOrders.invalidate();
-
-
 
         return v;
     }
@@ -155,8 +137,6 @@ public class OrderList extends Fragment {
             mListener.onFragmentInteraction(uri);
         }
     }
-
-
 
     @Override
     public void onDetach() {
@@ -170,8 +150,6 @@ public class OrderList extends Fragment {
         super.onAttach(activity);
     }
 
-
-
     public double sumaPrecio(ArrayList<Product> products){
 
         double total = 0;
@@ -182,23 +160,11 @@ public class OrderList extends Fragment {
                 total = total + products.get(i).getPrecio();
             }
 
-
         }
 
         return total;
-
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
