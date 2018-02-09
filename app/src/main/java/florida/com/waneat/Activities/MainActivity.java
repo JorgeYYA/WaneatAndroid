@@ -26,6 +26,7 @@ import florida.com.waneat.Adapters.AdapterItemList;
 import florida.com.waneat.Fragments.DialogFragment;
 
 import florida.com.waneat.Fragments.OrderList;
+import florida.com.waneat.Fragments.PrincipalScreen;
 import florida.com.waneat.Fragments.ProductFragment;
 import florida.com.waneat.Fragments.ShowOrder;
 import florida.com.waneat.Models.Order;
@@ -44,7 +45,7 @@ import florida.com.waneat.Services.UserService;
 public class MainActivity extends AppCompatActivity implements
         NavigationView.OnNavigationItemSelectedListener, DialogFragment.CestaInterface,
         TarjetasFragment.OnFragmentInteractionListener, UsuarioFragment.UserProfileListener,
-        ListProductFragment.OnFragmentInteractionListener, ProductFragment.OnFragmentInteractionListener, OrderList.interfaceOrder {
+        ListProductFragment.OnFragmentInteractionListener, ProductFragment.OnFragmentInteractionListener, OrderList.interfaceOrder,PrincipalScreen.OnFragmentInteractionListener {
 
 
     public ArrayList<Product> productosCesta = new ArrayList<Product>();
@@ -181,7 +182,7 @@ public class MainActivity extends AppCompatActivity implements
     private void loadFragment(){
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
-        ft.replace(R.id.fragment, new ListProductFragment());
+        ft.replace(R.id.fragment, new PrincipalScreen());
         ft.addToBackStack(null);
         ft.commit();
     }

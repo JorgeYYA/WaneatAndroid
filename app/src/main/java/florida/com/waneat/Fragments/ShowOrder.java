@@ -7,6 +7,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -41,6 +42,9 @@ public class ShowOrder extends Fragment {
 
     private String mParam1;
     private String mParam2;
+
+    private android.app.FragmentManager fm;
+    private FragmentTransaction ft;
 
     private ArrayList<Integer> imagen;
 
@@ -132,6 +136,7 @@ public class ShowOrder extends Fragment {
             public void onItemClick(Product item) {
 
                Toast.makeText(getActivity(), item.getNombre(), Toast.LENGTH_SHORT).show();
+
 
             }
 
