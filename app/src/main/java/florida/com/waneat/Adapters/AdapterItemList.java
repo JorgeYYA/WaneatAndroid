@@ -1,7 +1,6 @@
 package florida.com.waneat.Adapters;
 
 import android.support.annotation.NonNull;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -45,17 +44,19 @@ public class AdapterItemList extends RecyclerView.Adapter<AdapterItemList.MyView
         Product producto = productosLista.get(position);
         holder.nombre.setText(producto.getNombre());
         holder.precio.setText(String.valueOf(producto.getPrecio()));
+
+
         // holder.thumnail.setImageDrawable(producto.get(position).getImagenDrawable());
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         public TextView nombre, precio;
-        public CardView cv;
+       // public CardView cv;
 
         public MyViewHolder(View view) {
             super(view);
-            cv = (CardView) view.findViewById(R.id.card_view);
+            //cv = (CardView) view.findViewById(R.id.card_view);
             nombre = (TextView) view.findViewById(R.id.dishName);
             precio = (TextView) view.findViewById(R.id.dishPrice);
             view.setOnClickListener(this);

@@ -159,6 +159,15 @@ public class MainActivity extends AppCompatActivity implements
         Product producto2 = new Product(1, "macarrones", "boloñesa, algo más", 3.0, imagen, "Con salsa", "pasta", 2);
         this.productosCesta.add(producto2);
         this.productosLista.add(producto2);
+        Product producto3 = new Product(1, "lubina", "boloñesa, algo más", 5.0, imagen, "Con salsa", "pescado", 1);
+        this.productosCesta.add(producto3);
+        this.productosLista.add(producto3);
+        Product producto4 = new Product(1, "ternera", "boloñesa, algo más", 5.0, imagen, "Con salsa", "carne", 1);
+        this.productosCesta.add(producto4);
+        this.productosLista.add(producto4);
+        Product producto5 = new Product(1, "cereales", "boloñesa, algo más", 1.0, imagen, "Sin salsa", "Desayuno", 1);
+        this.productosCesta.add(producto5);
+        this.productosLista.add(producto5);
         Log.d("prueba", "cargarProductosIniciales: "+this.productosCesta.get(0).getNombre());
     }
 
