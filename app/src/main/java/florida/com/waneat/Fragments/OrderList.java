@@ -86,13 +86,13 @@ public class OrderList extends Fragment {
         imagen.add(R.drawable.plato2);
 
         //DEBUGGING MUY FUERTE
-        Product producto = new Product(0, "spaguettis", "boloñesa, algo más", 2.0,imagen, "Sin salsa", "pasta", 3);
+        Product producto = new Product(0, "spaguettis", "boloñesa, algo más", 2.0,imagen, "pasta", 3);
 
-        Product producto2 = new Product(1, "macarrones", "boloñesa, algo más", 3.0, imagen, "Con salsa", "pasta", 2);
+        Product producto2 = new Product(1, "macarrones", "boloñesa, algo más", 3.0, imagen,  "pasta", 2);
 
-        Product producto3 = new Product(2, "spaguettis2", "boloñesa, algo más", 2.0,imagen, "Sin salsa", "pasta", 3);
+        Product producto3 = new Product(2, "spaguettis2", "boloñesa, algo más", 2.0,imagen,  "pasta", 3);
 
-        Product producto4 = new Product(3, "macarrones2", "boloñesa, algo más", 3.0, imagen, "Con salsa", "pasta", 2);
+        Product producto4 = new Product(3, "macarrones2", "boloñesa, algo más", 3.0, imagen,  "pasta", 2);
 
         products.add(producto);
         products.add(producto2);

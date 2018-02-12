@@ -20,36 +20,23 @@ public class Product implements Parcelable {
     private ArrayList<Integer> imagen;
     private Drawable ImagenDrawable;
     private String categoria;
-    private String comentariosAdicionales;
     private int cantidad;
 
-    public Product(int id, String nombre, String descripcion, double precio, ArrayList<Integer> imagen, String comentariosAdicionales, String categoria, int cantidad) {
+    public Product(int id, String nombre, String descripcion, double precio, ArrayList<Integer> imagen, String categoria, int cantidad) {
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.precio = precio;
         this.imagen = imagen;
-        this.comentariosAdicionales = comentariosAdicionales;
         this.categoria = categoria;
         this.cantidad = cantidad;
     }
-
-    /*public Drawable getImagenDrawable() {
-        return ImagenDrawable;
-    }*/
-
-    /*public void setImagenDrawable(Drawable imagenDrawable) {
-        ImagenDrawable = imagenDrawable;
-    }*/
 
     public Product(int id,String nombre, double precio) {
 
         this.id = id;
         this.nombre = nombre;
         this.precio = precio;
-
-
-
 
     }
 
@@ -95,14 +82,6 @@ public class Product implements Parcelable {
         this.imagen = imagen;
     }
 
-    public String getComentariosAdicionales() {
-        return comentariosAdicionales;
-    }
-
-    public void setComentariosAdicionales(String comentariosAdicionales) {
-        this.comentariosAdicionales = comentariosAdicionales;
-    }
-
     public String getCategoria() {
         return categoria;
     }
@@ -132,7 +111,6 @@ public class Product implements Parcelable {
         }
         ImagenDrawable = (Drawable) in.readValue(Drawable.class.getClassLoader());
         categoria = in.readString();
-        comentariosAdicionales = in.readString();
         cantidad = in.readInt();
     }
 
@@ -155,7 +133,6 @@ public class Product implements Parcelable {
         }
         dest.writeValue(ImagenDrawable);
         dest.writeString(categoria);
-        dest.writeString(comentariosAdicionales);
         dest.writeInt(cantidad);
     }
 

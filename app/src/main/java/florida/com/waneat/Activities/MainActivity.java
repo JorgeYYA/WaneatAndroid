@@ -7,6 +7,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -56,6 +57,7 @@ public class MainActivity extends AppCompatActivity implements
     private UserService service;
     private TextView emailUsuarioLogged, nombreUsuario;
 
+    private Toolbar toolbar;
 
     RecyclerView mRecyclerView;
 
@@ -63,7 +65,7 @@ public class MainActivity extends AppCompatActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
 
@@ -176,19 +178,19 @@ public class MainActivity extends AppCompatActivity implements
         //    public Product(int id, String nombre, String descripcion, float precio, ArrayList<Integer> imagen, String comentariosAdicionales, String categoria, int cantidad) {
         imagen.add(R.drawable.plato1);
         imagen.add(R.drawable.plato2);
-        Product producto = new Product(0, "Spaguettis", "boloñesa, algo más", 2.0, imagen, "Sin salsa", "pasta", 0);
+        Product producto = new Product(0, "Spaguettis", "boloñesa, algo más", 2.0, imagen, "pasta", 0);
         //this.productosCesta.add(producto);
         this.productosLista.add(producto);
-        Product producto2 = new Product(1, "Macarrones", "boloñesa, algo más", 3.0, imagen, "Con salsa", "pasta", 0);
+        Product producto2 = new Product(1, "Macarrones", "boloñesa, algo más", 3.0, imagen,  "pasta", 0);
         //this.productosCesta.add(producto2);
         this.productosLista.add(producto2);
-        Product producto3 = new Product(2, "Lubina", "boloñesa, algo más", 5.0, imagen, "Con salsa", "pescado", 0);
+        Product producto3 = new Product(2, "Lubina", "boloñesa, algo más", 5.0, imagen,  "pescado", 0);
         //this.productosCesta.add(producto3);
         this.productosLista.add(producto3);
-        Product producto4 = new Product(3, "Tenera", "boloñesa, algo más", 5.0, imagen, "Con salsa", "carne", 0);
+        Product producto4 = new Product(3, "Tenera", "boloñesa, algo más", 5.0, imagen,  "carne", 0);
         //this.productosCesta.add(producto4);
         this.productosLista.add(producto4);
-        Product producto5 = new Product(4, "Cereales", "boloñesa, algo más", 1.0, imagen, "Sin salsa", "Desayuno", 0);
+        Product producto5 = new Product(4, "Cereales", "boloñesa, algo más", 1.0, imagen,  "Desayuno", 0);
         //this.productosCesta.add(producto5);
         this.productosLista.add(producto5);
     }
@@ -252,30 +254,32 @@ public class MainActivity extends AppCompatActivity implements
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
 
         if (id == R.id.nav_miperfil) {
-            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             ft.replace(R.id.fragment, UsuarioFragment.newInstance()).addToBackStack("MY_FRAGMENT");
-            ft.commit();
+            toolbar.setBackgroundColor(ContextCompat.getColor(this, R.color.colorSecondaryDarkWaneat));
         }else if(id == R.id.inicio){
-            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             ft.replace(R.id.fragment, ListProductFragment.newInstance()).addToBackStack("MY_FRAGMENT");
-            ft.commit();
+            toolbar.setBackgroundColor(ContextCompat.getColor(this, android.R.color.transparent));
+
         }else if (id == R.id.nav_mispedidos) {
-            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             ft.replace(R.id.fragment, OrderList.newInstance(null,null)).addToBackStack("MY_FRAGMENT");
-            ft.commit();
+            toolbar.setBackgroundColor(ContextCompat.getColor(this, R.color.colorSecondaryDarkWaneat));
+
         } else if (id == R.id.nav_qr) {
             startActivityForResult(new Intent(MainActivity.this, QRActivity.class), PICK_CONTACT_REQUEST);
 
         } else if (id == R.id.nav_mistarjetas) {
-            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             ft.replace(R.id.fragment, TarjetasFragment.newInstance()).addToBackStack("MY_FRAGMENT");
-            ft.commit();
+            toolbar.setBackgroundColor(ContextCompat.getColor(this, R.color.colorSecondaryDarkWaneat));
+
         } else if (id == R.id.nav_logout) {
             this.service.signOut();
             startActivity(new Intent(MainActivity.this, LoginActivity.class));
         }
+
+        ft.commit();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
