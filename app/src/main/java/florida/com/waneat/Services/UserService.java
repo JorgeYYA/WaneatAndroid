@@ -22,8 +22,7 @@ public class UserService {
     final static String sharedName = "Settings";
     public MainActivity activity;
 
-    User u = new User("David", "Florida", "C/Floraida",
-             "david@gmail.com", "david123");
+    User u = new User("David", "Florida", "C/Floraida", "david@gmail.com", "david123");
 
 
 

@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity implements
         NavigationView.OnNavigationItemSelectedListener, DialogFragment.CestaInterface,
         TarjetasFragment.OnFragmentInteractionListener, UsuarioFragment.UserProfileListener,
         ListProductFragment.OnFragmentInteractionListener, ProductFragment.OnFragmentInteractionListener,
-        OrderList.interfaceOrder{
+        OrderList.InterfaceOrder, ShowOrder.OnFragmentInteractionListener{
 
 
     public ArrayList<Product> productosCesta = new ArrayList<Product>();
@@ -383,11 +383,13 @@ public class MainActivity extends AppCompatActivity implements
         return true;
     }
 
+    @Override
     public void showFloatingActionButton() {
         fab.show();
-        fab_cat.hide();
+        fab_cat.show();
     };
 
+    @Override
     public void hideFloatingActionButton() {
         fab.hide();
         fab_cat.hide();

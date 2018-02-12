@@ -49,6 +49,8 @@ public class ListProductFragment extends Fragment {
         // Inflate the layout for this fragment
         View v =  inflater.inflate(R.layout.fragment_list_product, container, false);
 
+        mListener.showFloatingActionButton();
+
         String idRestaurante = "";
 
         if(getArguments() != null){
@@ -113,6 +115,8 @@ public class ListProductFragment extends Fragment {
         void onFragmentInteraction(Uri uri);
         ArrayList<Product> getProductos();
         void verProducto(int position);
+        void showFloatingActionButton();
+        void hideFloatingActionButton();
 
     }
 

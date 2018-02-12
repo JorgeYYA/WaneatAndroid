@@ -6,14 +6,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
+    android:background="@color/lightGrayBackground"
     tools:openDrawer="start">
 
     <FrameLayout
         android:layout_width="match_parent"
+        android:background="@color/lightGrayBackground"
         android:layout_height="match_parent">
 
         <FrameLayout
             android:id="@+id/fragment"
+            android:background="@color/lightGrayBackground"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
         </FrameLayout>
@@ -24,18 +27,20 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
             android:layout_margin="@dimen/fab_margin"
+            android:visibility="gone"
             app:srcCompat="@drawable/ic_shopping_cart_black_24dp" />
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/fab_cat"
-            android:layout_width="63dp"
-            android:layout_height="59dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="bottom|left"
             android:layout_marginBottom="10dp"
             android:layout_marginEnd="@dimen/fab_margin"
             android:layout_marginRight="@dimen/fab_margin"
             android:layout_marginStart="10dp"
             android:src="@drawable/cat"
+            android:visibility="gone"
             tools:layout_editor_absoluteY="590dp" />
 
         <android.support.design.widget.FloatingActionButton

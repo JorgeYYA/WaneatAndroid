@@ -109,6 +109,8 @@ public class ShowOrder extends Fragment {
         progres = (ProgressBar) v.findViewById(R.id.image_progress);
 
 
+        mListener.hideFloatingActionButton();
+
         imageSwitcher = (ImageSwitcher) v.findViewById(R.id.image_switcher);
         imageSwitcher.setFactory(new ViewSwitcher.ViewFactory() {
 
@@ -183,12 +185,6 @@ public class ShowOrder extends Fragment {
         return v;
     }
 
-
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
 
     public void recoverImages(){
 
@@ -284,15 +280,20 @@ public class ShowOrder extends Fragment {
     }
 
     @Override
-    public void onAttach(Activity activity) {
-
-        super.onAttach(activity);
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof OnFragmentInteractionListener) {
+            mListener = (OnFragmentInteractionListener) context;
+        } else {
+            throw new RuntimeException(context.toString()
+                    + " must implement OnFragmentInteractionListener");
+        }
     }
 
 
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
+        void showFloatingActionButton();
+        void hideFloatingActionButton();
     }
 
     

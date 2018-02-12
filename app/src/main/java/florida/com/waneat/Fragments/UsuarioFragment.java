@@ -40,6 +40,7 @@ public class UsuarioFragment extends android.support.v4.app.Fragment {
         View v =  inflater.inflate(R.layout.fragment_usuario, container, false);
 
         user = mListener.getUser();
+        mListener.hideFloatingActionButton();
 
         this.perfilUsu = (EditText) v.findViewById(R.id.perfilUsu);
         this.perfilApe = (EditText) v.findViewById(R.id.perfilApe);
@@ -113,6 +114,8 @@ public class UsuarioFragment extends android.support.v4.app.Fragment {
 
     public interface UserProfileListener {
         User getUser();
+        void showFloatingActionButton();
+        void hideFloatingActionButton();
 
     }
 
