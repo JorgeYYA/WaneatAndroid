@@ -14,9 +14,9 @@
 
         <ImageView
             android:id="@+id/myImageView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/ic_launcher" />
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@color/lightGrayBackground" />
 
         <TextView
             android:id="@+id/cantidadProducto"
@@ -30,7 +30,7 @@
             android:gravity="center"
             android:text="500"
             android:textSize="35dp"
-            android:textColor="@color/colorSecondaryDarkWaneat" />
+            android:textColor="@color/colorPrimaryWaneat" />
     </RelativeLayout>
 
 

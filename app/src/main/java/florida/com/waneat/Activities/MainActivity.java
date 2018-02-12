@@ -14,11 +14,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import florida.com.waneat.Fragments.DialogFragment;
 import florida.com.waneat.Fragments.ListProductFragment;
@@ -65,6 +67,7 @@ public class MainActivity extends AppCompatActivity implements
         setSupportActionBar(toolbar);
 
 
+        setTitle("Waneat");
 
         this.service = new UserService(MainActivity.this);
 
@@ -149,26 +152,45 @@ public class MainActivity extends AppCompatActivity implements
         this.productosCesta.get(position).setCantidad(cantidadActual);
     }
 
+    @Override
+    public void addToCart(Product prod) {
+        if(productosCesta.isEmpty()){
+            this.productosCesta.add(prod);
+        }else{
+            for(int i=0;i<this.productosCesta.size();i++){
+                int can = 0;
+                if(productosCesta.get(i).getId() == prod.getId()) {
+                    can = productosCesta.get(i).getCantidad();
+                    Product newPro = productosCesta.get(i);
+                    newPro.setCantidad(can + 1);
+                    productosCesta.remove(productosCesta.get(i));
+                    productosCesta.add(newPro);
+                }else{
+                    this.productosCesta.add(prod);
+                }
+            }
+        }
+    }
+
     private void cargarProductosIniciales(){
         //    public Product(int id, String nombre, String descripcion, float precio, ArrayList<Integer> imagen, String comentariosAdicionales, String categoria, int cantidad) {
         imagen.add(R.drawable.plato1);
         imagen.add(R.drawable.plato2);
-        Product producto = new Product(0, "spaguettis", "boloñesa, algo más", 2.0, imagen, "Sin salsa", "pasta", 3);
-        this.productosCesta.add(producto);
+        Product producto = new Product(0, "Spaguettis", "boloñesa, algo más", 2.0, imagen, "Sin salsa", "pasta", 0);
+        //this.productosCesta.add(producto);
         this.productosLista.add(producto);
-        Product producto2 = new Product(1, "macarrones", "boloñesa, algo más", 3.0, imagen, "Con salsa", "pasta", 2);
-        this.productosCesta.add(producto2);
+        Product producto2 = new Product(1, "Macarrones", "boloñesa, algo más", 3.0, imagen, "Con salsa", "pasta", 0);
+        //this.productosCesta.add(producto2);
         this.productosLista.add(producto2);
-        Product producto3 = new Product(1, "lubina", "boloñesa, algo más", 5.0, imagen, "Con salsa", "pescado", 1);
-        this.productosCesta.add(producto3);
+        Product producto3 = new Product(2, "Lubina", "boloñesa, algo más", 5.0, imagen, "Con salsa", "pescado", 0);
+        //this.productosCesta.add(producto3);
         this.productosLista.add(producto3);
-        Product producto4 = new Product(1, "ternera", "boloñesa, algo más", 5.0, imagen, "Con salsa", "carne", 1);
-        this.productosCesta.add(producto4);
+        Product producto4 = new Product(3, "Tenera", "boloñesa, algo más", 5.0, imagen, "Con salsa", "carne", 0);
+        //this.productosCesta.add(producto4);
         this.productosLista.add(producto4);
-        Product producto5 = new Product(1, "cereales", "boloñesa, algo más", 1.0, imagen, "Sin salsa", "Desayuno", 1);
-        this.productosCesta.add(producto5);
+        Product producto5 = new Product(4, "Cereales", "boloñesa, algo más", 1.0, imagen, "Sin salsa", "Desayuno", 0);
+        //this.productosCesta.add(producto5);
         this.productosLista.add(producto5);
-        Log.d("prueba", "cargarProductosIniciales: "+this.productosCesta.get(0).getNombre());
     }
 
     @Override
@@ -222,6 +244,7 @@ public class MainActivity extends AppCompatActivity implements
         ft.addToBackStack("MY_FRAGMENT");
         ft.commit();
     }
+
 
 
     @SuppressWarnings("StatementWithEmptyBody")
