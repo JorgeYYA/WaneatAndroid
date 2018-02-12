@@ -7,6 +7,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
+import java.text.DecimalFormat;
 import java.util.List;
 
 import florida.com.waneat.Models.Product;
@@ -20,7 +23,7 @@ public class AdapterItemList extends RecyclerView.Adapter<AdapterItemList.MyView
 
     private List<Product> productosLista;
     private RecyclerViewOnItemClickListener recyclerViewOnItemClickListener;
-
+    private DecimalFormat dec = new DecimalFormat("#.00 €");;
 
     public AdapterItemList(List<Product> productosLista, @NonNull RecyclerViewOnItemClickListener recyclerViewOnItemClickListener) {
         this.productosLista = productosLista;
@@ -43,7 +46,8 @@ public class AdapterItemList extends RecyclerView.Adapter<AdapterItemList.MyView
     public void onBindViewHolder(MyViewHolder holder, int position) {
         Product producto = productosLista.get(position);
         holder.nombre.setText(producto.getNombre());
-        holder.precio.setText(String.valueOf(producto.getPrecio()));
+        holder.precio.setText(dec.format(producto.getPrecio()));
+        holder.categoria.setText(producto.getCategoria());
 
 
         // holder.thumnail.setImageDrawable(producto.get(position).getImagenDrawable());
@@ -51,7 +55,7 @@ public class AdapterItemList extends RecyclerView.Adapter<AdapterItemList.MyView
 
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        public TextView nombre, precio;
+        public TextView nombre, precio,categoria;
        // public CardView cv;
 
         public MyViewHolder(View view) {
@@ -59,6 +63,7 @@ public class AdapterItemList extends RecyclerView.Adapter<AdapterItemList.MyView
             //cv = (CardView) view.findViewById(R.id.card_view);
             nombre = (TextView) view.findViewById(R.id.dishName);
             precio = (TextView) view.findViewById(R.id.dishPrice);
+            categoria = (TextView) view.findViewById(R.id.categoria);
             view.setOnClickListener(this);
         }
 

@@ -60,6 +60,7 @@ public class TarjetasFragment extends Fragment {
         this.cardFront = v.findViewById(R.id.frontCard);
         this.nextButton = v.findViewById(R.id.guardarCredit);
 
+        getActivity().setTitle("Tus tarjetas");
 
         //METHODS
         toggleCard();

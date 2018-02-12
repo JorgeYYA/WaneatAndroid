@@ -49,9 +49,11 @@ public class ListProductFragment extends Fragment {
 
         if(getArguments() != null){
             idRestaurante = getArguments().getString("qr");
+            Toast.makeText(getContext(), idRestaurante, Toast.LENGTH_SHORT).show();
         }
 
-        Toast.makeText(getContext(), idRestaurante, Toast.LENGTH_SHORT).show();
+        getActivity().setTitle("Waneat");
+
 
         this.recyclerView = (RecyclerView) v.findViewById(R.id.my_recycler_view);
 
@@ -64,8 +66,6 @@ public class ListProductFragment extends Fragment {
 
         GridLayoutManager mGridLayoutManager = new GridLayoutManager(getContext(), 2);
         recyclerView.setLayoutManager(mGridLayoutManager);
-        recyclerView.addItemDecoration(new DividerItemDecoration(getContext(), LinearLayoutManager.VERTICAL));
-
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(productAdapter);
 

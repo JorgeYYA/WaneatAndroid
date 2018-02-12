@@ -61,9 +61,9 @@
             android:layout_height="match_parent"
             android:layout_marginRight="20dp"
             android:gravity="left"
-            android:text="preci"
+            android:text="45.90€"
             android:textAlignment="textEnd"
-            android:textColor="@android:color/background_dark"
+            android:textColor="@color/colorSecondaryDarkWaneat"
             android:textSize="25sp"
             android:textStyle="bold" />
 
