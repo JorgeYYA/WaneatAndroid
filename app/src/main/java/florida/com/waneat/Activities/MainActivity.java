@@ -368,10 +368,12 @@ public class MainActivity extends AppCompatActivity implements
 
     public void showFloatingActionButton() {
         fab.show();
+        fab_cat.hide();
     };
 
     public void hideFloatingActionButton() {
         fab.hide();
+        fab_cat.hide();
     };
 
 

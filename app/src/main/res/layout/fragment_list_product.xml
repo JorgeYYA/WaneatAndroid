@@ -5,7 +5,7 @@
     android:orientation="vertical"
     tools:context="florida.com.waneat.Fragments.ListProductFragment">
 
-    <HorizontalScrollView
+   <!-- <HorizontalScrollView
         android:layout_width="match_parent"
         android:background="@android:color/white"
         android:layout_height="wrap_content">
@@ -106,7 +106,7 @@
 
 
         </LinearLayout>
-    </HorizontalScrollView>
+    </HorizontalScrollView> -->
 
 
     <android.support.v7.widget.RecyclerView
