@@ -221,6 +221,7 @@ public class MainActivity extends AppCompatActivity implements
         fm = getSupportFragmentManager();
         DialogFragment dialog = new DialogFragment();
         dialog.show(fm, "Cart");
+
     }
 
     @Override
@@ -275,19 +276,19 @@ public class MainActivity extends AppCompatActivity implements
         //    public Product(int id, String nombre, String descripcion, float precio, ArrayList<Integer> imagen, String comentariosAdicionales, String categoria, int cantidad) {
         imagen.add(R.drawable.plato1);
         imagen.add(R.drawable.plato2);
-        Product producto = new Product(0, "Spaguettis", "boloñesa, algo más", 2.0, imagen, "pasta", 0);
+        Product producto = new Product(0, "Spaguettis", "boloñesa, algo más", 2.0, imagen, "pasta", 1);
         //this.productosCesta.add(producto);
         this.productosLista.add(producto);
-        Product producto2 = new Product(1, "Macarrones", "boloñesa, algo más", 3.0, imagen,  "pasta", 0);
+        Product producto2 = new Product(1, "Macarrones", "boloñesa, algo más", 3.0, imagen,  "pasta", 1);
         //this.productosCesta.add(producto2);
         this.productosLista.add(producto2);
-        Product producto3 = new Product(2, "Lubina", "boloñesa, algo más", 5.0, imagen,  "pescado", 0);
+        Product producto3 = new Product(2, "Lubina", "boloñesa, algo más", 5.0, imagen,  "pescado", 1);
         //this.productosCesta.add(producto3);
         this.productosLista.add(producto3);
-        Product producto4 = new Product(3, "Tenera", "boloñesa, algo más", 5.0, imagen,  "carne", 0);
+        Product producto4 = new Product(3, "Tenera", "boloñesa, algo más", 5.0, imagen,  "carne", 1);
         //this.productosCesta.add(producto4);
         this.productosLista.add(producto4);
-        Product producto5 = new Product(4, "Cereales", "boloñesa, algo más", 1.0, imagen,  "Desayuno", 0);
+        Product producto5 = new Product(4, "Cereales", "boloñesa, algo más", 1.0, imagen,  "Desayuno", 1);
         //this.productosCesta.add(producto5);
         this.productosLista.add(producto5);
     }
@@ -317,6 +318,7 @@ public class MainActivity extends AppCompatActivity implements
         ft.replace(R.id.fragment, new ListProductFragment());
         ft.addToBackStack("MY_FRAGMENT");
         ft.commit();
+        toolbar.setBackgroundColor(ContextCompat.getColor(this, android.R.color.transparent));
     }
 
     @Override
@@ -342,6 +344,7 @@ public class MainActivity extends AppCompatActivity implements
         ft.replace(R.id.fragment, new ProductFragment());
         ft.addToBackStack("MY_FRAGMENT");
         ft.commit();
+        toolbar.setBackgroundColor(ContextCompat.getColor(this, R.color.colorSecondaryDarkWaneat));
     }
 
 
@@ -418,6 +421,7 @@ public class MainActivity extends AppCompatActivity implements
     public void interfaceOrder(Order order) {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.fragment, ShowOrder.newInstance(order)).addToBackStack("MY_FRAGMENT");
+        toolbar.setBackgroundColor(ContextCompat.getColor(this, R.color.colorSecondaryDarkWaneat));
         ft.commit();
     }
 }
