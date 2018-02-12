@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="florida.com.waneat.Activities.SplashActivity"
+    android:background="@color/colorSecondaryDarkWaneat">
+
+    <ImageView
+        android:id="@+id/imageLogo"
+        android:layout_width="226dp"
+        android:layout_height="159dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="150dp"
+        android:scaleType="fitCenter"
+        app:srcCompat="@drawable/logologin" />
+
+    <com.felipecsl.gifimageview.library.GifImageView
+        android:id="@+id/carga"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_gravity="center"
+        android:layout_margin="20dp"
+        android:scaleType="fitCenter" />
+
+
+</LinearLayout>

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.FragmentManager;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -22,6 +23,7 @@ public class UserService {
     private String pwd;
     private SharedPreferences prefs;
     final static String sharedName = "Settings";
+    public MainActivity activity;
 
     User u = new User("David", "Florida", "C/Floraida",
             "123456789", "david@gmail.com", "david123");
@@ -30,6 +32,9 @@ public class UserService {
 
     public UserService (Context context){
         this.context = context;
+        if(context instanceof MainActivity){
+            activity = (MainActivity) context;
+        }
         this.prefs = context.getSharedPreferences(sharedName,Context.MODE_PRIVATE);
     }
 
@@ -57,6 +62,10 @@ public class UserService {
     public void signOut(){
         Toast.makeText(context, "Cerrando sesión", Toast.LENGTH_SHORT).show();
         context.getSharedPreferences(sharedName, 0).edit().clear().apply();
+        FragmentManager fragmentManager = activity.getSupportFragmentManager();
+        fragmentManager.popBackStackImmediate("MY_FRAGMENT", FragmentManager.POP_BACK_STACK_INCLUSIVE);
+
+
     }
 
     /**

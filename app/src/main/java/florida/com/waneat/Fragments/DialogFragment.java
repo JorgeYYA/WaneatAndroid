@@ -1,26 +1,23 @@
 package florida.com.waneat.Fragments;
 
 
-import android.app.Activity;
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
 import florida.com.waneat.Adapters.AdapterCartItem;
+import florida.com.waneat.Adapters.AdapterFinalizarCompra;
 import florida.com.waneat.Models.Product;
 import florida.com.waneat.R;
 
@@ -30,16 +27,19 @@ public class DialogFragment extends android.support.v4.app.DialogFragment{
     private RecyclerView recyclerView;
     private TextView cestaTotal;
     private AdapterCartItem adapter;
+    private AdapterFinalizarCompra adapterCompra;
+    private Button checkoutButton, buttonIntroducirTarj;
 
     private ArrayList<Product> cesta = new ArrayList<Product>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.dialog_fragment, container, false);
+        final View rootView = inflater.inflate(R.layout.dialog_fragment, container, false);
         getDialog().setTitle("Cesta");
         this.cesta = mListener.getProductosCesta();
         this.recyclerView = rootView.findViewById(R.id.cestaRecyclerView);
         this.cestaTotal = rootView.findViewById(R.id.cestaTotal);
+        this.checkoutButton = rootView.findViewById(R.id.checkoutButton);
 
         //cargamos los precios
         reloadPrecios();
@@ -67,6 +67,28 @@ public class DialogFragment extends android.support.v4.app.DialogFragment{
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(adapter);
 
+
+        checkoutButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+
+                buttonIntroducirTarj = (Button) rootView.findViewById(R.id.buttonIntroducirTarj);
+
+
+                adapterCompra = new AdapterFinalizarCompra(cesta);
+                recyclerView.setAdapter(adapterCompra);
+
+                buttonIntroducirTarj.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        FragmentTransaction ft = getFragmentManager().beginTransaction();
+                        ft.replace(R.id.fragment, TarjetasFragment.newInstance()).addToBackStack(null);
+                        ft.commit();
+                    }
+                });
+
+            }
+        });
+
         //Method related with this dialog
         return rootView;
     }
@@ -78,8 +100,7 @@ public class DialogFragment extends android.support.v4.app.DialogFragment{
         if (context instanceof CestaInterface) {
             mListener = (CestaInterface) context;
         } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
+            throw new RuntimeException(context.toString() + " must implement OnFragmentInteractionListener");
         }
     }
 

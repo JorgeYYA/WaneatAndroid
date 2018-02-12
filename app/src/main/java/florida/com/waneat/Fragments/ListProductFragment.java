@@ -1,16 +1,18 @@
 package florida.com.waneat.Fragments;
+
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -43,6 +45,13 @@ public class ListProductFragment extends Fragment {
         // Inflate the layout for this fragment
         View v =  inflater.inflate(R.layout.fragment_list_product, container, false);
 
+        String idRestaurante = "";
+
+        if(getArguments() != null){
+            idRestaurante = getArguments().getString("qr");
+        }
+
+        Toast.makeText(getContext(), idRestaurante, Toast.LENGTH_SHORT).show();
 
         this.recyclerView = (RecyclerView) v.findViewById(R.id.my_recycler_view);
 
@@ -53,8 +62,8 @@ public class ListProductFragment extends Fragment {
             }
         });
 
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
-        recyclerView.setLayoutManager(mLayoutManager);
+        GridLayoutManager mGridLayoutManager = new GridLayoutManager(getContext(), 2);
+        recyclerView.setLayoutManager(mGridLayoutManager);
         recyclerView.addItemDecoration(new DividerItemDecoration(getContext(), LinearLayoutManager.VERTICAL));
 
         recyclerView.setItemAnimator(new DefaultItemAnimator());
