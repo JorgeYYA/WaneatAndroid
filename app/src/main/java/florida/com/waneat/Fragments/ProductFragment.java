@@ -162,6 +162,7 @@ public class ProductFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 mListener.addToCart(pro);
+
                 Toast.makeText(getContext(), "Añadido: "+pro.getNombre()+" a la cesta correctamente", Toast.LENGTH_SHORT).show();
             }
         });

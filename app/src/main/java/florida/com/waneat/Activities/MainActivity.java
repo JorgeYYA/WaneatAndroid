@@ -19,6 +19,7 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -240,21 +241,33 @@ public class MainActivity extends AppCompatActivity implements
 
     @Override
     public void addToCart(Product prod) {
+        boolean added = false;
+        int can = 0;
+        int id = 0;
         if(productosCesta.isEmpty()){
             this.productosCesta.add(prod);
         }else{
             for(int i=0;i<this.productosCesta.size();i++){
-                int can = 0;
+
                 if(productosCesta.get(i).getId() == prod.getId()) {
-                    can = productosCesta.get(i).getCantidad();
-                    Product newPro = productosCesta.get(i);
-                    newPro.setCantidad(can + 1);
-                    productosCesta.remove(productosCesta.get(i));
-                    productosCesta.add(newPro);
-                }else{
-                    this.productosCesta.add(prod);
+                    added = true;
+                    if(added){
+                        id = productosCesta.get(i).getId();
+                    }
                 }
             }
+
+            if(!added) {
+                this.productosCesta.add(prod);
+            }else{
+
+                can = productosCesta.get(id).getCantidad();
+                Product newPro = productosCesta.get(id);
+                newPro.setCantidad(can + 1);
+                productosCesta.remove(productosCesta.get(id));
+                productosCesta.add(newPro);
+            }
+            added = false;
         }
     }
 

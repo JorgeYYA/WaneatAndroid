@@ -12,25 +12,39 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.GridLayout;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
 import florida.com.waneat.Adapters.AdapterCartItem;
+import florida.com.waneat.Adapters.AdapterCreditCards;
 import florida.com.waneat.Adapters.AdapterFinalizarCompra;
+import florida.com.waneat.Adapters.AdapterProductList;
+import florida.com.waneat.Models.CreditCard;
 import florida.com.waneat.Models.Product;
 import florida.com.waneat.R;
 
 public class DialogFragment extends android.support.v4.app.DialogFragment{
 
     public CestaInterface mListener;
-    private RecyclerView recyclerView;
-    private TextView cestaTotal;
+    private RecyclerView recyclerView, recyclerCards;
+    private TextView cestaTotal, tarjetaCredito;
     private AdapterCartItem adapter;
     private AdapterFinalizarCompra adapterCompra;
+    private AdapterCreditCards adapterCards;
     private Button checkoutButton, buttonIntroducirTarj;
+    private LinearLayout layoutEmpty;
+    private GridLayout layoutCards;
+
+    private int cardPos = 0;
 
     private ArrayList<Product> cesta = new ArrayList<Product>();
+
+
+    private ArrayList<CreditCard> cards = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -38,8 +52,12 @@ public class DialogFragment extends android.support.v4.app.DialogFragment{
         getDialog().setTitle("Cesta");
         this.cesta = mListener.getProductosCesta();
         this.recyclerView = rootView.findViewById(R.id.cestaRecyclerView);
+        this.recyclerCards = rootView.findViewById(R.id.recycler_cards);
         this.cestaTotal = rootView.findViewById(R.id.cestaTotal);
         this.checkoutButton = rootView.findViewById(R.id.checkoutButton);
+        this.layoutEmpty = rootView.findViewById(R.id.layout_empty);
+        this.layoutCards = rootView.findViewById(R.id.layout_cards);
+        this.tarjetaCredito = rootView.findViewById(R.id.card_number);
 
         //cargamos los precios
         reloadPrecios();
@@ -60,12 +78,43 @@ public class DialogFragment extends android.support.v4.app.DialogFragment{
             }
         });
 
+
+
+        cards.add(new CreditCard("4242424242424242","111","111","111",1));
+
+        cards.add(new CreditCard("1111111111111111","111","111","111",1));
+
+
+        if(cards != null) {
+            tarjetaCredito.setText(cards.get(0).getCreditCardNumber().substring(0,4)+" XXXX XXXX XXXX");
+        }
+
+        layoutCards.setVisibility(View.GONE);
+
+        if(cesta.isEmpty()){
+
+            layoutEmpty.setVisibility(View.VISIBLE);
+
+        }else{
+
+            layoutEmpty.setVisibility(View.GONE);
+
+        }
+
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
+        RecyclerView.LayoutManager mLayoutManager2 = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.addItemDecoration(new DividerItemDecoration(getContext(), LinearLayoutManager.VERTICAL));
 
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(adapter);
+
+
+        recyclerCards.setLayoutManager(mLayoutManager2);
+        recyclerCards.addItemDecoration(new DividerItemDecoration(getContext(), LinearLayoutManager.VERTICAL));
+
+        recyclerCards.setItemAnimator(new DefaultItemAnimator());
+
 
 
         checkoutButton.setOnClickListener(new View.OnClickListener() {
@@ -74,8 +123,33 @@ public class DialogFragment extends android.support.v4.app.DialogFragment{
                 buttonIntroducirTarj = (Button) rootView.findViewById(R.id.buttonIntroducirTarj);
 
 
-                adapterCompra = new AdapterFinalizarCompra(cesta);
-                recyclerView.setAdapter(adapterCompra);
+
+                if(!cesta.isEmpty()){
+
+                    layoutCards.setVisibility(View.VISIBLE);
+                    adapterCompra = new AdapterFinalizarCompra(cesta);
+                    recyclerCards.setAdapter(new AdapterCreditCards(cards, new AdapterCreditCards.OnItemClickListener() {
+
+                        @Override
+                        public void onItemClick(CreditCard item) {
+
+
+
+                            Toast.makeText(getActivity(), cardPos+"asd", Toast.LENGTH_SHORT).show();
+
+
+                        }
+
+
+                    }));
+
+                    recyclerView.setAdapter(adapterCompra);
+                   // recyclerCards.setAdapter(adapterCompra);
+
+                }
+
+
+
 
                 buttonIntroducirTarj.setOnClickListener(new View.OnClickListener() {
                     @Override
