@@ -1,5 +1,21 @@
 package florida.com.waneat.Adapters;
 
+/**
+ * Created by JorgeYYA on 12/02/2018.
+ */
+
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.RadioButton;
+import android.widget.TextView;
+
+import java.util.ArrayList;
+
+import florida.com.waneat.Models.CreditCard;
+import florida.com.waneat.Models.Order;
+import florida.com.waneat.R;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -7,7 +23,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,7 +31,6 @@ import java.util.ArrayList;
 import florida.com.waneat.Activities.MainActivity;
 import florida.com.waneat.Fragments.OrderList;
 import florida.com.waneat.Models.Order;
-import florida.com.waneat.Models.Restaurant;
 import florida.com.waneat.R;
 
 /**
@@ -24,23 +38,20 @@ import florida.com.waneat.R;
  */
 
 
-public class AdapterLastVisited extends RecyclerView.Adapter<AdapterLastVisited.ClaseViewHolder>{
+public class AdapterCreditCards extends RecyclerView.Adapter<AdapterCreditCards.ClaseViewHolder>{
 
     public static class ClaseViewHolder extends RecyclerView.ViewHolder {
 
-        TextView resName, date;
-        RatingBar rate;
+        RadioButton number;
+
         ClaseViewHolder(View itemView) {
             super(itemView);
 
-            resName = itemView.findViewById(R.id.res_name);
-            date = itemView.findViewById(R.id.date);
-            rate = itemView.findViewById(R.id.rating_bar);
-
+            number = itemView.findViewById(R.id.number);
 
         }
 
-        public void bind(final Restaurant item, final OnItemClickListener listener) {
+        public void bind(final CreditCard item, final OnItemClickListener listener) {
 
 
             itemView.setOnClickListener(new View.OnClickListener() {
@@ -48,6 +59,7 @@ public class AdapterLastVisited extends RecyclerView.Adapter<AdapterLastVisited.
                 @Override public void onClick(View v) {
 
                     listener.onItemClick(item);
+
 
                 }
 
@@ -60,10 +72,10 @@ public class AdapterLastVisited extends RecyclerView.Adapter<AdapterLastVisited.
 
 
     private final OnItemClickListener listener;
-    ArrayList<Restaurant> restaurants;
+    ArrayList<CreditCard> cards;
 
-    public AdapterLastVisited(ArrayList<Restaurant> restaurants, OnItemClickListener listener){
-        this.restaurants = restaurants;
+    public AdapterCreditCards(ArrayList<CreditCard> cards, OnItemClickListener listener){
+        this.cards = cards;
         this.listener = listener;
     }
 
@@ -71,12 +83,12 @@ public class AdapterLastVisited extends RecyclerView.Adapter<AdapterLastVisited.
 
     @Override
     public int getItemCount() {
-        return restaurants.size();
+        return cards.size();
     }
 
     @Override
     public ClaseViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.last_visited, viewGroup, false);
+        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.credit_cards, viewGroup, false);
         ClaseViewHolder pvh = new ClaseViewHolder(v);
         return pvh;
     }
@@ -85,17 +97,15 @@ public class AdapterLastVisited extends RecyclerView.Adapter<AdapterLastVisited.
     public void onBindViewHolder(final ClaseViewHolder ViewHolder, final int i) {
 
 
-        ViewHolder.bind(restaurants.get(i), listener);
+
+
+        ViewHolder.bind(cards.get(i), listener);
 
         int numProd;
 
         String list = "";
 
-
-
-        ViewHolder.resName.setText(restaurants.get(i).getNombre());
-        ViewHolder.rate.setRating((float)restaurants.get(i).getPunctuation());
-        ViewHolder.date.setText("10/02/19");
+        ViewHolder.number.setText(cards.get(i).getCreditCardNumber());
 
     }
 
@@ -104,20 +114,9 @@ public class AdapterLastVisited extends RecyclerView.Adapter<AdapterLastVisited.
 
     public interface OnItemClickListener {
 
-        void onItemClick(Restaurant item);
+        void onItemClick(CreditCard item);
 
     }
-
-
-
-
-
-
-
-
-
-
-
 
 
 

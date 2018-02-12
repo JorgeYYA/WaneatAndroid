@@ -143,6 +143,8 @@ public class ShowOrder extends Fragment {
 
         }));
 
+
+
         recyclerProd.invalidate();
 
 
@@ -173,6 +175,10 @@ public class ShowOrder extends Fragment {
 
         showImagesOrder sm = new showImagesOrder(imageSwitcher, progres, imagen);
         sm.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+
+        //TODO: Cambiar a order num
+        getActivity().setTitle("Pedido Num: 1");
+
 
         return v;
     }

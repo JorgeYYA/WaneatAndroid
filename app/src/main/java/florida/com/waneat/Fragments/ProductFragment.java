@@ -100,6 +100,7 @@ public class ProductFragment extends Fragment {
         progres = (ProgressBar) v.findViewById(R.id.image_progress);
         categoriaProducto = (TextView) v.findViewById(R.id.categoriaProducto);
 
+
         this.imagen.add(R.drawable.plato1);
         this.imagen.add(R.drawable.plato2);
 
@@ -128,6 +129,7 @@ public class ProductFragment extends Fragment {
         // Establece la animación de transición entre fotos
         setAnim();
 
+        getActivity().setTitle(name.getText().toString());
 
         //Pone la primera imagen
         try{
@@ -159,9 +161,9 @@ public class ProductFragment extends Fragment {
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                mListener.addToCart(pro);
 
-                Toast.makeText(getActivity(), "Abrir otra cosa {Debug 100% libre de palabras malsonantes}", Toast.LENGTH_SHORT).show();
-
+                Toast.makeText(getContext(), "Añadido: "+pro.getNombre()+" a la cesta correctamente", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -288,6 +290,7 @@ public class ProductFragment extends Fragment {
     public interface OnFragmentInteractionListener {
         void onFragmentInteraction(Uri uri);
         Product getProductoSelected();
+        void addToCart(Product prod);
     }
 }
 

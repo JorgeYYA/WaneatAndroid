@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorSecondaryDarkWaneat"
+    android:background="@color/lightGrayBackground"
     android:orientation="vertical"
     tools:context="florida.com.waneat.Fragments.UsuarioFragment">
 
@@ -19,7 +19,7 @@
             android:layout_weight="1"
             android:text="Mi perfil:"
             android:padding="10dp"
-            android:textColor="#fff"
+            android:textColor="@color/colorSecondaryDarkWaneat"
             android:textStyle="bold"
             android:textSize="30dp"/>
 

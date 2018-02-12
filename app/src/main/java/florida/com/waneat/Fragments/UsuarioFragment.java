@@ -72,6 +72,7 @@ public class UsuarioFragment extends android.support.v4.app.Fragment {
 
 
 
+        getActivity().setTitle("Mi perfil");
 
         return v;
     }
