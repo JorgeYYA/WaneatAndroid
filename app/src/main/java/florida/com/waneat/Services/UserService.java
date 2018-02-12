@@ -3,11 +3,8 @@ package florida.com.waneat.Services;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentManager;
 import android.widget.Toast;
-
-import java.util.ArrayList;
 
 import florida.com.waneat.Activities.MainActivity;
 import florida.com.waneat.Models.User;
@@ -26,7 +23,7 @@ public class UserService {
     public MainActivity activity;
 
     User u = new User("David", "Florida", "C/Floraida",
-            "123456789", "david@gmail.com", "david123");
+             "david@gmail.com", "david123");
 
 
 

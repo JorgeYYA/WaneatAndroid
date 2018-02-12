@@ -103,7 +103,7 @@ public class OrderList extends Fragment {
 
         Order order = new Order(products,"10/2/2018","Restaurante Paco Mer",total);
 
-        Order order2 = new Order(products,"10/2/2018","Restaurante Sin Trazas de Palabras Malsonantes",total);
+        Order order2 = new Order(products,"10/2/2018","El Tambor Remendado",total); //A ver si alguien pilla la referencia :3
 
         orders.add(order);
         orders.add(order2);
