@@ -173,6 +173,8 @@ public class MainActivity extends AppCompatActivity implements
                 if(getSupportFragmentManager().getBackStackEntryCount() == 0) finish();
             }
         });
+        toolbar.setBackgroundColor(ContextCompat.getColor(this, android.R.color.transparent));
+
 
     }
 
@@ -249,7 +251,6 @@ public class MainActivity extends AppCompatActivity implements
             this.productosCesta.add(prod);
         }else{
             for(int i=0;i<this.productosCesta.size();i++){
-
                 if(productosCesta.get(i).getId() == prod.getId()) {
                     added = true;
                     if(added){
@@ -319,11 +320,6 @@ public class MainActivity extends AppCompatActivity implements
         ft.addToBackStack("MY_FRAGMENT");
         ft.commit();
         toolbar.setBackgroundColor(ContextCompat.getColor(this, android.R.color.transparent));
-    }
-
-    @Override
-    public void onFragmentInteraction(Uri uri) {
-
     }
 
     @Override

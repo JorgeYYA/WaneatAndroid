@@ -87,11 +87,6 @@ public class ListProductFragment extends Fragment {
         return v;
     }
 
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
 
     @Override
     public void onAttach(Context context) {
@@ -112,7 +107,6 @@ public class ListProductFragment extends Fragment {
 
 
     public interface OnFragmentInteractionListener {
-        void onFragmentInteraction(Uri uri);
         ArrayList<Product> getProductos();
         void verProducto(int position);
         void showFloatingActionButton();
