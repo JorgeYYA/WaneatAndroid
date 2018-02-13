@@ -15,7 +15,15 @@
         android:layout_gravity="center"
         android:layout_marginTop="150dp"
         android:scaleType="fitCenter"
-        app:srcCompat="@drawable/logologin" />
+        app:srcCompat="@drawable/logo" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="WANEAT"
+        android:textColor="@android:color/white"
+        android:textSize="40dp" />
 
     <com.felipecsl.gifimageview.library.GifImageView
         android:id="@+id/carga"

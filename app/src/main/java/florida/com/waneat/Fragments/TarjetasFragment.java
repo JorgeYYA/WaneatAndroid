@@ -3,6 +3,8 @@ package florida.com.waneat.Fragments;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +13,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 
+import java.util.ArrayList;
+
+import florida.com.waneat.Adapters.AdapterItemList;
+import florida.com.waneat.Adapters.AdapterTarjetas;
 import florida.com.waneat.Models.CreditCard;
 import florida.com.waneat.R;
 
@@ -25,6 +31,9 @@ public class TarjetasFragment extends Fragment {
     private EditText number,month,year,cvc,holder;
     private RelativeLayout cardFront, cardBack;
     private Button nextButton;
+
+    private ArrayList<CreditCard> tarjetas = new ArrayList<CreditCard>();
+    private AdapterItemList adapter;
 
     private boolean isFront = false;
 
@@ -53,6 +62,8 @@ public class TarjetasFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_tarjetas, container, false);
 
+        tarjetas.add(new CreditCard("6567","David","e","e",4));
+        tarjetas.add(new CreditCard("1243124","Sergio","e","e",4));
         mListener.hideFloatingActionButton();
 
         this.number = v.findViewById(R.id.creditCardNumber);
@@ -68,6 +79,13 @@ public class TarjetasFragment extends Fragment {
 
         //METHODS
         toggleCard();
+
+
+        RecyclerView rv = (RecyclerView)v.findViewById(R.id.recycler_tarjetas);
+        LinearLayoutManager llm = new LinearLayoutManager(v.getContext());
+        rv.setLayoutManager(llm);
+        AdapterTarjetas adapter = new AdapterTarjetas(tarjetas);
+        rv.setAdapter(adapter);
 
         return v;
     }
