@@ -53,6 +53,7 @@ public class TarjetasFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_tarjetas, container, false);
 
+        mListener.hideFloatingActionButton();
 
         this.number = v.findViewById(R.id.creditCardNumber);
         this.cvc = v.findViewById(R.id.creditCardCVC);
@@ -150,5 +151,7 @@ public class TarjetasFragment extends Fragment {
     }
 
     public interface OnFragmentInteractionListener {
+        void showFloatingActionButton();
+        void hideFloatingActionButton();
     }
 }

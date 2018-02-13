@@ -3,6 +3,7 @@ package florida.com.waneat.Fragments;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.AppBarLayout;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
@@ -12,6 +13,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.RatingBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -45,6 +49,8 @@ public class ListProductFragment extends Fragment {
         // Inflate the layout for this fragment
         View v =  inflater.inflate(R.layout.fragment_list_product, container, false);
 
+        mListener.showFloatingActionButton();
+
         String idRestaurante = "";
 
         if(getArguments() != null){
@@ -53,6 +59,15 @@ public class ListProductFragment extends Fragment {
         }
 
         getActivity().setTitle("Waneat");
+
+        TextView tituloRestaurante = v.findViewById(R.id.tituloRestaurante);
+        TextView direccionRestaurante = v.findViewById(R.id.direccionRestaurante);
+        RatingBar ratingRestaurante = v.findViewById(R.id.ruleRatingBar);
+
+        //Incluimos la info del restaurante
+        tituloRestaurante.setText("Restaaurante");
+        direccionRestaurante.setText("Calle Alginet");
+        ratingRestaurante.setRating(3);
 
 
         this.recyclerView = (RecyclerView) v.findViewById(R.id.my_recycler_view);
@@ -100,6 +115,8 @@ public class ListProductFragment extends Fragment {
         void onFragmentInteraction(Uri uri);
         ArrayList<Product> getProductos();
         void verProducto(int position);
+        void showFloatingActionButton();
+        void hideFloatingActionButton();
 
     }
 
