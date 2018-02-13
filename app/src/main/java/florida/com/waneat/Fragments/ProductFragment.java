@@ -95,7 +95,7 @@ public class ProductFragment extends Fragment {
             }
         });
 
-        showImages sm = new showImages(viewPager, null);
+        showImages sm = new showImages(viewPager, pro);
         sm.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 
         viewPager.setOnTouchListener(new View.OnTouchListener() {
@@ -148,18 +148,18 @@ public class ProductFragment extends Fragment {
     }
 }
 
-class showImages extends AsyncTask<ViewPager, ArrayList<String>, Order> {
+class showImages extends AsyncTask<ViewPager, ArrayList<String>, Product> {
     ViewPager imageSwitcher;
-    Order pro;
+    Product pro;
 
 
-    public showImages(ViewPager imageSwitcher, Order pro){
+    public showImages(ViewPager imageSwitcher, Product pro){
         this.imageSwitcher = imageSwitcher;
         this.pro = pro;
     }
 
     @Override
-    protected Order doInBackground(ViewPager... imageSwitchers) {
+    protected Product doInBackground(ViewPager... imageSwitchers) {
 
         try {
             Thread.sleep(5000);
@@ -189,7 +189,7 @@ class showImages extends AsyncTask<ViewPager, ArrayList<String>, Order> {
 
 
     @Override
-    protected void onPostExecute(Order pro) {
+    protected void onPostExecute(Product pro) {
         super.onPostExecute(pro);
 
 
@@ -206,7 +206,7 @@ class showImages extends AsyncTask<ViewPager, ArrayList<String>, Order> {
 
 
             }
-            showImagesOrder sm = new showImagesOrder(imageSwitcher, pro);
+            showImages sm = new showImages(imageSwitcher, pro);
             sm.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 
 

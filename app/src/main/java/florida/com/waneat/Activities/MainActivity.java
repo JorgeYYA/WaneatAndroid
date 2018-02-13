@@ -45,7 +45,6 @@ public class MainActivity extends AppCompatActivity implements
 
 
     public static boolean pause;
-    public static boolean waiting;
     public ArrayList<Product> productosCesta = new ArrayList<Product>();
     public ArrayList<Product> productosLista = new ArrayList<Product>();
     ArrayList<Integer> imagen = new ArrayList<>();
