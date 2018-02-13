@@ -30,6 +30,7 @@ public class TarjetasFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
+
     public TarjetasFragment() {
         // Required empty public constructor
     }
@@ -51,6 +52,9 @@ public class TarjetasFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_tarjetas, container, false);
+
+        mListener.hideFloatingActionButton();
+
         this.number = v.findViewById(R.id.creditCardNumber);
         this.cvc = v.findViewById(R.id.creditCardCVC);
         this.month = v.findViewById(R.id.creditCardMonth);
@@ -64,7 +68,7 @@ public class TarjetasFragment extends Fragment {
 
         //METHODS
         toggleCard();
-
+        
         return v;
     }
 
@@ -147,5 +151,7 @@ public class TarjetasFragment extends Fragment {
     }
 
     public interface OnFragmentInteractionListener {
+        void showFloatingActionButton();
+        void hideFloatingActionButton();
     }
 }

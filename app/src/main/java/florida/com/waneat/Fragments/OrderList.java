@@ -28,16 +28,6 @@ public class OrderList extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-
-    private String mParam1;
-    private String mParam2;
-
-    private interfaceOrder interfaz;
-
-
-    private android.app.FragmentManager fm;
-    private FragmentTransaction ft;
-
     ArrayList<Order> orders;
 
     ArrayList<Integer> imagen;
@@ -48,7 +38,7 @@ public class OrderList extends Fragment {
 
     double total;
 
-    private OnFragmentInteractionListener mListener;
+    private InterfaceOrder interfaz;
 
     public OrderList() {
 
@@ -68,8 +58,7 @@ public class OrderList extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+
         }
     }
 
@@ -77,22 +66,23 @@ public class OrderList extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View v = inflater.inflate(R.layout.fragment_order_list, container, false);
-
         products = new ArrayList<Product>();
         orders = new ArrayList<Order>();
+
+        interfaz.hideFloatingActionButton();
 
         imagen = new ArrayList<>();
         imagen.add(R.drawable.plato1);
         imagen.add(R.drawable.plato2);
 
         //DEBUGGING MUY FUERTE
-        Product producto = new Product(0, "spaguettis", "boloñesa, algo más", 2.0,imagen, "Sin salsa", "pasta", 3);
+        Product producto = new Product(0, "spaguettis", "boloñesa, algo más", 2.0,imagen, "pasta", 3);
 
-        Product producto2 = new Product(1, "macarrones", "boloñesa, algo más", 3.0, imagen, "Con salsa", "pasta", 2);
+        Product producto2 = new Product(1, "macarrones", "boloñesa, algo más", 3.0, imagen,  "pasta", 2);
 
-        Product producto3 = new Product(2, "spaguettis2", "boloñesa, algo más", 2.0,imagen, "Sin salsa", "pasta", 3);
+        Product producto3 = new Product(2, "spaguettis2", "boloñesa, algo más", 2.0,imagen,  "pasta", 3);
 
-        Product producto4 = new Product(3, "macarrones2", "boloñesa, algo más", 3.0, imagen, "Con salsa", "pasta", 2);
+        Product producto4 = new Product(3, "macarrones2", "boloñesa, algo más", 3.0, imagen,  "pasta", 2);
 
         products.add(producto);
         products.add(producto2);
@@ -133,23 +123,23 @@ public class OrderList extends Fragment {
         return v;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
+
 
     @Override
     public void onDetach() {
         super.onDetach();
-        mListener = null;
+        interfaz = null;
     }
 
     @Override
-    public void onAttach(Activity activity) {
-        interfaz = (interfaceOrder) activity;
-        super.onAttach(activity);
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof ListProductFragment.OnFragmentInteractionListener) {
+            interfaz = (InterfaceOrder) context;
+        } else {
+            throw new RuntimeException(context.toString()
+                    + " must implement OnFragmentInteractionListener");
+        }
     }
 
     public double sumaPrecio(ArrayList<Product> products){
@@ -167,13 +157,10 @@ public class OrderList extends Fragment {
         return total;
     }
 
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
-    }
-
-    public interface interfaceOrder{
-        public void interfaceOrder(Order order);
+    public interface InterfaceOrder{
+        void interfaceOrder(Order order);
+        void showFloatingActionButton();
+        void hideFloatingActionButton();
 
     }
 }
