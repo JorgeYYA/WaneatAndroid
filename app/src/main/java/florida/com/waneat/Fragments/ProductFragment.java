@@ -54,7 +54,6 @@ public class ProductFragment extends Fragment {
         categoriaProducto = (TextView) v.findViewById(R.id.categoriaProducto);
 
 
-
         pro = mListener.getProductoSelected();
 
         String imagenes [] = {"https://i.imgur.com/S3BBYyc.jpg","https://i.imgur.com/1GNHl4Q.jpg"};
@@ -119,6 +118,8 @@ public class ProductFragment extends Fragment {
     public interface OnFragmentInteractionListener {
         Product getProductoSelected();
         void addToCart(Product prod);
+        void showFloatingActionButton();
+        void hideFloatingActionButton();
     }
 }
 
