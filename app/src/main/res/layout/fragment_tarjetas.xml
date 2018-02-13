@@ -11,14 +11,15 @@
         android:padding="10dp">
 
         <TextView
+            android:id="@+id/credit_card"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="Mi tarjeta:"
             android:padding="10dp"
+            android:text="Mi tarjeta:"
             android:textColor="@color/colorSecondaryDarkWaneat"
-            android:textStyle="bold"
-            android:textSize="30dp"/>
+            android:textSize="30dp"
+            android:textStyle="bold" />
 
     </LinearLayout>
 

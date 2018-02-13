@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Waneat</string>
+    <string name="comments">Comentarios Adicionales</string>
+    <string name="add_product">Añadir a la cesta</string>
+    <string name="action_settings">Opciones</string>
+    <string name="editLogMail">Correo Elecrónico</string>
+    <string name="editLogPass">Contraseña</string>
+    <string name="buttonLogin">Iniciar</string>
+    <string name="registerLabel">"¿Aún no tienes cuenta? ¡Registrate ahora! "</string>
+    <string name="nombreRegister">Nombre</string>
+    <string name="emailRegister">Correo Electrónico</string>
+    <string name="passwordRegister">Contraseña</string>
+    <string name="registrarButton">Registrarse</string>
+    <string name="alreadyRegistered">¿Ya estás registrado? Accede a tu cuenta</string>
+    <string name="categoria">CARNE</string>
+    <string name="comentariosAdicionalesProducto">Comentarios: </string>
+    <string name="precioProducto">Precio: </string>
+    <string name="textView">Tarjeta de credito:</string>
+    <string name="buttonIntroducirTarj">Introducir tarjeta</string>
+    <string name="checkoutButton">IR A PAGAR</string>
+    <string name="entrantesCategoria">Entrantes</string>
+    <string name="pastaCategoria">Pasta</string>
+    <string name="carneCategoria">Carne</string>
+    <string name="pescadoCategoria">Pescado</string>
+    <string name="ensaladaFragment">Ensalada</string>
+    <string name="postresCategoria">Postre</string>
+    <string name="bebidaCategoria">Bebida</string>
+    <string name="p_add">Añadir a la cesta</string>
+    <string name="p_add2">Hacer otro pedido</string>
+    <string name="credit_card">Mi tarjeta: </string>
+    <string name="guardarCredit">SIGUIENTE</string>
+    <string name="profile_header">Mi perfil: </string>
+    <string name="tagNombre">Nombre</string>
+    <string name="tagApellidos">Apellidos</string>
+    <string name="tagCorreo">Correo</string>
+    <string name="tagTlf">Teléfono</string>
+    <string name="buttonCambios">GUARDAR CAMBIOS</string>
+
+</resources>
