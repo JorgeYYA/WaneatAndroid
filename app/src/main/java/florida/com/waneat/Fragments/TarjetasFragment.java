@@ -67,7 +67,7 @@ public class TarjetasFragment extends Fragment {
 
         //METHODS
         toggleCard();
-        
+
         return v;
     }
 
