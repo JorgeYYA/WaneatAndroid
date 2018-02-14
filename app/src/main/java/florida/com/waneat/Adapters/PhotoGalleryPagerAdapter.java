@@ -1,6 +1,8 @@
 package florida.com.waneat.Adapters;
 
 import android.content.Context;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.support.v4.view.PagerAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,8 +13,7 @@ import android.widget.LinearLayout;
 import com.koushikdutta.ion.Ion;
 
 import java.util.List;
-
-import florida.com.waneat.Models.Image_;
+import florida.com.waneat.Models.ImageProduct;
 import florida.com.waneat.R;
 
 /**
@@ -24,13 +25,14 @@ public class PhotoGalleryPagerAdapter extends PagerAdapter {
     private static final String TAG = "ImageViewPage";
     Context mContext;
     LayoutInflater mLayoutInflater;
-    private List<Image_> images;
+    private List<ImageProduct> images;
 
-    public PhotoGalleryPagerAdapter(Context context, List<Image_> images) {
+    public PhotoGalleryPagerAdapter(Context context, List<ImageProduct> images) {
         mContext = context;
         this.images = images;
         mLayoutInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
+
 
     @Override
     public int getCount() {
@@ -43,6 +45,7 @@ public class PhotoGalleryPagerAdapter extends PagerAdapter {
         return view == object;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
         View itemView = mLayoutInflater.inflate(R.layout.image_item, container, false);
@@ -56,6 +59,9 @@ public class PhotoGalleryPagerAdapter extends PagerAdapter {
         }
         container.addView(itemView);
 
+
+
+
         return itemView;
     }
 
@@ -63,5 +69,6 @@ public class PhotoGalleryPagerAdapter extends PagerAdapter {
     public void destroyItem(ViewGroup container, int position, Object object) {
         container.removeView((LinearLayout) object);
     }
+
 
 }

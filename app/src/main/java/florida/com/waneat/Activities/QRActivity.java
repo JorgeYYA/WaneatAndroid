@@ -18,6 +18,7 @@ import com.dlazaro66.qrcodereaderview.QRCodeReaderView;
 import com.koushikdutta.ion.Ion;
 
 import florida.com.waneat.R;
+import florida.com.waneat.Services.RestaurantService;
 import florida.com.waneat.Utils.PointsOverlayView;
 
 public class QRActivity extends AppCompatActivity implements QRCodeReaderView.OnQRCodeReadListener {
@@ -60,6 +61,9 @@ public class QRActivity extends AppCompatActivity implements QRCodeReaderView.On
     public void onQRCodeRead(String text, PointF[] points) {
         labelClick.setText(text);
         pointsOverlayView.setPoints(points);
+        RestaurantService service = new RestaurantService(this);
+        service.getRestaurant(Integer.parseInt(text));
+
         Intent returnIntent = new Intent();
         returnIntent.putExtra("read_qr",text);
         setResult(MainActivity.RESULT_OK,returnIntent);

@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName;
  * Created by sergiomoreno on 14/2/18.
  */
 
-public class Image_ {
+public class ImageProduct {
 
         @SerializedName("id")
         @Expose
@@ -28,7 +28,7 @@ public class Image_ {
          * No args constructor for use in serialization
          *
          */
-        public Image_() {
+        public ImageProduct() {
         }
 
         /**
@@ -39,7 +39,7 @@ public class Image_ {
          * @param createdAt
          * @param idProductId
          */
-        public Image_(Integer id, String imageUrl, Integer idProductId, String createdAt, String updatedAt) {
+        public ImageProduct(Integer id, String imageUrl, Integer idProductId, String createdAt, String updatedAt) {
             super();
             this.id = id;
             this.imageUrl = imageUrl;

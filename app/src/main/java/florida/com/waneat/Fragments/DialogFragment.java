@@ -8,6 +8,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,14 +18,20 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
-
+import java.util.Date;
 import florida.com.waneat.Adapters.AdapterCartItem;
 import florida.com.waneat.Adapters.AdapterCreditCards;
 import florida.com.waneat.Adapters.AdapterFinalizarCompra;
 import florida.com.waneat.Adapters.AdapterProductList;
 import florida.com.waneat.Models.CreditCard;
+import florida.com.waneat.Models.Order;
 import florida.com.waneat.Models.Product;
 import florida.com.waneat.R;
 
@@ -36,13 +43,15 @@ public class DialogFragment extends android.support.v4.app.DialogFragment{
     private AdapterCartItem adapter;
     private AdapterFinalizarCompra adapterCompra;
     private AdapterCreditCards adapterCards;
-    private Button checkoutButton, buttonIntroducirTarj;
+    private Button checkoutButton, buttonIntroducirTarj, tramitarPedido;
     private LinearLayout layoutEmpty;
     private GridLayout layoutCards;
 
+    DatabaseReference bbdd;
+
     private int cardPos = 0;
 
-    private List<Product> cesta = new ArrayList<Product>();
+    private ArrayList<Product> cesta = new ArrayList<Product>();
 
 
     private ArrayList<CreditCard> cards = new ArrayList<>();
@@ -59,6 +68,12 @@ public class DialogFragment extends android.support.v4.app.DialogFragment{
         this.layoutEmpty = rootView.findViewById(R.id.layout_empty);
         this.layoutCards = rootView.findViewById(R.id.layout_cards);
         this.tarjetaCredito = rootView.findViewById(R.id.card_number);
+        this.tramitarPedido = rootView.findViewById(R.id.tramitar);
+
+
+
+        bbdd = FirebaseDatabase.getInstance().getReference("pedidos");
+
 
         //cargamos los precios
         reloadPrecios();
@@ -87,10 +102,12 @@ public class DialogFragment extends android.support.v4.app.DialogFragment{
 
 
         if(cards != null) {
-            tarjetaCredito.setText(cards.get(0).getCreditCardNumber().substring(0,4)+" XXXX XXXX XXXX");
+            tarjetaCredito.setText(cards.get(0).getCreditCardNumber().substring(0,4)+" **** **** ****");
         }
 
         layoutCards.setVisibility(View.GONE);
+        tramitarPedido.setVisibility(View.GONE);
+        checkoutButton.setVisibility(View.VISIBLE);
 
         if(cesta.isEmpty()){
 
@@ -116,24 +133,22 @@ public class DialogFragment extends android.support.v4.app.DialogFragment{
 
         recyclerCards.setItemAnimator(new DefaultItemAnimator());
 
-
-
         checkoutButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
                 buttonIntroducirTarj = (Button) rootView.findViewById(R.id.buttonIntroducirTarj);
 
-
-
                 if(!cesta.isEmpty()){
 
                     layoutCards.setVisibility(View.VISIBLE);
+                    tramitarPedido.setVisibility(View.VISIBLE);
+                    checkoutButton.setVisibility(View.GONE);
+
                     adapterCompra = new AdapterFinalizarCompra(cesta);
                     recyclerCards.setAdapter(new AdapterCreditCards(cards, new AdapterCreditCards.OnItemClickListener() {
 
                         @Override
                         public void onItemClick(CreditCard item) {
-
 
 
                             Toast.makeText(getActivity(), cardPos+"asd", Toast.LENGTH_SHORT).show();
@@ -164,8 +179,45 @@ public class DialogFragment extends android.support.v4.app.DialogFragment{
             }
         });
 
+
+
+        tramitarPedido.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                
+
+                tramitarPedido();
+
+            }
+        });
+
+
+
         //Method related with this dialog
         return rootView;
+    }
+
+
+    public void tramitarPedido(){
+
+
+        Date d = new Date();
+
+        CharSequence s  = DateFormat.format("dd/MM/yyyy", d.getTime());
+
+
+        int idUsuario = 1;
+
+        //PARTIALLY HARDCODED
+        Order o = new Order(idUsuario,cesta, s+"", "Restaurante Paco Mer", Double.valueOf(String.valueOf(mListener.getCestaPrice())));
+
+        String clave = "pedido_"+o.getId();
+
+        bbdd.child(clave).setValue(o);
+
+        Toast.makeText(getActivity(), "El pedido ha sido tramitado correctamente", Toast.LENGTH_SHORT).show();
+
     }
 
 
@@ -186,12 +238,12 @@ public class DialogFragment extends android.support.v4.app.DialogFragment{
     }
 
     private void reloadPrecios(){
-        this.cestaTotal.setText(String.valueOf(mListener.getCestaPrice()));
+        this.cestaTotal.setText(String.valueOf(mListener.getCestaPrice())+getResources().getString(R.string.badge));
     }
 
 
     public interface CestaInterface {
-        List<Product> getProductosCesta();
+        ArrayList<Product> getProductosCesta();
         double getCestaPrice();
         void addProduct(int position);
         void removeProduct(int position);

@@ -1,10 +1,13 @@
 package florida.com.waneat.Fragments;
 
 import android.content.Context;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -17,9 +20,7 @@ import java.util.List;
 
 import florida.com.waneat.Adapters.PhotoGalleryPagerAdapter;
 import florida.com.waneat.Models.Product;
-import florida.com.waneat.Models.Rating;
-import florida.com.waneat.Models.Rating_;
-import florida.com.waneat.Models.Restaurant;
+import florida.com.waneat.Models.RatingProduct;
 import florida.com.waneat.R;
 import me.relex.circleindicator.CircleIndicator;
 
@@ -32,6 +33,9 @@ public class ProductFragment extends Fragment {
     private Button add;
     private OnFragmentInteractionListener mListener;
     private RatingBar ratingBar;
+    public static boolean pause;
+    static int size;
+
 
     public ProductFragment() {
 
@@ -65,6 +69,8 @@ public class ProductFragment extends Fragment {
         //Añadimos 1 por defecto
         pro.setCantidad(1);
 
+        size = pro.getImages().size();
+
         ViewPager viewPager = (ViewPager) v.findViewById(R.id.viewPager);
         PhotoGalleryPagerAdapter adapter = new PhotoGalleryPagerAdapter(getContext(), pro.getImages());
 
@@ -73,7 +79,6 @@ public class ProductFragment extends Fragment {
             viewPager.setAdapter(adapter);
             indicator.setViewPager(viewPager);
             adapter.registerDataSetObserver(indicator.getDataSetObserver());
-
         }
 
         showData();
@@ -90,6 +95,20 @@ public class ProductFragment extends Fragment {
             }
         });
 
+        showImages sm = new showImages(viewPager, pro);
+        sm.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+
+        viewPager.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+
+                ProductFragment.pause = true;
+
+                return false;
+            }
+        });
+
+
         return v;
     }
 
@@ -100,10 +119,10 @@ public class ProductFragment extends Fragment {
         price.setText(pro.getPriceProduct()+""+getResources().getText(R.string.badge));
         desc.setText(pro.getDescriptionProduct());
         categoriaProducto.setText(pro.getCategoryProduct());
-        List<Rating_> ratings= this.pro.getRatings();
+        List<RatingProduct> ratings= this.pro.getRatings();
         int count = 0;
         float media = 0;
-        for (Rating_ rate: ratings) {
+        for (RatingProduct rate: ratings) {
             count++;
             media += rate.getRate();
         }
@@ -137,6 +156,69 @@ public class ProductFragment extends Fragment {
         void addToCart(Product prod);
         void showFloatingActionButton();
         void hideFloatingActionButton();
+    }
+}
+
+class showImages extends AsyncTask<ViewPager, ArrayList<String>, Product> {
+    ViewPager imageSwitcher;
+    Product pro;
+
+
+    public showImages(ViewPager imageSwitcher, Product pro){
+        this.imageSwitcher = imageSwitcher;
+        this.pro = pro;
+    }
+
+    @Override
+    protected Product doInBackground(ViewPager... imageSwitchers) {
+
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        Log.d("pausa","nomrmal");
+        //comprueba si se ha interactuado con la imagen recientemente y en tal caso pausa la ejecucion del thread
+        if (ProductFragment.pause) {
+
+            Log.d("pausa","pausado");
+
+            try {
+                Thread.sleep(5000);
+                ProductFragment.pause = false;
+                Log.d("pausa","pausado"+ProductFragment.pause);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return null;
+    }
+
+
+    @Override
+    protected void onPostExecute(Product pro) {
+        super.onPostExecute(pro);
+
+
+        ArrayList<String> asd = null;
+        Log.d("pausa","sigue");
+        for (int i = 0; i < 1; i++) {
+
+            if (imageSwitcher.getCurrentItem()<ProductFragment.size-1) {
+
+                imageSwitcher.setCurrentItem(imageSwitcher.getCurrentItem() + 1);
+            }else{
+
+                imageSwitcher.setCurrentItem(0);
+
+            }
+            showImages sm = new showImages(imageSwitcher, pro);
+            sm.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+
+
+        }
     }
 }
 

@@ -1,6 +1,9 @@
 package florida.com.waneat.Activities;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -14,13 +17,11 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,8 +51,10 @@ public class MainActivity extends AppCompatActivity implements
         OrderList.InterfaceOrder, ShowOrder.OnFragmentInteractionListener, InitialFragment.OnFragmentInteractionListener{
 
 
-    public List<Product> productosCesta = new ArrayList<>();
-    public List<Product> productosLista = new ArrayList<>();
+
+    public ArrayList<Product> productosCesta = new ArrayList<>();
+    public ArrayList<Product> productosLista = new ArrayList<>();
+
     public Product productoSelected = new Product();
     public Restaurant restauranteSelected = new Restaurant();
 
@@ -70,6 +73,8 @@ public class MainActivity extends AppCompatActivity implements
 
     RecyclerView mRecyclerView;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,14 +86,6 @@ public class MainActivity extends AppCompatActivity implements
 
         this.service = new UserService(MainActivity.this);
         this.userLogged = Preferences.gsonToUser(MainActivity.this);
-
-
-        //TODO: CAMBIAR DE SITIO PROBLEMA DE CARGAS
-        //Recogemos todos los datos del restaurante y cargamos los arrays pertinentes
-        restauranteSelected = Preferences.gsonToRestaurant(MainActivity.this);
-
-        //cargamos los arrays
-        this.productosLista = restauranteSelected.getProducts();
 
         fab = (FloatingActionButton) findViewById(R.id.fab);
         fab_cat = (FloatingActionButton) findViewById(R.id.fab_cat);
@@ -289,20 +286,25 @@ public class MainActivity extends AppCompatActivity implements
         return this.restauranteSelected;
     }
 
-    @Override
-    public void callApiRestaurant(int id) {
-        RestaurantService service = new RestaurantService(MainActivity.this);
-        Log.d("MainActivity", "callApiRestaurant: "+id);
-        service.getRestaurant(id);
-        //Recogemos todos los datos del restaurante y cargamos los arrays pertinentes
-        restauranteSelected = Preferences.gsonToRestaurant(MainActivity.this);
-
-        //cargamos los arrays
-       this.productosLista = restauranteSelected.getProducts();
+    public static boolean verificaConexion(Context ctx) {
+        boolean bConectado = false;
+        ConnectivityManager connec = (ConnectivityManager) ctx
+                .getSystemService(Context.CONNECTIVITY_SERVICE);
+        // No sólo wifi, también GPRS
+        NetworkInfo[] redes = connec.getAllNetworkInfo();
+        // este bucle debería no ser tan ñapa
+        for (int i = 0; i < 2; i++) {
+            // ¿Tenemos conexión? ponemos a true
+            if (redes[i].getState() == NetworkInfo.State.CONNECTED) {
+                bConectado = true;
+            }
+        }
+        return bConectado;
     }
 
+
     @Override
-    public List<Product> getProductosCesta() {
+    public ArrayList<Product> getProductosCesta() {
         return this.productosCesta;
     }
 
@@ -367,7 +369,7 @@ public class MainActivity extends AppCompatActivity implements
             toolbar.setBackgroundColor(ContextCompat.getColor(this, android.R.color.transparent));
 
         }else if (id == R.id.nav_mispedidos) {
-            ft.replace(R.id.fragment, OrderList.newInstance(null,null)).addToBackStack("MY_FRAGMENT");
+            ft.replace(R.id.fragment, OrderList.newInstance(null,null)).addToBackStack("order_list");
             toolbar.setBackgroundColor(ContextCompat.getColor(this, R.color.colorSecondaryDarkWaneat));
 
         } else if (id == R.id.nav_qr) {
@@ -380,6 +382,8 @@ public class MainActivity extends AppCompatActivity implements
         } else if (id == R.id.nav_logout) {
             this.service.signOut();
             startActivity(new Intent(MainActivity.this, LoginActivity.class));
+        } else if (id == R.id.nav_about) {
+
         }
 
         ft.commit();
@@ -406,11 +410,17 @@ public class MainActivity extends AppCompatActivity implements
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == PICK_CONTACT_REQUEST) {
             if (resultCode == RESULT_OK) {
+
+                //Le pasamos si ha entrado en activity qr o no.
                 Bundle bundle = new Bundle();
-                String result=data.getStringExtra("read_qr");
-                bundle.putString("qr",result);
+                boolean result=data.getBooleanExtra("read_qr", false);
+                bundle.putBoolean("qr",result);
                 ListProductFragment main = ListProductFragment.newInstance();
                 main.setArguments(bundle);
+
+                //CARGAMOS LOS RESTAURANTES
+                this.restauranteSelected = Preferences.gsonToRestaurant(MainActivity.this);
+                this.productosLista = this.restauranteSelected.getProducts();
 
                 fm = getSupportFragmentManager();
                 FragmentTransaction ft = fm.beginTransaction();

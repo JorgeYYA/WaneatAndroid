@@ -9,8 +9,10 @@ import android.os.Parcelable;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.google.firebase.database.Exclude;
 
 import java.util.ArrayList;
+
 import java.util.List;
 
 public class Product implements Parcelable {
@@ -41,10 +43,10 @@ public class Product implements Parcelable {
     private String updatedAt;
     @SerializedName("images")
     @Expose
-    private List<Image_> images = null;
+    private List<ImageProduct> images = null;
     @SerializedName("ratings")
     @Expose
-    private List<Rating_> ratings = null;
+    private List<RatingProduct> ratings = null;
 
     private int cantidad;
 
@@ -68,7 +70,7 @@ public class Product implements Parcelable {
      * @param priceProduct
      * @param ratings
      */
-    public Product(Integer id, Double priceProduct, String nameProduct, String descriptionProduct, String categoryProduct, Integer idRestaurantId, String createdAt, String updatedAt, List<Image_> images, List<Rating_> ratings) {
+    public Product(Integer id, Double priceProduct, String nameProduct, String descriptionProduct, String categoryProduct, Integer idRestaurantId, String createdAt, String updatedAt, List<ImageProduct> images, List<RatingProduct> ratings) {
         super();
         this.id = id;
         this.priceProduct = priceProduct;
@@ -146,19 +148,20 @@ public class Product implements Parcelable {
         this.updatedAt = updatedAt;
     }
 
-    public List<Image_> getImages() {
+    @Exclude
+    public List<ImageProduct> getImages() {
         return images;
     }
 
-    public void setImages(List<Image_> images) {
+    public void setImages(List<ImageProduct> images) {
         this.images = images;
     }
 
-    public List<Rating_> getRatings() {
+    public List<RatingProduct> getRatings() {
         return ratings;
     }
 
-    public void setRatings(List<Rating_> ratings) {
+    public void setRatings(List<RatingProduct> ratings) {
         this.ratings = ratings;
     }
 
@@ -181,15 +184,15 @@ public class Product implements Parcelable {
         createdAt = in.readString();
         updatedAt = in.readString();
         if (in.readByte() == 0x01) {
-            images = new ArrayList<Image_>() {
+            images = new ArrayList<ImageProduct>() {
             };
-            in.readList(images, Image_.class.getClassLoader());
+            in.readList(images, ImageProduct.class.getClassLoader());
         } else {
             images = null;
         }
         if (in.readByte() == 0x01) {
-            ratings = new ArrayList<Rating_>();
-            in.readList(ratings, Rating_.class.getClassLoader());
+            ratings = new ArrayList<RatingProduct>();
+            in.readList(ratings, RatingProduct.class.getClassLoader());
         } else {
             ratings = null;
         }

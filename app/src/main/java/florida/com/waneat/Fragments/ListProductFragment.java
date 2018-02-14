@@ -1,10 +1,14 @@
 package florida.com.waneat.Fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.GridLayoutManager;
@@ -13,6 +17,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
@@ -24,12 +29,16 @@ import com.koushikdutta.ion.Ion;
 import java.util.ArrayList;
 import java.util.List;
 
+import florida.com.waneat.Activities.MainActivity;
+import florida.com.waneat.Activities.QRActivity;
 import florida.com.waneat.Adapters.AdapterItemList;
+import florida.com.waneat.Adapters.PhotoGalleryPager;
 import florida.com.waneat.Models.Product;
 import florida.com.waneat.Models.Rating;
 import florida.com.waneat.Models.Restaurant;
 import florida.com.waneat.R;
 import florida.com.waneat.Services.RestaurantService;
+import me.relex.circleindicator.CircleIndicator;
 
 public class ListProductFragment extends Fragment {
 
@@ -38,6 +47,7 @@ public class ListProductFragment extends Fragment {
     private RecyclerView recyclerView;
     private AdapterItemList productAdapter;
     private Restaurant restaurant;
+    private Context context;
 
     public ListProductFragment() {
     }
@@ -59,52 +69,69 @@ public class ListProductFragment extends Fragment {
 
         mListener.showFloatingActionButton();
 
-        String idRestaurante = "";
+        TextView tituloRestaurante = v.findViewById(R.id.tituloRestaurante);
+        TextView direccionRestaurante = v.findViewById(R.id.direccionRestaurante);
+        RatingBar ratingRestaurante = v.findViewById(R.id.ruleRatingBar);
+        Button scanDirect = v.findViewById(R.id.scan);
 
-        //Tenemos la id del restaurante para hacer la llamada
+        //Ha entrado en activity qr y ha escaneado una mesa le permitimos acceder aqui
         if(getArguments() != null){
-            idRestaurante = getArguments().getString("qr");
-            Toast.makeText(getContext(), idRestaurante, Toast.LENGTH_SHORT).show();
-            mListener.callApiRestaurant(Integer.parseInt(idRestaurante));
+            this.restaurant = this.mListener.getRestauranteSelected();
+
+
+            //ImageView fotoRestaurante = v.findViewById(R.id.fotoRestaurante);
+
+
+            //Incluimos la info del restaurante
+            tituloRestaurante.setText(this.restaurant.getNameRestaurant());
+            direccionRestaurante.setText(this.restaurant.getAddressRestaurant());
+            //media del ratings de los restaurantes
+            List<Rating> ratings= this.restaurant.getRatings();
+            int count = 0;
+            float media = 0;
+            for (Rating rate: ratings) {
+                count++;
+                media += rate.getRate();
+            }
+            ratingRestaurante.setRating(media/count);
+
+
+            // Ion.with(fotoRestaurante).load(this.restaurant.getImages().get(0).getImageUrl());
+
+            ViewPager viewPager = (ViewPager) v.findViewById(R.id.viewPager);
+            PhotoGalleryPager adapter = new PhotoGalleryPager(getContext(), restaurant.getImages());
+
+            if (viewPager != null) {
+                CircleIndicator indicator = (CircleIndicator) v.findViewById(R.id.indicator_default);
+                viewPager.setAdapter(adapter);
+                indicator.setViewPager(viewPager);
+                adapter.registerDataSetObserver(indicator.getDataSetObserver());
+            }
+
+            this.recyclerView = (RecyclerView) v.findViewById(R.id.my_recycler_view);
+
+            productAdapter = new AdapterItemList(mListener.getProductos(), new AdapterItemList.RecyclerViewOnItemClickListener() {
+                @Override
+                public void onClick(View v, int position) {
+                    mListener.verProducto(position);
+                }
+            });
+
+            GridLayoutManager mGridLayoutManager = new GridLayoutManager(getContext(), 2);
+            recyclerView.setLayoutManager(mGridLayoutManager);
+            recyclerView.setItemAnimator(new DefaultItemAnimator());
+            recyclerView.setAdapter(productAdapter);
+        }else{
+            Toast.makeText(getContext(), "No has escaneado ningún QR", Toast.LENGTH_SHORT).show();
+            mListener.hideFloatingActionButton();
+            tituloRestaurante.setText("ESCANEA EL QR PARA ACCEDER AQUI");
+            scanDirect.setVisibility(View.VISIBLE);
+            direccionRestaurante.setVisibility(View.GONE);
+            ratingRestaurante.setVisibility(View.GONE);
         }
 
         getActivity().setTitle("Waneat");
 
-        this.restaurant = this.mListener.getRestauranteSelected();
-
-        TextView tituloRestaurante = v.findViewById(R.id.tituloRestaurante);
-        TextView direccionRestaurante = v.findViewById(R.id.direccionRestaurante);
-        RatingBar ratingRestaurante = v.findViewById(R.id.ruleRatingBar);
-        ImageView fotoRestaurante = v.findViewById(R.id.fotoRestaurante);
-
-        //Incluimos la info del restaurante
-        tituloRestaurante.setText(this.restaurant.getNameRestaurant());
-        direccionRestaurante.setText(this.restaurant.getAddressRestaurant());
-        //media del ratings de los restaurantes
-        List<Rating> ratings= this.restaurant.getRatings();
-        int count = 0;
-        float media = 0;
-        for (Rating rate: ratings) {
-            count++;
-            media += rate.getRate();
-        }
-        ratingRestaurante.setRating(media/count);
-
-        Ion.with(fotoRestaurante).load(this.restaurant.getImages().get(0).getImageUrl());
-
-        this.recyclerView = (RecyclerView) v.findViewById(R.id.my_recycler_view);
-
-        productAdapter = new AdapterItemList(mListener.getProductos(), new AdapterItemList.RecyclerViewOnItemClickListener() {
-            @Override
-            public void onClick(View v, int position) {
-                mListener.verProducto(position);
-            }
-        });
-
-        GridLayoutManager mGridLayoutManager = new GridLayoutManager(getContext(), 2);
-        recyclerView.setLayoutManager(mGridLayoutManager);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setAdapter(productAdapter);
 
         return v;
     }
@@ -115,6 +142,8 @@ public class ListProductFragment extends Fragment {
         super.onAttach(context);
         if (context instanceof OnFragmentInteractionListener) {
             mListener = (OnFragmentInteractionListener) context;
+            this.context = context;
+
         } else {
             throw new RuntimeException(context.toString()
                     + " must implement OnFragmentInteractionListener");
@@ -131,7 +160,6 @@ public class ListProductFragment extends Fragment {
     public interface OnFragmentInteractionListener {
         List<Product> getProductos();
         Restaurant getRestauranteSelected();
-        void callApiRestaurant(int id);
         void verProducto(int position);
         void showFloatingActionButton();
         void hideFloatingActionButton();

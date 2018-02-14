@@ -5,6 +5,7 @@ import android.os.Parcelable;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by JorgeYYA on 08/02/2018.
@@ -14,17 +15,23 @@ public class Order implements Parcelable {
 
     int id;
 
+    int userId;
+
     ArrayList<Product> products;
 
     String date, resName;
 
     double total;
 
-    public Order(ArrayList<Product> products, String date, String resName, double total) {
+
+    public Order() {}
+
+    public Order(int userId, ArrayList<Product> products, String date, String resName, double total) {
         this.products = products;
         this.date = date;
         this.resName = resName;
         this.total = total;
+        this.userId = userId;
     }
 
     protected Order(Parcel in) {
@@ -77,6 +84,18 @@ public class Order implements Parcelable {
 
     public void setTotal(double total) {
         this.total = total;
+    }
+
+    public int getId() {return id;}
+
+    public void setId(int id) {this.id = id;}
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     @Override

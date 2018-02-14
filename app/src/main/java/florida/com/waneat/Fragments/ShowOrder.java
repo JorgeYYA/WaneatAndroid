@@ -1,31 +1,46 @@
 package florida.com.waneat.Fragments;
 
 import android.content.Context;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.view.DragEvent;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageSwitcher;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.koushikdutta.ion.Ion;
+
 import java.util.ArrayList;
+
+import florida.com.waneat.Activities.MainActivity;
 import florida.com.waneat.Adapters.AdapterProductList;
+import florida.com.waneat.Adapters.PhotoGalleryPagerAdapter;
 import florida.com.waneat.Models.Order;
 import florida.com.waneat.Models.Product;
 import florida.com.waneat.R;
+import me.relex.circleindicator.CircleIndicator;
+
+import static florida.com.waneat.Fragments.ShowOrder.size;
 
 public class ShowOrder extends Fragment {
 
-
-    private ArrayList<String> imagen;
     private Order order;
     private ArrayList<Product> products;
     private RecyclerView recyclerProd;
     private TextView resName,date,totalPrize;
-
+    private ImageView imagenOrder;
     private OnFragmentInteractionListener mListener;
+    static int size;
 
     public ShowOrder() {
 
@@ -49,12 +64,8 @@ public class ShowOrder extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_show_order, container, false);
-
-        imagen = new ArrayList<String>();
-
 
 
         mListener.hideFloatingActionButton();
@@ -62,7 +73,7 @@ public class ShowOrder extends Fragment {
         resName = (TextView) v.findViewById(R.id.res_name);
         date = (TextView) v.findViewById(R.id.order_date);
         totalPrize = (TextView) v.findViewById(R.id.prize);
-
+        imagenOrder = (ImageView) v.findViewById(R.id.imagen);
         products = order.getProducts();
 
         recyclerProd = (RecyclerView) v.findViewById(R.id.product_list);
@@ -70,6 +81,9 @@ public class ShowOrder extends Fragment {
         LinearLayoutManager llm = new LinearLayoutManager(getActivity());
 
         recyclerProd.setLayoutManager(llm);
+
+
+
 
 
         recyclerProd.setAdapter(new AdapterProductList(products, new AdapterProductList.OnItemClickListener() {
@@ -90,15 +104,11 @@ public class ShowOrder extends Fragment {
         recyclerProd.invalidate();
 
 
-        //Recoge la primera imagen de cada producto del pedido
-        recoverImages();
-
-
         //Muestra por pantalla los datos del pedido
         resName.setText(order.getResName());
         date.setText(order.getDate());
         totalPrize.setText(order.getTotal()+"");
-
+        Ion.with(imagenOrder).load(order.getProducts().get(0).getImages().get(0).getImageUrl());
 
         //TODO: Cambiar a order num
         getActivity().setTitle("Pedido Num: 1");
@@ -108,16 +118,6 @@ public class ShowOrder extends Fragment {
     }
 
 
-    public void recoverImages(){
-
-        for(int i = 0;i<order.getProducts().size();i++){
-            if(order.getProducts().get(i).getImages().get(0) != null) {
-                imagen.add(order.getProducts().get(i).getImages().get(i).getImageUrl());
-            }
-
-        }
-
-    }
 
 
     @Override

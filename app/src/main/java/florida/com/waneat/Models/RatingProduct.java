@@ -7,7 +7,7 @@ package florida.com.waneat.Models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Rating_ {
+public class RatingProduct {
 
     @SerializedName("id")
     @Expose
@@ -29,7 +29,7 @@ public class Rating_ {
      * No args constructor for use in serialization
      *
      */
-    public Rating_() {
+    public RatingProduct() {
     }
 
     /**
@@ -40,7 +40,7 @@ public class Rating_ {
      * @param createdAt
      * @param idProductId
      */
-    public Rating_(Integer id, Double rate, Integer idProductId, String createdAt, String updatedAt) {
+    public RatingProduct(Integer id, Double rate, Integer idProductId, String createdAt, String updatedAt) {
         super();
         this.id = id;
         this.rate = rate;

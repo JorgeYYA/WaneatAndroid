@@ -3,6 +3,7 @@ package florida.com.waneat.Models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -61,7 +62,7 @@ public class Restaurant {
     private List<Rating> ratings = null;
     @SerializedName("products")
     @Expose
-    private List<Product> products = null;
+    private ArrayList<Product> products = null;
 
     /**
      * No args constructor for use in serialization
@@ -90,7 +91,7 @@ public class Restaurant {
      * @param specialty
      * @param ratings
      */
-    public Restaurant(Integer id, String nameRestaurant, String addressRestaurant, String cityRestaurant, String postalcodeRestaurant, String countryRestaurant, String stateRestaurant, String description, String emailRestaurant, String specialty, String restaurantUrl, Integer idUserId, String createdAt, String updatedAt, List<Image> images, List<Rating> ratings, List<Product> products) {
+    public Restaurant(Integer id, String nameRestaurant, String addressRestaurant, String cityRestaurant, String postalcodeRestaurant, String countryRestaurant, String stateRestaurant, String description, String emailRestaurant, String specialty, String restaurantUrl, Integer idUserId, String createdAt, String updatedAt, List<Image> images, List<Rating> ratings, ArrayList<Product> products) {
         super();
         this.id = id;
         this.nameRestaurant = nameRestaurant;
@@ -239,11 +240,11 @@ public class Restaurant {
         this.ratings = ratings;
     }
 
-    public List<Product> getProducts() {
+    public ArrayList<Product> getProducts() {
         return products;
     }
 
-    public void setProducts(List<Product> products) {
+    public void setProducts(ArrayList<Product> products) {
         this.products = products;
     }
 

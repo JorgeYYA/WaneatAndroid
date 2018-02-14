@@ -96,7 +96,6 @@ public class AdapterProductList extends RecyclerView.Adapter<AdapterProductList.
         ViewHolder.quantity.setText(products.get(i).getCantidad()+"");
         ViewHolder.prize.setText(products.get(i).getPriceProduct()+"");
 
-
     }
 
 
