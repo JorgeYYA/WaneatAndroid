@@ -241,7 +241,7 @@ public class DialogFragment extends android.support.v4.app.DialogFragment{
     }
 
     private void reloadPrecios(){
-        this.cestaTotal.setText(String.valueOf(mListener.getCestaPrice()));
+        this.cestaTotal.setText(String.valueOf(mListener.getCestaPrice())+getResources().getString(R.string.badge));
     }
 
 

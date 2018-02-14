@@ -133,12 +133,6 @@ public class OrderList extends Fragment {
 
         recuperaDatos();
 
-
-
-
-
-
-
         return v;
     }
 
