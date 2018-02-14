@@ -138,5 +138,14 @@
             android:layout_weight="1"
             android:background="@color/colorPrimaryDarkWaneat"
             android:text="IR A PAGAR" />
+
+        <Button
+            android:id="@+id/tramitar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/colorPrimaryDarkWaneat"
+            android:text="Tramitar Pedido"
+            android:visibility="gone" />
     </LinearLayout>
 </FrameLayout>

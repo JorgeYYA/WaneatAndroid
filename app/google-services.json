@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "51386970580",
+    "firebase_url": "https://waneat-c6b4d.firebaseio.com",
+    "project_id": "waneat-c6b4d",
+    "storage_bucket": "waneat-c6b4d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:51386970580:android:233045b6a6fc816c",
+        "android_client_info": {
+          "package_name": "florida.com.waneat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "51386970580-59b1bnrg6lrj5gg79nib9qgniurih8vk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "florida.com.waneat",
+            "certificate_hash": "3308a7a3e3ad6d21691dbc74ce8792c544fa78f4"
+          }
+        },
+        {
+          "client_id": "51386970580-ho592jvg6dj6un5t2gca38kthlgd8eqi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA54YCWn2wQRcYRckya7XUU8TMH3HJHMOE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "51386970580-ho592jvg6dj6un5t2gca38kthlgd8eqi.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

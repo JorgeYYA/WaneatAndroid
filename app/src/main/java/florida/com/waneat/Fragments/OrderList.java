@@ -8,11 +8,21 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -38,7 +48,14 @@ public class OrderList extends Fragment {
 
     double total;
 
+    LinearLayout empty;
+
+    TextView info;
+
     private InterfaceOrder interfaz;
+
+
+    DatabaseReference bbdd;
 
     public OrderList() {
 
@@ -66,6 +83,12 @@ public class OrderList extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View v = inflater.inflate(R.layout.fragment_order_list, container, false);
+
+        empty = (LinearLayout) v.findViewById(R.id.empty_list);
+        info = (TextView) v.findViewById(R.id.info);
+
+        info.setText("Cargando...");
+
         products = new ArrayList<Product>();
         orders = new ArrayList<Order>();
 
@@ -91,34 +114,86 @@ public class OrderList extends Fragment {
 
         total = sumaPrecio(products);
 
-        Order order = new Order(products,"10/2/2018","Restaurante Paco Mer",total);
+       /* Order order = new Order(1,products,"10/2/2018","Restaurante Paco Mer",total);
 
-        Order order2 = new Order(products,"10/2/2018","El Tambor Remendado",total); //A ver si alguien pilla la referencia :3
-
+        Order order2 = new Order(1,products,"10/2/2018","El Tambor Remendado",total);
         orders.add(order);
-        orders.add(order2);
+        orders.add(order2);*/
+
+        //HARDCODED
+        final int idUser = 1;
 
         recyclerOrders = (RecyclerView) v.findViewById(R.id.recycler_orders);
 
-        LinearLayoutManager llm = new LinearLayoutManager(getActivity());
 
-        recyclerOrders.setLayoutManager(llm);
-
-        getActivity().setTitle("Listado de pedidos");
+        bbdd = FirebaseDatabase.getInstance().getReference("pedidos");
 
 
-        recyclerOrders.setAdapter(new AdapterOrderList(orders, new AdapterOrderList.OnItemClickListener() {
-
+        bbdd.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onItemClick(Order item) {
+            public void onDataChange(DataSnapshot dataSnapshot) {
 
-                interfaz.interfaceOrder(item);
+                for (DataSnapshot ds : dataSnapshot.getChildren()) {
+
+                    Order order = ds.getValue(Order.class);
+
+                    if (order.getUserId() == idUser) {
+
+                        orders.add(order);
+
+                    }
+
+                }
+
+                LinearLayoutManager llm = new LinearLayoutManager(getActivity());
+
+                recyclerOrders.setLayoutManager(llm);
+
+
+                recyclerOrders.setAdapter(new AdapterOrderList(orders, new AdapterOrderList.OnItemClickListener() {
+
+                    @Override
+                    public void onItemClick(Order item) {
+
+                        interfaz.interfaceOrder(item);
+
+                    }
+
+                }));
+
+                recyclerOrders.invalidate();
+
+
+                if (orders.size() == 0) {
+
+
+                    info.setText("No hay pedidos registrados");
+                    empty.setVisibility(View.VISIBLE);
+                    recyclerOrders.setVisibility(View.GONE);
+
+                } else {
+
+                    empty.setVisibility(View.GONE);
+                    recyclerOrders.setVisibility(View.VISIBLE);
+
+
+                }
+
 
             }
 
-        }));
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
 
-        recyclerOrders.invalidate();
+            }
+        });
+
+
+
+
+
+
+
 
         return v;
     }
@@ -136,6 +211,7 @@ public class OrderList extends Fragment {
         super.onAttach(context);
         if (context instanceof ListProductFragment.OnFragmentInteractionListener) {
             interfaz = (InterfaceOrder) context;
+            getActivity().setTitle("Listado de pedidos");
         } else {
             throw new RuntimeException(context.toString()
                     + " must implement OnFragmentInteractionListener");

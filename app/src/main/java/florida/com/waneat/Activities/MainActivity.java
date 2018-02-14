@@ -362,7 +362,7 @@ public class MainActivity extends AppCompatActivity implements
             toolbar.setBackgroundColor(ContextCompat.getColor(this, android.R.color.transparent));
 
         }else if (id == R.id.nav_mispedidos) {
-            ft.replace(R.id.fragment, OrderList.newInstance(null,null)).addToBackStack("MY_FRAGMENT");
+            ft.replace(R.id.fragment, OrderList.newInstance(null,null)).addToBackStack("order_list");
             toolbar.setBackgroundColor(ContextCompat.getColor(this, R.color.colorSecondaryDarkWaneat));
 
         } else if (id == R.id.nav_qr) {

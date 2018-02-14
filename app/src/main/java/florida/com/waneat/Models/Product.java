@@ -5,6 +5,8 @@ import android.graphics.drawable.DrawableWrapper;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.firebase.database.Exclude;
+
 import java.util.ArrayList;
 
 /**
@@ -74,6 +76,7 @@ public class Product implements Parcelable {
         this.precio = precio;
     }
 
+    @Exclude
     public ArrayList<Integer> getImagen() {
         return imagen;
     }
