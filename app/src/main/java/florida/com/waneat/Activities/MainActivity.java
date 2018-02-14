@@ -13,6 +13,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
@@ -170,8 +171,6 @@ public class MainActivity extends AppCompatActivity implements
                 if(getSupportFragmentManager().getBackStackEntryCount() == 0) finish();
             }
         });
-        toolbar.setBackgroundColor(ContextCompat.getColor(this, android.R.color.transparent));
-
 
     }
 
@@ -244,6 +243,7 @@ public class MainActivity extends AppCompatActivity implements
         boolean added = false;
         int can = 0;
         int id = 0;
+        int pos = 0;
         if(productosCesta.isEmpty()){
             this.productosCesta.add(prod);
         }else{
@@ -252,6 +252,7 @@ public class MainActivity extends AppCompatActivity implements
                     added = true;
                     if(added){
                         id = productosCesta.get(i).getId();
+                        pos = i;
                     }
                 }
             }
@@ -259,11 +260,9 @@ public class MainActivity extends AppCompatActivity implements
             if(!added) {
                 this.productosCesta.add(prod);
             }else{
-
-                can = productosCesta.get(id).getCantidad();
-                Product newPro = productosCesta.get(id);
-                newPro.setCantidad(can + 1);
-                productosCesta.remove(productosCesta.get(id));
+                Product newPro = productosCesta.get(pos);
+                newPro.setCantidad(newPro.getCantidad() + 1);
+                productosCesta.remove(pos);
                 productosCesta.add(newPro);
             }
             added = false;
