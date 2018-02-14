@@ -102,7 +102,7 @@ public class DialogFragment extends android.support.v4.app.DialogFragment{
 
 
         if(cards != null) {
-            tarjetaCredito.setText(cards.get(0).getCreditCardNumber().substring(0,4)+" XXXX XXXX XXXX");
+            tarjetaCredito.setText(cards.get(0).getCreditCardNumber().substring(0,4)+" **** **** ****");
         }
 
         layoutCards.setVisibility(View.GONE);
@@ -133,14 +133,10 @@ public class DialogFragment extends android.support.v4.app.DialogFragment{
 
         recyclerCards.setItemAnimator(new DefaultItemAnimator());
 
-
-
         checkoutButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
                 buttonIntroducirTarj = (Button) rootView.findViewById(R.id.buttonIntroducirTarj);
-
-
 
                 if(!cesta.isEmpty()){
 
@@ -153,7 +149,6 @@ public class DialogFragment extends android.support.v4.app.DialogFragment{
 
                         @Override
                         public void onItemClick(CreditCard item) {
-
 
 
                             Toast.makeText(getActivity(), cardPos+"asd", Toast.LENGTH_SHORT).show();
@@ -189,6 +184,8 @@ public class DialogFragment extends android.support.v4.app.DialogFragment{
         tramitarPedido.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                
 
                 tramitarPedido();
 

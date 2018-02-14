@@ -3,6 +3,8 @@ package florida.com.waneat.Fragments;
 import android.app.Activity;
 import android.app.FragmentTransaction;
 import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -26,6 +28,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
+import florida.com.waneat.Activities.MainActivity;
 import florida.com.waneat.Adapters.AdapterOrderList;
 import florida.com.waneat.Models.Order;
 import florida.com.waneat.Models.Product;
@@ -100,28 +103,6 @@ public class OrderList extends Fragment {
         imagen.add(R.drawable.plato1);
         imagen.add(R.drawable.plato2);
 
-        //DEBUGGING MUY FUERTE
-        Product producto = new Product(0, "spaguettis", "boloñesa, algo más", 2.0,imagen, "pasta", 3);
-
-        Product producto2 = new Product(1, "macarrones", "boloñesa, algo más", 3.0, imagen,  "pasta", 2);
-
-        Product producto3 = new Product(2, "spaguettis2", "boloñesa, algo más", 2.0,imagen,  "pasta", 3);
-
-        Product producto4 = new Product(3, "macarrones2", "boloñesa, algo más", 3.0, imagen,  "pasta", 2);
-
-        products.add(producto);
-        products.add(producto2);
-        products.add(producto3);
-        products.add(producto4);
-
-        total = sumaPrecio(products);
-
-       /*Order order = new Order(1,products,"10/2/2018","Restaurante Paco Mer",total);
-
-        Order order2 = new Order(1,products,"10/2/2018","El Tambor Remendado",total);
-        orders.add(order);
-        orders.add(order2);*/
-
         //HARDCODED
         idUser = 1;
 
@@ -130,8 +111,16 @@ public class OrderList extends Fragment {
 
         bbdd = FirebaseDatabase.getInstance().getReference("pedidos");
 
+        if (!MainActivity.verificaConexion(getActivity())) {
 
-        recuperaDatos();
+            info.setText("No se ha podido conectar, \ncomprueba tu conexión a internet");
+
+
+        }else {
+
+            recuperaDatos();
+
+        }
 
         return v;
     }
@@ -189,15 +178,17 @@ public class OrderList extends Fragment {
                 }
 
 
+
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
 
+                info.setText("No se ha podido conectar, comprueba tu conexión a internet");
+
             }
         });
     }
-
 
 
     @Override
