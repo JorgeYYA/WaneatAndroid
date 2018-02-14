@@ -31,6 +31,8 @@ import static florida.com.waneat.Fragments.ShowOrder.size;
 public class ShowOrder extends Fragment {
 
 
+    public static boolean pause;
+
     private ArrayList<String> imagen;
     private Order order;
     private ArrayList<Product> products;
@@ -130,7 +132,6 @@ public class ShowOrder extends Fragment {
 
 
 
-
         //Recoge la primera imagen de cada producto del pedido
         //recoverImages();
 
@@ -152,7 +153,7 @@ public class ShowOrder extends Fragment {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
 
-                MainActivity.pause = true;
+                ShowOrder.pause = true;
 
                 return false;
             }
@@ -224,14 +225,14 @@ class showImagesOrder extends AsyncTask<ViewPager, ArrayList<String>, Order> {
 
         Log.d("pausa","nomrmal");
         //comprueba si se ha interactuado con la imagen recientemente y en tal caso pausa la ejecucion del thread
-        if (MainActivity.pause) {
+        if (ShowOrder.pause) {
 
             Log.d("pausa","pausado");
 
             try {
                 Thread.sleep(5000);
-                MainActivity.pause = false;
-                Log.d("pausa","pausado"+MainActivity.pause);
+                ShowOrder.pause = false;
+                Log.d("pausa","pausado"+ShowOrder.pause);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -263,8 +264,6 @@ class showImagesOrder extends AsyncTask<ViewPager, ArrayList<String>, Order> {
             }
             showImagesOrder sm = new showImagesOrder(imageSwitcher, pro);
             sm.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-
-
         }
     }
 }

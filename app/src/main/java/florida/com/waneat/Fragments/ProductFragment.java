@@ -29,6 +29,8 @@ import static florida.com.waneat.Fragments.ShowOrder.size;
 public class ProductFragment extends Fragment {
 
 
+    public static boolean pause;
+
     static Product pro;
     private TextView price, name, desc,categoriaProducto;
     private Button add;
@@ -102,7 +104,7 @@ public class ProductFragment extends Fragment {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
 
-                MainActivity.pause = true;
+                ProductFragment.pause = true;
 
                 return false;
             }
@@ -169,20 +171,18 @@ class showImages extends AsyncTask<ViewPager, ArrayList<String>, Product> {
 
         Log.d("pausa","nomrmal");
         //comprueba si se ha interactuado con la imagen recientemente y en tal caso pausa la ejecucion del thread
-        if (MainActivity.pause) {
+        if (ProductFragment.pause) {
 
             Log.d("pausa","pausado");
 
             try {
                 Thread.sleep(5000);
-                MainActivity.pause = false;
-                Log.d("pausa","pausado"+MainActivity.pause);
+                ProductFragment.pause = false;
+                Log.d("pausa","pausado"+ProductFragment.pause);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-
         }
-
 
         return null;
     }
@@ -203,7 +203,6 @@ class showImages extends AsyncTask<ViewPager, ArrayList<String>, Product> {
             }else{
 
                 imageSwitcher.setCurrentItem(0);
-
 
             }
             showImages sm = new showImages(imageSwitcher, pro);

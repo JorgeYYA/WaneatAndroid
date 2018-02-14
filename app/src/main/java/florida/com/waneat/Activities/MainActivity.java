@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity implements
         OrderList.InterfaceOrder, ShowOrder.OnFragmentInteractionListener{
 
 
-    public static boolean pause;
+
     public ArrayList<Product> productosCesta = new ArrayList<Product>();
     public ArrayList<Product> productosLista = new ArrayList<Product>();
     ArrayList<Integer> imagen = new ArrayList<>();
