@@ -33,6 +33,7 @@ public class LoginActivity extends AppCompatActivity {
 
         if(service.isLoggedIn()){
             finish();
+            service.getUserByEmail();
         }
 
 
