@@ -5,32 +5,46 @@
     tools:showIn="navigation_view">
 
     <group android:checkableBehavior="single">
+
         <item
             android:id="@+id/inicio"
-            android:icon="@drawable/border_radius"
-            android:title="Inicio">
+            android:icon="@drawable/inicio"
+            android:title="Inicio"/>
 
-        </item>
         <item
             android:id="@+id/nav_miperfil"
             android:icon="@drawable/miperfil"
             android:title="Mi perfil" />
+
         <item
             android:id="@+id/nav_mispedidos"
             android:icon="@drawable/mispedidos"
             android:title="Mis pedidos" />
+
         <item
             android:id="@+id/nav_qr"
             android:icon="@drawable/qr"
             android:title="Escanear QR" />
+
         <item
             android:id="@+id/nav_mistarjetas"
             android:icon="@drawable/tarjetas"
             android:title="Mis tarjetas" />
+
         <item
             android:id="@+id/nav_logout"
             android:icon="@drawable/exit"
             android:title="Cerrar Sesión" />
+
+    </group>
+
+    <group android:checkableBehavior="single"
+        android:id="@+id/secondgrupo">
+
+        <item
+            android:id="@+id/nav_about"
+            android:icon="@drawable/about"
+            android:title="Información" />
     </group>
 
 </menu>

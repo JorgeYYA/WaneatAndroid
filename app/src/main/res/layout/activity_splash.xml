@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="florida.com.waneat.Activities.SplashActivity"
-    android:background="@color/colorSecondaryDarkWaneat">
+    android:background="@drawable/back"
+    android:alpha="0.75">
 
     <ImageView
         android:id="@+id/imageLogo"
@@ -22,13 +23,15 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="WANEAT"
-        android:textColor="@android:color/white"
-        android:textSize="40dp" />
+        android:textColor="@color/colorPrimaryWaneat"
+        android:textSize="60dp"
+        android:textStyle="bold"
+        />
 
     <com.felipecsl.gifimageview.library.GifImageView
         android:id="@+id/carga"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_gravity="center"
         android:layout_margin="20dp"
         android:scaleType="fitCenter" />

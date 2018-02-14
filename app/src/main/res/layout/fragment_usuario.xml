@@ -68,8 +68,10 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center_vertical|end"
+                    android:selectAllOnFocus="false"
                     android:textColor="@android:color/black"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    android:backgroundTint="@android:color/transparent" />
 
             </LinearLayout>
 
@@ -99,7 +101,9 @@
                     android:layout_weight="1"
                     android:gravity="center_vertical|end"
                     android:textColor="@android:color/black"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    android:backgroundTint="@android:color/transparent"
+                    />
 
             </LinearLayout>
 
@@ -129,7 +133,9 @@
                     android:layout_weight="1"
                     android:gravity="center_vertical|end"
                     android:textColor="@android:color/black"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    android:backgroundTint="@android:color/transparent"
+                    />
 
             </LinearLayout>
 
@@ -159,7 +165,9 @@
                     android:layout_weight="1"
                     android:gravity="center_vertical|end"
                     android:textColor="@android:color/black"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    android:backgroundTint="@android:color/transparent"
+                    />
 
             </LinearLayout>
 
@@ -189,7 +197,9 @@
                     android:layout_weight="1"
                     android:gravity="center_vertical|end"
                     android:textColor="@android:color/black"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    android:backgroundTint="@android:color/transparent"
+                    />
 
             </LinearLayout>
 
@@ -219,7 +229,9 @@
                     android:layout_weight="1"
                     android:gravity="center_vertical|end"
                     android:textColor="@android:color/black"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    android:backgroundTint="@android:color/transparent"
+                    />
 
             </LinearLayout>
 
@@ -249,7 +261,9 @@
                     android:layout_weight="1"
                     android:gravity="center_vertical|end"
                     android:textColor="@android:color/black"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    android:backgroundTint="@android:color/transparent"
+                    />
 
             </LinearLayout>
 
@@ -279,7 +293,9 @@
                     android:layout_weight="1"
                     android:gravity="center_vertical|end"
                     android:textColor="@android:color/black"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    android:backgroundTint="@android:color/transparent"
+                    />
 
             </LinearLayout>
 

@@ -25,10 +25,10 @@
                 android:id="@+id/indicator_default"
                 android:layout_width="fill_parent"
                 android:layout_height="40dp"
-                app:ci_height="10dp"
-                app:ci_width="10dp"
+                android:layout_centerInParent="true"
                 app:ci_gravity="center"
-                android:layout_centerInParent="true"/>
+                app:ci_height="10dp"
+                app:ci_width="10dp" />
         </RelativeLayout>
 
 

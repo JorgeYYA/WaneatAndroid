@@ -21,6 +21,8 @@
         android:layout_margin="10dp"
         android:orientation="vertical">
 
+
+
         <EditText
             android:id="@+id/editLogEmail"
             android:layout_width="match_parent"
@@ -39,6 +41,8 @@
             android:background="@drawable/layout_edittext"
             android:padding="10dp"
             android:hint="Contraseña"/>
+
+
     </LinearLayout>
 
     <Button
