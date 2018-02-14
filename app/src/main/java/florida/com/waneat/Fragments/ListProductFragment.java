@@ -26,8 +26,8 @@ import java.util.List;
 
 import florida.com.waneat.Adapters.AdapterItemList;
 import florida.com.waneat.Models.Product;
+import florida.com.waneat.Models.Rating;
 import florida.com.waneat.Models.Restaurant;
-import florida.com.waneat.Models.RestaurantRatings;
 import florida.com.waneat.R;
 import florida.com.waneat.Services.RestaurantService;
 
@@ -78,19 +78,19 @@ public class ListProductFragment extends Fragment {
         ImageView fotoRestaurante = v.findViewById(R.id.fotoRestaurante);
 
         //Incluimos la info del restaurante
-        tituloRestaurante.setText(this.restaurant.getName_restaurant());
-        direccionRestaurante.setText(this.restaurant.getAddress_restaurant());
+        tituloRestaurante.setText(this.restaurant.getNameRestaurant());
+        direccionRestaurante.setText(this.restaurant.getAddressRestaurant());
         //media del ratings de los restaurantes
-        List<RestaurantRatings> ratings= this.restaurant.getRatings();
+        List<Rating> ratings= this.restaurant.getRatings();
         int count = 0;
         float media = 0;
-        for (RestaurantRatings rate: ratings) {
+        for (Rating rate: ratings) {
             count++;
             media += rate.getRate();
         }
         ratingRestaurante.setRating(media/count);
 
-        Ion.with(fotoRestaurante).load(this.restaurant.getImages().get(0).getImage_url());
+        Ion.with(fotoRestaurante).load(this.restaurant.getImages().get(0).getImageUrl());
 
         this.recyclerView = (RecyclerView) v.findViewById(R.id.my_recycler_view);
 

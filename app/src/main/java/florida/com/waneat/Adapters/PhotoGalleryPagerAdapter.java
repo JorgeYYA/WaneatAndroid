@@ -12,8 +12,7 @@ import com.koushikdutta.ion.Ion;
 
 import java.util.List;
 
-import florida.com.waneat.Models.Product;
-import florida.com.waneat.Models.ProductImage;
+import florida.com.waneat.Models.Image_;
 import florida.com.waneat.R;
 
 /**
@@ -25,10 +24,9 @@ public class PhotoGalleryPagerAdapter extends PagerAdapter {
     private static final String TAG = "ImageViewPage";
     Context mContext;
     LayoutInflater mLayoutInflater;
-    private List<ProductImage> images;
-    private String[] mResources;
+    private List<Image_> images;
 
-    public PhotoGalleryPagerAdapter(Context context, List<ProductImage> images) {
+    public PhotoGalleryPagerAdapter(Context context, List<Image_> images) {
         mContext = context;
         this.images = images;
         mLayoutInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -36,7 +34,7 @@ public class PhotoGalleryPagerAdapter extends PagerAdapter {
 
     @Override
     public int getCount() {
-        return mResources.length;
+        return images.size();
     }
 
 
@@ -51,9 +49,9 @@ public class PhotoGalleryPagerAdapter extends PagerAdapter {
 
         final ImageView iv_photo = (ImageView) itemView.findViewById(R.id.iv_photo);
 
-        if (!images.get(position).getImage_url().equals("")){
+        if (!images.get(position).getImageUrl().equals("")){
             Ion.with(mContext)
-                    .load(images.get(position).getImage_url().trim())
+                    .load(images.get(position).getImageUrl().trim())
                     .intoImageView(iv_photo);
         }
         container.addView(itemView);

@@ -48,10 +48,10 @@ public class AdapterItemList extends RecyclerView.Adapter<AdapterItemList.MyView
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         Product producto = productosLista.get(holder.getAdapterPosition());
-        Ion.with(holder.image).load(producto.getImages().get(0).getImage_url());
-        holder.nombre.setText(producto.getName_product());
-        holder.precio.setText(dec.format(producto.getPrice_product()));
-        holder.categoria.setText(producto.getCategory_product());
+        Ion.with(holder.image).load(producto.getImages().get(0).getImageUrl());
+        holder.nombre.setText(producto.getNameProduct());
+        holder.precio.setText(dec.format(producto.getPriceProduct()));
+        holder.categoria.setText(producto.getCategoryProduct());
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {

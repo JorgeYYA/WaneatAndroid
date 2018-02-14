@@ -50,8 +50,8 @@ public class MainActivity extends AppCompatActivity implements
         OrderList.InterfaceOrder, ShowOrder.OnFragmentInteractionListener, InitialFragment.OnFragmentInteractionListener{
 
 
-    public List<Product> productosCesta;
-    public List<Product> productosLista;
+    public List<Product> productosCesta = new ArrayList<>();
+    public List<Product> productosLista = new ArrayList<>();
     public Product productoSelected = new Product();
     public Restaurant restauranteSelected = new Restaurant();
 
@@ -80,8 +80,15 @@ public class MainActivity extends AppCompatActivity implements
         setTitle("Waneat");
 
         this.service = new UserService(MainActivity.this);
-
         this.userLogged = Preferences.gsonToUser(MainActivity.this);
+
+
+        //TODO: CAMBIAR DE SITIO PROBLEMA DE CARGAS
+        //Recogemos todos los datos del restaurante y cargamos los arrays pertinentes
+        restauranteSelected = Preferences.gsonToRestaurant(MainActivity.this);
+
+        //cargamos los arrays
+        this.productosLista = restauranteSelected.getProducts();
 
         fab = (FloatingActionButton) findViewById(R.id.fab);
         fab_cat = (FloatingActionButton) findViewById(R.id.fab_cat);
@@ -285,12 +292,13 @@ public class MainActivity extends AppCompatActivity implements
     @Override
     public void callApiRestaurant(int id) {
         RestaurantService service = new RestaurantService(MainActivity.this);
+        Log.d("MainActivity", "callApiRestaurant: "+id);
         service.getRestaurant(id);
         //Recogemos todos los datos del restaurante y cargamos los arrays pertinentes
         restauranteSelected = Preferences.gsonToRestaurant(MainActivity.this);
 
         //cargamos los arrays
-     //   this.productosLista = restauranteSelected.getProducts();
+       this.productosLista = restauranteSelected.getProducts();
     }
 
     @Override
@@ -302,7 +310,7 @@ public class MainActivity extends AppCompatActivity implements
     public double getCestaPrice() {
         double precioTotal = 0.0;
         for (Product pro: this.productosCesta) {
-            precioTotal += pro.getPrice_product()*pro.getCantidad();
+            precioTotal += pro.getPriceProduct()*pro.getCantidad();
         }
         return precioTotal;
     }

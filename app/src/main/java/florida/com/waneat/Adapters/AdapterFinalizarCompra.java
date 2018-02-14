@@ -37,8 +37,8 @@ public class AdapterFinalizarCompra  extends RecyclerView.Adapter<AdapterFinaliz
 
 
         holder.cantidad.setText(Integer.toString(producto.getCantidad()));
-        holder.nombre_producto.setText(producto.getName_product());
-        holder.precio.setText(String.valueOf(producto.getPrice_product())+"€");
+        holder.nombre_producto.setText(producto.getNameProduct());
+        holder.precio.setText(String.valueOf(producto.getPriceProduct())+"€");
     }
 
     @Override

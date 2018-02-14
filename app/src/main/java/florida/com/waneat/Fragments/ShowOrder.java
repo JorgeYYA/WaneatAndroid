@@ -77,7 +77,7 @@ public class ShowOrder extends Fragment {
             @Override
             public void onItemClick(Product item) {
 
-               Toast.makeText(getActivity(), item.getName_product(), Toast.LENGTH_SHORT).show();
+               Toast.makeText(getActivity(), item.getNameProduct(), Toast.LENGTH_SHORT).show();
 
 
             }
@@ -112,7 +112,7 @@ public class ShowOrder extends Fragment {
 
         for(int i = 0;i<order.getProducts().size();i++){
             if(order.getProducts().get(i).getImages().get(0) != null) {
-                imagen.add(order.getProducts().get(i).getImages().get(i).getImage_url());
+                imagen.add(order.getProducts().get(i).getImages().get(i).getImageUrl());
             }
 
         }

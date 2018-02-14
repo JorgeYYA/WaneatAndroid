@@ -1,54 +1,116 @@
 package florida.com.waneat.Models;
 
-import java.util.ArrayList;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 import java.util.List;
 
 /**
- * Created by JorgeYYA on 09/02/2018.
+ * Created by sergiomoreno on 14/2/18.
  */
 
 public class Restaurant {
+
+    @SerializedName("id")
+    @Expose
     private Integer id;
-    private String name_restaurant;
-    private String address_restaurant;
-    private String city_restaurant;
-    private String postalcode_restaurant;
-    private String country_restaurant;
-    private String state_restaurant;
+    @SerializedName("name_restaurant")
+    @Expose
+    private String nameRestaurant;
+    @SerializedName("address_restaurant")
+    @Expose
+    private String addressRestaurant;
+    @SerializedName("city_restaurant")
+    @Expose
+    private String cityRestaurant;
+    @SerializedName("postalcode_restaurant")
+    @Expose
+    private String postalcodeRestaurant;
+    @SerializedName("country_restaurant")
+    @Expose
+    private String countryRestaurant;
+    @SerializedName("state_restaurant")
+    @Expose
+    private String stateRestaurant;
+    @SerializedName("description")
+    @Expose
     private String description;
-    private String email_restaurant;
+    @SerializedName("email_restaurant")
+    @Expose
+    private String emailRestaurant;
+    @SerializedName("specialty")
+    @Expose
     private String specialty;
-    private String restaurant_url;
-    private Integer id_user_id;
-    private String created_at;
-    private String updated_at;
-    private List<RestaurantImage> images = null;
-    private List<RestaurantRatings> ratings = null;
+    @SerializedName("restaurant_url")
+    @Expose
+    private String restaurantUrl;
+    @SerializedName("id_user_id")
+    @Expose
+    private Integer idUserId;
+    @SerializedName("created_at")
+    @Expose
+    private String createdAt;
+    @SerializedName("updated_at")
+    @Expose
+    private String updatedAt;
+    @SerializedName("images")
+    @Expose
+    private List<Image> images = null;
+    @SerializedName("ratings")
+    @Expose
+    private List<Rating> ratings = null;
+    @SerializedName("products")
+    @Expose
     private List<Product> products = null;
 
-    public Restaurant(Integer id, String name_restaurant, String address_restaurant, String city_restaurant, String postalcode_restaurant, String country_restaurant, String state_restaurant, String description, String email_restaurant, String specialty, String restaurant_url, Integer id_user_id, String created_at, String updated_at, List<RestaurantImage> images, List<RestaurantRatings> ratings, List<Product> products) {
+    /**
+     * No args constructor for use in serialization
+     *
+     */
+    public Restaurant() {
+    }
+
+    /**
+     *
+     * @param stateRestaurant
+     * @param countryRestaurant
+     * @param emailRestaurant
+     * @param addressRestaurant
+     * @param cityRestaurant
+     * @param postalcodeRestaurant
+     * @param updatedAt
+     * @param id
+     * @param nameRestaurant
+     * @param createdAt
+     * @param description
+     * @param images
+     * @param restaurantUrl
+     * @param idUserId
+     * @param products
+     * @param specialty
+     * @param ratings
+     */
+    public Restaurant(Integer id, String nameRestaurant, String addressRestaurant, String cityRestaurant, String postalcodeRestaurant, String countryRestaurant, String stateRestaurant, String description, String emailRestaurant, String specialty, String restaurantUrl, Integer idUserId, String createdAt, String updatedAt, List<Image> images, List<Rating> ratings, List<Product> products) {
+        super();
         this.id = id;
-        this.name_restaurant = name_restaurant;
-        this.address_restaurant = address_restaurant;
-        this.city_restaurant = city_restaurant;
-        this.postalcode_restaurant = postalcode_restaurant;
-        this.country_restaurant = country_restaurant;
-        this.state_restaurant = state_restaurant;
+        this.nameRestaurant = nameRestaurant;
+        this.addressRestaurant = addressRestaurant;
+        this.cityRestaurant = cityRestaurant;
+        this.postalcodeRestaurant = postalcodeRestaurant;
+        this.countryRestaurant = countryRestaurant;
+        this.stateRestaurant = stateRestaurant;
         this.description = description;
-        this.email_restaurant = email_restaurant;
+        this.emailRestaurant = emailRestaurant;
         this.specialty = specialty;
-        this.restaurant_url = restaurant_url;
-        this.id_user_id = id_user_id;
-        this.created_at = created_at;
-        this.updated_at = updated_at;
+        this.restaurantUrl = restaurantUrl;
+        this.idUserId = idUserId;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
         this.images = images;
         this.ratings = ratings;
         this.products = products;
     }
 
-    public Restaurant(){
-
-    }
     public Integer getId() {
         return id;
     }
@@ -57,52 +119,52 @@ public class Restaurant {
         this.id = id;
     }
 
-    public String getName_restaurant() {
-        return name_restaurant;
+    public String getNameRestaurant() {
+        return nameRestaurant;
     }
 
-    public void setName_restaurant(String name_restaurant) {
-        this.name_restaurant = name_restaurant;
+    public void setNameRestaurant(String nameRestaurant) {
+        this.nameRestaurant = nameRestaurant;
     }
 
-    public String getAddress_restaurant() {
-        return address_restaurant;
+    public String getAddressRestaurant() {
+        return addressRestaurant;
     }
 
-    public void setAddress_restaurant(String address_restaurant) {
-        this.address_restaurant = address_restaurant;
+    public void setAddressRestaurant(String addressRestaurant) {
+        this.addressRestaurant = addressRestaurant;
     }
 
-    public String getCity_restaurant() {
-        return city_restaurant;
+    public String getCityRestaurant() {
+        return cityRestaurant;
     }
 
-    public void setCity_restaurant(String city_restaurant) {
-        this.city_restaurant = city_restaurant;
+    public void setCityRestaurant(String cityRestaurant) {
+        this.cityRestaurant = cityRestaurant;
     }
 
-    public String getPostalcode_restaurant() {
-        return postalcode_restaurant;
+    public String getPostalcodeRestaurant() {
+        return postalcodeRestaurant;
     }
 
-    public void setPostalcode_restaurant(String postalcode_restaurant) {
-        this.postalcode_restaurant = postalcode_restaurant;
+    public void setPostalcodeRestaurant(String postalcodeRestaurant) {
+        this.postalcodeRestaurant = postalcodeRestaurant;
     }
 
-    public String getCountry_restaurant() {
-        return country_restaurant;
+    public String getCountryRestaurant() {
+        return countryRestaurant;
     }
 
-    public void setCountry_restaurant(String country_restaurant) {
-        this.country_restaurant = country_restaurant;
+    public void setCountryRestaurant(String countryRestaurant) {
+        this.countryRestaurant = countryRestaurant;
     }
 
-    public String getState_restaurant() {
-        return state_restaurant;
+    public String getStateRestaurant() {
+        return stateRestaurant;
     }
 
-    public void setState_restaurant(String state_restaurant) {
-        this.state_restaurant = state_restaurant;
+    public void setStateRestaurant(String stateRestaurant) {
+        this.stateRestaurant = stateRestaurant;
     }
 
     public String getDescription() {
@@ -113,12 +175,12 @@ public class Restaurant {
         this.description = description;
     }
 
-    public String getEmail_restaurant() {
-        return email_restaurant;
+    public String getEmailRestaurant() {
+        return emailRestaurant;
     }
 
-    public void setEmail_restaurant(String email_restaurant) {
-        this.email_restaurant = email_restaurant;
+    public void setEmailRestaurant(String emailRestaurant) {
+        this.emailRestaurant = emailRestaurant;
     }
 
     public String getSpecialty() {
@@ -129,51 +191,51 @@ public class Restaurant {
         this.specialty = specialty;
     }
 
-    public String getRestaurant_url() {
-        return restaurant_url;
+    public String getRestaurantUrl() {
+        return restaurantUrl;
     }
 
-    public void setRestaurant_url(String restaurant_url) {
-        this.restaurant_url = restaurant_url;
+    public void setRestaurantUrl(String restaurantUrl) {
+        this.restaurantUrl = restaurantUrl;
     }
 
-    public Integer getId_user_id() {
-        return id_user_id;
+    public Integer getIdUserId() {
+        return idUserId;
     }
 
-    public void setId_user_id(Integer id_user_id) {
-        this.id_user_id = id_user_id;
+    public void setIdUserId(Integer idUserId) {
+        this.idUserId = idUserId;
     }
 
-    public String getCreated_at() {
-        return created_at;
+    public String getCreatedAt() {
+        return createdAt;
     }
 
-    public void setCreated_at(String created_at) {
-        this.created_at = created_at;
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
     }
 
-    public String getUpdated_at() {
-        return updated_at;
+    public String getUpdatedAt() {
+        return updatedAt;
     }
 
-    public void setUpdated_at(String updated_at) {
-        this.updated_at = updated_at;
+    public void setUpdatedAt(String updatedAt) {
+        this.updatedAt = updatedAt;
     }
 
-    public List<RestaurantImage> getImages() {
+    public List<Image> getImages() {
         return images;
     }
 
-    public void setImages(List<RestaurantImage> images) {
+    public void setImages(List<Image> images) {
         this.images = images;
     }
 
-    public List<RestaurantRatings> getRatings() {
+    public List<Rating> getRatings() {
         return ratings;
     }
 
-    public void setRatings(List<RestaurantRatings> ratings) {
+    public void setRatings(List<Rating> ratings) {
         this.ratings = ratings;
     }
 
@@ -184,4 +246,5 @@ public class Restaurant {
     public void setProducts(List<Product> products) {
         this.products = products;
     }
+
 }

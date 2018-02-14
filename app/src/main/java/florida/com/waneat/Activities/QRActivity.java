@@ -51,12 +51,9 @@ public class QRActivity extends AppCompatActivity implements QRCodeReaderView.On
                 if (ContextCompat.checkSelfPermission(QRActivity.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED)
                     ActivityCompat.requestPermissions(QRActivity.this, new String[]{Manifest.permission.CAMERA}, 50);
                 else
-                qrCodeReaderView.startCamera();
+                    qrCodeReaderView.startCamera();
             }
         });
-
-
-
     }
 
     @Override

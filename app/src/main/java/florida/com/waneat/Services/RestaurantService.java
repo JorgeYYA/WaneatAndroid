@@ -33,16 +33,18 @@ public class RestaurantService {
          */
         public void getRestaurant(int id){
             Log.d("TAG", "getRestaurant: "+id);
-            api.getResta(id, new DataStrategy.InteractDispacherGetRestaurants() {
+            api.getRestaurant(id, new DataStrategy.InteractDispacherGetRestaurants() {
                 @Override
-                public void getResta(Restaurant restaurant) {
+                public void getRestaurant(Restaurant restaurant) {
                     Toast.makeText(context, "Información del restaurante recuperada correctamente", Toast.LENGTH_SHORT).show();
-                    Log.d("getResta ", "getResta: "+restaurant.getName_restaurant());
+                    Log.d("getResta ", "getResta: entra en getRestra");
+                    Log.d("getResta ", "getResta: "+restaurant.getNameRestaurant());
                     Preferences.restaurantToString(context, restaurant);
                 }
 
                 @Override
                 public void isError(Throwable t) {
+                    Log.d("getResta ", "getResta: entra isERROR");
                     Toast.makeText(context, "Ha fallado la conexión", Toast.LENGTH_SHORT).show();
                 }
             });

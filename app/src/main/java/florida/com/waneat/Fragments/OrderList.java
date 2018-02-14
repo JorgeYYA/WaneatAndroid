@@ -149,7 +149,7 @@ public class OrderList extends Fragment {
         for(int i=0;i<products.size();i++){
 
             for(int i1=0;i1<products.get(i).getCantidad();i1++) {
-                total = total + products.get(i).getPrice_product();
+                total = total + products.get(i).getPriceProduct();
             }
 
         }

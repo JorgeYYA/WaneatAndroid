@@ -45,9 +45,9 @@ public class AdapterCartItem  extends RecyclerView.Adapter<AdapterCartItem.MyVie
         holder.remove.setTag(holder.getAdapterPosition());
 
 
-        holder.nombre.setText(producto.getName_product());
+        holder.nombre.setText(producto.getNameProduct());
         holder.cantidad.setText(Integer.toString(producto.getCantidad()));
-        holder.precio.setText(String.valueOf(producto.getPrice_product()));
+        holder.precio.setText(String.valueOf(producto.getPriceProduct()));
     }
 
     @Override

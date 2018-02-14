@@ -19,7 +19,7 @@ public abstract class DataStrategy {
     public abstract void login(DataLogin data,InteractDispacher dispacher);
     public abstract void register(RegisterData data, InteractDispacherRegister dispacher);
     public abstract void update(User user, InteractDispacherUpdate update);
-    public abstract void getResta(int id, InteractDispacherGetRestaurants dispacher);
+    public abstract void getRestaurant(int id, InteractDispacherGetRestaurants dispacher);
 
 
     public interface InteractDispacher {
@@ -38,7 +38,7 @@ public abstract class DataStrategy {
     }
 
     public interface InteractDispacherGetRestaurants{
-        void getResta(Restaurant restaurant);
+        void getRestaurant(Restaurant restaurant);
         void isError(Throwable t);
     }
 
