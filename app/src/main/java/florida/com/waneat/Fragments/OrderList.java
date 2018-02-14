@@ -57,6 +57,8 @@ public class OrderList extends Fragment {
 
     DatabaseReference bbdd;
 
+    int idUser=0;
+
     public OrderList() {
 
     }
@@ -87,7 +89,7 @@ public class OrderList extends Fragment {
         empty = (LinearLayout) v.findViewById(R.id.empty_list);
         info = (TextView) v.findViewById(R.id.info);
 
-        info.setText("Cargando...");
+        info.setText("  Cargando...\n(Podría tardar un rato)");
 
         products = new ArrayList<Product>();
         orders = new ArrayList<Order>();
@@ -114,20 +116,33 @@ public class OrderList extends Fragment {
 
         total = sumaPrecio(products);
 
-       /* Order order = new Order(1,products,"10/2/2018","Restaurante Paco Mer",total);
+       /*Order order = new Order(1,products,"10/2/2018","Restaurante Paco Mer",total);
 
         Order order2 = new Order(1,products,"10/2/2018","El Tambor Remendado",total);
         orders.add(order);
         orders.add(order2);*/
 
         //HARDCODED
-        final int idUser = 1;
+        idUser = 1;
 
         recyclerOrders = (RecyclerView) v.findViewById(R.id.recycler_orders);
 
 
         bbdd = FirebaseDatabase.getInstance().getReference("pedidos");
 
+
+        recuperaDatos();
+
+
+
+
+
+
+
+        return v;
+    }
+
+    public void recuperaDatos(){
 
         bbdd.addValueEventListener(new ValueEventListener() {
             @Override
@@ -187,15 +202,6 @@ public class OrderList extends Fragment {
 
             }
         });
-
-
-
-
-
-
-
-
-        return v;
     }
 
 

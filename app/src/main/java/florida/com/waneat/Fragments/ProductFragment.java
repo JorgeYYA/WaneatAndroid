@@ -79,7 +79,6 @@ public class ProductFragment extends Fragment {
             viewPager.setAdapter(adapter);
             indicator.setViewPager(viewPager);
             adapter.registerDataSetObserver(indicator.getDataSetObserver());
-
         }
 
         showData();
