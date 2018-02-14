@@ -10,13 +10,15 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import florida.com.waneat.Models.User;
+import florida.com.waneat.Preferences.Preferences;
 import florida.com.waneat.R;
+import florida.com.waneat.Services.UserService;
 
 
 public class UsuarioFragment extends android.support.v4.app.Fragment {
 
 
-    private EditText perfilUsu, perfilApe, perfilCorreo, perfilTlf, perfilDir, perfilCiudad, perfilPais, perfilCod;
+    private EditText perfilUsu, perfilUsername, perfilCorreo, perfilTlf, perfilDir, perfilCiudad, perfilPais, perfilCod;
     private Button buttonGuardar;
     private User user;
 
@@ -43,7 +45,7 @@ public class UsuarioFragment extends android.support.v4.app.Fragment {
         mListener.hideFloatingActionButton();
 
         this.perfilUsu = (EditText) v.findViewById(R.id.perfilUsu);
-        this.perfilApe = (EditText) v.findViewById(R.id.perfilApe);
+        this.perfilUsername = (EditText) v.findViewById(R.id.perfilUsuario);
         this.perfilCorreo = (EditText) v.findViewById(R.id.perfilCorreo);
         this.perfilTlf = (EditText) v.findViewById(R.id.perfilTlf);
         this.perfilDir = (EditText) v.findViewById(R.id.perfilDir);
@@ -54,35 +56,41 @@ public class UsuarioFragment extends android.support.v4.app.Fragment {
 
 
         this.perfilUsu.setText(user.getNombre());
-        this.perfilApe.setText(user.getApellidos());
+        this.perfilUsername.setText(user.getUsername());
         this.perfilCorreo.setText(user.getEmail());
-        this.perfilTlf.setText(user.getTlf());
-        this.perfilDir.setText(user.getDireccion());
-        this.perfilCiudad.setText(user.getCiudad());
-        this.perfilPais.setText(user.getPais());
-        this.perfilCod.setText(user.getCodigo_postal());
+        this.perfilTlf.setText(user.getContact_phone());
+        this.perfilDir.setText(user.getAddress());
+        this.perfilCiudad.setText(user.getCity());
+        this.perfilPais.setText(user.getState());
+        this.perfilCod.setText(user.getPostal_code());
 
 
 
         buttonGuardar.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 user.setNombre(perfilUsu.getText().toString());
-                user.setApellidos(perfilApe.getText().toString());
+                user.setUsername(perfilUsername.getText().toString());
                 user.setEmail(perfilCorreo.getText().toString());
-                user.setTlf(perfilTlf.getText().toString());
-                user.setDireccion(perfilDir.getText().toString());
-                user.setCiudad(perfilCiudad.getText().toString());
-                user.setPais(perfilPais.getText().toString());
-                user.setCodigo_postal(perfilCod.getText().toString());
+                user.setContact_phone(perfilTlf.getText().toString());
+                user.setAddress(perfilDir.getText().toString());
+                user.setCity(perfilCiudad.getText().toString());
+                user.setState(perfilPais.getText().toString());
+                user.setPostal_code(perfilCod.getText().toString());
 
                 perfilUsu.setText(user.getNombre());
-                perfilApe.setText(user.getApellidos());
+                perfilUsername.setText(user.getUsername());
                 perfilCorreo.setText(user.getEmail());
-                perfilTlf.setText(user.getTlf());
-                perfilDir.setText(user.getDireccion());
-                perfilCiudad.setText(user.getCiudad());
-                perfilPais.setText(user.getPais());
-                perfilCod.setText(user.getCodigo_postal());
+                perfilTlf.setText(user.getContact_phone());
+                perfilDir.setText(user.getAddress());
+                perfilCiudad.setText(user.getCity());
+                perfilPais.setText(user.getState());
+                perfilCod.setText(user.getPostal_code());
+
+                UserService service = new UserService(getContext());
+                //actualizamos el usuario en la api
+                service.updateProfile(user);
+                //actualizamos el usuario del json
+                Preferences.gsonToString(getContext(), user);
 
                 Toast.makeText(v.getContext(), "Cambios guardados", Toast.LENGTH_SHORT).show();
             }

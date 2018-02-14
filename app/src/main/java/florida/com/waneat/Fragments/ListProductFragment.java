@@ -13,16 +13,23 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.koushikdutta.ion.Ion;
+
 import java.util.ArrayList;
+import java.util.List;
 
 import florida.com.waneat.Adapters.AdapterItemList;
 import florida.com.waneat.Models.Product;
+import florida.com.waneat.Models.Restaurant;
+import florida.com.waneat.Models.RestaurantRatings;
 import florida.com.waneat.R;
+import florida.com.waneat.Services.RestaurantService;
 
 public class ListProductFragment extends Fragment {
 
@@ -30,6 +37,7 @@ public class ListProductFragment extends Fragment {
 
     private RecyclerView recyclerView;
     private AdapterItemList productAdapter;
+    private Restaurant restaurant;
 
     public ListProductFragment() {
     }
@@ -53,22 +61,36 @@ public class ListProductFragment extends Fragment {
 
         String idRestaurante = "";
 
+        //Tenemos la id del restaurante para hacer la llamada
         if(getArguments() != null){
             idRestaurante = getArguments().getString("qr");
             Toast.makeText(getContext(), idRestaurante, Toast.LENGTH_SHORT).show();
+            mListener.callApiRestaurant(Integer.parseInt(idRestaurante));
         }
 
         getActivity().setTitle("Waneat");
 
+        this.restaurant = this.mListener.getRestauranteSelected();
+
         TextView tituloRestaurante = v.findViewById(R.id.tituloRestaurante);
         TextView direccionRestaurante = v.findViewById(R.id.direccionRestaurante);
         RatingBar ratingRestaurante = v.findViewById(R.id.ruleRatingBar);
+        ImageView fotoRestaurante = v.findViewById(R.id.fotoRestaurante);
 
         //Incluimos la info del restaurante
-        tituloRestaurante.setText("Restaaurante");
-        direccionRestaurante.setText("Calle Alginet");
-        ratingRestaurante.setRating(3);
+        tituloRestaurante.setText(this.restaurant.getName_restaurant());
+        direccionRestaurante.setText(this.restaurant.getAddress_restaurant());
+        //media del ratings de los restaurantes
+        List<RestaurantRatings> ratings= this.restaurant.getRatings();
+        int count = 0;
+        float media = 0;
+        for (RestaurantRatings rate: ratings) {
+            count++;
+            media += rate.getRate();
+        }
+        ratingRestaurante.setRating(media/count);
 
+        Ion.with(fotoRestaurante).load(this.restaurant.getImages().get(0).getImage_url());
 
         this.recyclerView = (RecyclerView) v.findViewById(R.id.my_recycler_view);
 
@@ -107,7 +129,9 @@ public class ListProductFragment extends Fragment {
 
 
     public interface OnFragmentInteractionListener {
-        ArrayList<Product> getProductos();
+        List<Product> getProductos();
+        Restaurant getRestauranteSelected();
+        void callApiRestaurant(int id);
         void verProducto(int position);
         void showFloatingActionButton();
         void hideFloatingActionButton();

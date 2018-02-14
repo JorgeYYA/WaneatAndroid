@@ -109,11 +109,11 @@ public class AdapterOrderList extends RecyclerView.Adapter<AdapterOrderList.Clas
 
             if (i1 == numProd-1) {
 
-                list = list + orders.get(i).getProducts().get(i1).getNombre();
+                list = list + orders.get(i).getProducts().get(i1).getName_product();
 
             } else {
 
-                list = list + orders.get(i).getProducts().get(i1).getNombre() + ", ";
+                list = list + orders.get(i).getProducts().get(i1).getName_product() + ", ";
             }
         }
 

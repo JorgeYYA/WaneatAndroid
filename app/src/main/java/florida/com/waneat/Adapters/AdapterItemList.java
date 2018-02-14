@@ -5,7 +5,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.koushikdutta.ion.Ion;
 
 import org.w3c.dom.Text;
 
@@ -44,23 +47,22 @@ public class AdapterItemList extends RecyclerView.Adapter<AdapterItemList.MyView
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        Product producto = productosLista.get(position);
-        holder.nombre.setText(producto.getNombre());
-        holder.precio.setText(dec.format(producto.getPrecio()));
-        holder.categoria.setText(producto.getCategoria());
-
-
-        // holder.thumnail.setImageDrawable(producto.get(position).getImagenDrawable());
+        Product producto = productosLista.get(holder.getAdapterPosition());
+        Ion.with(holder.image).load(producto.getImages().get(0).getImage_url());
+        holder.nombre.setText(producto.getName_product());
+        holder.precio.setText(dec.format(producto.getPrice_product()));
+        holder.categoria.setText(producto.getCategory_product());
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         public TextView nombre, precio,categoria;
-       // public CardView cv;
+        public ImageView image;
 
         public MyViewHolder(View view) {
             super(view);
             //cv = (CardView) view.findViewById(R.id.card_view);
+            image = (ImageView) view.findViewById(R.id.thumbnail);
             nombre = (TextView) view.findViewById(R.id.dishName);
             precio = (TextView) view.findViewById(R.id.dishPrice);
             categoria = (TextView) view.findViewById(R.id.categoria);

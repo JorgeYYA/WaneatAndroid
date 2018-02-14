@@ -1,23 +1,21 @@
 package florida.com.waneat.Models;
 
 /**
- * Created by sergiomoreno on 12/2/18.
+ * Created by sergiomoreno on 14/2/18.
  */
 
-public class RestaurantRatings {
+public class RestaurantImage {
 
     private Integer id;
-    private float rate;
+    private String image_url;
     private Integer id_restaurant_id;
-    private Integer id_user_id;
     private String created_at;
     private String updated_at;
 
-    public RestaurantRatings(Integer id, float rate, Integer id_restaurant_id, Integer id_user_id, String created_at, String updated_at ) {
+    public RestaurantImage(Integer id, String image_url, Integer id_restaurant_id, String created_at, String updated_at) {
         this.id = id;
-        this.rate = rate;
+        this.image_url = image_url;
         this.id_restaurant_id = id_restaurant_id;
-        this.id_user_id = id_user_id;
         this.created_at = created_at;
         this.updated_at = updated_at;
     }
@@ -30,20 +28,12 @@ public class RestaurantRatings {
         this.id = id;
     }
 
-    public Integer getId_user_id() {
-        return id_user_id;
+    public String getImage_url() {
+        return image_url;
     }
 
-    public void setId_user_id(Integer id_user_id) {
-        this.id_user_id = id_user_id;
-    }
-
-    public float getRate() {
-        return rate;
-    }
-
-    public void setRate(float rate) {
-        this.rate = rate;
+    public void setImage_url(String image_url) {
+        this.image_url = image_url;
     }
 
     public Integer getId_restaurant_id() {

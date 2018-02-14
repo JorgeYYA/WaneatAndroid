@@ -10,6 +10,10 @@ import android.widget.LinearLayout;
 
 import com.koushikdutta.ion.Ion;
 
+import java.util.List;
+
+import florida.com.waneat.Models.Product;
+import florida.com.waneat.Models.ProductImage;
 import florida.com.waneat.R;
 
 /**
@@ -21,12 +25,12 @@ public class PhotoGalleryPagerAdapter extends PagerAdapter {
     private static final String TAG = "ImageViewPage";
     Context mContext;
     LayoutInflater mLayoutInflater;
-
+    private List<ProductImage> images;
     private String[] mResources;
 
-    public PhotoGalleryPagerAdapter(Context context, String[] resources) {
+    public PhotoGalleryPagerAdapter(Context context, List<ProductImage> images) {
         mContext = context;
-        mResources = resources;
+        this.images = images;
         mLayoutInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
@@ -47,9 +51,9 @@ public class PhotoGalleryPagerAdapter extends PagerAdapter {
 
         final ImageView iv_photo = (ImageView) itemView.findViewById(R.id.iv_photo);
 
-        if (!mResources[position].equals("")){
+        if (!images.get(position).getImage_url().equals("")){
             Ion.with(mContext)
-                    .load(mResources[position].trim())
+                    .load(images.get(position).getImage_url().trim())
                     .intoImageView(iv_photo);
         }
         container.addView(itemView);

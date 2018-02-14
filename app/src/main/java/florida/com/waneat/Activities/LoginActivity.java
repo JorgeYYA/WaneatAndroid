@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -22,6 +23,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE|WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
 
         this.service = new UserService(LoginActivity.this);
 
@@ -31,6 +33,7 @@ public class LoginActivity extends AppCompatActivity {
         login = (Button) findViewById(R.id.buttonLogin);
         registerLabel = (TextView) findViewById(R.id.registerLabel);
 
+
         if(service.isLoggedIn()){
             finish();
         }
@@ -39,6 +42,7 @@ public class LoginActivity extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 //llamar metodo service
+
                 service.signIn(editLogEmail.getText().toString(), editLogPass.getText().toString());
                 finish();
             }

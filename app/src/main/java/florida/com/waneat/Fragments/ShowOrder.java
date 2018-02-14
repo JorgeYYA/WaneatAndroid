@@ -19,7 +19,7 @@ import florida.com.waneat.R;
 public class ShowOrder extends Fragment {
 
 
-    private ArrayList<Integer> imagen;
+    private ArrayList<String> imagen;
     private Order order;
     private ArrayList<Product> products;
     private RecyclerView recyclerProd;
@@ -53,7 +53,7 @@ public class ShowOrder extends Fragment {
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_show_order, container, false);
 
-        imagen = new ArrayList<Integer>();
+        imagen = new ArrayList<String>();
 
 
 
@@ -77,7 +77,7 @@ public class ShowOrder extends Fragment {
             @Override
             public void onItemClick(Product item) {
 
-               Toast.makeText(getActivity(), item.getNombre(), Toast.LENGTH_SHORT).show();
+               Toast.makeText(getActivity(), item.getName_product(), Toast.LENGTH_SHORT).show();
 
 
             }
@@ -111,8 +111,8 @@ public class ShowOrder extends Fragment {
     public void recoverImages(){
 
         for(int i = 0;i<order.getProducts().size();i++){
-            if(order.getProducts().get(i).getImagen().get(0) != null) {
-                imagen.add(order.getProducts().get(i).getImagen().get(0));
+            if(order.getProducts().get(i).getImages().get(0) != null) {
+                imagen.add(order.getProducts().get(i).getImages().get(i).getImage_url());
             }
 
         }

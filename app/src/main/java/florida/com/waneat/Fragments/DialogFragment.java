@@ -18,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import florida.com.waneat.Adapters.AdapterCartItem;
 import florida.com.waneat.Adapters.AdapterCreditCards;
@@ -41,7 +42,7 @@ public class DialogFragment extends android.support.v4.app.DialogFragment{
 
     private int cardPos = 0;
 
-    private ArrayList<Product> cesta = new ArrayList<Product>();
+    private List<Product> cesta = new ArrayList<Product>();
 
 
     private ArrayList<CreditCard> cards = new ArrayList<>();
@@ -190,7 +191,7 @@ public class DialogFragment extends android.support.v4.app.DialogFragment{
 
 
     public interface CestaInterface {
-        ArrayList<Product> getProductosCesta();
+        List<Product> getProductosCesta();
         double getCestaPrice();
         void addProduct(int position);
         void removeProduct(int position);

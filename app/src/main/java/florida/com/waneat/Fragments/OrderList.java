@@ -75,7 +75,7 @@ public class OrderList extends Fragment {
         imagen.add(R.drawable.plato1);
         imagen.add(R.drawable.plato2);
 
-        //DEBUGGING MUY FUERTE
+        /*DEBUGGING MUY FUERTE
         Product producto = new Product(0, "spaguettis", "boloñesa, algo más", 2.0,imagen, "pasta", 3);
 
         Product producto2 = new Product(1, "macarrones", "boloñesa, algo más", 3.0, imagen,  "pasta", 2);
@@ -87,7 +87,7 @@ public class OrderList extends Fragment {
         products.add(producto);
         products.add(producto2);
         products.add(producto3);
-        products.add(producto4);
+        products.add(producto4);*/
 
         total = sumaPrecio(products);
 
@@ -149,7 +149,7 @@ public class OrderList extends Fragment {
         for(int i=0;i<products.size();i++){
 
             for(int i1=0;i1<products.get(i).getCantidad();i1++) {
-                total = total + products.get(i).getPrecio();
+                total = total + products.get(i).getPrice_product();
             }
 
         }

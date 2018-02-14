@@ -15,6 +15,7 @@ import java.util.ArrayList;
 
 import florida.com.waneat.Adapters.PhotoGalleryPagerAdapter;
 import florida.com.waneat.Models.Product;
+import florida.com.waneat.Models.Restaurant;
 import florida.com.waneat.R;
 import me.relex.circleindicator.CircleIndicator;
 
@@ -22,7 +23,7 @@ import me.relex.circleindicator.CircleIndicator;
 public class ProductFragment extends Fragment {
 
 
-    static Product pro;
+    private Product pro;
     private TextView price, name, desc,categoriaProducto;
     private Button add;
     private OnFragmentInteractionListener mListener;
@@ -56,10 +57,8 @@ public class ProductFragment extends Fragment {
 
         pro = mListener.getProductoSelected();
 
-        String imagenes [] = {"https://i.imgur.com/S3BBYyc.jpg","https://i.imgur.com/1GNHl4Q.jpg"};
-
         ViewPager viewPager = (ViewPager) v.findViewById(R.id.viewPager);
-        PhotoGalleryPagerAdapter adapter = new PhotoGalleryPagerAdapter(getContext(), imagenes);
+        PhotoGalleryPagerAdapter adapter = new PhotoGalleryPagerAdapter(getContext(), pro.getImages());
 
         if (viewPager != null) {
             CircleIndicator indicator = (CircleIndicator) v.findViewById(R.id.indicator_default);
@@ -80,7 +79,7 @@ public class ProductFragment extends Fragment {
             public void onClick(View view) {
                 mListener.addToCart(pro);
 
-                Toast.makeText(getContext(), "Añadido: "+pro.getNombre()+" a la cesta correctamente", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Añadido: "+pro.getName_product()+" a la cesta correctamente", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -90,10 +89,10 @@ public class ProductFragment extends Fragment {
 
     public void showData(){
 
-        name.setText(pro.getNombre());
-        price.setText(pro.getPrecio()+""+getResources().getText(R.string.badge));
-        desc.setText(pro.getDescripcion());
-        categoriaProducto.setText(pro.getCategoria());
+        name.setText(pro.getName_product());
+        price.setText(pro.getPrice_product()+""+getResources().getText(R.string.badge));
+        desc.setText(pro.getDescription_product());
+        categoriaProducto.setText(pro.getCategory_product());
 
     }
 
