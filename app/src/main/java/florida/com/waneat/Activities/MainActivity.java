@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity implements
         OrderList.InterfaceOrder, ShowOrder.OnFragmentInteractionListener{
 
 
+
     public ArrayList<Product> productosCesta = new ArrayList<Product>();
     public ArrayList<Product> productosLista = new ArrayList<Product>();
     ArrayList<Integer> imagen = new ArrayList<>();
@@ -61,6 +62,8 @@ public class MainActivity extends AppCompatActivity implements
     private Toolbar toolbar;
 
     RecyclerView mRecyclerView;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
