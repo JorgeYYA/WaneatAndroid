@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -25,6 +24,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import florida.com.waneat.Fragments.AboutFragment;
 import florida.com.waneat.Fragments.DialogFragment;
 import florida.com.waneat.Fragments.ListProductFragment;
 import florida.com.waneat.Fragments.OrderList;
@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity implements
         NavigationView.OnNavigationItemSelectedListener, DialogFragment.CestaInterface,
         TarjetasFragment.OnFragmentInteractionListener, UsuarioFragment.UserProfileListener,
         ListProductFragment.OnFragmentInteractionListener, ProductFragment.OnFragmentInteractionListener,
-        OrderList.InterfaceOrder, ShowOrder.OnFragmentInteractionListener{
+        OrderList.InterfaceOrder, ShowOrder.OnFragmentInteractionListener, AboutFragment.OnFragmentInteractionListener{
 
 
 
@@ -392,7 +392,8 @@ public class MainActivity extends AppCompatActivity implements
             this.service.signOut();
             startActivity(new Intent(MainActivity.this, LoginActivity.class));
         } else if (id == R.id.nav_about) {
-
+            ft.replace(R.id.fragment, AboutFragment.newInstance()).addToBackStack("MY_FRAGMENT");
+            toolbar.setBackgroundColor(ContextCompat.getColor(this, R.color.colorSecondaryDarkWaneat));
         }
 
         ft.commit();

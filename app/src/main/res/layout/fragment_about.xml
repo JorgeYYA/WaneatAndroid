@@ -1,0 +1,80 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="florida.com.waneat.Fragments.AboutFragment"
+    android:background="@color/colorPrimaryDarkWaneat">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <TextView
+        android:id="@+id/text_Info1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:padding="5dp"
+        android:text="¡DISFRUTA DE WANEAT!"
+        android:textColor="@android:color/black"
+        android:textSize="30dp" />
+
+    <TextView
+        android:id="@+id/text_Info2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:padding="5dp"
+        android:text="Waneat es una aplicación que nos ofrece una manera rápida y distinta de hacer nuestros pedidos en un restaurante. Gracias a los códigos QR implantados en todas las mesas del restaurante, el cliente podrá pedir su plato a través de la aplicación sin necesidad de esperas innecesarias ni malentendidos. Con un simple click el pedido sera enviado para su elaboración y podrá disfrutar de el nada mas este listo."
+        android:textColor="@android:color/black"
+        android:textSize="18sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="422dp"
+            android:layout_height="87dp"
+            android:layout_marginTop="100dp"
+            android:layout_weight="1"
+            android:background="@color/colorSecondaryDarkWaneat"
+            android:src="@drawable/logo" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/text_Info3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="100dp"
+                android:layout_weight="1"
+                android:background="@color/colorSecondaryWaneat"
+                android:text="Desarrollo:"
+                android:textColor="@android:color/black"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/text_Info4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="jk" />
+
+            <TextView
+                android:id="@+id/text_Info5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="fgdfgh" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
