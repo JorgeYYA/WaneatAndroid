@@ -1,19 +1,15 @@
 package florida.com.waneat.Fragments;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.AppBarLayout;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -68,6 +64,19 @@ public class ListProductFragment extends Fragment {
         tituloRestaurante.setText("Restaaurante");
         direccionRestaurante.setText("Calle Alginet");
         ratingRestaurante.setRating(3);
+
+
+        ratingRestaurante.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_UP) {
+                    DialogListProductRating ratingDialog = new DialogListProductRating();
+                    // Show Alert DialogFragment
+                    ratingDialog.show(getFragmentManager(), "Alert Dialog Fragment");
+                }
+                return true;
+            }
+        });
 
 
         this.recyclerView = (RecyclerView) v.findViewById(R.id.my_recycler_view);

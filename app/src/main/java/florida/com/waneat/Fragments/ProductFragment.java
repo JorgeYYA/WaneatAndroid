@@ -11,19 +11,16 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 
-import florida.com.waneat.Activities.MainActivity;
 import florida.com.waneat.Adapters.PhotoGalleryPagerAdapter;
-import florida.com.waneat.Models.Order;
 import florida.com.waneat.Models.Product;
 import florida.com.waneat.R;
 import me.relex.circleindicator.CircleIndicator;
-
-import static florida.com.waneat.Fragments.ShowOrder.size;
 
 
 public class ProductFragment extends Fragment {
@@ -35,6 +32,7 @@ public class ProductFragment extends Fragment {
     private TextView price, name, desc,categoriaProducto;
     private Button add;
     private OnFragmentInteractionListener mListener;
+    private RatingBar ratingRestaurant;
 
     static int size;
 
@@ -109,6 +107,19 @@ public class ProductFragment extends Fragment {
             }
         });
 
+        ratingRestaurant = (RatingBar) v.findViewById(R.id.ratingRestaurant);
+
+        ratingRestaurant.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_UP) {
+                    DialogProductRating ratingDialog = new DialogProductRating();
+                    // Show Alert DialogFragment
+                    ratingDialog.show(getFragmentManager(), "Alert Dialog Fragment");
+                }
+                return true;
+            }
+        });
 
         return v;
     }
