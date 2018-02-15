@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -40,7 +39,6 @@ import florida.com.waneat.Models.Restaurant;
 import florida.com.waneat.Models.User;
 import florida.com.waneat.Preferences.Preferences;
 import florida.com.waneat.R;
-import florida.com.waneat.Services.RestaurantService;
 import florida.com.waneat.Services.UserService;
 
 
@@ -411,12 +409,7 @@ public class MainActivity extends AppCompatActivity implements
         if (requestCode == PICK_CONTACT_REQUEST) {
             if (resultCode == RESULT_OK) {
 
-                //Le pasamos si ha entrado en activity qr o no.
-                Bundle bundle = new Bundle();
-                boolean result=data.getBooleanExtra("read_qr", false);
-                bundle.putBoolean("qr",result);
                 ListProductFragment main = ListProductFragment.newInstance();
-                main.setArguments(bundle);
 
                 //CARGAMOS LOS RESTAURANTES
                 this.restauranteSelected = Preferences.gsonToRestaurant(MainActivity.this);

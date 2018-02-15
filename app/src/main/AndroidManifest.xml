@@ -18,7 +18,8 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Activities.RegisterActivity" />
         <activity android:name=".Activities.LoginActivity" />
-        <activity android:name=".Activities.QRActivity" />
+        <activity android:name=".Activities.QRActivity" >
+        </activity>
         <activity android:name=".Activities.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

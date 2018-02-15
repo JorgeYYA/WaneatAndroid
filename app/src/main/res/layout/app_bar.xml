@@ -83,14 +83,6 @@
                             app:ci_height="10dp"
                             app:ci_width="10dp" />
 
-                        <Button
-                            android:id="@+id/scan"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:background="@drawable/border_radius"
-                            android:text="Escanear"
-                            android:visibility="gone"/>
-
                     </LinearLayout>
                 </RelativeLayout>
             </FrameLayout>
