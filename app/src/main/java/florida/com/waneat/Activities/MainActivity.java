@@ -16,6 +16,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
@@ -214,7 +215,8 @@ public class MainActivity extends AppCompatActivity implements
 
     @Override
     public void callQRActivity() {
-        startActivityForResult(new Intent(MainActivity.this, QRActivity.class), PICK_CONTACT_REQUEST);
+        Intent jeje = new Intent(MainActivity.this, QRActivity.class);
+        startActivityForResult(jeje, PICK_CONTACT_REQUEST);
     }
 
     @Override
@@ -364,16 +366,13 @@ public class MainActivity extends AppCompatActivity implements
         if (id == R.id.nav_miperfil) {
             ft.replace(R.id.fragment, UsuarioFragment.newInstance()).addToBackStack("MY_FRAGMENT");
             toolbar.setBackgroundColor(ContextCompat.getColor(this, R.color.colorSecondaryDarkWaneat));
-        }else if(id == R.id.inicio){
-            ft.replace(R.id.fragment, ListProductFragment.newInstance()).addToBackStack("MY_FRAGMENT");
-            toolbar.setBackgroundColor(ContextCompat.getColor(this, android.R.color.transparent));
-
         }else if (id == R.id.nav_mispedidos) {
-            ft.replace(R.id.fragment, OrderList.newInstance(null,null)).addToBackStack("order_list");
+            ft.replace(R.id.fragment, OrderList.newInstance(null,null)).addToBackStack("MY_FRAGMENT");
             toolbar.setBackgroundColor(ContextCompat.getColor(this, R.color.colorSecondaryDarkWaneat));
 
         } else if (id == R.id.nav_qr) {
-            startActivityForResult(new Intent(MainActivity.this, QRActivity.class), PICK_CONTACT_REQUEST);
+            ft.replace(R.id.fragment, InitialFragment.newInstance()).addToBackStack("MY_FRAGMENT");
+            toolbar.setBackgroundColor(ContextCompat.getColor(this, R.color.colorSecondaryDarkWaneat));
 
         } else if (id == R.id.nav_mistarjetas) {
             ft.replace(R.id.fragment, TarjetasFragment.newInstance()).addToBackStack("MY_FRAGMENT");
@@ -409,19 +408,26 @@ public class MainActivity extends AppCompatActivity implements
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Log.d("REQUESTCODE", "onActivityResult: "+requestCode);
+        Log.d("RESULTCODE", "onActivityResult: "+resultCode);
+
         if (requestCode == PICK_CONTACT_REQUEST) {
             if (resultCode == RESULT_OK) {
-
-                ListProductFragment main = ListProductFragment.newInstance();
 
                 //CARGAMOS LOS RESTAURANTES
                 this.restauranteSelected = Preferences.gsonToRestaurant(MainActivity.this);
                 this.productosLista = this.restauranteSelected.getProducts();
 
+                ListProductFragment main = ListProductFragment.newInstance();
+                Log.d("PRUEBA", "onActivityResult: ENTRA EN RESULT OK");
+
+
                 fm = getSupportFragmentManager();
                 FragmentTransaction ft = fm.beginTransaction();
                 ft.replace(R.id.fragment, main, "MY_FRAGMENT");
                 ft.commitAllowingStateLoss();
+            }else{
+                Log.d("PRUEBA", "onActivityResult: NO ES -1");
             }
         }
     }

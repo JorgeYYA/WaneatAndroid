@@ -69,11 +69,13 @@ public class ListProductFragment extends Fragment {
         List<Rating> ratings= this.restaurant.getRatings();
         int count = 0;
         float media = 0;
-        for (Rating rate: ratings) {
-            count++;
-            media += rate.getRate();
+        if(ratings != null){
+            for (Rating rate: ratings) {
+                count++;
+                media += rate.getRate();
+            }
+            ratingRestaurante.setRating(media/count);
         }
-        ratingRestaurante.setRating(media/count);
 
 
         // Ion.with(fotoRestaurante).load(this.restaurant.getImages().get(0).getImageUrl());

@@ -170,6 +170,7 @@ public class TarjetasFragment extends Fragment {
 
     public interface OnFragmentInteractionListener {
         void showFloatingActionButton();
+        void callQRActivity();
         void hideFloatingActionButton();
     }
 }

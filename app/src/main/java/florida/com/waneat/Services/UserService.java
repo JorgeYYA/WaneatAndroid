@@ -82,12 +82,17 @@ public class UserService {
             api.login(new DataLogin(email,pwd), new DataStrategy.InteractDispacher() {
                 @Override
                 public void login(User user) {
-                    Toast.makeText(context, "Inicio de sesión completado", Toast.LENGTH_SHORT).show();
-                    Preferences.gsonToString(context, user);
-                    Preferences.setBoolean(context, Preferences.SIGNED_IN, true);
-                    Intent i = new Intent(context,MainActivity.class);
-                    i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    context.startActivity(i);
+
+                    if(user.getEmail() != null){
+                        Toast.makeText(context, "Inicio de sesión correcto", Toast.LENGTH_SHORT).show();
+                        Preferences.gsonToString(context, user);
+                        Preferences.setBoolean(context, Preferences.SIGNED_IN, true);
+                        Intent i = new Intent(context,MainActivity.class);
+                        i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        context.startActivity(i);
+                    }else{
+                        Toast.makeText(context, "Datos incorrectos", Toast.LENGTH_SHORT).show();
+                    }
                 }
 
                 @Override

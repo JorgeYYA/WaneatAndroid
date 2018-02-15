@@ -102,8 +102,6 @@ public class OrderList extends Fragment {
         interfaz.hideFloatingActionButton();
 
         imagen = new ArrayList<>();
-        imagen.add(R.drawable.plato1);
-        imagen.add(R.drawable.plato2);
 
 
         if (!MainActivity.verificaConexion(getActivity())) {
