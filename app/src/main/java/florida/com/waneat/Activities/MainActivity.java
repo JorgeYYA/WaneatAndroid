@@ -25,6 +25,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import florida.com.waneat.Fragments.AboutFragment;
 import florida.com.waneat.Fragments.DialogFragment;
 import florida.com.waneat.Fragments.InitialFragment;
 import florida.com.waneat.Fragments.ListProductFragment;
@@ -46,7 +47,8 @@ public class MainActivity extends AppCompatActivity implements
         NavigationView.OnNavigationItemSelectedListener, DialogFragment.CestaInterface,
         TarjetasFragment.OnFragmentInteractionListener, UsuarioFragment.UserProfileListener,
         ListProductFragment.OnFragmentInteractionListener, ProductFragment.OnFragmentInteractionListener,
-        OrderList.InterfaceOrder, ShowOrder.OnFragmentInteractionListener, InitialFragment.OnFragmentInteractionListener{
+        OrderList.InterfaceOrder, ShowOrder.OnFragmentInteractionListener, InitialFragment.OnFragmentInteractionListener,
+        AboutFragment.OnFragmentInteractionListener{
 
 
 
@@ -381,7 +383,8 @@ public class MainActivity extends AppCompatActivity implements
             this.service.signOut();
             startActivity(new Intent(MainActivity.this, LoginActivity.class));
         } else if (id == R.id.nav_about) {
-
+            ft.replace(R.id.fragment, AboutFragment.newInstance()).addToBackStack("MY_FRAGMENT");
+            toolbar.setBackgroundColor(ContextCompat.getColor(this, R.color.colorSecondaryDarkWaneat));
         }
 
         ft.commit();
