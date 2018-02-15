@@ -16,6 +16,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
@@ -23,9 +24,11 @@ import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import florida.com.waneat.Fragments.AboutFragment;
 import florida.com.waneat.Fragments.DialogFragment;
+import florida.com.waneat.Fragments.InitialFragment;
 import florida.com.waneat.Fragments.ListProductFragment;
 import florida.com.waneat.Fragments.OrderList;
 import florida.com.waneat.Fragments.ProductFragment;
@@ -34,7 +37,9 @@ import florida.com.waneat.Fragments.TarjetasFragment;
 import florida.com.waneat.Fragments.UsuarioFragment;
 import florida.com.waneat.Models.Order;
 import florida.com.waneat.Models.Product;
+import florida.com.waneat.Models.Restaurant;
 import florida.com.waneat.Models.User;
+import florida.com.waneat.Preferences.Preferences;
 import florida.com.waneat.R;
 import florida.com.waneat.Services.UserService;
 
@@ -43,15 +48,18 @@ public class MainActivity extends AppCompatActivity implements
         NavigationView.OnNavigationItemSelectedListener, DialogFragment.CestaInterface,
         TarjetasFragment.OnFragmentInteractionListener, UsuarioFragment.UserProfileListener,
         ListProductFragment.OnFragmentInteractionListener, ProductFragment.OnFragmentInteractionListener,
-        OrderList.InterfaceOrder, ShowOrder.OnFragmentInteractionListener, AboutFragment.OnFragmentInteractionListener{
+        OrderList.InterfaceOrder, ShowOrder.OnFragmentInteractionListener, InitialFragment.OnFragmentInteractionListener,
+        AboutFragment.OnFragmentInteractionListener{
 
 
 
-    public ArrayList<Product> productosCesta = new ArrayList<Product>();
-    public ArrayList<Product> productosLista = new ArrayList<Product>();
-    ArrayList<Integer> imagen = new ArrayList<>();
+    public ArrayList<Product> productosCesta = new ArrayList<>();
+    public ArrayList<Product> productosLista = new ArrayList<>();
+
     public Product productoSelected = new Product();
-    static final int PICK_CONTACT_REQUEST = 1;  // The request code
+    public Restaurant restauranteSelected = new Restaurant();
+
+    static final int PICK_CONTACT_REQUEST = 1;
 
     public User userLogged = new User();
     public FloatingActionButton fab, fab_cat, fab_carne, fab_pescado, fab_pasta, fab_bebida;
@@ -78,12 +86,7 @@ public class MainActivity extends AppCompatActivity implements
         setTitle("Waneat");
 
         this.service = new UserService(MainActivity.this);
-
-        /*
-        TODO:Cambiar al metodo de api
-         */
-        this.userLogged = this.service.getUserByEmail();
-
+        this.userLogged = Preferences.gsonToUser(MainActivity.this);
 
         fab = (FloatingActionButton) findViewById(R.id.fab);
         fab_cat = (FloatingActionButton) findViewById(R.id.fab_cat);
@@ -164,11 +167,10 @@ public class MainActivity extends AppCompatActivity implements
 
 
         //metemos la info en el header
-        nombreUsuario.setText(userLogged.getNombre()+ " "+userLogged.getApellidos());
+        nombreUsuario.setText(userLogged.getNombre());
         emailUsuarioLogged.setText(userLogged.getEmail());
 
         loadFragment();
-        cargarProductosIniciales();
 
         fm = getSupportFragmentManager();
         fm.addOnBackStackChangedListener(new FragmentManager.OnBackStackChangedListener() {
@@ -209,6 +211,12 @@ public class MainActivity extends AppCompatActivity implements
             isOpen = true;
         }
 
+    }
+
+    @Override
+    public void callQRActivity() {
+        Intent jeje = new Intent(MainActivity.this, QRActivity.class);
+        startActivityForResult(jeje, PICK_CONTACT_REQUEST);
     }
 
     @Override
@@ -275,6 +283,11 @@ public class MainActivity extends AppCompatActivity implements
         }
     }
 
+    @Override
+    public Restaurant getRestauranteSelected() {
+        return this.restauranteSelected;
+    }
+
     public static boolean verificaConexion(Context ctx) {
         boolean bConectado = false;
         ConnectivityManager connec = (ConnectivityManager) ctx
@@ -291,26 +304,6 @@ public class MainActivity extends AppCompatActivity implements
         return bConectado;
     }
 
-    private void cargarProductosIniciales(){
-        //    public Product(int id, String nombre, String descripcion, float precio, ArrayList<Integer> imagen, String comentariosAdicionales, String categoria, int cantidad) {
-        imagen.add(R.drawable.plato1);
-        imagen.add(R.drawable.plato2);
-        Product producto = new Product(0, "Spaguettis", "boloñesa, algo más", 2.0, imagen, "pasta", 1);
-        //this.productosCesta.add(producto);
-        this.productosLista.add(producto);
-        Product producto2 = new Product(1, "Macarrones", "boloñesa, algo más", 3.0, imagen,  "pasta", 1);
-        //this.productosCesta.add(producto2);
-        this.productosLista.add(producto2);
-        Product producto3 = new Product(2, "Lubina", "boloñesa, algo más", 5.0, imagen,  "pescado", 1);
-        //this.productosCesta.add(producto3);
-        this.productosLista.add(producto3);
-        Product producto4 = new Product(3, "Tenera", "boloñesa, algo más", 5.0, imagen,  "carne", 1);
-        //this.productosCesta.add(producto4);
-        this.productosLista.add(producto4);
-        Product producto5 = new Product(4, "Cereales", "boloñesa, algo más", 1.0, imagen,  "Desayuno", 1);
-        //this.productosCesta.add(producto5);
-        this.productosLista.add(producto5);
-    }
 
     @Override
     public ArrayList<Product> getProductosCesta() {
@@ -321,7 +314,7 @@ public class MainActivity extends AppCompatActivity implements
     public double getCestaPrice() {
         double precioTotal = 0.0;
         for (Product pro: this.productosCesta) {
-            precioTotal += pro.getPrecio()*pro.getCantidad();
+            precioTotal += pro.getPriceProduct()*pro.getCantidad();
         }
         return precioTotal;
     }
@@ -334,14 +327,14 @@ public class MainActivity extends AppCompatActivity implements
     private void loadFragment(){
         fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
-        ft.replace(R.id.fragment, new ListProductFragment());
+        ft.replace(R.id.fragment, new InitialFragment());
         ft.addToBackStack("MY_FRAGMENT");
         ft.commit();
-        toolbar.setBackgroundColor(ContextCompat.getColor(this, android.R.color.transparent));
+        toolbar.setBackgroundColor(ContextCompat.getColor(this, R.color.colorSecondaryDarkWaneat));
     }
 
     @Override
-    public ArrayList<Product> getProductos() {
+    public List<Product> getProductos() {
         return this.productosLista;
     }
 
@@ -373,16 +366,13 @@ public class MainActivity extends AppCompatActivity implements
         if (id == R.id.nav_miperfil) {
             ft.replace(R.id.fragment, UsuarioFragment.newInstance()).addToBackStack("MY_FRAGMENT");
             toolbar.setBackgroundColor(ContextCompat.getColor(this, R.color.colorSecondaryDarkWaneat));
-        }else if(id == R.id.inicio){
-            ft.replace(R.id.fragment, ListProductFragment.newInstance()).addToBackStack("MY_FRAGMENT");
-            toolbar.setBackgroundColor(ContextCompat.getColor(this, android.R.color.transparent));
-
         }else if (id == R.id.nav_mispedidos) {
-            ft.replace(R.id.fragment, OrderList.newInstance(null,null)).addToBackStack("order_list");
+            ft.replace(R.id.fragment, OrderList.newInstance(null,null)).addToBackStack("MY_FRAGMENT");
             toolbar.setBackgroundColor(ContextCompat.getColor(this, R.color.colorSecondaryDarkWaneat));
 
         } else if (id == R.id.nav_qr) {
-            startActivityForResult(new Intent(MainActivity.this, QRActivity.class), PICK_CONTACT_REQUEST);
+            ft.replace(R.id.fragment, InitialFragment.newInstance()).addToBackStack("MY_FRAGMENT");
+            toolbar.setBackgroundColor(ContextCompat.getColor(this, R.color.colorSecondaryDarkWaneat));
 
         } else if (id == R.id.nav_mistarjetas) {
             ft.replace(R.id.fragment, TarjetasFragment.newInstance()).addToBackStack("MY_FRAGMENT");
@@ -418,18 +408,26 @@ public class MainActivity extends AppCompatActivity implements
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Log.d("REQUESTCODE", "onActivityResult: "+requestCode);
+        Log.d("RESULTCODE", "onActivityResult: "+resultCode);
+
         if (requestCode == PICK_CONTACT_REQUEST) {
             if (resultCode == RESULT_OK) {
-                Bundle bundle = new Bundle();
-                String result=data.getStringExtra("read_qr");
-                bundle.putString("qr",result);
+
+                //CARGAMOS LOS RESTAURANTES
+                this.restauranteSelected = Preferences.gsonToRestaurant(MainActivity.this);
+                this.productosLista = this.restauranteSelected.getProducts();
+
                 ListProductFragment main = ListProductFragment.newInstance();
-                main.setArguments(bundle);
+                Log.d("PRUEBA", "onActivityResult: ENTRA EN RESULT OK");
+
 
                 fm = getSupportFragmentManager();
                 FragmentTransaction ft = fm.beginTransaction();
                 ft.replace(R.id.fragment, main, "MY_FRAGMENT");
                 ft.commitAllowingStateLoss();
+            }else{
+                Log.d("PRUEBA", "onActivityResult: NO ES -1");
             }
         }
     }

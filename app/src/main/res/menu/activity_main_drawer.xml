@@ -7,9 +7,9 @@
     <group android:checkableBehavior="single">
 
         <item
-            android:id="@+id/inicio"
-            android:icon="@drawable/inicio"
-            android:title="Inicio"/>
+            android:id="@+id/nav_qr"
+            android:icon="@drawable/qr"
+            android:title="Hacer pedido" />
 
         <item
             android:id="@+id/nav_miperfil"
@@ -21,10 +21,7 @@
             android:icon="@drawable/mispedidos"
             android:title="Mis pedidos" />
 
-        <item
-            android:id="@+id/nav_qr"
-            android:icon="@drawable/qr"
-            android:title="Escanear QR" />
+
 
         <item
             android:id="@+id/nav_mistarjetas"

@@ -13,21 +13,22 @@ import android.widget.LinearLayout;
 import com.koushikdutta.ion.Ion;
 
 import java.util.List;
-import florida.com.waneat.Models.ImageProduct;
+
+import florida.com.waneat.Models.Image;
 import florida.com.waneat.R;
 
 /**
  * Created by sergiomoreno on 13/2/18.
  */
 
-public class PhotoGalleryPagerAdapter extends PagerAdapter {
+public class PhotoGalleryPager extends PagerAdapter {
 
     private static final String TAG = "ImageViewPage";
     Context mContext;
     LayoutInflater mLayoutInflater;
-    private List<ImageProduct> images;
+    private List<Image> images;
 
-    public PhotoGalleryPagerAdapter(Context context, List<ImageProduct> images) {
+    public PhotoGalleryPager(Context context, List<Image> images) {
         mContext = context;
         this.images = images;
         mLayoutInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);

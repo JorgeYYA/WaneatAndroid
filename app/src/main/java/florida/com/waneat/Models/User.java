@@ -5,44 +5,40 @@ package florida.com.waneat.Models;
  */
 
 public class User {
-
-    private String nombre;
-    private String apellidos;
-    private String direccion;
-    private String email;
-    private String password;
+    
     private Integer id;
-    private String ciudad;
-    private String pais;
-    private String codigo_postal;
-    private String tlf;
+    private String name;
+    private String username;
+    private String address;
+    private String email;
+    private String city;
+    private String state;
+    private String postal_code;
+    private String nif;
+    private String contact_phone;
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "nombre='" + nombre + '\'' +
-                ", apellidos='" + apellidos + '\'' +
-                ", direccion='" + direccion + '\'' +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                ", id=" + id +
-                ", ciudad='" + ciudad + '\'' +
-                ", pais='" + pais + '\'' +
-                ", codigo_postal='" + codigo_postal + '\'' +
-                ", tlf='" + tlf + '\'' +
-                '}';
-    }
-
-    public User(String nombre, String apellidos, String direccion, String email, String password) {
-        this.nombre = nombre;
-        this.apellidos = apellidos;
-        this.direccion = direccion;
+    public User(Integer id, String name, String username, String address, String email, String city, String state, String postal_code, String nif, String contact_phone) {
+        this.id = id;
+        this.name = name;
+        this.username = username;
+        this.address = address;
         this.email = email;
-        this.password = password;
+        this.city = city;
+        this.state = state;
+        this.postal_code = postal_code;
+        this.nif = nif;
+        this.contact_phone = contact_phone;
     }
 
     public User() {}
 
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
     public Integer getId() {
         return id;
@@ -52,60 +48,53 @@ public class User {
         this.id = id;
     }
 
-    public String getCiudad() {
-        return ciudad;
+    public String getCity() {
+        return city;
     }
 
-    public void setCiudad(String ciudad) {
-        this.ciudad = ciudad;
+    public void setCity(String city) {
+        this.city = city;
     }
 
-    public String getPais() {
-        return pais;
+    public String getState() {
+        return state;
     }
 
-    public void setPais(String pais) {
-        this.pais = pais;
+    public void setState(String state) {
+        this.state = state;
     }
 
-    public String getCodigo_postal() {
-        return codigo_postal;
+    public String getPostal_code() {
+        return postal_code;
     }
 
-    public void setCodigo_postal(String codigo_postal) {
-        this.codigo_postal = codigo_postal;
+    public void setPostal_code(String postal_code) {
+        this.postal_code = postal_code;
     }
 
     public String getNombre() {
-        return nombre;
+        return name;
     }
 
     public void setNombre(String nombre) {
-        this.nombre = nombre;
+        this.name = nombre;
     }
 
-    public String getApellidos() {
-        return apellidos;
+
+    public String getAddress() {
+        return address;
     }
 
-    public void setApellidos(String apellidos) {
-        this.apellidos = apellidos;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
-    public String getDireccion() {
-        return direccion;
+    public String getContact_phone() {
+        return contact_phone;
     }
 
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
-    }
-
-    public String getTlf() {
-        return tlf;
-    }
-
-    public void setTlf(String tlf) {
-        this.tlf = tlf;
+    public void setContact_phone(String contact_phone) {
+        this.contact_phone = contact_phone;
     }
 
     public String getEmail() {
@@ -116,13 +105,19 @@ public class User {
         this.email = email;
     }
 
-    public String getPassword() {
-        return password;
+    public String getName() {
+        return name;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setName(String name) {
+        this.name = name;
     }
 
+    public String getNif() {
+        return nif;
+    }
 
+    public void setNif(String nif) {
+        this.nif = nif;
+    }
 }

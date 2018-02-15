@@ -47,7 +47,7 @@ public class OrderList extends Fragment {
 
     ArrayList<Product> products;
 
-    static RecyclerView recyclerOrders;
+    RecyclerView recyclerOrders;
 
     double total;
 
@@ -58,7 +58,7 @@ public class OrderList extends Fragment {
     private InterfaceOrder interfaz;
 
 
-    DatabaseReference bbdd;
+    DatabaseReference bbdd = FirebaseDatabase.getInstance().getReference();
 
     int idUser=0;
 
@@ -97,25 +97,15 @@ public class OrderList extends Fragment {
         products = new ArrayList<Product>();
         orders = new ArrayList<Order>();
 
+        recyclerOrders = (RecyclerView)v.findViewById(R.id.recycler_orders);
+
         interfaz.hideFloatingActionButton();
 
         imagen = new ArrayList<>();
-        imagen.add(R.drawable.plato1);
-        imagen.add(R.drawable.plato2);
 
-        //HARDCODED
-        idUser = 1;
-
-        recyclerOrders = (RecyclerView) v.findViewById(R.id.recycler_orders);
-
-
-        bbdd = FirebaseDatabase.getInstance().getReference("pedidos");
 
         if (!MainActivity.verificaConexion(getActivity())) {
-
             info.setText("No se ha podido conectar, \ncomprueba tu conexión a internet");
-
-
         }else {
 
             recuperaDatos();
@@ -216,7 +206,7 @@ public class OrderList extends Fragment {
         for(int i=0;i<products.size();i++){
 
             for(int i1=0;i1<products.get(i).getCantidad();i1++) {
-                total = total + products.get(i).getPrecio();
+                total = total + products.get(i).getPriceProduct();
             }
 
         }

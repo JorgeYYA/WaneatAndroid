@@ -14,8 +14,12 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageSwitcher;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.koushikdutta.ion.Ion;
+
 import java.util.ArrayList;
 
 import florida.com.waneat.Activities.MainActivity;
@@ -30,21 +34,12 @@ import static florida.com.waneat.Fragments.ShowOrder.size;
 
 public class ShowOrder extends Fragment {
 
-
-    public static boolean pause;
-
-    private ArrayList<String> imagen;
     private Order order;
     private ArrayList<Product> products;
     private RecyclerView recyclerProd;
     private TextView resName,date,totalPrize;
-
+    private ImageView imagenOrder;
     private OnFragmentInteractionListener mListener;
-
-
-
-    static int position;
-
     static int size;
 
     public ShowOrder() {
@@ -69,19 +64,8 @@ public class ShowOrder extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_show_order, container, false);
-
-
-        String imagenes [] = {"https://i.imgur.com/S3BBYyc.jpg","https://i.imgur.com/1GNHl4Q.jpg"};
-
-
-        imagen = new ArrayList<String>();
-
-        //asd
-        size = imagenes.length;
-
 
 
         mListener.hideFloatingActionButton();
@@ -89,7 +73,7 @@ public class ShowOrder extends Fragment {
         resName = (TextView) v.findViewById(R.id.res_name);
         date = (TextView) v.findViewById(R.id.order_date);
         totalPrize = (TextView) v.findViewById(R.id.prize);
-
+        imagenOrder = (ImageView) v.findViewById(R.id.imagen);
         products = order.getProducts();
 
         recyclerProd = (RecyclerView) v.findViewById(R.id.product_list);
@@ -107,7 +91,7 @@ public class ShowOrder extends Fragment {
             @Override
             public void onItemClick(Product item) {
 
-               Toast.makeText(getActivity(), item.getNombre(), Toast.LENGTH_SHORT).show();
+               Toast.makeText(getActivity(), item.getNameProduct(), Toast.LENGTH_SHORT).show();
 
 
             }
@@ -119,62 +103,21 @@ public class ShowOrder extends Fragment {
 
         recyclerProd.invalidate();
 
-        ViewPager viewPager = (ViewPager) v.findViewById(R.id.viewPager);
-        PhotoGalleryPagerAdapter adapter = new PhotoGalleryPagerAdapter(getContext(), imagenes);
-
-        if (viewPager != null) {
-            CircleIndicator indicator = (CircleIndicator) v.findViewById(R.id.indicator_default);
-            viewPager.setAdapter(adapter);
-            indicator.setViewPager(viewPager);
-            adapter.registerDataSetObserver(indicator.getDataSetObserver());
-
-        }
-
-
-
-        //Recoge la primera imagen de cada producto del pedido
-        //recoverImages();
-
 
         //Muestra por pantalla los datos del pedido
         resName.setText(order.getResName());
         date.setText(order.getDate());
         totalPrize.setText(order.getTotal()+"");
-
+        Ion.with(imagenOrder).load(order.getProducts().get(0).getImages().get(0).getImageUrl());
 
         //TODO: Cambiar a order num
         getActivity().setTitle("Pedido Num: 1");
-
-        showImagesOrder sm = new showImagesOrder(viewPager, order);
-        sm.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-
-
-        viewPager.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-
-                ShowOrder.pause = true;
-
-                return false;
-            }
-        });
 
 
         return v;
     }
 
 
-    public void recoverImages(){
-
-        for(int i = 0;i<order.getProducts().size();i++){
-            if(order.getProducts().get(i).getImagen().get(0) != null) {
-                //imagen.add(order.getProducts().get(i).getImagen().get(0));
-
-            }
-
-        }
-
-    }
 
 
     @Override
@@ -201,69 +144,4 @@ public class ShowOrder extends Fragment {
     }
 
     
-}
-
-
-class showImagesOrder extends AsyncTask<ViewPager, ArrayList<String>, Order> {
-    ViewPager imageSwitcher;
-    Order pro;
-
-
-    public showImagesOrder(ViewPager imageSwitcher, Order pro){
-        this.imageSwitcher = imageSwitcher;
-        this.pro = pro;
-    }
-
-    @Override
-    protected Order doInBackground(ViewPager... imageSwitchers) {
-
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        Log.d("pausa","nomrmal");
-        //comprueba si se ha interactuado con la imagen recientemente y en tal caso pausa la ejecucion del thread
-        if (ShowOrder.pause) {
-
-            Log.d("pausa","pausado");
-
-            try {
-                Thread.sleep(5000);
-                ShowOrder.pause = false;
-                Log.d("pausa","pausado"+ShowOrder.pause);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-
-        }
-
-
-        return null;
-    }
-
-
-    @Override
-    protected void onPostExecute(Order pro) {
-        super.onPostExecute(pro);
-
-
-        ArrayList<String> asd = null;
-
-        for (int i = 0; i < 1; i++) {
-
-            if (imageSwitcher.getCurrentItem()<size-1) {
-
-                imageSwitcher.setCurrentItem(imageSwitcher.getCurrentItem() + 1);
-            }else{
-
-                imageSwitcher.setCurrentItem(0);
-
-
-            }
-            showImagesOrder sm = new showImagesOrder(imageSwitcher, pro);
-            sm.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-        }
-    }
 }

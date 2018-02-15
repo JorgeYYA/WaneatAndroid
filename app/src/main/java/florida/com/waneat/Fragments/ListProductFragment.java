@@ -3,6 +3,7 @@ package florida.com.waneat.Fragments;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -10,15 +11,21 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+
+import android.widget.Button;
+
 import android.widget.RatingBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import florida.com.waneat.Adapters.AdapterItemList;
+import florida.com.waneat.Adapters.PhotoGalleryPager;
 import florida.com.waneat.Models.Product;
+import florida.com.waneat.Models.Rating;
+import florida.com.waneat.Models.Restaurant;
 import florida.com.waneat.R;
+import me.relex.circleindicator.CircleIndicator;
 
 public class ListProductFragment extends Fragment {
 
@@ -26,6 +33,8 @@ public class ListProductFragment extends Fragment {
 
     private RecyclerView recyclerView;
     private AdapterItemList productAdapter;
+    private Restaurant restaurant;
+    private Context context;
 
     public ListProductFragment() {
     }
@@ -47,24 +56,42 @@ public class ListProductFragment extends Fragment {
 
         mListener.showFloatingActionButton();
 
-        String idRestaurante = "";
-
-        if(getArguments() != null){
-            idRestaurante = getArguments().getString("qr");
-            Toast.makeText(getContext(), idRestaurante, Toast.LENGTH_SHORT).show();
-        }
-
-        getActivity().setTitle("Waneat");
-
         TextView tituloRestaurante = v.findViewById(R.id.tituloRestaurante);
         TextView direccionRestaurante = v.findViewById(R.id.direccionRestaurante);
         RatingBar ratingRestaurante = v.findViewById(R.id.ruleRatingBar);
 
-        //Incluimos la info del restaurante
-        tituloRestaurante.setText("Restaaurante");
-        direccionRestaurante.setText("Calle Alginet");
-        ratingRestaurante.setRating(3);
 
+        this.restaurant = this.mListener.getRestauranteSelected();
+
+
+
+        //Incluimos la info del restaurante
+        tituloRestaurante.setText(this.restaurant.getNameRestaurant());
+        direccionRestaurante.setText(this.restaurant.getAddressRestaurant());
+        //media del ratings de los restaurantes
+        List<Rating> ratings= this.restaurant.getRatings();
+        int count = 0;
+        float media = 0;
+        if(ratings != null){
+            for (Rating rate: ratings) {
+                count++;
+                media += rate.getRate();
+            }
+            ratingRestaurante.setRating(media/count);
+        }
+
+
+        // Ion.with(fotoRestaurante).load(this.restaurant.getImages().get(0).getImageUrl());
+
+        ViewPager viewPager = (ViewPager) v.findViewById(R.id.viewPager);
+        PhotoGalleryPager adapter = new PhotoGalleryPager(getContext(), restaurant.getImages());
+
+        if (viewPager != null) {
+            CircleIndicator indicator = (CircleIndicator) v.findViewById(R.id.indicator_default);
+            viewPager.setAdapter(adapter);
+            indicator.setViewPager(viewPager);
+            adapter.registerDataSetObserver(indicator.getDataSetObserver());
+        }
 
         ratingRestaurante.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -93,6 +120,9 @@ public class ListProductFragment extends Fragment {
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(productAdapter);
 
+        getActivity().setTitle("Waneat");
+
+
         return v;
     }
 
@@ -102,6 +132,8 @@ public class ListProductFragment extends Fragment {
         super.onAttach(context);
         if (context instanceof OnFragmentInteractionListener) {
             mListener = (OnFragmentInteractionListener) context;
+            this.context = context;
+
         } else {
             throw new RuntimeException(context.toString()
                     + " must implement OnFragmentInteractionListener");
@@ -116,7 +148,8 @@ public class ListProductFragment extends Fragment {
 
 
     public interface OnFragmentInteractionListener {
-        ArrayList<Product> getProductos();
+        List<Product> getProductos();
+        Restaurant getRestauranteSelected();
         void verProducto(int position);
         void showFloatingActionButton();
         void hideFloatingActionButton();

@@ -32,13 +32,13 @@ public class AdapterFinalizarCompra  extends RecyclerView.Adapter<AdapterFinaliz
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        Product producto = productosLista.get(position);
+        Product producto = productosLista.get(holder.getAdapterPosition());
         //le añadimos el id en el que se clicka al boton de añadir y de borrar respectivamente
 
 
         holder.cantidad.setText(Integer.toString(producto.getCantidad()));
-        holder.nombre_producto.setText(producto.getNombre());
-        holder.precio.setText(String.valueOf(producto.getPrecio())+"€");
+        holder.nombre_producto.setText(producto.getNameProduct());
+        holder.precio.setText(String.valueOf(producto.getPriceProduct())+"€");
     }
 
     @Override

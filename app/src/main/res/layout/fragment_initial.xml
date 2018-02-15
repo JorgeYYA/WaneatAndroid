@@ -1,0 +1,26 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_gravity="center"
+    android:gravity="center"
+    android:background="#687080"
+    tools:context="florida.com.waneat.Fragments.InitialFragment">
+
+
+    <ImageView
+        android:layout_weight="5"
+        android:id="@+id/qrScan"
+        android:layout_width="match_parent"
+        android:layout_height="0dp" />
+
+    <Button
+        android:id="@+id/scanButton"
+        android:layout_weight="0.5"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@drawable/border_radius"
+        android:text="Escanea el QR"/>
+
+</LinearLayout>

@@ -30,7 +30,6 @@ public class IntroductionActivity extends AppCompatActivity {
         this.service = new UserService(IntroductionActivity.this);
 
         if(service.isLoggedIn()){
-            service.getUserByEmail();
             startActivity(new Intent(IntroductionActivity.this, SplashActivity.class));
         }
 

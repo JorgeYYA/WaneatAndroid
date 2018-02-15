@@ -1,97 +1,170 @@
 package florida.com.waneat.Models;
 
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.DrawableWrapper;
+/**
+ * Created by sergiomoreno on 14/2/18.
+ */
+
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 import com.google.firebase.database.Exclude;
 
 import java.util.ArrayList;
 
-/**
- * Created by sergiomoreno on 5/2/18.
- */
+import java.util.List;
 
 public class Product implements Parcelable {
 
-    private int id;
-    private String nombre;
-    private String descripcion;
-    private double precio;
-    private ArrayList<Integer> imagen;
-    private Drawable ImagenDrawable;
-    private String categoria;
+    @SerializedName("id")
+    @Expose
+    private Integer id;
+    @SerializedName("price_product")
+    @Expose
+    private Double priceProduct;
+    @SerializedName("name_product")
+    @Expose
+    private String nameProduct;
+    @SerializedName("description_product")
+    @Expose
+    private String descriptionProduct;
+    @SerializedName("category_product")
+    @Expose
+    private String categoryProduct;
+    @SerializedName("id_restaurant_id")
+    @Expose
+    private Integer idRestaurantId;
+    @SerializedName("created_at")
+    @Expose
+    private String createdAt;
+    @SerializedName("updated_at")
+    @Expose
+    private String updatedAt;
+    @SerializedName("images")
+    @Expose
+    private List<ImageProduct> images = null;
+    @SerializedName("ratings")
+    @Expose
+    private List<RatingProduct> ratings = null;
+
     private int cantidad;
 
-    public Product(int id, String nombre, String descripcion, double precio, ArrayList<Integer> imagen, String categoria, int cantidad) {
-        this.id = id;
-        this.nombre = nombre;
-        this.descripcion = descripcion;
-        this.precio = precio;
-        this.imagen = imagen;
-        this.categoria = categoria;
-        this.cantidad = cantidad;
+    /**
+     * No args constructor for use in serialization
+     *
+     */
+    public Product() {
     }
 
-    public Product(int id,String nombre, double precio) {
-
+    /**
+     *
+     * @param updatedAt
+     * @param id
+     * @param idRestaurantId
+     * @param nameProduct
+     * @param categoryProduct
+     * @param createdAt
+     * @param descriptionProduct
+     * @param images
+     * @param priceProduct
+     * @param ratings
+     */
+    public Product(Integer id, Double priceProduct, String nameProduct, String descriptionProduct, String categoryProduct, Integer idRestaurantId, String createdAt, String updatedAt, List<ImageProduct> images, List<RatingProduct> ratings) {
+        super();
         this.id = id;
-        this.nombre = nombre;
-        this.precio = precio;
-
+        this.priceProduct = priceProduct;
+        this.nameProduct = nameProduct;
+        this.descriptionProduct = descriptionProduct;
+        this.categoryProduct = categoryProduct;
+        this.idRestaurantId = idRestaurantId;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+        this.images = images;
+        this.ratings = ratings;
     }
 
-    public Product(){}
-
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public String getNombre() {
-        return nombre;
+    public Double getPriceProduct() {
+        return priceProduct;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setPriceProduct(Double priceProduct) {
+        this.priceProduct = priceProduct;
     }
 
-    public String getDescripcion() {
-        return descripcion;
+    public String getNameProduct() {
+        return nameProduct;
     }
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+    public void setNameProduct(String nameProduct) {
+        this.nameProduct = nameProduct;
     }
 
-    public double getPrecio() {
-        return precio;
+    public String getDescriptionProduct() {
+        return descriptionProduct;
     }
 
-    public void setPrecio(double precio) {
-        this.precio = precio;
+    public void setDescriptionProduct(String descriptionProduct) {
+        this.descriptionProduct = descriptionProduct;
+    }
+
+    public String getCategoryProduct() {
+        return categoryProduct;
+    }
+
+    public void setCategoryProduct(String categoryProduct) {
+        this.categoryProduct = categoryProduct;
+    }
+
+    public Integer getIdRestaurantId() {
+        return idRestaurantId;
+    }
+
+    public void setIdRestaurantId(Integer idRestaurantId) {
+        this.idRestaurantId = idRestaurantId;
+    }
+
+    public String getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public String getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(String updatedAt) {
+        this.updatedAt = updatedAt;
     }
 
     @Exclude
-    public ArrayList<Integer> getImagen() {
-        return imagen;
+    public List<ImageProduct> getImages() {
+        return images;
     }
 
-    public void setImagen(ArrayList<Integer> imagen) {
-        this.imagen = imagen;
+    public void setImages(List<ImageProduct> images) {
+        this.images = images;
     }
 
-    public String getCategoria() {
-        return categoria;
+    public List<RatingProduct> getRatings() {
+        return ratings;
     }
 
-    public void setCategoria(String categoria) {
-        this.categoria = categoria;
+    public void setRatings(List<RatingProduct> ratings) {
+        this.ratings = ratings;
     }
+
 
     public int getCantidad() {
         return cantidad;
@@ -102,18 +175,27 @@ public class Product implements Parcelable {
     }
 
     protected Product(Parcel in) {
-        id = in.readInt();
-        nombre = in.readString();
-        descripcion = in.readString();
-        precio = in.readDouble();
+        id = in.readByte() == 0x00 ? null : in.readInt();
+        priceProduct = in.readByte() == 0x00 ? null : in.readDouble();
+        nameProduct = in.readString();
+        descriptionProduct = in.readString();
+        categoryProduct = in.readString();
+        idRestaurantId = in.readByte() == 0x00 ? null : in.readInt();
+        createdAt = in.readString();
+        updatedAt = in.readString();
         if (in.readByte() == 0x01) {
-            imagen = new ArrayList<Integer>();
-            in.readList(imagen, Integer.class.getClassLoader());
+            images = new ArrayList<ImageProduct>() {
+            };
+            in.readList(images, ImageProduct.class.getClassLoader());
         } else {
-            imagen = null;
+            images = null;
         }
-        ImagenDrawable = (Drawable) in.readValue(Drawable.class.getClassLoader());
-        categoria = in.readString();
+        if (in.readByte() == 0x01) {
+            ratings = new ArrayList<RatingProduct>();
+            in.readList(ratings, RatingProduct.class.getClassLoader());
+        } else {
+            ratings = null;
+        }
         cantidad = in.readInt();
     }
 
@@ -124,18 +206,41 @@ public class Product implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(id);
-        dest.writeString(nombre);
-        dest.writeString(descripcion);
-        dest.writeDouble(precio);
-        if (imagen == null) {
+        if (id == null) {
             dest.writeByte((byte) (0x00));
         } else {
             dest.writeByte((byte) (0x01));
-            dest.writeList(imagen);
+            dest.writeInt(id);
         }
-        dest.writeValue(ImagenDrawable);
-        dest.writeString(categoria);
+        if (priceProduct == null) {
+            dest.writeByte((byte) (0x00));
+        } else {
+            dest.writeByte((byte) (0x01));
+            dest.writeDouble(priceProduct);
+        }
+        dest.writeString(nameProduct);
+        dest.writeString(descriptionProduct);
+        dest.writeString(categoryProduct);
+        if (idRestaurantId == null) {
+            dest.writeByte((byte) (0x00));
+        } else {
+            dest.writeByte((byte) (0x01));
+            dest.writeInt(idRestaurantId);
+        }
+        dest.writeString(createdAt);
+        dest.writeString(updatedAt);
+        if (images == null) {
+            dest.writeByte((byte) (0x00));
+        } else {
+            dest.writeByte((byte) (0x01));
+            dest.writeList(images);
+        }
+        if (ratings == null) {
+            dest.writeByte((byte) (0x00));
+        } else {
+            dest.writeByte((byte) (0x01));
+            dest.writeList(ratings);
+        }
         dest.writeInt(cantidad);
     }
 

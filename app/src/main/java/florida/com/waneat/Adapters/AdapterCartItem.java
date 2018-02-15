@@ -41,13 +41,13 @@ public class AdapterCartItem  extends RecyclerView.Adapter<AdapterCartItem.MyVie
     public void onBindViewHolder(MyViewHolder holder, int position) {
         Product producto = productosLista.get(position);
         //le añadimos el id en el que se clicka al boton de añadir y de borrar respectivamente
-        holder.add.setTag(position);
-        holder.remove.setTag(position);
+        holder.add.setTag(holder.getAdapterPosition());
+        holder.remove.setTag(holder.getAdapterPosition());
 
 
-        holder.nombre.setText(producto.getNombre());
+        holder.nombre.setText(producto.getNameProduct());
         holder.cantidad.setText(Integer.toString(producto.getCantidad()));
-        holder.precio.setText(String.valueOf(producto.getPrecio()));
+        holder.precio.setText(String.valueOf(producto.getPriceProduct()));
     }
 
     @Override

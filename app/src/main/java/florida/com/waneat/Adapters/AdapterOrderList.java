@@ -24,6 +24,9 @@ import florida.com.waneat.R;
 
 public class AdapterOrderList extends RecyclerView.Adapter<AdapterOrderList.ClaseViewHolder>{
 
+    private final OnItemClickListener listener;
+    ArrayList<Order> orders = new ArrayList<>();
+
     public static class ClaseViewHolder extends RecyclerView.ViewHolder {
 
         TextView resName, date, prodList, totalPrize;
@@ -58,19 +61,17 @@ public class AdapterOrderList extends RecyclerView.Adapter<AdapterOrderList.Clas
 
 
 
-    private final OnItemClickListener listener;
-    ArrayList<Order> orders;
 
-        public AdapterOrderList(ArrayList<Order> orders, OnItemClickListener listener){
-            this.orders = orders;
-            this.listener = listener;
-        }
+    public AdapterOrderList(ArrayList<Order> orders, OnItemClickListener listener){
+        this.orders = orders;
+        this.listener = listener;
+    }
 
 
 
     @Override
     public int getItemCount() {
-        return orders.size();
+        return (orders == null) ? 0 : orders.size();
     }
 
     @Override
@@ -96,32 +97,35 @@ public class AdapterOrderList extends RecyclerView.Adapter<AdapterOrderList.Clas
         ViewHolder.date.setText(orders.get(i).getDate());
         ViewHolder.totalPrize.setText(orders.get(i).getTotal()+"");
 
-        if (orders.get(i).getProducts().size()>=3){
-            numProd = 3;
+        if(orders.get(i).getProducts() != null){
+            if (orders.get(i).getProducts().size()>=3){
+                numProd = 3;
 
-        }else{
+            }else{
 
-            numProd = orders.get(i).getProducts().size();
+                numProd = orders.get(i).getProducts().size();
 
-        }
+            }
 
-        for(int i1=0;i1<numProd;i1++) {
+            for(int i1=0;i1<numProd;i1++) {
 
-            if (i1 == numProd-1) {
+                if (i1 == numProd-1) {
 
-                list = list + orders.get(i).getProducts().get(i1).getNombre();
+                    list = list + orders.get(i).getProducts().get(i1).getNameProduct();
 
-            } else {
+                } else {
 
-                list = list + orders.get(i).getProducts().get(i1).getNombre() + ", ";
+                    list = list + orders.get(i).getProducts().get(i1).getNameProduct() + ", ";
+                }
+            }
+
+            if (orders.get(i).getProducts().size()>3){
+
+                list = list +" ...";
+
             }
         }
 
-        if (orders.get(i).getProducts().size()>3){
-
-            list = list +" ...";
-
-        }
 
 
 

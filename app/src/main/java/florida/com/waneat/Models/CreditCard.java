@@ -5,6 +5,8 @@ package florida.com.waneat.Models;
  */
 
 public class CreditCard {
+    private int idUser;
+    private int id;
     private String creditCardNumber;
     private String creditCardHolderName;
     private String creditCardMonthDate;
@@ -59,6 +61,22 @@ public class CreditCard {
 
     public void setCreditCardCvc(int creditCardCvc) {
         this.creditCardCvc = creditCardCvc;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getIdUser() {
+        return idUser;
+    }
+
+    public void setIdUser(int idUser) {
+        this.idUser = idUser;
     }
 
     @Override
