@@ -16,22 +16,22 @@
 
     <TextView
         android:id="@+id/nombre_producto"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
-        android:layout_weight="1"
-        android:text="Macarrones"
-        android:textColor="@android:color/darker_gray"
-        android:textSize="15sp" />
+        android:layout_weight="27"
+        android:text="Macarronesasdasdassdasdasdsdasasdasda"
+        android:textAppearance="@style/TextAppearance.AppCompat"
+        android:textColor="@android:color/darker_gray" />
 
     <TextView
         android:id="@+id/precio"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginRight="10dp"
-        android:layout_weight="1"
+        android:layout_weight="0"
         android:gravity="left"
-        android:text="5.0€"
+        android:text="5433.0€"
         android:textAlignment="textEnd"
         android:textColor="@android:color/background_dark"
         android:textSize="18sp"

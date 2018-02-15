@@ -148,7 +148,7 @@ public class Product implements Parcelable {
         this.updatedAt = updatedAt;
     }
 
-    @Exclude
+
     public List<ImageProduct> getImages() {
         return images;
     }
