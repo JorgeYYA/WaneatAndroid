@@ -32,21 +32,15 @@ import florida.com.waneat.Activities.MainActivity;
 import florida.com.waneat.Adapters.AdapterOrderList;
 import florida.com.waneat.Models.Order;
 import florida.com.waneat.Models.Product;
+import florida.com.waneat.Models.User;
+import florida.com.waneat.Preferences.Preferences;
 import florida.com.waneat.R;
 
 
 public class OrderList extends Fragment {
-
-
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    ArrayList<Order> orders;
-
-    ArrayList<Integer> imagen;
-
-    ArrayList<Product> products;
-
+    ArrayList<Order> orders = new ArrayList<>();
+    ArrayList<Integer> imagen  = new ArrayList<>();
+    ArrayList<Product> products  = new ArrayList<>();
     RecyclerView recyclerOrders;
 
     double total;
@@ -60,7 +54,7 @@ public class OrderList extends Fragment {
 
     DatabaseReference bbdd = FirebaseDatabase.getInstance().getReference();
 
-    int idUser=0;
+    private User user = new User();
 
     public OrderList() {
 
@@ -69,10 +63,6 @@ public class OrderList extends Fragment {
 
     public static OrderList newInstance(String param1, String param2) {
         OrderList fragment = new OrderList();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
         return fragment;
     }
 
@@ -88,6 +78,8 @@ public class OrderList extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View v = inflater.inflate(R.layout.fragment_order_list, container, false);
+
+        this.user =  Preferences.gsonToUser(getContext());
 
         empty = (LinearLayout) v.findViewById(R.id.empty_list);
         info = (TextView) v.findViewById(R.id.info);
@@ -125,7 +117,7 @@ public class OrderList extends Fragment {
 
                     Order order = ds.getValue(Order.class);
 
-                    if (order.getUserId() == idUser) {
+                    if (order.getUserId() == user.getId()) {
 
                         orders.add(order);
 

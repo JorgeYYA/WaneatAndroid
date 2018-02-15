@@ -7,9 +7,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.koushikdutta.ion.Ion;
 
 import java.util.List;
 
@@ -48,7 +51,7 @@ public class AdapterCartItem  extends RecyclerView.Adapter<AdapterCartItem.MyVie
         holder.nombre.setText(producto.getNameProduct());
         holder.cantidad.setText(Integer.toString(producto.getCantidad()));
         holder.precio.setText(String.valueOf(producto.getPriceProduct()));
-    }
+     }
 
     @Override
     public int getItemCount() {
@@ -60,6 +63,7 @@ public class AdapterCartItem  extends RecyclerView.Adapter<AdapterCartItem.MyVie
     public class MyViewHolder extends RecyclerView.ViewHolder{
 
         public TextView nombre, comentariosAdicionales, precio, cantidad;
+        public ImageView fotoProducto;
         public Button add, remove;
 
         public MyViewHolder(View view) {
@@ -68,6 +72,7 @@ public class AdapterCartItem  extends RecyclerView.Adapter<AdapterCartItem.MyVie
             comentariosAdicionales = (TextView) view.findViewById(R.id.comentariosAdicionalesProducto);
             precio = (TextView) view.findViewById(R.id.precioProducto);
             cantidad = (TextView) view.findViewById(R.id.cantidadProducto);
+            fotoProducto = (ImageView) view.findViewById(R.id.myImageView);
             add = (Button) view.findViewById(R.id.addProduct);
             remove = (Button) view.findViewById(R.id.removeProduct);
             addProducts();
