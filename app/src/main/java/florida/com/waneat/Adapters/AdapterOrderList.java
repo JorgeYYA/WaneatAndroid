@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import florida.com.waneat.Activities.MainActivity;
@@ -91,11 +92,12 @@ public class AdapterOrderList extends RecyclerView.Adapter<AdapterOrderList.Clas
 
         String list = "";
 
+        DecimalFormat df = new DecimalFormat("#.00");
 
 
         ViewHolder.resName.setText(orders.get(i).getResName());
         ViewHolder.date.setText(orders.get(i).getDate());
-        ViewHolder.totalPrize.setText(orders.get(i).getTotal()+"");
+        ViewHolder.totalPrize.setText(df.format(orders.get(i).getTotal())+"");
 
         if(orders.get(i).getProducts() != null){
             if (orders.get(i).getProducts().size()>=3){

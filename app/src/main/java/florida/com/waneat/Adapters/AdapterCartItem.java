@@ -1,18 +1,24 @@
 package florida.com.waneat.Adapters;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.koushikdutta.ion.Ion;
+
 import java.util.List;
 
+import florida.com.waneat.Activities.MainActivity;
 import florida.com.waneat.Models.Product;
 import florida.com.waneat.R;
 
@@ -24,9 +30,11 @@ public class AdapterCartItem  extends RecyclerView.Adapter<AdapterCartItem.MyVie
 
     private List<Product> productosLista;
     private BtnClickListener BtnClickListener;
+    private Context context;
 
-    public AdapterCartItem(List<Product> productosLista, @NonNull BtnClickListener BtnClickListener) {
+    public AdapterCartItem(Context context, List<Product> productosLista, @NonNull BtnClickListener BtnClickListener) {
         this.productosLista = productosLista;
+        this.context = context;
         this.BtnClickListener = BtnClickListener;
     }
 
@@ -47,7 +55,8 @@ public class AdapterCartItem  extends RecyclerView.Adapter<AdapterCartItem.MyVie
 
         holder.nombre.setText(producto.getNameProduct());
         holder.cantidad.setText(Integer.toString(producto.getCantidad()));
-        holder.precio.setText(String.valueOf(producto.getPriceProduct()));
+        holder.precio.setText(String.valueOf(producto.getPriceProduct())+ context.getResources().getString(R.string.badge));
+        Ion.with(holder.fotoProducto).load(producto.getImages().get(0).getImageUrl());
     }
 
     @Override
@@ -60,6 +69,7 @@ public class AdapterCartItem  extends RecyclerView.Adapter<AdapterCartItem.MyVie
     public class MyViewHolder extends RecyclerView.ViewHolder{
 
         public TextView nombre, comentariosAdicionales, precio, cantidad;
+        public ImageView fotoProducto;
         public Button add, remove;
 
         public MyViewHolder(View view) {
@@ -68,6 +78,7 @@ public class AdapterCartItem  extends RecyclerView.Adapter<AdapterCartItem.MyVie
             comentariosAdicionales = (TextView) view.findViewById(R.id.comentariosAdicionalesProducto);
             precio = (TextView) view.findViewById(R.id.precioProducto);
             cantidad = (TextView) view.findViewById(R.id.cantidadProducto);
+            fotoProducto = (ImageView) view.findViewById(R.id.miniatura);
             add = (Button) view.findViewById(R.id.addProduct);
             remove = (Button) view.findViewById(R.id.removeProduct);
             addProducts();

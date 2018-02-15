@@ -32,6 +32,8 @@ import florida.com.waneat.Activities.MainActivity;
 import florida.com.waneat.Adapters.AdapterOrderList;
 import florida.com.waneat.Models.Order;
 import florida.com.waneat.Models.Product;
+import florida.com.waneat.Models.User;
+import florida.com.waneat.Preferences.Preferences;
 import florida.com.waneat.R;
 
 
@@ -43,9 +45,9 @@ public class OrderList extends Fragment {
 
     ArrayList<Order> orders;
 
-    ArrayList<Integer> imagen;
+    ArrayList<Integer> imagen = new ArrayList<>();
 
-    ArrayList<Product> products;
+    ArrayList<Product> products = new ArrayList<>();
 
     RecyclerView recyclerOrders;
 
@@ -60,7 +62,7 @@ public class OrderList extends Fragment {
 
     DatabaseReference bbdd = FirebaseDatabase.getInstance().getReference();
 
-    int idUser=0;
+    private User user = new User();
 
     public OrderList() {
 
@@ -103,6 +105,11 @@ public class OrderList extends Fragment {
 
         imagen = new ArrayList<>();
 
+        user = Preferences.gsonToUser(getContext());
+
+        bbdd = bbdd.child("pedidos");
+
+
 
         if (!MainActivity.verificaConexion(getActivity())) {
             info.setText("No se ha podido conectar, \ncomprueba tu conexión a internet");
@@ -124,8 +131,9 @@ public class OrderList extends Fragment {
                 for (DataSnapshot ds : dataSnapshot.getChildren()) {
 
                     Order order = ds.getValue(Order.class);
+                    Log.d("TAG","asd");
 
-                    if (order.getUserId() == idUser) {
+                    if (order.getUserId() == user.getId()) {
 
                         orders.add(order);
 
