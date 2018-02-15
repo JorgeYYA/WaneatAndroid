@@ -13,7 +13,7 @@
         android:layout_height="fill_parent" >
 
         <ImageView
-            android:id="@+id/myImageView"
+            android:id="@+id/miniatura"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:background="@color/lightGrayBackground" />
@@ -22,10 +22,10 @@
             android:id="@+id/cantidadProducto"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@id/myImageView"
-            android:layout_alignTop="@id/myImageView"
-            android:layout_alignRight="@id/myImageView"
-            android:layout_alignBottom="@id/myImageView"
+            android:layout_alignLeft="@id/miniatura"
+            android:layout_alignTop="@id/miniatura"
+            android:layout_alignRight="@id/miniatura"
+            android:layout_alignBottom="@id/miniatura"
             android:layout_margin="1dp"
             android:gravity="center"
             android:text="500"

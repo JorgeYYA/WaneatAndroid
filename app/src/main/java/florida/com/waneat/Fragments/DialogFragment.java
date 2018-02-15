@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.GridLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,6 +24,7 @@ import android.widget.Toast;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -35,6 +37,9 @@ import florida.com.waneat.Adapters.AdapterProductList;
 import florida.com.waneat.Models.CreditCard;
 import florida.com.waneat.Models.Order;
 import florida.com.waneat.Models.Product;
+import florida.com.waneat.Models.Restaurant;
+import florida.com.waneat.Models.User;
+import florida.com.waneat.Preferences.Preferences;
 import florida.com.waneat.R;
 
 import static android.content.Context.MODE_PRIVATE;
@@ -50,6 +55,9 @@ public class DialogFragment extends android.support.v4.app.DialogFragment{
     private Button checkoutButton, buttonIntroducirTarj, tramitarPedido, addCard;
     private LinearLayout layoutEmpty;
     private GridLayout layoutCards;
+    private User user = new User();
+    private Restaurant restaurant = new Restaurant();
+    private ImageView mini;
 
     DatabaseReference bbdd;
 
@@ -74,13 +82,14 @@ public class DialogFragment extends android.support.v4.app.DialogFragment{
         this.tarjetaCredito = rootView.findViewById(R.id.card_number);
         this.tramitarPedido = rootView.findViewById(R.id.tramitar);
         this.addCard = rootView.findViewById(R.id.add_card);
+        this.mini = rootView.findViewById(R.id.miniatura);
 
         bbdd = FirebaseDatabase.getInstance().getReference("pedidos");
 
         //cargamos los precios
         reloadPrecios();
 
-        adapter = new AdapterCartItem(cesta, new AdapterCartItem.BtnClickListener() {
+        adapter = new AdapterCartItem(getContext(), cesta, new AdapterCartItem.BtnClickListener() {
 
             @Override
             public void onAddProducts(int position) {
@@ -95,6 +104,10 @@ public class DialogFragment extends android.support.v4.app.DialogFragment{
                 reloadPrecios();
             }
         });
+
+        user = Preferences.gsonToUser(getContext());
+
+        restaurant = Preferences.gsonToRestaurant(getContext());
 
         CreditCard cc1 = new CreditCard("4242424242424242","111","111","111",1);
         CreditCard cc2 = new CreditCard("0123456789123456","111","111","111",1);
@@ -257,20 +270,30 @@ public class DialogFragment extends android.support.v4.app.DialogFragment{
         CharSequence s  = DateFormat.format("dd/MM/yyyy", d.getTime());
 
 
-        int idUsuario = 1;
+        int idUsuario = user.getId();
 
         //PARTIALLY HARDCODED
-        Order o = new Order(idUsuario,cesta, s+"", "Restaurante Paco Mer", Double.valueOf(String.valueOf(mListener.getCestaPrice())));
+        Order o = new Order(idUsuario,cesta, s+"", restaurant.getNameRestaurant(), Double.valueOf(String.valueOf(mListener.getCestaPrice())));
 
-        String clave = "pedido_"+o.getId();
 
-        bbdd.child(clave).setValue(o);
+
+        String clave = bbdd.push().getKey();
+
+        bbdd.child("pedido_"+clave).setValue(o);
 
         Toast to = Toast.makeText(getActivity(), "El pedido ha sido tramitado correctamente", Toast.LENGTH_SHORT);
 
         to.setGravity(Gravity.CENTER,Gravity.CENTER,Gravity.CENTER);
 
         to.show();
+
+        for(int i = 0;i<cesta.size();i++){
+
+            cesta.get(i).setCantidad(1);
+
+        }
+
+        cesta.clear();
     }
 
 
@@ -291,7 +314,10 @@ public class DialogFragment extends android.support.v4.app.DialogFragment{
     }
 
     private void reloadPrecios(){
-        this.cestaTotal.setText(String.valueOf(mListener.getCestaPrice())+getResources().getString(R.string.badge));
+        DecimalFormat df = new DecimalFormat("#.00");
+
+
+        this.cestaTotal.setText(df.format(Double.valueOf(String.valueOf(mListener.getCestaPrice())))+getResources().getString(R.string.badge));
     }
 
 

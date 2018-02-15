@@ -3,6 +3,8 @@ package florida.com.waneat.Models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.firebase.database.Exclude;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -86,6 +88,7 @@ public class Order implements Parcelable {
         this.total = total;
     }
 
+    @Exclude
     public int getId() {return id;}
 
     public void setId(int id) {this.id = id;}
