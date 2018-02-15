@@ -185,7 +185,7 @@ public class DialogFragment extends android.support.v4.app.DialogFragment{
             @Override
             public void onClick(View view) {
 
-                
+
 
                 tramitarPedido();
 
