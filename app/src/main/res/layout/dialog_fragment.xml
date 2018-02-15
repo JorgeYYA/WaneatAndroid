@@ -40,7 +40,8 @@
         <android.support.v7.widget.RecyclerView
             android:id="@+id/cestaRecyclerView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+            android:layout_height="wrap_content"
+            android:visibility="gone"></android.support.v7.widget.RecyclerView>
 
 
         <Space
@@ -84,7 +85,7 @@
             android:columnCount="3"
             android:orientation="vertical"
             android:rowCount="2"
-            android:visibility="visible">
+            android:visibility="gone">
 
 
             <TextView
@@ -141,7 +142,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@color/colorPrimaryDarkWaneat"
-            android:text="IR A PAGAR" />
+            android:text="IR A PAGAR"
+            android:visibility="gone" />
 
         <Button
             android:id="@+id/tramitar"
@@ -150,6 +152,15 @@
             android:layout_weight="1"
             android:background="@color/colorPrimaryDarkWaneat"
             android:text="Tramitar Pedido"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/add_card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/colorPrimaryDarkWaneat"
+            android:text="Añadir otra tarjeta"
             android:visibility="gone" />
     </LinearLayout>
 </FrameLayout>

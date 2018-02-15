@@ -42,7 +42,7 @@ public class AdapterCreditCards extends RecyclerView.Adapter<AdapterCreditCards.
 
     public static class ClaseViewHolder extends RecyclerView.ViewHolder {
 
-        RadioButton number;
+        TextView number;
 
         ClaseViewHolder(View itemView) {
             super(itemView);
@@ -103,9 +103,9 @@ public class AdapterCreditCards extends RecyclerView.Adapter<AdapterCreditCards.
 
         int numProd;
 
-        String list = "";
+        String cardNumber = cards.get(i).getCreditCardNumber();
 
-        ViewHolder.number.setText(cards.get(i).getCreditCardNumber());
+        ViewHolder.number.setText(cardNumber.substring(0,4)+" **** **** "+cardNumber.substring(12,16));
 
     }
 
