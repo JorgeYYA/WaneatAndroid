@@ -153,16 +153,6 @@
                 android:background="@drawable/border_radius"
                 android:text="SIGUIENTE"
                 android:textColor="@android:color/black" />
-            <Button
-                android:id="@+id/testborrar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="15dp"
-                android:layout_marginTop="15dp"
-                android:background="@drawable/border_radius"
-                android:text="QR HIJO DE PUTA"
-                android:textColor="@android:color/black" />
-
 
         </LinearLayout>
 

@@ -7,7 +7,6 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 
 import com.koushikdutta.ion.Ion;
@@ -38,11 +37,8 @@ public class InitialFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v =  inflater.inflate(R.layout.fragment_initial, container, false);
         ImageView image = (ImageView) v.findViewById(R.id.qrScan);
-        Button button = (Button) v.findViewById(R.id.scanButton);
 
-        Ion.with(image).load("https://cdn.dribbble.com/users/795597/screenshots/3660276/gif__3_.gif");
-        
-        button.setOnClickListener(new View.OnClickListener() {
+        image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 mListener.callQRActivity();
