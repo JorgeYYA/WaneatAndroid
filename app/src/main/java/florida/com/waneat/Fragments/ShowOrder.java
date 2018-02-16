@@ -111,11 +111,10 @@ public class ShowOrder extends Fragment {
         resName.setText(order.getResName());
         date.setText(order.getDate());
         totalPrize.setText(df.format(order.getTotal())+"");
-        //ESTO PETA
         Ion.with(imagenOrder).load(order.getProducts().get(0).getImages().get(0).getImageUrl());
         Log.d("ShowOrder", "onCreateView: "+order.getProducts().get(0).getNameProduct());
 
-        getActivity().setTitle("Pedido Num: "+order.getId());
+        getActivity().setTitle("Pedido");
 
         return v;
     }
@@ -127,6 +126,8 @@ public class ShowOrder extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+        //Sin testear
+        getActivity().setTitle("Listado de pedidos");
     }
 
     @Override

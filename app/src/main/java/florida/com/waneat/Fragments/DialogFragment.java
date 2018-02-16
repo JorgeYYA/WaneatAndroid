@@ -52,7 +52,7 @@ public class DialogFragment extends android.support.v4.app.DialogFragment{
     private AdapterCartItem adapter;
     private AdapterFinalizarCompra adapterCompra;
     private AdapterCreditCards adapterCards;
-    private Button checkoutButton, buttonIntroducirTarj, tramitarPedido, addCard;
+    private Button checkoutButton, buttonIntroducirTarj, tramitarPedido, addCard, buttonAddOneCard;
     private LinearLayout layoutEmpty;
     private GridLayout layoutCards;
     private User user = new User();
@@ -83,6 +83,8 @@ public class DialogFragment extends android.support.v4.app.DialogFragment{
         this.tramitarPedido = rootView.findViewById(R.id.tramitar);
         this.addCard = rootView.findViewById(R.id.add_card);
         this.mini = rootView.findViewById(R.id.miniatura);
+        buttonIntroducirTarj = (Button) rootView.findViewById(R.id.buttonIntroducirTarj);
+        buttonAddOneCard = (Button) rootView.findViewById(R.id.add_one_card);
 
         bbdd = FirebaseDatabase.getInstance().getReference("pedidos");
 
@@ -121,13 +123,23 @@ public class DialogFragment extends android.support.v4.app.DialogFragment{
 
         if(cards != null) {
 
+                //Importante, cuando se borre un de las tarjetas registradas, reiniciar el valor "preferred_card" a 0 para evitar conflictos
 
-            SharedPreferences prefs = getActivity().getSharedPreferences("preferences", MODE_PRIVATE);
+                SharedPreferences prefs = getActivity().getSharedPreferences("preferences", MODE_PRIVATE);
 
-            int cardId = prefs.getInt("preferred_card",0);
+                int cardId = prefs.getInt("preferred_card", 0);
 
-            tarjetaCredito.setText(cards.get(cardId).getCreditCardNumber().substring(0, 4) + " **** **** " + cards.get(cardId).getCreditCardNumber().substring(12, 16));
+                tarjetaCredito.setText(cards.get(cardId).getCreditCardNumber().substring(0, 4) + " **** **** " + cards.get(cardId).getCreditCardNumber().substring(12, 16));
 
+                buttonIntroducirTarj.setVisibility(View.VISIBLE);
+
+                buttonAddOneCard.setVisibility(View.GONE);
+        }else{
+
+            tarjetaCredito.setText("No tienes tarjetas guardadas");
+            //tarjetaCredito.setText("Pulsa 'Anadir tarjeta' para añadir una trajeta de crédito");
+            buttonIntroducirTarj.setVisibility(View.GONE);
+            buttonAddOneCard.setVisibility(View.VISIBLE);
 
         }
 
@@ -164,8 +176,6 @@ public class DialogFragment extends android.support.v4.app.DialogFragment{
         checkoutButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
-                buttonIntroducirTarj = (Button) rootView.findViewById(R.id.buttonIntroducirTarj);
-
                 if(!cesta.isEmpty()){
 
                     layoutCards.setVisibility(View.VISIBLE);
@@ -174,10 +184,8 @@ public class DialogFragment extends android.support.v4.app.DialogFragment{
 
                     adapterCompra = new AdapterFinalizarCompra(cesta);
 
-
                     recyclerView.setAdapter(adapterCompra);
                    // recyclerCards.setAdapter(adapterCompra);
-
                 }
 
                 buttonIntroducirTarj.setOnClickListener(new View.OnClickListener() {
@@ -194,7 +202,6 @@ public class DialogFragment extends android.support.v4.app.DialogFragment{
 
                             @Override
                             public void onItemClick(CreditCard item) {
-
 
                                 layoutCards.setVisibility(View.VISIBLE);
                                 tramitarPedido.setVisibility(View.VISIBLE);
@@ -213,16 +220,12 @@ public class DialogFragment extends android.support.v4.app.DialogFragment{
 
                                 tarjetaCredito.setText(item.getCreditCardNumber().substring(0, 4) + " **** **** " + item.getCreditCardNumber().substring(12, 16));
 
-
-
                             }
 
 
                         }));
 
                        // recyclerView.setAdapter(adapterCompra);
-
-
                     }
                 });
 
@@ -246,11 +249,16 @@ public class DialogFragment extends android.support.v4.app.DialogFragment{
             @Override
             public void onClick(View view) {
 
-                FragmentTransaction ft = getFragmentManager().beginTransaction();
-                ft.replace(R.id.fragment, TarjetasFragment.newInstance()).addToBackStack(null);
-                ft.commit();
+                addAnotherCard();
 
-                getDialog().dismiss();
+            }
+        });
+
+        buttonAddOneCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                addAnotherCard();
 
             }
         });
@@ -259,6 +267,17 @@ public class DialogFragment extends android.support.v4.app.DialogFragment{
 
         //Method related with this dialog
         return rootView;
+    }
+
+
+    public void addAnotherCard(){
+
+        FragmentTransaction ft = getFragmentManager().beginTransaction();
+        ft.replace(R.id.fragment, TarjetasFragment.newInstance()).addToBackStack(null);
+        ft.commit();
+
+        getDialog().dismiss();
+
     }
 
 
