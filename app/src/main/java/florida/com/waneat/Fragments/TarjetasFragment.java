@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -37,6 +38,7 @@ public class TarjetasFragment extends Fragment {
     private EditText number,month,year,cvc,holder;
     private RelativeLayout cardFront, cardBack;
     private Button nextButton;
+    private TextView emptyList;
 
     private ArrayList<CreditCard> tarjetas = new ArrayList<CreditCard>();
     private AdapterItemList adapter;
@@ -83,7 +85,11 @@ public class TarjetasFragment extends Fragment {
         this.cardFront = v.findViewById(R.id.frontCard);
         this.nextButton = v.findViewById(R.id.guardarCredit);
 
+
         getActivity().setTitle("Tus tarjetas");
+
+
+
 
         //METHODS
         toggleCard();
@@ -91,29 +97,13 @@ public class TarjetasFragment extends Fragment {
 
 
 
+        emptyList = (TextView) v.findViewById(R.id.empty_list);
         rv = (RecyclerView)v.findViewById(R.id.recycler_tarjetas);
+
         LinearLayoutManager llm = new LinearLayoutManager(v.getContext());
         rv.setLayoutManager(llm);
 
-        if(Preferences.gsonToCreditCard(getContext()) != null){
-
-            tarjetas = Preferences.gsonToCreditCard(getContext());
-
-            rv.setAdapter(new AdapterTarjetas(tarjetas, new AdapterTarjetas.OnItemLongClickListener() {
-
-
-                @Override
-                public boolean onItemLongClick(CreditCard item) {
-
-                    borrarTarjetas(item.getId(),item.getCreditCardNumber());
-
-                    return true;
-
-                }
-            }));
-
-        }
-
+        cargarDatos();
 
 
         return v;
@@ -191,20 +181,7 @@ public class TarjetasFragment extends Fragment {
 
             Preferences.creditCardToString(getContext(), Preferences.CREDIT_CARD, tarjetas);
 
-            tarjetas = Preferences.gsonToCreditCard(getContext());
-
-            rv.setAdapter(new AdapterTarjetas(tarjetas, new AdapterTarjetas.OnItemLongClickListener() {
-
-
-                @Override
-                public boolean onItemLongClick(CreditCard item) {
-
-                    borrarTarjetas(item.getId(), item.getCreditCardNumber());
-
-                    return true;
-
-                }
-            }));
+            cargarDatos();
 
         }else{
 
@@ -213,6 +190,32 @@ public class TarjetasFragment extends Fragment {
         }
 
 
+
+    }
+
+    private  void cargarDatos(){
+
+
+        emptyList.setVisibility(View.GONE);
+
+        tarjetas = Preferences.gsonToCreditCard(getContext());
+
+        rv.setAdapter(new AdapterTarjetas(tarjetas, new AdapterTarjetas.OnItemLongClickListener() {
+
+
+            @Override
+            public boolean onItemLongClick(CreditCard item) {
+
+                borrarTarjetas(item.getId(), item.getCreditCardNumber());
+
+                return true;
+
+            }
+        }));
+
+        if (Preferences.gsonToCreditCard(getContext()).size() == 0) {
+            emptyList.setVisibility(View.VISIBLE);
+        }
 
     }
 
@@ -261,18 +264,9 @@ public class TarjetasFragment extends Fragment {
         Preferences.creditCardToString(getContext(),Preferences.CREDIT_CARD,tarjetas);
 
 
-            rv.setAdapter(new AdapterTarjetas(tarjetas, new AdapterTarjetas.OnItemLongClickListener() {
 
 
-                @Override
-                public boolean onItemLongClick(CreditCard item) {
-
-                    borrarTarjetas(item.getId(),item.getCreditCardNumber());
-
-                    return true;
-
-                }
-            }));
+        cargarDatos();
 
 
 
