@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_weight="1"
-            android:text="Macarrones"
+            android:text="Macarrones sadsdsasdasdasd"
             android:textColor="@android:color/darker_gray"
             android:textSize="15sp" />
 
