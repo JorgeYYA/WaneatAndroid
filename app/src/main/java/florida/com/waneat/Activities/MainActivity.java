@@ -54,6 +54,8 @@ public class MainActivity extends AppCompatActivity implements
 
 
 
+    static public String PREFERENCES = "preferences";
+
     public ArrayList<Product> productosCesta = new ArrayList<>();
     public ArrayList<Product> productosLista = new ArrayList<>();
     public ArrayList<Product> productosFiltrados = new ArrayList<>();

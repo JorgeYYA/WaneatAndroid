@@ -30,6 +30,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Date;
+
+import florida.com.waneat.Activities.MainActivity;
 import florida.com.waneat.Adapters.AdapterCartItem;
 import florida.com.waneat.Adapters.AdapterCreditCards;
 import florida.com.waneat.Adapters.AdapterFinalizarCompra;
@@ -58,6 +60,7 @@ public class DialogFragment extends android.support.v4.app.DialogFragment{
     private User user = new User();
     private Restaurant restaurant = new Restaurant();
     private ImageView mini;
+    private boolean cardsNotFound;
 
     DatabaseReference bbdd;
 
@@ -82,6 +85,7 @@ public class DialogFragment extends android.support.v4.app.DialogFragment{
         this.tramitarPedido = rootView.findViewById(R.id.tramitar);
         this.addCard = rootView.findViewById(R.id.add_card);
         this.mini = rootView.findViewById(R.id.miniatura);
+        buttonIntroducirTarj = (Button) rootView.findViewById(R.id.buttonIntroducirTarj);
 
         bbdd = FirebaseDatabase.getInstance().getReference("pedidos");
 
@@ -118,14 +122,31 @@ public class DialogFragment extends android.support.v4.app.DialogFragment{
 
         cards.add(cc2);
 
-        if(cards != null) {
+        if(cards.size()!=0) {
+
+                //Importante, cuando se borre un de las tarjetas registradas, reiniciar el valor "preferred_card" a 0 para evitar conflictos
+
+                SharedPreferences prefs = getActivity().getSharedPreferences(MainActivity.PREFERENCES, MODE_PRIVATE);
+
+                int cardId = prefs.getInt("preferred_card", 0);
+
+                tarjetaCredito.setText(cards.get(cardId).getCreditCardNumber().substring(0, 4) + " **** **** " + cards.get(cardId).getCreditCardNumber().substring(12, 16));
+
+                buttonIntroducirTarj.setVisibility(View.VISIBLE);
+
+                cardsNotFound = false;
+
+                buttonIntroducirTarj.setText("Cambiar tarjeta");
 
 
-            SharedPreferences prefs = getActivity().getSharedPreferences("preferences", MODE_PRIVATE);
+        }else{
 
-            int cardId = prefs.getInt("preferred_card",0);
+            tarjetaCredito.setText("No tienes tarjetas guardadas");
+            //tarjetaCredito.setText("Pulsa 'Anadir tarjeta' para añadir una trajeta de crédito");
 
-            tarjetaCredito.setText(cards.get(cardId).getCreditCardNumber().substring(0, 4) + " **** **** " + cards.get(cardId).getCreditCardNumber().substring(12, 16));
+            buttonIntroducirTarj.setText("Añadir tarjeta");
+
+            cardsNotFound = true;
 
 
         }
@@ -163,8 +184,6 @@ public class DialogFragment extends android.support.v4.app.DialogFragment{
         checkoutButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
-                buttonIntroducirTarj = (Button) rootView.findViewById(R.id.buttonIntroducirTarj);
-
                 if(!cesta.isEmpty()){
 
                     layoutCards.setVisibility(View.VISIBLE);
@@ -173,53 +192,24 @@ public class DialogFragment extends android.support.v4.app.DialogFragment{
 
                     adapterCompra = new AdapterFinalizarCompra(cesta);
 
-
                     recyclerView.setAdapter(adapterCompra);
                    // recyclerCards.setAdapter(adapterCompra);
-
                 }
 
                 buttonIntroducirTarj.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
 
-                        layoutCards.setVisibility(View.GONE);
-                        tramitarPedido.setVisibility(View.GONE);
-                        checkoutButton.setVisibility(View.GONE);
-                        addCard.setVisibility(View.VISIBLE);
+                        if(!cardsNotFound){
 
-                       // adapterCompra = new AdapterCreditCards(cards);
-                        recyclerView.setAdapter(new AdapterCreditCards(cards, new AdapterCreditCards.OnItemClickListener() {
+                            changeCard();
 
-                            @Override
-                            public void onItemClick(CreditCard item) {
+                        }else{
 
+                            addAnotherCard();
 
-                                layoutCards.setVisibility(View.VISIBLE);
-                                tramitarPedido.setVisibility(View.VISIBLE);
-                                checkoutButton.setVisibility(View.GONE);
-                                addCard.setVisibility(View.GONE);
+                        }
 
-                                adapterCompra = new AdapterFinalizarCompra(cesta);
-
-                                recyclerView.setAdapter(adapterCompra);
-
-                                SharedPreferences.Editor prefs = getActivity().getSharedPreferences("preferences", MODE_PRIVATE).edit();
-
-                                prefs.putInt("preferred_card", item.getId());
-
-                                prefs.apply();
-
-                                tarjetaCredito.setText(item.getCreditCardNumber().substring(0, 4) + " **** **** " + item.getCreditCardNumber().substring(12, 16));
-
-
-
-                            }
-
-
-                        }));
-
-                       // recyclerView.setAdapter(adapterCompra);
 
 
                     }
@@ -245,15 +235,10 @@ public class DialogFragment extends android.support.v4.app.DialogFragment{
             @Override
             public void onClick(View view) {
 
-                FragmentTransaction ft = getFragmentManager().beginTransaction();
-                ft.replace(R.id.fragment, TarjetasFragment.newInstance()).addToBackStack(null);
-                ft.commit();
-
-                getDialog().dismiss();
+                addAnotherCard();
 
             }
         });
-
 
 
         //Method related with this dialog
@@ -261,20 +246,67 @@ public class DialogFragment extends android.support.v4.app.DialogFragment{
     }
 
 
-    public void tramitarPedido(){
+    public void changeCard(){
 
+        layoutCards.setVisibility(View.GONE);
+        tramitarPedido.setVisibility(View.GONE);
+        checkoutButton.setVisibility(View.GONE);
+        addCard.setVisibility(View.VISIBLE);
+
+        // adapterCompra = new AdapterCreditCards(cards);
+        recyclerView.setAdapter(new AdapterCreditCards(cards, new AdapterCreditCards.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(CreditCard item) {
+
+                layoutCards.setVisibility(View.VISIBLE);
+                tramitarPedido.setVisibility(View.VISIBLE);
+                checkoutButton.setVisibility(View.GONE);
+                addCard.setVisibility(View.GONE);
+
+                adapterCompra = new AdapterFinalizarCompra(cesta);
+
+                recyclerView.setAdapter(adapterCompra);
+
+                SharedPreferences.Editor prefs = getActivity().getSharedPreferences(MainActivity.PREFERENCES, MODE_PRIVATE).edit();
+
+                prefs.putInt("preferred_card", item.getId());
+
+                prefs.apply();
+
+                tarjetaCredito.setText(item.getCreditCardNumber().substring(0, 4) + " **** **** " + item.getCreditCardNumber().substring(12, 16));
+
+            }
+
+
+        }));
+
+        // recyclerView.setAdapter(adapterCompra);
+
+    }
+
+
+    public void addAnotherCard(){
+
+        FragmentTransaction ft = getFragmentManager().beginTransaction();
+        ft.replace(R.id.fragment, TarjetasFragment.newInstance()).addToBackStack(null);
+        ft.commit();
+
+        getDialog().dismiss();
+
+    }
+
+
+    public void tramitarPedido(){
 
         Date d = new Date();
 
         CharSequence s  = DateFormat.format("dd/MM/yyyy", d.getTime());
 
-
         int idUsuario = user.getId();
 
-        //PARTIALLY HARDCODED
+
         Order o = new Order(idUsuario,cesta, s+"", restaurant.getNameRestaurant(), Double.valueOf(String.valueOf(mListener.getCestaPrice())));
-
-
 
         String clave = bbdd.push().getKey();
 
