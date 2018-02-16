@@ -101,7 +101,7 @@ public class ShowOrder extends Fragment {
         }));
 
 
-
+        mListener.changeColorToolbar(true);
         recyclerProd.invalidate();
 
 
@@ -144,6 +144,8 @@ public class ShowOrder extends Fragment {
     public interface OnFragmentInteractionListener {
         void showFloatingActionButton();
         void hideFloatingActionButton();
+        void changeColorToolbar(boolean dark);
+
     }
 
     

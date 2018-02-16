@@ -40,7 +40,10 @@ public class QRActivity extends AppCompatActivity implements QRCodeReaderView.On
         pointsOverlayView = (PointsOverlayView) findViewById(R.id.points_overlay_view);
 
 
-        initCamera();
+        //TODO: FOR DEBUGGINS PURPOSES
+        //initCamera();
+        restaurantCall(0);
+
     }
 
     @Override

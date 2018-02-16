@@ -26,6 +26,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import florida.com.waneat.Adapters.AdapterItemList;
 import florida.com.waneat.Fragments.AboutFragment;
 import florida.com.waneat.Fragments.DialogFragment;
 import florida.com.waneat.Fragments.InitialFragment;
@@ -57,26 +58,15 @@ public class MainActivity extends AppCompatActivity implements
     public ArrayList<Product> productosLista = new ArrayList<>();
     public ArrayList<Product> productosFiltrados = new ArrayList<>();
     public boolean isFiltered = false;
-
     public Product productoSelected = new Product();
     public Restaurant restauranteSelected = new Restaurant();
-
     static final int PICK_CONTACT_REQUEST = 1;
-
     public User userLogged = new User();
-    public FloatingActionButton fab, fab_cat, fab_carne, fab_pescado, fab_pasta, fab_bebida;
-
     private FragmentManager fm;
     private UserService service;
     private TextView emailUsuarioLogged, nombreUsuario;
-    Animation fabOpen, fabClose, rotateForward, rotateBackward;
-    boolean isOpen = false;
-
+    private FloatingActionButton fab;
     private Toolbar toolbar;
-
-    RecyclerView mRecyclerView;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,69 +78,13 @@ public class MainActivity extends AppCompatActivity implements
         setTitle("Waneat");
 
         this.service = new UserService(MainActivity.this);
-        this.userLogged = Preferences.gsonToUser(MainActivity.this);
-
         fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab_cat = (FloatingActionButton) findViewById(R.id.fab_cat);
-        fab_carne = (FloatingActionButton) findViewById(R.id.fab_carne);
-        fab_pescado = (FloatingActionButton) findViewById(R.id.fab_pescado);
-        fab_pasta = (FloatingActionButton) findViewById(R.id.fab_pasta);
-        fab_bebida = (FloatingActionButton) findViewById(R.id.fab_bebida);
-
-
-        fabOpen = AnimationUtils.loadAnimation(this,R.anim.fab_open);
-        fabClose = AnimationUtils.loadAnimation(this,R.anim.fab_close);
-
-        rotateForward = AnimationUtils.loadAnimation(this,R.anim.rotate_forward);
-        rotateBackward = AnimationUtils.loadAnimation(this,R.anim.rotate_backward);
 
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 openCart();
-
-            }
-        });
-
-        fab_cat.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                animateFab();
-
-            }
-        });
-
-        fab_carne.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                animateFab();
-
-            }
-        });
-
-        fab_pescado.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                animateFab();
-
-            }
-        });
-
-        fab_pasta.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                filtrarCategoria("Pasta");
-                animateFab();
-
-            }
-        });
-
-        fab_bebida.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                animateFab();
-
             }
         });
 
@@ -182,37 +116,6 @@ public class MainActivity extends AppCompatActivity implements
                 if(getSupportFragmentManager().getBackStackEntryCount() == 0) finish();
             }
         });
-
-    }
-
-    private void animateFab()
-    {
-        if(isOpen)
-        {
-            fab_cat.startAnimation(rotateForward);
-            fab_carne.startAnimation(fabClose);
-            fab_pescado.startAnimation(fabClose);
-            fab_pasta.startAnimation(fabClose);
-            fab_bebida.startAnimation(fabClose);
-            fab_carne.setClickable(false);
-            fab_pescado.setClickable(false);
-            fab_pasta.setClickable(false);
-            fab_bebida.setClickable(false);
-            isOpen = false;
-        }
-        else
-        {
-            fab_cat.startAnimation(rotateBackward);
-            fab_carne.startAnimation(fabOpen);
-            fab_pescado.startAnimation(fabOpen);
-            fab_pasta.startAnimation(fabOpen);
-            fab_bebida.startAnimation(fabOpen);
-            fab_carne.setClickable(true);
-            fab_pescado.setClickable(true);
-            fab_pasta.setClickable(true);
-            fab_bebida.setClickable(true);
-            isOpen = true;
-        }
 
     }
 
@@ -253,15 +156,6 @@ public class MainActivity extends AppCompatActivity implements
     public void addProduct(int position) {
         int cantidadActual = this.productosCesta.get(position).getCantidad()+1;
         this.productosCesta.get(position).setCantidad(cantidadActual);
-    }
-
-    public void filtrarCategoria(String categoria){
-        for(int i=0;i<this.productosLista.size();i++){
-            if(productosLista.get(i).getCategoryProduct().equalsIgnoreCase(categoria)){
-                productosFiltrados.add(productosLista.get(i));
-            }
-        }
-        productosLista = productosFiltrados;
     }
 
     @Override
@@ -400,14 +294,12 @@ public class MainActivity extends AppCompatActivity implements
 
     @Override
     public void showFloatingActionButton() {
-        fab.show();
-        fab_cat.show();
+       fab.show();
     };
 
     @Override
     public void hideFloatingActionButton() {
         fab.hide();
-        fab_cat.hide();
     };
 
 
@@ -440,7 +332,11 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void changeColorToolbar(){
-        toolbar.setBackgroundColor(ContextCompat.getColor(this, android.R.color.transparent));
+    public void changeColorToolbar(boolean dark){
+        if(dark){
+            toolbar.setBackgroundColor(ContextCompat.getColor(this,R.color.colorSecondaryDarkWaneat));
+        }else{
+            toolbar.setBackgroundColor(ContextCompat.getColor(this, android.R.color.transparent));
+        }
     }
 }

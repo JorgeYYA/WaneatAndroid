@@ -38,6 +38,7 @@ public class InitialFragment extends Fragment {
         View v =  inflater.inflate(R.layout.fragment_initial, container, false);
         ImageView image = (ImageView) v.findViewById(R.id.qrScan);
 
+        mListener.changeColorToolbar(true);
         image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -66,6 +67,7 @@ public class InitialFragment extends Fragment {
     }
 
     public interface OnFragmentInteractionListener {
+        void changeColorToolbar(boolean dark);
         void callQRActivity();
     }
 }

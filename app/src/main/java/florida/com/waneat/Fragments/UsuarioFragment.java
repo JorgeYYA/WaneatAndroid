@@ -65,6 +65,7 @@ public class UsuarioFragment extends android.support.v4.app.Fragment {
         this.perfilCod.setText(user.getPostal_code());
 
 
+        mListener.changeColorToolbar(true);
 
         buttonGuardar.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -123,6 +124,7 @@ public class UsuarioFragment extends android.support.v4.app.Fragment {
     public interface UserProfileListener {
         User getUser();
         void showFloatingActionButton();
+        void changeColorToolbar(boolean dark);
         void hideFloatingActionButton();
 
     }

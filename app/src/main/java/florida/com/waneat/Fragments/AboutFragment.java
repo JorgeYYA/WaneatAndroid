@@ -43,6 +43,7 @@ public class AboutFragment extends android.support.v4.app.Fragment {
         mListener.hideFloatingActionButton();
 
         getActivity().setTitle("Información");
+        mListener.changeColorToolbar(true);
 
         return v;
     }
@@ -66,6 +67,7 @@ public class AboutFragment extends android.support.v4.app.Fragment {
 
     public interface OnFragmentInteractionListener {
         void showFloatingActionButton();
+        void changeColorToolbar(boolean dark);
         void hideFloatingActionButton();
     }
 

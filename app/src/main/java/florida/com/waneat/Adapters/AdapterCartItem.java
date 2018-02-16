@@ -68,14 +68,13 @@ public class AdapterCartItem  extends RecyclerView.Adapter<AdapterCartItem.MyVie
 
     public class MyViewHolder extends RecyclerView.ViewHolder{
 
-        public TextView nombre, comentariosAdicionales, precio, cantidad;
+        public TextView nombre, precio, cantidad;
         public ImageView fotoProducto;
         public Button add, remove;
 
         public MyViewHolder(View view) {
             super(view);
             nombre = (TextView) view.findViewById(R.id.nombreProducto);
-            comentariosAdicionales = (TextView) view.findViewById(R.id.comentariosAdicionalesProducto);
             precio = (TextView) view.findViewById(R.id.precioProducto);
             cantidad = (TextView) view.findViewById(R.id.cantidadProducto);
             fotoProducto = (ImageView) view.findViewById(R.id.miniatura);

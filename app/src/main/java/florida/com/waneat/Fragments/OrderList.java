@@ -96,6 +96,7 @@ public class OrderList extends Fragment {
 
         }
 
+        interfaz.changeColorToolbar(true);
 
         return v;
     }
@@ -183,6 +184,7 @@ public class OrderList extends Fragment {
         void interfaceOrder(Order order);
         void showFloatingActionButton();
         void hideFloatingActionButton();
+        void changeColorToolbar(boolean dark);
 
     }
 }

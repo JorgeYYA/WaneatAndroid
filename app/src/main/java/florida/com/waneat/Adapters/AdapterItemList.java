@@ -1,10 +1,13 @@
 package florida.com.waneat.Adapters;
 
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -13,6 +16,7 @@ import com.koushikdutta.ion.Ion;
 import org.w3c.dom.Text;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 import florida.com.waneat.Models.Product;
@@ -24,12 +28,14 @@ import florida.com.waneat.R;
 
 public class AdapterItemList extends RecyclerView.Adapter<AdapterItemList.MyViewHolder> {
 
-    private List<Product> productosLista;
+    private List<Product> productosLista =  new ArrayList<>();
+    private List<Product> productosFiltrados = new ArrayList<>();
     private RecyclerViewOnItemClickListener recyclerViewOnItemClickListener;
     private DecimalFormat dec = new DecimalFormat("#.00 €");;
 
     public AdapterItemList(List<Product> productosLista, @NonNull RecyclerViewOnItemClickListener recyclerViewOnItemClickListener) {
         this.productosLista = productosLista;
+        this.productosFiltrados = cloneList(productosLista);
         this.recyclerViewOnItemClickListener = recyclerViewOnItemClickListener;
 
     }
@@ -42,6 +48,7 @@ public class AdapterItemList extends RecyclerView.Adapter<AdapterItemList.MyView
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         View itemView = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.card_view, viewGroup, false);
+
         return new MyViewHolder(itemView);
     }
 
@@ -53,6 +60,37 @@ public class AdapterItemList extends RecyclerView.Adapter<AdapterItemList.MyView
         holder.precio.setText(dec.format(producto.getPriceProduct()));
         holder.categoria.setText(producto.getCategoryProduct());
     }
+
+
+    public void filter(String categoryFilter) {
+        productosLista.clear();
+        Log.d("FILTER", "entrada filter: "+categoryFilter);
+        if(categoryFilter.equalsIgnoreCase("")){
+            Log.d("FILTER", "entra a null");
+            productosLista.addAll(this.productosFiltrados);
+        }else{
+            for(Product item: this.productosFiltrados){
+                Log.d("FILTER", "categoryFilter:: "+categoryFilter);
+                Log.d("FILTER", "getCategoryProduct:: "+item.getCategoryProduct());
+                if(item.getCategoryProduct().equalsIgnoreCase(categoryFilter)){
+                    productosLista.add(item);
+                }
+            }
+            this.productosFiltrados.toString();
+            Log.d("FILTER", "entra else::");
+
+        }
+        notifyDataSetChanged();
+    }
+
+    public static List<Product> cloneList (List<Product> list) {
+        List<Product> clonedList = new ArrayList<Product>(list.size());
+        for (Product dog : list) {
+            clonedList.add(new Product(dog));
+        }
+        return clonedList;
+    }
+
 
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
@@ -75,10 +113,12 @@ public class AdapterItemList extends RecyclerView.Adapter<AdapterItemList.MyView
         }
     }
 
-    public interface RecyclerViewOnItemClickListener {
 
+    public interface RecyclerViewOnItemClickListener {
         void onClick(View v, int position);
     }
+
+
 
 }
 

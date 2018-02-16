@@ -81,6 +81,7 @@ public class TarjetasFragment extends Fragment {
         toggleCard();
 
 
+        mListener.changeColorToolbar(true);
         RecyclerView rv = (RecyclerView)v.findViewById(R.id.recycler_tarjetas);
         LinearLayoutManager llm = new LinearLayoutManager(v.getContext());
         rv.setLayoutManager(llm);
@@ -172,5 +173,6 @@ public class TarjetasFragment extends Fragment {
         void showFloatingActionButton();
         void callQRActivity();
         void hideFloatingActionButton();
+        void changeColorToolbar(boolean dark);
     }
 }

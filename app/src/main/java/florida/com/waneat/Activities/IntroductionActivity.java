@@ -31,6 +31,7 @@ public class IntroductionActivity extends AppCompatActivity {
 
         if(service.isLoggedIn()){
             startActivity(new Intent(IntroductionActivity.this, SplashActivity.class));
+            finish();
         }
 
     }

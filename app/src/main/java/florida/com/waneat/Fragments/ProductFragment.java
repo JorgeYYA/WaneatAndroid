@@ -108,6 +108,7 @@ public class ProductFragment extends Fragment {
             }
         });
 
+        mListener.changeColorToolbar(true);
 
         return v;
     }
@@ -155,6 +156,7 @@ public class ProductFragment extends Fragment {
         Product getProductoSelected();
         void addToCart(Product prod);
         void showFloatingActionButton();
+        void changeColorToolbar(boolean dark);
         void hideFloatingActionButton();
     }
 }

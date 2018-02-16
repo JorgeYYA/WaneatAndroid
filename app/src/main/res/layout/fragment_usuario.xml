@@ -8,18 +8,6 @@
     tools:context="florida.com.waneat.Fragments.UsuarioFragment">
 
 
-
-        <TextView
-            android:id="@+id/profile_header"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:padding="10dp"
-            android:text="Mi perfil:"
-            android:textColor="@color/colorSecondaryDarkWaneat"
-            android:textSize="30dp"
-            android:textStyle="bold" />
-
     <!-- TODO: Update blank fragment layout -->
     <ScrollView
         android:layout_width="fill_parent"

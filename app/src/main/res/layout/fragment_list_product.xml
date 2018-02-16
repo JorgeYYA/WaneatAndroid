@@ -8,12 +8,14 @@ android:fitsSystemWindows="true"
     >
     <include layout="@layout/app_bar"></include>
 
+
+
+
  <android.support.v4.widget.NestedScrollView
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     >
-
     <android.support.v7.widget.RecyclerView
         xmlns:card_view="http://schemas.android.com/apk/res-auto"
         android:id="@+id/my_recycler_view"
@@ -21,5 +23,67 @@ android:fitsSystemWindows="true"
         android:layout_height="wrap_content"
         android:scrollbars="vertical"/>
 </android.support.v4.widget.NestedScrollView>
+
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab_cat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|left"
+            android:layout_marginBottom="10dp"
+            android:layout_marginEnd="@dimen/fab_margin"
+            android:layout_marginRight="@dimen/fab_margin"
+            android:layout_marginStart="10dp"
+            android:src="@drawable/cat"
+            android:visibility="visible" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab_carne"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|left"
+            android:layout_marginBottom="100dp"
+            android:layout_marginEnd="@dimen/fab_margin"
+            android:layout_marginRight="@dimen/fab_margin"
+            android:layout_marginStart="10dp"
+            android:src="@drawable/carne"
+            android:visibility="invisible" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab_pescado"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|left"
+            android:layout_marginBottom="95dp"
+            android:layout_marginEnd="@dimen/fab_margin"
+            android:layout_marginRight="@dimen/fab_margin"
+            android:layout_marginStart="58dp"
+            android:src="@drawable/pescado"
+            android:visibility="invisible" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab_pasta"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|left"
+            android:layout_marginBottom="58dp"
+            android:layout_marginEnd="@dimen/fab_margin"
+            android:layout_marginRight="@dimen/fab_margin"
+            android:layout_marginStart="95dp"
+            android:src="@drawable/pasta"
+            android:visibility="invisible" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab_bebida"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|left"
+            android:layout_marginBottom="10dp"
+            android:layout_marginEnd="@dimen/fab_margin"
+            android:layout_marginRight="@dimen/fab_margin"
+            android:layout_marginStart="100dp"
+            android:src="@drawable/bebida"
+            android:visibility="invisible" />
+
 
 </android.support.design.widget.CoordinatorLayout>

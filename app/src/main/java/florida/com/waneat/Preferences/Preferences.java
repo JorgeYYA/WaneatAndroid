@@ -19,6 +19,8 @@ public class Preferences {
     public static final String SIGNED_IN  = "isSignedIn";
     public static final String RESTAURANT_KEY  = "restaurant";
 
+    //Preferences.setString(context, Preferences.USUARIO_KEY, string);
+
     public static void setString(Context context, final String key, final String string) {
         SharedPreferences shapref = PreferenceManager.getDefaultSharedPreferences(context);
         SharedPreferences.Editor editor = shapref.edit();
