@@ -1,10 +1,16 @@
 package florida.com.waneat.Fragments;
 
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.style.UnderlineSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import florida.com.waneat.R;
 
@@ -44,6 +50,22 @@ public class AboutFragment extends android.support.v4.app.Fragment {
 
         getActivity().setTitle("Información");
         mListener.changeColorToolbar(true);
+
+        TextView textView = (TextView) v.findViewById(R.id.text_Info9);
+        SpannableString content = new SpannableString("Página Web");
+        content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
+        textView.setTextColor(Color.parseColor("#2083ED"));
+        textView.setText(content);
+
+        textView.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Uri uri = Uri.parse("http://waneat.es/");
+                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                startActivity(intent);
+            }
+        });
 
         return v;
     }

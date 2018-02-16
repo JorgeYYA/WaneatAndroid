@@ -32,6 +32,7 @@ public class ProductFragment extends Fragment {
     private TextView price, name, desc,categoriaProducto, ratingNumberRestaurant;
     private Button add;
     private OnFragmentInteractionListener mListener;
+    private RatingBar ratingRestaurant;
     private RatingBar ratingBar;
     public static boolean pause;
     static int size;
@@ -109,6 +110,19 @@ public class ProductFragment extends Fragment {
         });
 
         mListener.changeColorToolbar(true);
+        ratingRestaurant = (RatingBar) v.findViewById(R.id.ratingRestaurant);
+
+        ratingRestaurant.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_UP) {
+                    DialogProductRating ratingDialog = new DialogProductRating();
+                    // Show Alert DialogFragment
+                    ratingDialog.show(getFragmentManager(), "Alert Dialog Fragment");
+                }
+                return true;
+            }
+        });
 
         return v;
     }
