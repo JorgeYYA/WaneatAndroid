@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-    <string name="app_name">Waneat</string>
+    <string name="badge">€</string>
+    <string name="action_settings">Ajustes</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="comments">Comentarios Adicionales</string>
     <string name="add_product">Añadir a la cesta</string>
-    <string name="action_settings">Opciones</string>
     <string name="editLogMail">Correo Elecrónico</string>
     <string name="editLogPass">Contraseña</string>
     <string name="buttonLogin">Iniciar</string>
@@ -37,5 +37,6 @@
     <string name="tagCorreo">Correo</string>
     <string name="tagTlf">Teléfono</string>
     <string name="buttonCambios">GUARDAR CAMBIOS</string>
-
+    <string name="app_name">Waneat</string>
+    <string name="profile">Perfil</string>
 </resources>

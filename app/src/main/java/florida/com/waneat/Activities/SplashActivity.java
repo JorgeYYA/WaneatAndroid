@@ -6,8 +6,10 @@ import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ImageView;
 
 import com.felipecsl.gifimageview.library.GifImageView;
+import com.koushikdutta.ion.Ion;
 
 import org.apache.commons.io.IOUtils;
 
@@ -18,7 +20,7 @@ import florida.com.waneat.R;
 
 public class SplashActivity extends AppCompatActivity {
 
-    private GifImageView gifImageView;
+    private ImageView gifImageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,15 +32,14 @@ public class SplashActivity extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_splash);
 
-        gifImageView = (GifImageView)findViewById(R.id.carga);
+        gifImageView = (ImageView)findViewById(R.id.carga);
 
         try{
-            InputStream inputStream = getAssets().open("splash.gif");
-            byte[] bytes = IOUtils.toByteArray(inputStream);
-            gifImageView.setBytes(bytes);
-            gifImageView.startAnimation();
+            Ion.with(gifImageView)
+                    .fitCenter()
+                    .load("https://loading.io/spinners/ellipsis/lg.discuss-ellipsis-preloader.gif");
         }
-        catch (IOException ex){
+        catch (Exception ex){
 
         }
 
