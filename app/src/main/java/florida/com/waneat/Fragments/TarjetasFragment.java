@@ -1,8 +1,10 @@
 package florida.com.waneat.Fragments;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -12,12 +14,17 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
 import florida.com.waneat.Adapters.AdapterItemList;
+import florida.com.waneat.Adapters.AdapterOrderList;
 import florida.com.waneat.Adapters.AdapterTarjetas;
 import florida.com.waneat.Models.CreditCard;
+import florida.com.waneat.Models.Order;
+import florida.com.waneat.Preferences.Preferences;
 import florida.com.waneat.R;
 
 
@@ -31,6 +38,7 @@ public class TarjetasFragment extends Fragment {
     private EditText number,month,year,cvc,holder;
     private RelativeLayout cardFront, cardBack;
     private Button nextButton;
+    private TextView emptyList;
 
     private ArrayList<CreditCard> tarjetas = new ArrayList<CreditCard>();
     private AdapterItemList adapter;
@@ -38,6 +46,8 @@ public class TarjetasFragment extends Fragment {
     private boolean isFront = false;
 
     private OnFragmentInteractionListener mListener;
+
+    RecyclerView rv;
 
 
     public TarjetasFragment() {
@@ -62,8 +72,8 @@ public class TarjetasFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_tarjetas, container, false);
 
-        tarjetas.add(new CreditCard("6567","David","e","e",4));
-        tarjetas.add(new CreditCard("1243124","Sergio","e","e",4));
+
+
         mListener.hideFloatingActionButton();
 
         this.number = v.findViewById(R.id.creditCardNumber);
@@ -75,18 +85,26 @@ public class TarjetasFragment extends Fragment {
         this.cardFront = v.findViewById(R.id.frontCard);
         this.nextButton = v.findViewById(R.id.guardarCredit);
 
+
         getActivity().setTitle("Tus tarjetas");
+
+
+
 
         //METHODS
         toggleCard();
 
 
         mListener.changeColorToolbar(true);
-        RecyclerView rv = (RecyclerView)v.findViewById(R.id.recycler_tarjetas);
+
+        emptyList = (TextView) v.findViewById(R.id.empty_list);
+        rv = (RecyclerView)v.findViewById(R.id.recycler_tarjetas);
+
         LinearLayoutManager llm = new LinearLayoutManager(v.getContext());
         rv.setLayoutManager(llm);
-        AdapterTarjetas adapter = new AdapterTarjetas(tarjetas);
-        rv.setAdapter(adapter);
+
+        cargarDatos();
+
 
         return v;
     }
@@ -131,7 +149,11 @@ public class TarjetasFragment extends Fragment {
                }
             }
         });
+
+
     }
+
+
 
     private void checkButton(){
         if(!isFront){
@@ -143,13 +165,111 @@ public class TarjetasFragment extends Fragment {
     }
 
     private void guardarDatos(){
-        CreditCard card = new CreditCard(
-                this.number.getText().toString(),
-                this.holder.getText().toString(),
-                this.month.getText().toString(),
-                this.year.getText().toString(),
-                Integer.parseInt(this.cvc.getText().toString()));
-        Log.d("TAG", "guardarDatos: "+card.toString());
+
+
+        if(this.number.getText().toString().length()==16) {
+
+            CreditCard card = new CreditCard(
+                    this.number.getText().toString(),
+                    this.holder.getText().toString(),
+                    this.month.getText().toString(),
+                    this.year.getText().toString(),
+                    Integer.parseInt(this.cvc.getText().toString()));
+
+
+            tarjetas.add(card);
+
+            Preferences.creditCardToString(getContext(), Preferences.CREDIT_CARD, tarjetas);
+
+            cargarDatos();
+
+        }else{
+
+            Toast.makeText(getActivity(), "Los datos de la tarjeta no son correctos", Toast.LENGTH_SHORT).show();
+
+        }
+
+
+
+    }
+
+    private  void cargarDatos(){
+
+
+        emptyList.setVisibility(View.GONE);
+
+        tarjetas = Preferences.gsonToCreditCard(getContext());
+
+        rv.setAdapter(new AdapterTarjetas(tarjetas, new AdapterTarjetas.OnItemLongClickListener() {
+
+
+            @Override
+            public boolean onItemLongClick(CreditCard item) {
+
+                borrarTarjetas(item.getId(), item.getCreditCardNumber());
+
+                return true;
+
+            }
+        }));
+
+        if (Preferences.gsonToCreditCard(getContext()).size() == 0) {
+            emptyList.setVisibility(View.VISIBLE);
+        }
+
+    }
+
+    private void borrarTarjetas(final int id, final String cardName){
+
+
+
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setMessage("¿Está seguro de que desea eliminar la tarjeta "+cardName.substring(0, 4) + " **** **** " + cardName.substring(12, 16)+"?").setTitle("Eliminar");
+
+        builder.setPositiveButton("Eliminar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                tarjetas.remove(id);
+
+                fixCardsArray();
+
+            }
+        });
+
+        builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+
+
+            }
+        });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+
+
+    }
+
+    public void fixCardsArray(){
+
+        for (int i = 0;i<tarjetas.size();i++){
+
+            tarjetas.get(i).setId(i);
+
+        }
+
+        Preferences.creditCardToString(getContext(),Preferences.CREDIT_CARD,tarjetas);
+
+
+        Preferences.setInt(getContext(),Preferences.PREFERRED_CREDIT_CARD,0);
+
+        cargarDatos();
+
+
+
     }
 
 
