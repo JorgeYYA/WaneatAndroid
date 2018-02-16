@@ -5,6 +5,8 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -22,10 +24,13 @@ import com.koushikdutta.ion.Ion;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.List;
 
 import florida.com.waneat.Activities.MainActivity;
 import florida.com.waneat.Adapters.AdapterProductList;
+import florida.com.waneat.Adapters.PhotoGalleryPager;
 import florida.com.waneat.Adapters.PhotoGalleryPagerAdapter;
+import florida.com.waneat.Models.ImageProduct;
 import florida.com.waneat.Models.Order;
 import florida.com.waneat.Models.Product;
 import florida.com.waneat.R;
@@ -39,8 +44,8 @@ public class ShowOrder extends Fragment {
     private ArrayList<Product> products;
     private RecyclerView recyclerProd;
     private TextView resName,date,totalPrize;
-    private ImageView imagenOrder;
     private OnFragmentInteractionListener mListener;
+    private ViewPager viewpager;
     static int size;
 
     public ShowOrder() {
@@ -74,18 +79,17 @@ public class ShowOrder extends Fragment {
         resName = (TextView) v.findViewById(R.id.res_name);
         date = (TextView) v.findViewById(R.id.order_date);
         totalPrize = (TextView) v.findViewById(R.id.prize);
-        imagenOrder = (ImageView) v.findViewById(R.id.imagen);
+        //imagenOrder = (ImageView) v.findViewById(R.id.imagen);
+        viewpager = (ViewPager) v.findViewById(R.id.viewPagerShow);
         products = order.getProducts();
 
         recyclerProd = (RecyclerView) v.findViewById(R.id.product_list);
 
-        LinearLayoutManager llm = new LinearLayoutManager(getActivity());
 
-        recyclerProd.setLayoutManager(llm);
-
-
-
-
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
+        recyclerProd.setLayoutManager(mLayoutManager);
+        recyclerProd.setItemAnimator(new DefaultItemAnimator());
+        recyclerProd.addItemDecoration(new DividerItemDecoration(getContext(), LinearLayoutManager.VERTICAL));
 
         recyclerProd.setAdapter(new AdapterProductList(products, new AdapterProductList.OnItemClickListener() {
 
@@ -101,18 +105,24 @@ public class ShowOrder extends Fragment {
         }));
 
 
+
         mListener.changeColorToolbar(true);
         recyclerProd.invalidate();
 
 
-        DecimalFormat df = new DecimalFormat("#.00");
+        DecimalFormat df = new DecimalFormat("#.00 €");
 
         //Muestra por pantalla los datos del pedido
         resName.setText(order.getResName());
         date.setText(order.getDate());
-        totalPrize.setText(df.format(order.getTotal())+"");
-        Ion.with(imagenOrder).load(order.getProducts().get(0).getImages().get(0).getImageUrl());
-        Log.d("ShowOrder", "onCreateView: "+order.getProducts().get(0).getNameProduct());
+        totalPrize.setText("Total: "+df.format(order.getTotal()));
+
+        PhotoGalleryPagerAdapter adapter = new PhotoGalleryPagerAdapter(getContext(), order.getProducts().get(0).getImages());
+
+        if (viewpager != null) {
+            viewpager.setAdapter(adapter);
+        }
+
 
         getActivity().setTitle("Pedido");
 

@@ -7,29 +7,29 @@
     android:orientation="vertical">
 
     <LinearLayout
+        android:padding="10dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_weight="1"
         android:background="@android:color/background_light"
         android:columnCount="3">
 
         <TextView
             android:id="@+id/quantity"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:layout_marginLeft="20dp"
-            android:text="1x"
-            android:textColor="@android:color/background_dark"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:text="8x"
+            android:textAlignment="center"
+            android:textColor="@color/colorSecondaryDarkWaneat"
             android:textSize="20sp"
-            android:textStyle="italic" />
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/prod_name"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_marginLeft="20dp"
-            android:layout_weight="1"
+            android:layout_weight="0.4"
             android:text="Macarrones sadsdsasdasdasd"
             android:textColor="@android:color/darker_gray"
             android:textSize="15sp" />

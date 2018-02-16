@@ -54,7 +54,6 @@ public class UserService {
 
         if(Preferences.getBoolean(context,Preferences.SIGNED_IN)){
             //significa que esta logueado
-            Toast.makeText(context, "Ya estas logueado", Toast.LENGTH_SHORT).show();
             context.startActivity(new Intent(context,MainActivity.class));
             return true;
         }else{

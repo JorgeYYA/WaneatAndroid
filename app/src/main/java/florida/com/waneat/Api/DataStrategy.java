@@ -20,7 +20,8 @@ public abstract class DataStrategy {
     public abstract void register(RegisterData data, InteractDispacherRegister dispacher);
     public abstract void update(User user, InteractDispacherUpdate update);
     public abstract void getRestaurant(int id, InteractDispacherGetRestaurants dispacher);
-
+    public abstract void insertRating(DataRestaurantRating data, InteractDispacherRestaurantRating dispacher);
+    public abstract void insertProductRating(DataProductRating data, InteractDispacherRestaurantRating dispacher);
 
     public interface InteractDispacher {
         void login(User user);
@@ -39,6 +40,16 @@ public abstract class DataStrategy {
 
     public interface InteractDispacherGetRestaurants{
         void getRestaurant(Restaurant restaurant);
+        void isError(Throwable t);
+    }
+
+    public interface InteractDispacherRestaurantRating{
+        void insertRating(DataRestaurantRating data);
+        void isError(Throwable t);
+    }
+
+    public interface InteractDispacherProductRating{
+        void insertProductRating(DataProductRating data);
         void isError(Throwable t);
     }
 
@@ -73,6 +84,16 @@ public abstract class DataStrategy {
     public interface ObjectStrategyGetRestaurant{
         @GET("restaurant/{id}")
         Call<Restaurant> getRestaurant(@Path("id") int idItem);
+    }
+
+    public interface ObjectInsertRating{
+        @POST("insertRating")
+        Call insertRating(@Body DataRestaurantRating data);
+    }
+
+    public interface ObjectInsertProductRating{
+        @POST("insertProductRating")
+        Call insertProductRating(@Body DataProductRating data);
     }
 
 }

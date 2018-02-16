@@ -86,14 +86,12 @@ public class DataWebService extends DataStrategy  {
 
     @Override
     public void getRestaurant(int id, final InteractDispacherGetRestaurants dispacher) {
-        Log.d("DATAWEBSERVICE", "getResta: que cojones pasa");
         ObjectStrategyGetRestaurant getterRestaurant = retrofit.create(ObjectStrategyGetRestaurant.class);
         Call<Restaurant> call = getterRestaurant.getRestaurant(id);
         call.enqueue(new Callback<Restaurant>() {
             @Override
             public void onResponse(Call<Restaurant> call, Response<Restaurant> response) {
                 dispacher.getRestaurant(response.body());
-                Log.d("DATAWEBSERVICE", "onResponse: "+response.body().getNameRestaurant());
             }
 
             @Override
@@ -102,4 +100,15 @@ public class DataWebService extends DataStrategy  {
             }
         });
     }
+
+    @Override
+    public void insertRating(DataRestaurantRating data, InteractDispacherRestaurantRating dispacher) {
+
+    }
+
+    @Override
+    public void insertProductRating(DataProductRating data, InteractDispacherRestaurantRating dispacher) {
+
+    }
 }
+

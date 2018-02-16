@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import florida.com.waneat.Activities.MainActivity;
@@ -85,16 +86,12 @@ public class AdapterProductList extends RecyclerView.Adapter<AdapterProductList.
 
 
         ViewHolder.bind(products.get(i), listener);
-
-        int numProd;
-
-        String list = "";
-
+        DecimalFormat df = new DecimalFormat("#.00 €");
 
 
         ViewHolder.prodName.setText(products.get(i).getNameProduct());
         ViewHolder.quantity.setText(products.get(i).getCantidad()+"");
-        ViewHolder.prize.setText(products.get(i).getPriceProduct()+"");
+        ViewHolder.prize.setText(df.format(products.get(i).getPriceProduct()));
 
     }
 

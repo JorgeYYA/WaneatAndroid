@@ -1,5 +1,7 @@
 package florida.com.waneat.Adapters;
 
+import android.content.Context;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -27,10 +29,12 @@ public class AdapterOrderList extends RecyclerView.Adapter<AdapterOrderList.Clas
 
     private final OnItemClickListener listener;
     ArrayList<Order> orders = new ArrayList<>();
+    private Context context;
 
     public static class ClaseViewHolder extends RecyclerView.ViewHolder {
 
         TextView resName, date, prodList, totalPrize;
+        ViewPager viewPager;
 
         ClaseViewHolder(View itemView) {
             super(itemView);
@@ -39,7 +43,7 @@ public class AdapterOrderList extends RecyclerView.Adapter<AdapterOrderList.Clas
             date = itemView.findViewById(R.id.date);
             prodList = itemView.findViewById(R.id.prod_list);
             totalPrize = itemView.findViewById(R.id.prize);
-
+            viewPager = itemView.findViewById(R.id.viewPagerOrder);
 
         }
 
@@ -63,9 +67,10 @@ public class AdapterOrderList extends RecyclerView.Adapter<AdapterOrderList.Clas
 
 
 
-    public AdapterOrderList(ArrayList<Order> orders, OnItemClickListener listener){
+    public AdapterOrderList(ArrayList<Order> orders, Context context, OnItemClickListener listener){
         this.orders = orders;
         this.listener = listener;
+        this.context = context;
     }
 
 
@@ -92,12 +97,14 @@ public class AdapterOrderList extends RecyclerView.Adapter<AdapterOrderList.Clas
 
         String list = "";
 
-        DecimalFormat df = new DecimalFormat("#.00");
+        DecimalFormat df = new DecimalFormat("#.00€");
 
 
         ViewHolder.resName.setText(orders.get(i).getResName());
         ViewHolder.date.setText(orders.get(i).getDate());
-        ViewHolder.totalPrize.setText(df.format(orders.get(i).getTotal())+"");
+        ViewHolder.totalPrize.setText(df.format(orders.get(i).getTotal()));
+        PhotoGalleryPagerAdapter adapter = new PhotoGalleryPagerAdapter(context, orders.get(i).getProducts().get(0).getImages());
+        ViewHolder.viewPager.setAdapter(adapter);
 
         if(orders.get(i).getProducts() != null){
             if (orders.get(i).getProducts().size()>=3){
@@ -138,25 +145,10 @@ public class AdapterOrderList extends RecyclerView.Adapter<AdapterOrderList.Clas
 
 
     public interface OnItemClickListener {
-
         void onItemClick(Order item);
-
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-    @Override
+     @Override
     public void onAttachedToRecyclerView(RecyclerView recyclerView) {
         super.onAttachedToRecyclerView(recyclerView);
     }

@@ -80,6 +80,8 @@ public class MainActivity extends AppCompatActivity implements
         setTitle("Waneat");
 
         this.service = new UserService(MainActivity.this);
+        this.userLogged = Preferences.gsonToUser(MainActivity.this);
+
         fab = (FloatingActionButton) findViewById(R.id.fab);
 
 

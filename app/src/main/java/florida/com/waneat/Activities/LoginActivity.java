@@ -44,7 +44,6 @@ public class LoginActivity extends AppCompatActivity {
                 //llamar metodo service
 
                 service.signIn(editLogEmail.getText().toString(), editLogPass.getText().toString());
-                finish();
             }
         });
 

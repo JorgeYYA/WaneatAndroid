@@ -160,7 +160,6 @@ public class ListProductFragment extends Fragment {
             fab_pescado.startAnimation(fabClose);
             fab_pasta.startAnimation(fabClose);
             fab_bebida.startAnimation(fabClose);
-            fab_cat.setClickable(false);
             fab_carne.setClickable(false);
             fab_pescado.setClickable(false);
             fab_pasta.setClickable(false);

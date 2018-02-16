@@ -8,6 +8,7 @@ import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -75,6 +76,9 @@ public class OrderList extends Fragment {
         empty = (LinearLayout) v.findViewById(R.id.empty_list);
         info = (TextView) v.findViewById(R.id.info);
 
+
+
+
         info.setText("  Cargando...\n(Podría tardar un rato)");
 
 
@@ -124,7 +128,7 @@ public class OrderList extends Fragment {
 
                 recyclerOrders.setLayoutManager(llm);
 
-                recyclerOrders.setAdapter(new AdapterOrderList(orders, new AdapterOrderList.OnItemClickListener() {
+                recyclerOrders.setAdapter(new AdapterOrderList(orders, getContext(), new AdapterOrderList.OnItemClickListener() {
 
                     @Override
                     public void onItemClick(Order item) {
