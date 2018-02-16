@@ -113,34 +113,13 @@ public class DialogFragment extends android.support.v4.app.DialogFragment{
 
         restaurant = Preferences.gsonToRestaurant(getContext());
 
-        CreditCard cc1 = new CreditCard("4242424242424242","111","111","111",1);
-        CreditCard cc2 = new CreditCard("0123456789123456","111","111","111",1);
+        if(Preferences.gsonToCreditCard(getContext()) != null){
 
-        cc1.setId(0);
-        cc2.setId(1);
+            cards = Preferences.gsonToCreditCard(getContext());
 
-        cards.add(cc1);
+        }
 
-        cards.add(cc2);
-
-        if(cards.size()!=0) {
-
-                //Importante, cuando se borre un de las tarjetas registradas, reiniciar el valor "preferred_card" a 0 para evitar conflictos
-
-                SharedPreferences prefs = getActivity().getSharedPreferences(MainActivity.PREFERENCES, MODE_PRIVATE);
-
-                int cardId = prefs.getInt("preferred_card", 0);
-
-                tarjetaCredito.setText(cards.get(cardId).getCreditCardNumber().substring(0, 4) + " **** **** " + cards.get(cardId).getCreditCardNumber().substring(12, 16));
-
-                buttonIntroducirTarj.setVisibility(View.VISIBLE);
-
-                cardsNotFound = false;
-
-                buttonIntroducirTarj.setText("Cambiar tarjeta");
-
-
-        }else{
+        if(cards.size()== 0) {
 
             tarjetaCredito.setText("No tienes tarjetas guardadas");
             //tarjetaCredito.setText("Pulsa 'Anadir tarjeta' para añadir una trajeta de crédito");
@@ -148,6 +127,31 @@ public class DialogFragment extends android.support.v4.app.DialogFragment{
             buttonIntroducirTarj.setText("Añadir tarjeta");
 
             cardsNotFound = true;
+
+
+        }else{
+
+            int cardId = 0;
+
+            if(Preferences.getInt(getContext(), Preferences.PREFERRED_CREDIT_CARD) == -1 || cards.size()-1<Preferences.getInt(getContext(), Preferences.PREFERRED_CREDIT_CARD)) {
+
+                Preferences.setInt(getContext(),Preferences.PREFERRED_CREDIT_CARD,0);
+
+            }
+
+            cardId = Preferences.getInt(getContext(), Preferences.PREFERRED_CREDIT_CARD);
+
+
+
+            tarjetaCredito.setText(cards.get(cardId).getCreditCardNumber().substring(0, 4) + " **** **** " + cards.get(cardId).getCreditCardNumber().substring(12, 16));
+
+            buttonIntroducirTarj.setVisibility(View.VISIBLE);
+
+            cardsNotFound = false;
+
+            buttonIntroducirTarj.setText("Cambiar tarjeta");
+
+
 
 
         }
@@ -210,12 +214,8 @@ public class DialogFragment extends android.support.v4.app.DialogFragment{
                             addAnotherCard();
 
                         }
-
-
-
                     }
                 });
-
             }
         });
 
@@ -269,11 +269,7 @@ public class DialogFragment extends android.support.v4.app.DialogFragment{
 
                 recyclerView.setAdapter(adapterCompra);
 
-                SharedPreferences.Editor prefs = getActivity().getSharedPreferences(MainActivity.PREFERENCES, MODE_PRIVATE).edit();
-
-                prefs.putInt("preferred_card", item.getId());
-
-                prefs.apply();
+                Preferences.setInt(getContext(),Preferences.PREFERRED_CREDIT_CARD,item.getId());
 
                 tarjetaCredito.setText(item.getCreditCardNumber().substring(0, 4) + " **** **** " + item.getCreditCardNumber().substring(12, 16));
 

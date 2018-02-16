@@ -9,7 +9,9 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 
+import florida.com.waneat.Models.CreditCard;
 import florida.com.waneat.Models.Restaurant;
 import florida.com.waneat.Models.User;
 
@@ -18,6 +20,10 @@ public class Preferences {
     public static final String USUARIO_KEY = "usuario";
     public static final String SIGNED_IN  = "isSignedIn";
     public static final String RESTAURANT_KEY  = "restaurant";
+    public static final String PREFERRED_CREDIT_CARD = "preferred_card";
+    public static final String CREDIT_CARD = "credit_cards";
+
+
 
     public static void setString(Context context, final String key, final String string) {
         SharedPreferences shapref = PreferenceManager.getDefaultSharedPreferences(context);
@@ -25,6 +31,7 @@ public class Preferences {
         editor.putString(key, string);
         editor.apply();
     }
+
 
     public static String getString(Context context, final String key) {
         SharedPreferences shapref = PreferenceManager.getDefaultSharedPreferences(context);
@@ -87,4 +94,18 @@ public class Preferences {
         }.getType();
         return gson.fromJson(Preferences.getString(context, USUARIO_KEY), type);
     }
+
+    public static ArrayList<CreditCard> gsonToCreditCard(Context context) {
+        Gson gson = new Gson();
+        Type type = new TypeToken<ArrayList<CreditCard>>() {
+        }.getType();
+        return gson.fromJson(Preferences.getString(context, CREDIT_CARD), type);
+    }
+
+
+    public static void creditCardToString (Context context, final String key, final ArrayList<CreditCard> cards) {
+        Gson gson = new Gson();
+        setString(context, CREDIT_CARD, gson.toJson(cards));
+    }
+
 }
