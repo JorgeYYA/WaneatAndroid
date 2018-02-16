@@ -71,7 +71,6 @@ public class DialogFragment extends android.support.v4.app.DialogFragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View rootView = inflater.inflate(R.layout.dialog_fragment, container, false);
-        getDialog().setTitle("Cesta");
         this.cesta = mListener.getProductosCesta();
         this.recyclerView = rootView.findViewById(R.id.cestaRecyclerView);
         this.recyclerCards = rootView.findViewById(R.id.recycler_cards);

@@ -121,6 +121,7 @@ public class ListProductFragment extends Fragment {
         recyclerView.setAdapter(productAdapter);
 
         getActivity().setTitle("Waneat");
+        mListener.changeColorToolbar();
 
 
         return v;
@@ -150,6 +151,7 @@ public class ListProductFragment extends Fragment {
     public interface OnFragmentInteractionListener {
         List<Product> getProductos();
         Restaurant getRestauranteSelected();
+        void changeColorToolbar();
         void verProducto(int position);
         void showFloatingActionButton();
         void hideFloatingActionButton();

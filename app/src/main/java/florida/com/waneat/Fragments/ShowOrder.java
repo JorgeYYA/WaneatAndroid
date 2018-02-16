@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import com.koushikdutta.ion.Ion;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import florida.com.waneat.Activities.MainActivity;
@@ -104,15 +105,17 @@ public class ShowOrder extends Fragment {
         recyclerProd.invalidate();
 
 
+        DecimalFormat df = new DecimalFormat("#.00");
+
         //Muestra por pantalla los datos del pedido
         resName.setText(order.getResName());
         date.setText(order.getDate());
-        totalPrize.setText(order.getTotal()+"");
+        totalPrize.setText(df.format(order.getTotal())+"");
+        //ESTO PETA
         Ion.with(imagenOrder).load(order.getProducts().get(0).getImages().get(0).getImageUrl());
+        Log.d("ShowOrder", "onCreateView: "+order.getProducts().get(0).getNameProduct());
 
-        //TODO: Cambiar a order num
-        getActivity().setTitle("Pedido Num: 1");
-
+        getActivity().setTitle("Pedido Num: "+order.getId());
 
         return v;
     }

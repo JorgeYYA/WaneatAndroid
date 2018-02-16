@@ -38,25 +38,10 @@ import florida.com.waneat.R;
 
 
 public class OrderList extends Fragment {
-
-
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    ArrayList<Order> orders;
-
-    ArrayList<Integer> imagen = new ArrayList<>();
-
-    ArrayList<Product> products = new ArrayList<>();
-
-    RecyclerView recyclerOrders;
-
-    double total;
-
-    LinearLayout empty;
-
-    TextView info;
-
+    private ArrayList<Order> orders = new ArrayList<>();
+    private RecyclerView recyclerOrders;
+    private LinearLayout empty;
+    private TextView info;
     private InterfaceOrder interfaz;
 
 
@@ -71,53 +56,46 @@ public class OrderList extends Fragment {
 
     public static OrderList newInstance(String param1, String param2) {
         OrderList fragment = new OrderList();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
         return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-
-        }
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View v = inflater.inflate(R.layout.fragment_order_list, container, false);
 
+        this.user =  Preferences.gsonToUser(getContext());
+
         empty = (LinearLayout) v.findViewById(R.id.empty_list);
         info = (TextView) v.findViewById(R.id.info);
 
         info.setText("  Cargando...\n(Podría tardar un rato)");
 
-        products = new ArrayList<Product>();
-        orders = new ArrayList<Order>();
 
         recyclerOrders = (RecyclerView)v.findViewById(R.id.recycler_orders);
 
         interfaz.hideFloatingActionButton();
 
-        imagen = new ArrayList<>();
 
         user = Preferences.gsonToUser(getContext());
 
         bbdd = bbdd.child("pedidos");
 
 
-
         if (!MainActivity.verificaConexion(getActivity())) {
             info.setText("No se ha podido conectar, \ncomprueba tu conexión a internet");
-        }else {
+        } else {
 
             recuperaDatos();
 
         }
+
 
         return v;
     }
@@ -145,7 +123,6 @@ public class OrderList extends Fragment {
 
                 recyclerOrders.setLayoutManager(llm);
 
-
                 recyclerOrders.setAdapter(new AdapterOrderList(orders, new AdapterOrderList.OnItemClickListener() {
 
                     @Override
@@ -171,18 +148,12 @@ public class OrderList extends Fragment {
 
                     empty.setVisibility(View.GONE);
                     recyclerOrders.setVisibility(View.VISIBLE);
-
-
                 }
-
-
-
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
 
-                info.setText("No se ha podido conectar, comprueba tu conexión a internet");
 
             }
         });
@@ -207,20 +178,6 @@ public class OrderList extends Fragment {
         }
     }
 
-    public double sumaPrecio(ArrayList<Product> products){
-
-        double total = 0;
-
-        for(int i=0;i<products.size();i++){
-
-            for(int i1=0;i1<products.get(i).getCantidad();i1++) {
-                total = total + products.get(i).getPriceProduct();
-            }
-
-        }
-
-        return total;
-    }
 
     public interface InterfaceOrder{
         void interfaceOrder(Order order);

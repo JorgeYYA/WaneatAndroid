@@ -55,6 +55,8 @@ public class MainActivity extends AppCompatActivity implements
 
     public ArrayList<Product> productosCesta = new ArrayList<>();
     public ArrayList<Product> productosLista = new ArrayList<>();
+    public ArrayList<Product> productosFiltrados = new ArrayList<>();
+    public boolean isFiltered = false;
 
     public Product productoSelected = new Product();
     public Restaurant restauranteSelected = new Restaurant();
@@ -138,6 +140,7 @@ public class MainActivity extends AppCompatActivity implements
         fab_pasta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                filtrarCategoria("Pasta");
                 animateFab();
 
             }
@@ -252,6 +255,15 @@ public class MainActivity extends AppCompatActivity implements
         this.productosCesta.get(position).setCantidad(cantidadActual);
     }
 
+    public void filtrarCategoria(String categoria){
+        for(int i=0;i<this.productosLista.size();i++){
+            if(productosLista.get(i).getCategoryProduct().equalsIgnoreCase(categoria)){
+                productosFiltrados.add(productosLista.get(i));
+            }
+        }
+        productosLista = productosFiltrados;
+    }
+
     @Override
     public void addToCart(Product prod) {
         boolean added = false;
@@ -330,7 +342,6 @@ public class MainActivity extends AppCompatActivity implements
         ft.replace(R.id.fragment, new InitialFragment());
         ft.addToBackStack("MY_FRAGMENT");
         ft.commit();
-        toolbar.setBackgroundColor(ContextCompat.getColor(this, R.color.colorSecondaryDarkWaneat));
     }
 
     @Override
@@ -351,7 +362,6 @@ public class MainActivity extends AppCompatActivity implements
         ft.replace(R.id.fragment, new ProductFragment());
         ft.addToBackStack("MY_FRAGMENT");
         ft.commit();
-        toolbar.setBackgroundColor(ContextCompat.getColor(this, R.color.colorSecondaryDarkWaneat));
     }
 
 
@@ -365,25 +375,20 @@ public class MainActivity extends AppCompatActivity implements
 
         if (id == R.id.nav_miperfil) {
             ft.replace(R.id.fragment, UsuarioFragment.newInstance()).addToBackStack("MY_FRAGMENT");
-            toolbar.setBackgroundColor(ContextCompat.getColor(this, R.color.colorSecondaryDarkWaneat));
         }else if (id == R.id.nav_mispedidos) {
             ft.replace(R.id.fragment, OrderList.newInstance(null,null)).addToBackStack("MY_FRAGMENT");
-            toolbar.setBackgroundColor(ContextCompat.getColor(this, R.color.colorSecondaryDarkWaneat));
 
         } else if (id == R.id.nav_qr) {
             ft.replace(R.id.fragment, InitialFragment.newInstance()).addToBackStack("MY_FRAGMENT");
-            toolbar.setBackgroundColor(ContextCompat.getColor(this, R.color.colorSecondaryDarkWaneat));
 
         } else if (id == R.id.nav_mistarjetas) {
             ft.replace(R.id.fragment, TarjetasFragment.newInstance()).addToBackStack("MY_FRAGMENT");
-            toolbar.setBackgroundColor(ContextCompat.getColor(this, R.color.colorSecondaryDarkWaneat));
 
         } else if (id == R.id.nav_logout) {
             this.service.signOut();
             startActivity(new Intent(MainActivity.this, LoginActivity.class));
         } else if (id == R.id.nav_about) {
             ft.replace(R.id.fragment, AboutFragment.newInstance()).addToBackStack("MY_FRAGMENT");
-            toolbar.setBackgroundColor(ContextCompat.getColor(this, R.color.colorSecondaryDarkWaneat));
         }
 
         ft.commit();
@@ -408,8 +413,6 @@ public class MainActivity extends AppCompatActivity implements
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        Log.d("REQUESTCODE", "onActivityResult: "+requestCode);
-        Log.d("RESULTCODE", "onActivityResult: "+resultCode);
 
         if (requestCode == PICK_CONTACT_REQUEST) {
             if (resultCode == RESULT_OK) {
@@ -419,15 +422,12 @@ public class MainActivity extends AppCompatActivity implements
                 this.productosLista = this.restauranteSelected.getProducts();
 
                 ListProductFragment main = ListProductFragment.newInstance();
-                Log.d("PRUEBA", "onActivityResult: ENTRA EN RESULT OK");
 
 
                 fm = getSupportFragmentManager();
                 FragmentTransaction ft = fm.beginTransaction();
                 ft.replace(R.id.fragment, main, "MY_FRAGMENT");
                 ft.commitAllowingStateLoss();
-            }else{
-                Log.d("PRUEBA", "onActivityResult: NO ES -1");
             }
         }
     }
@@ -436,7 +436,11 @@ public class MainActivity extends AppCompatActivity implements
     public void interfaceOrder(Order order) {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.fragment, ShowOrder.newInstance(order)).addToBackStack("MY_FRAGMENT");
-        toolbar.setBackgroundColor(ContextCompat.getColor(this, R.color.colorSecondaryDarkWaneat));
         ft.commit();
+    }
+
+    @Override
+    public void changeColorToolbar(){
+        toolbar.setBackgroundColor(ContextCompat.getColor(this, android.R.color.transparent));
     }
 }

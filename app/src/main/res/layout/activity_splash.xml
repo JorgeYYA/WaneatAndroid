@@ -28,7 +28,7 @@
         android:textStyle="bold"
         />
 
-    <com.felipecsl.gifimageview.library.GifImageView
+    <ImageView
         android:id="@+id/carga"
         android:layout_width="100dp"
         android:layout_height="100dp"
