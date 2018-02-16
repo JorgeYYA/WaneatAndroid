@@ -14,7 +14,7 @@
         android:layout_width="229dp"
         android:layout_height="93dp"
         android:layout_gravity="center"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="60dp"
         android:layout_weight="1"
         android:src="@drawable/logo" />
 
@@ -39,61 +39,14 @@
         android:textColor="@android:color/black"
         android:textSize="18sp" />
 
-    <TextView
-        android:id="@+id/text_Info3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:layout_weight="1"
-        android:paddingStart="20dp"
-        android:text="Desarrollo:"
-        android:textColor="@android:color/black"
-        android:textSize="20dp" />
-
-    <TextView
-        android:id="@+id/text_Info4"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:paddingStart="10dp"
-        android:text="Sergio"
-        android:textSize="18dp" />
-
-    <TextView
-        android:id="@+id/text_Info5"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="David"
-        android:paddingStart="10dp"
-        android:textSize="18dp" />
-
-
-    <TextView
-        android:id="@+id/text_Info6"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:paddingStart="10dp"
-        android:text="Jorge"
-        android:textSize="18dp" />
-
-    <TextView
-        android:id="@+id/text_Info7"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:paddingStart="10dp"
-        android:text="David"
-        android:textSize="18dp" />
 
     <TextView
         android:id="@+id/text_Info8"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:gravity="center|start"
         android:paddingStart="20dp"
-        android:paddingTop="10dp"
         android:text="Más información:"
         android:textColor="@color/colorSecondaryDarkWaneat"
         android:textSize="24sp" />
@@ -103,8 +56,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:paddingBottom="20dp"
-        android:paddingStart="10dp"
+        android:paddingStart="30dp"
         android:textSize="20dp" />
 
 </LinearLayout>
