@@ -39,10 +39,7 @@ public class TarjetasFragment extends Fragment {
     private RelativeLayout cardFront, cardBack;
     private Button nextButton;
     private TextView emptyList;
-
-    private ArrayList<CreditCard> tarjetas = new ArrayList<CreditCard>();
-    private AdapterItemList adapter;
-
+    private ArrayList<CreditCard> tarjetas = new ArrayList<>();
     private boolean isFront = false;
 
     private OnFragmentInteractionListener mListener;
@@ -71,6 +68,7 @@ public class TarjetasFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_tarjetas, container, false);
+
 
 
 
@@ -177,12 +175,18 @@ public class TarjetasFragment extends Fragment {
                     this.year.getText().toString(),
                     Integer.parseInt(this.cvc.getText().toString()));
 
+            if(card != null){
+                Log.d("TarjetasFragment", "guardarDatos: "+card.getCreditCardNumber());
+                Log.d("TarjetasFragment", "guardarDatos: "+card.getCreditCardMonthDate());
+                Log.d("TarjetasFragment", "guardarDatos: "+card.getCreditCardYearDate());
+                Log.d("TarjetasFragment", "guardarDatos: "+card.getCreditCardCvc());
+                Log.d("TarjetasFragment", "guardarDatos: "+card.getCreditCardHolderName());
+                this.tarjetas.add(card);
+                Preferences.creditCardToString(getContext(), Preferences.CREDIT_CARD, this.tarjetas);
+                cargarDatos();
+            }
 
-            tarjetas.add(card);
 
-            Preferences.creditCardToString(getContext(), Preferences.CREDIT_CARD, tarjetas);
-
-            cargarDatos();
 
         }else{
 
@@ -199,7 +203,9 @@ public class TarjetasFragment extends Fragment {
 
         emptyList.setVisibility(View.GONE);
 
-        tarjetas = Preferences.gsonToCreditCard(getContext());
+        if(Preferences.gsonToCreditCard(getContext()) != null){
+            tarjetas = Preferences.gsonToCreditCard(getContext());
+        }
 
         rv.setAdapter(new AdapterTarjetas(tarjetas, new AdapterTarjetas.OnItemLongClickListener() {
 
@@ -214,9 +220,13 @@ public class TarjetasFragment extends Fragment {
             }
         }));
 
-        if (Preferences.gsonToCreditCard(getContext()).size() == 0) {
-            emptyList.setVisibility(View.VISIBLE);
+
+        if(Preferences.gsonToCreditCard(getContext()) != null){
+            if (Preferences.gsonToCreditCard(getContext()).size() == 0) {
+                emptyList.setVisibility(View.VISIBLE);
+            }
         }
+
 
     }
 
