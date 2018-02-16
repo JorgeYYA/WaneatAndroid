@@ -34,6 +34,7 @@ public class DialogListProductRating extends android.support.v4.app.DialogFragme
             @Override
             public void onClick(View view) {
 
+
             }
         });
 

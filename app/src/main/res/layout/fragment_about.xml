@@ -5,18 +5,28 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="florida.com.waneat.Fragments.AboutFragment"
-    android:background="@color/colorPrimaryDarkWaneat">
+    android:background="@color/lightGrayBackground">
 
     <!-- TODO: Update blank fragment layout -->
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="229dp"
+        android:layout_height="93dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="40dp"
+        android:layout_weight="1"
+        android:src="@drawable/logo" />
 
     <TextView
         android:id="@+id/text_Info1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
         android:padding="5dp"
         android:text="¡DISFRUTA DE WANEAT!"
-        android:textColor="@android:color/black"
+        android:textColor="@color/colorSecondaryDarkWaneat"
         android:textSize="30dp" />
 
     <TextView
@@ -24,57 +34,77 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:padding="5dp"
+        android:paddingStart="10dp"
         android:text="Waneat es una aplicación que nos ofrece una manera rápida y distinta de hacer nuestros pedidos en un restaurante. Gracias a los códigos QR implantados en todas las mesas del restaurante, el cliente podrá pedir su plato a través de la aplicación sin necesidad de esperas innecesarias ni malentendidos. Con un simple click el pedido sera enviado para su elaboración y podrá disfrutar de el nada mas este listo."
         android:textColor="@android:color/black"
         android:textSize="18sp" />
 
-    <LinearLayout
+    <TextView
+        android:id="@+id/text_Info3"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_weight="1"
+        android:paddingStart="20dp"
+        android:text="Desarrollo:"
+        android:textColor="@android:color/black"
+        android:textSize="20dp" />
 
-        <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="422dp"
-            android:layout_height="87dp"
-            android:layout_marginTop="100dp"
-            android:layout_weight="1"
-            android:background="@color/colorSecondaryDarkWaneat"
-            android:src="@drawable/logo" />
+    <TextView
+        android:id="@+id/text_Info4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:paddingStart="10dp"
+        android:text="Sergio"
+        android:textSize="18dp" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical">
+    <TextView
+        android:id="@+id/text_Info5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="David"
+        android:paddingStart="10dp"
+        android:textSize="18dp" />
 
-            <TextView
-                android:id="@+id/text_Info3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="100dp"
-                android:layout_weight="1"
-                android:background="@color/colorSecondaryWaneat"
-                android:text="Desarrollo:"
-                android:textColor="@android:color/black"
-                android:textSize="20dp" />
 
-            <TextView
-                android:id="@+id/text_Info4"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="jk" />
+    <TextView
+        android:id="@+id/text_Info6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:paddingStart="10dp"
+        android:text="Jorge"
+        android:textSize="18dp" />
 
-            <TextView
-                android:id="@+id/text_Info5"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="fgdfgh" />
-        </LinearLayout>
+    <TextView
+        android:id="@+id/text_Info7"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:paddingStart="10dp"
+        android:text="David"
+        android:textSize="18dp" />
 
-    </LinearLayout>
+    <TextView
+        android:id="@+id/text_Info8"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:paddingStart="20dp"
+        android:paddingTop="10dp"
+        android:text="Más información:"
+        android:textColor="@color/colorSecondaryDarkWaneat"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/text_Info9"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:paddingBottom="20dp"
+        android:paddingStart="10dp"
+        android:textSize="20dp" />
 
 </LinearLayout>
