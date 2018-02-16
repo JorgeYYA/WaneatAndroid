@@ -131,19 +131,6 @@
                 android:background="@color/colorPrimaryDarkWaneat"
                 android:padding="5dp"
                 android:text="Cambiar tarjeta"
-                android:visibility="gone" />
-
-            <Button
-                android:id="@+id/add_one_card"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical|end"
-                android:layout_margin="5dp"
-                android:layout_rowSpan="2"
-                android:layout_weight="3"
-                android:background="@color/colorPrimaryDarkWaneat"
-                android:padding="5dp"
-                android:text="Añadir tarjeta"
                 android:visibility="visible" />
 
 
