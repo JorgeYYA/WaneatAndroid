@@ -125,6 +125,8 @@ public class DialogFragment extends android.support.v4.app.DialogFragment{
 
             buttonIntroducirTarj.setText("Añadir tarjeta");
 
+            checkoutButton.setVisibility(View.GONE);
+
             cardsNotFound = true;
 
 
