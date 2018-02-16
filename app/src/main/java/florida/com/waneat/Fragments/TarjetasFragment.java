@@ -97,6 +97,7 @@ public class TarjetasFragment extends Fragment {
 
         mListener.changeColorToolbar(true);
 
+
         emptyList = (TextView) v.findViewById(R.id.empty_list);
         rv = (RecyclerView)v.findViewById(R.id.recycler_tarjetas);
 
@@ -292,7 +293,7 @@ public class TarjetasFragment extends Fragment {
     public interface OnFragmentInteractionListener {
         void showFloatingActionButton();
         void callQRActivity();
-        void hideFloatingActionButton();
         void changeColorToolbar(boolean dark);
+        void hideFloatingActionButton();
     }
 }

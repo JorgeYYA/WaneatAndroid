@@ -43,7 +43,7 @@ public class AdapterIntroduction extends PagerAdapter {
     public Object instantiateItem(final ViewGroup container, final int position) {
         View itemView = layoutInflater.inflate(R.layout.image_item, container, false);
 
-        ImageView imageView = (ImageView) itemView.findViewById(R.id.iv_photo);
+        final ImageView imageView = (ImageView) itemView.findViewById(R.id.iv_photo);
         imageView.setImageResource(images[position]);
 
         container.addView(itemView);
@@ -52,6 +52,7 @@ public class AdapterIntroduction extends PagerAdapter {
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 if(position == 1) {
                     context.startActivity(new Intent(context, SplashActivity.class));
                 }
