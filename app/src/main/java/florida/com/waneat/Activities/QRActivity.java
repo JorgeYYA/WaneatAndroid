@@ -41,6 +41,7 @@ public class QRActivity extends AppCompatActivity implements QRCodeReaderView.On
 
 
         initCamera();
+
     }
 
     @Override

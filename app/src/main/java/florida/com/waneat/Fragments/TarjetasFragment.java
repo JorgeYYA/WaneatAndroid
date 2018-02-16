@@ -175,36 +175,42 @@ public class TarjetasFragment extends Fragment {
     }
 
     private void guardarDatos(){
-        CreditCard card = new CreditCard(
-                this.number.getText().toString(),
-                this.holder.getText().toString(),
-                this.month.getText().toString(),
-                this.year.getText().toString(),
-                Integer.parseInt(this.cvc.getText().toString()));
 
 
+        if(this.number.getText().toString().length()==16) {
 
-        tarjetas.add(card);
+            CreditCard card = new CreditCard(
+                    this.number.getText().toString(),
+                    this.holder.getText().toString(),
+                    this.month.getText().toString(),
+                    this.year.getText().toString(),
+                    Integer.parseInt(this.cvc.getText().toString()));
 
-        Preferences.creditCardToString(getContext(),Preferences.CREDIT_CARD,tarjetas);
 
-        tarjetas = Preferences.gsonToCreditCard(getContext());
+            tarjetas.add(card);
 
-        rv.setAdapter(new AdapterTarjetas(tarjetas, new AdapterTarjetas.OnItemLongClickListener() {
+            Preferences.creditCardToString(getContext(), Preferences.CREDIT_CARD, tarjetas);
+
+            tarjetas = Preferences.gsonToCreditCard(getContext());
+
+            rv.setAdapter(new AdapterTarjetas(tarjetas, new AdapterTarjetas.OnItemLongClickListener() {
 
 
-            @Override
-            public boolean onItemLongClick(CreditCard item) {
+                @Override
+                public boolean onItemLongClick(CreditCard item) {
 
-                borrarTarjetas(item.getId(),item.getCreditCardNumber());
+                    borrarTarjetas(item.getId(), item.getCreditCardNumber());
 
-                return true;
+                    return true;
 
-            }
-        }));
+                }
+            }));
 
-        Toast.makeText(getActivity(), tarjetas.get(0).getCreditCardNumber()+"", Toast.LENGTH_SHORT).show();
+        }else{
 
+            Toast.makeText(getActivity(), "Los datos de la tarjeta no son correctos", Toast.LENGTH_SHORT).show();
+
+        }
 
 
 
