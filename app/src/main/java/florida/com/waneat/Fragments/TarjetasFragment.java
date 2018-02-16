@@ -264,7 +264,7 @@ public class TarjetasFragment extends Fragment {
         Preferences.creditCardToString(getContext(),Preferences.CREDIT_CARD,tarjetas);
 
 
-
+        Preferences.setInt(getContext(),Preferences.PREFERRED_CREDIT_CARD,0);
 
         cargarDatos();
 
