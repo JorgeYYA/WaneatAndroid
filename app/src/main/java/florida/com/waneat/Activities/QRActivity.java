@@ -4,13 +4,9 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.PointF;
-import android.os.Build;
-import android.support.annotation.NonNull;
+import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -53,7 +49,7 @@ public class QRActivity extends AppCompatActivity implements QRCodeReaderView.On
             try{
                 restaurantCall(Integer.parseInt(text));
             }catch(Exception e){
-                Toast.makeText(this, "Ha ocurrido un error", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getResources().getString(R.string.error), Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -105,7 +101,7 @@ public class QRActivity extends AppCompatActivity implements QRCodeReaderView.On
         api.getRestaurant(id, new DataStrategy.InteractDispacherGetRestaurants() {
             @Override
             public void getRestaurant(Restaurant restaurant) {
-                Toast.makeText(QRActivity.this, "Información del restaurante recuperada correctamente", Toast.LENGTH_SHORT).show();
+                Toast.makeText(QRActivity.this, getResources().getString(R.string.infoRes), Toast.LENGTH_SHORT).show();
                 Preferences.restaurantToString(QRActivity.this, restaurant);
 
                 Intent returnIntent = new Intent();
@@ -116,7 +112,7 @@ public class QRActivity extends AppCompatActivity implements QRCodeReaderView.On
 
             @Override
             public void isError(Throwable t) {
-                Toast.makeText(QRActivity.this, "Ha fallado la conexión", Toast.LENGTH_SHORT).show();
+                Toast.makeText(QRActivity.this, getResources().getString(R.string.conexFail), Toast.LENGTH_SHORT).show();
             }
         });
     }

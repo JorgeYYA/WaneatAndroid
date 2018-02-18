@@ -114,10 +114,10 @@ public class DialogFragment extends android.support.v4.app.DialogFragment{
 
         if(cards.size()== 0) {
 
-            tarjetaCredito.setText("No tienes tarjetas guardadas");
+            tarjetaCredito.setText(getResources().getString(R.string.tarjetaNoGuardada));
             //tarjetaCredito.setText("Pulsa 'Anadir tarjeta' para añadir una trajeta de crédito");
 
-            buttonIntroducirTarj.setText("Añadir tarjeta");
+            buttonIntroducirTarj.setText(getResources().getString(R.string.addCard));
 
             tramitarPedido.setVisibility(View.GONE);
 
@@ -145,7 +145,7 @@ public class DialogFragment extends android.support.v4.app.DialogFragment{
 
             cardsNotFound = false;
 
-            buttonIntroducirTarj.setText("Cambiar tarjeta");
+            buttonIntroducirTarj.setText(getResources().getString(R.string.changeCard));
 
 
 

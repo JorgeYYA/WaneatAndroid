@@ -1,30 +1,21 @@
 package florida.com.waneat.Fragments;
 
-import android.app.Activity;
-import android.app.FragmentTransaction;
 import android.content.Context;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -32,7 +23,6 @@ import java.util.ArrayList;
 import florida.com.waneat.Activities.MainActivity;
 import florida.com.waneat.Adapters.AdapterOrderList;
 import florida.com.waneat.Models.Order;
-import florida.com.waneat.Models.Product;
 import florida.com.waneat.Models.User;
 import florida.com.waneat.Preferences.Preferences;
 import florida.com.waneat.R;
@@ -79,7 +69,7 @@ public class OrderList extends Fragment {
 
 
 
-        info.setText("  Cargando...\n(Podría tardar un rato)");
+        info.setText(getResources().getString(R.string.cargandoTarda));
 
 
         recyclerOrders = (RecyclerView)v.findViewById(R.id.recycler_orders);
@@ -93,7 +83,7 @@ public class OrderList extends Fragment {
 
 
         if (!MainActivity.verificaConexion(getActivity())) {
-            info.setText("No se ha podido conectar, \ncomprueba tu conexión a internet");
+            info.setText(getResources().getString(R.string.noConex));
         } else {
 
             recuperaDatos();
@@ -145,7 +135,7 @@ public class OrderList extends Fragment {
                 if (orders.size() == 0) {
 
 
-                    info.setText("No hay pedidos registrados");
+                    info.setText(getResources().getString(R.string.noPedidos));
                     empty.setVisibility(View.VISIBLE);
                     recyclerOrders.setVisibility(View.GONE);
 

@@ -19,11 +19,8 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-import florida.com.waneat.Adapters.AdapterItemList;
-import florida.com.waneat.Adapters.AdapterOrderList;
 import florida.com.waneat.Adapters.AdapterTarjetas;
 import florida.com.waneat.Models.CreditCard;
-import florida.com.waneat.Models.Order;
 import florida.com.waneat.Preferences.Preferences;
 import florida.com.waneat.R;
 
@@ -157,9 +154,9 @@ public class TarjetasFragment extends Fragment {
     private void checkButton(){
         if(!isFront){
             //estamos en el back por lo tanto guardamos
-            this.nextButton.setText("GUARDAR");
+            this.nextButton.setText(getResources().getString(R.string.guardar));
         }else{
-            this.nextButton.setText("SIGUIENTE");
+            this.nextButton.setText(getResources().getString(R.string.guardarCredit));
         }
     }
 
