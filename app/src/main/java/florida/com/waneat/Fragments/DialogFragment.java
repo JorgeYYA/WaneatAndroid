@@ -2,7 +2,6 @@ package florida.com.waneat.Fragments;
 
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -25,17 +24,13 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.text.DecimalFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Date;
 
-import florida.com.waneat.Activities.MainActivity;
 import florida.com.waneat.Adapters.AdapterCartItem;
 import florida.com.waneat.Adapters.AdapterCreditCards;
 import florida.com.waneat.Adapters.AdapterFinalizarCompra;
-import florida.com.waneat.Adapters.AdapterProductList;
+import florida.com.waneat.Adapters.AdapterUltimosDatos;
 import florida.com.waneat.Models.CreditCard;
 import florida.com.waneat.Models.Order;
 import florida.com.waneat.Models.Product;
@@ -43,8 +38,6 @@ import florida.com.waneat.Models.Restaurant;
 import florida.com.waneat.Models.User;
 import florida.com.waneat.Preferences.Preferences;
 import florida.com.waneat.R;
-
-import static android.content.Context.MODE_PRIVATE;
 
 public class DialogFragment extends android.support.v4.app.DialogFragment{
 
@@ -54,6 +47,7 @@ public class DialogFragment extends android.support.v4.app.DialogFragment{
     private AdapterCartItem adapter;
     private AdapterFinalizarCompra adapterCompra;
     private AdapterCreditCards adapterCards;
+    private AdapterUltimosDatos adapterDatos;
     private Button checkoutButton, buttonIntroducirTarj, tramitarPedido, addCard;
     private LinearLayout layoutEmpty;
     private GridLayout layoutCards;
@@ -227,9 +221,10 @@ public class DialogFragment extends android.support.v4.app.DialogFragment{
             @Override
             public void onClick(View view) {
 
-                tramitarPedido();
+                ultimosDatos();
+                //tramitarPedido();
 
-                getDialog().dismiss();
+                //getDialog().dismiss();
 
             }
         });
@@ -326,6 +321,27 @@ public class DialogFragment extends android.support.v4.app.DialogFragment{
         cesta.clear();
     }
 
+
+    public void ultimosDatos(){
+
+        layoutCards.setVisibility(View.GONE);
+        tramitarPedido.setVisibility(View.VISIBLE);
+        checkoutButton.setVisibility(View.GONE);
+
+        adapterDatos = new AdapterUltimosDatos(cesta);
+        recyclerView.setAdapter(adapterDatos);
+
+        tramitarPedido.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                tramitarPedido();
+                getDialog().dismiss();
+            }
+        });
+
+
+
+    }
 
     @Override
     public void onAttach(Context context) {
