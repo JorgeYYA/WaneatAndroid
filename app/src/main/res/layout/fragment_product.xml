@@ -106,7 +106,7 @@
                     android:background="@drawable/border_radius"
                     android:padding="10dp"
                     android:textColor="#fff"
-                    android:text="Pasta"/>
+                    android:text="@string/pastaCategoria"/>
 
 
                 <TextView

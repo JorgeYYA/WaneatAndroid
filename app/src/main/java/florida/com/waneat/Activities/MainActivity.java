@@ -22,7 +22,6 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -120,14 +119,6 @@ public class MainActivity extends AppCompatActivity implements
         });
 
     }
-
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-        finish();
-        startActivity(getIntent());
-    }
-
 
     @Override
     public void callQRActivity() {
@@ -237,7 +228,7 @@ public class MainActivity extends AppCompatActivity implements
 
     @Override
     public User getUser() {
-      return  this.userLogged;
+        return  this.userLogged;
     }
 
     private void loadFragment(){
@@ -305,8 +296,15 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     @Override
+    protected void onRestart() {
+        super.onRestart();
+        finish();
+        startActivity(getIntent());
+    }
+
+    @Override
     public void showFloatingActionButton() {
-       fab.show();
+        fab.show();
     };
 
     @Override

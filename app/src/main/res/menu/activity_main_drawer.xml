@@ -19,19 +19,16 @@
         <item
             android:id="@+id/nav_mispedidos"
             android:icon="@drawable/mispedidos"
-            android:title="Mis pedidos" />
-
-
+            android:title="@string/nav_mispedidos" />
 
         <item
             android:id="@+id/nav_mistarjetas"
             android:icon="@drawable/tarjetas"
-            android:title="Mis tarjetas" />
-
+            android:title="@string/nav_mistarjetas" />
         <item
             android:id="@+id/nav_logout"
             android:icon="@drawable/exit"
-            android:title="Cerrar Sesión" />
+            android:title="@string/nav_logout" />
 
     </group>
 

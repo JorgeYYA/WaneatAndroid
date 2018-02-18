@@ -29,7 +29,7 @@
             android:background="@color/colorSecondaryDarkWaneat"
             android:textColor="@android:color/white"
             android:textSize="10dp"
-            android:text="CARNE"/>
+            android:text="@string/categoria"/>
 
 
         <LinearLayout

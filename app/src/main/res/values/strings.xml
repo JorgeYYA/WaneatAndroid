@@ -45,4 +45,5 @@
     <string name="idioma1">Español</string>
     <string name="idioma2">Inglés</string>
     <string name="hacer_pedido">Hacer pedido</string>
+    <string name="tagCod">Código postal</string>
 </resources>

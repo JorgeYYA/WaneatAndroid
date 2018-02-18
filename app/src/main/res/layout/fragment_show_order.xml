@@ -92,10 +92,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:text="Total: 5,90€"
-                android:textColor="@color/colorSecondaryDarkWaneat"
                 android:textSize="30dp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:layout_weight="1"
+                android:background="@color/colorSecondaryDarkWaneat"
+                android:text="@string/p_add2"
+                android:textColor="@android:color/white"
+                android:visibility="gone" />
 
         </LinearLayout>
 
