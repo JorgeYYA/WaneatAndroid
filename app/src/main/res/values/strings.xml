@@ -46,4 +46,18 @@
     <string name="idioma2">Inglés</string>
     <string name="hacer_pedido">Hacer pedido</string>
     <string name="tagCod">Código postal</string>
+    <string name="textViewEmpty">La cesta esta vacia</string>
+    <string name="myOrders">Mis pedidos</string>
+    <string name="creditCardHolderName">NOMBRE APELLIDO</string>
+    <string name="tagProfile">Mi perfil:</string>
+    <string name="tagDir">Direccion</string>
+    <string name="tagCiudad">Ciudad</string>
+    <string name="tagPais">Pais</string>
+    <string name="nav_miperfil">Mi perfl</string>
+    <string name="nav_mispedidos">Mis pedidos</string>
+    <string name="nav_qr">Escanear QR</string>
+    <string name="nav_mistarjetas">"Mis tarjetas "</string>
+    <string name="nav_logout">Cerrar sesión</string>
+    <string name="inicio">Inicio</string>
+    <string name="informacion">Información</string>
 </resources>
