@@ -36,8 +36,8 @@ public class QRActivity extends AppCompatActivity implements QRCodeReaderView.On
         pointsOverlayView = (PointsOverlayView) findViewById(R.id.points_overlay_view);
 
 
-        //initCamera();
-        restaurantCall(2);
+        initCamera();
+        //restaurantCall(2);
     }
 
     @Override
@@ -126,6 +126,9 @@ public class QRActivity extends AppCompatActivity implements QRCodeReaderView.On
         qrCodeReaderView.setBackCamera();
 
         ActivityCompat.requestPermissions(QRActivity.this, new String[]{Manifest.permission.CAMERA}, 1);
+
+        qrCodeReaderView.startCamera();
+
     }
 
 }
