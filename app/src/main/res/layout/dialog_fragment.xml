@@ -97,7 +97,7 @@
                 android:layout_weight="3"
                 android:background="@color/colorPrimaryDarkWaneat"
                 android:padding="5dp"
-                android:text="Cambiar tarjeta"
+                android:text="@string/buttonIntroducirTarj"
                 android:visibility="visible" />
 
 
@@ -115,7 +115,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="La cesta está vacía"
+                android:text="@string/textViewEmpty"
                 android:textAlignment="center"
                 android:textColor="@android:color/background_dark"
                 android:textSize="18sp"
@@ -137,6 +137,6 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@color/colorPrimaryDarkWaneat"
-            android:text="IR A PAGAR" />
+            android:text="@string/checkoutButton" />
     </LinearLayout>
 </FrameLayout>

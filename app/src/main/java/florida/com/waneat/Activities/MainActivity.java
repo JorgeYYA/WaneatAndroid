@@ -1,7 +1,6 @@
 package florida.com.waneat.Activities;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -19,7 +18,6 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -41,30 +39,34 @@ public class MainActivity extends AppCompatActivity implements
         NavigationView.OnNavigationItemSelectedListener, DialogFragment.CestaInterface,
         TarjetasFragment.OnFragmentInteractionListener, UsuarioFragment.UserProfileListener,
         ListProductFragment.OnFragmentInteractionListener, ProductFragment.OnFragmentInteractionListener,
-        OrderList.InterfaceOrder, ShowOrder.OnFragmentInteractionListener{
+        OrderList.InterfaceOrder, ShowOrder.OnFragmentInteractionListener
+
+    {
 
 
-    public ArrayList<Product> productosCesta = new ArrayList<Product>();
-    public ArrayList<Product> productosLista = new ArrayList<Product>();
-    ArrayList<Integer> imagen = new ArrayList<>();
-    public Product productoSelected = new Product();
-    static final int PICK_CONTACT_REQUEST = 1;  // The request code
+        public ArrayList<Product> productosCesta = new ArrayList<Product>();
+        public ArrayList<Product> productosLista = new ArrayList<Product>();
+        ArrayList<Integer> imagen = new ArrayList<>();
+        public Product productoSelected = new Product();
+        static final int PICK_CONTACT_REQUEST = 1;  // The request code
 
-    public User userLogged = new User();
-    public FloatingActionButton fab, fab_cat, fab_carne, fab_pescado, fab_pasta, fab_bebida;
+        public User userLogged = new User();
+        public FloatingActionButton fab, fab_cat, fab_carne, fab_pescado, fab_pasta, fab_bebida;
 
-    private FragmentManager fm;
-    private UserService service;
-    private TextView emailUsuarioLogged, nombreUsuario;
-    Animation fabOpen, fabClose, rotateForward, rotateBackward;
-    boolean isOpen = false;
+        private FragmentManager fm;
+        private UserService service;
+        private TextView emailUsuarioLogged, nombreUsuario;
 
-    private Toolbar toolbar;
+        Animation fabOpen, fabClose, rotateForward, rotateBackward;
+        boolean isOpen = false;
 
-    RecyclerView mRecyclerView;
+        private Toolbar toolbar;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
+        RecyclerView mRecyclerView;
+
+
+        @Override
+        public void onCreate (Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -89,12 +91,11 @@ public class MainActivity extends AppCompatActivity implements
         fab_bebida = (FloatingActionButton) findViewById(R.id.fab_bebida);
 
 
-        fabOpen = AnimationUtils.loadAnimation(this,R.anim.fab_open);
-        fabClose = AnimationUtils.loadAnimation(this,R.anim.fab_close);
+        fabOpen = AnimationUtils.loadAnimation(this, R.anim.fab_open);
+        fabClose = AnimationUtils.loadAnimation(this, R.anim.fab_close);
 
-        rotateForward = AnimationUtils.loadAnimation(this,R.anim.rotate_forward);
-        rotateBackward = AnimationUtils.loadAnimation(this,R.anim.rotate_backward);
-
+        rotateForward = AnimationUtils.loadAnimation(this, R.anim.rotate_forward);
+        rotateBackward = AnimationUtils.loadAnimation(this, R.anim.rotate_backward);
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -160,7 +161,7 @@ public class MainActivity extends AppCompatActivity implements
 
 
         //metemos la info en el header
-        nombreUsuario.setText(userLogged.getNombre()+ " "+userLogged.getApellidos());
+        nombreUsuario.setText(userLogged.getNombre() + " " + userLogged.getApellidos());
         emailUsuarioLogged.setText(userLogged.getEmail());
 
         loadFragment();
@@ -170,7 +171,7 @@ public class MainActivity extends AppCompatActivity implements
         fm.addOnBackStackChangedListener(new FragmentManager.OnBackStackChangedListener() {
             @Override
             public void onBackStackChanged() {
-                if(getSupportFragmentManager().getBackStackEntryCount() == 0) finish();
+                if (getSupportFragmentManager().getBackStackEntryCount() == 0) finish();
             }
         });
         toolbar.setBackgroundColor(ContextCompat.getColor(this, android.R.color.transparent));
@@ -178,10 +179,8 @@ public class MainActivity extends AppCompatActivity implements
 
     }
 
-    private void animateFab()
-    {
-        if(isOpen)
-        {
+    private void animateFab() {
+        if (isOpen) {
             fab_cat.startAnimation(rotateForward);
             fab_carne.startAnimation(fabClose);
             fab_pescado.startAnimation(fabClose);
@@ -192,9 +191,7 @@ public class MainActivity extends AppCompatActivity implements
             fab_pasta.setClickable(false);
             fab_bebida.setClickable(false);
             isOpen = false;
-        }
-        else
-        {
+        } else {
             fab_cat.startAnimation(rotateBackward);
             fab_carne.startAnimation(fabOpen);
             fab_pescado.startAnimation(fabOpen);
@@ -219,7 +216,7 @@ public class MainActivity extends AppCompatActivity implements
         }
     }
 
-    private void openCart(){
+    private void openCart() {
         fm = getSupportFragmentManager();
         DialogFragment dialog = new DialogFragment();
         dialog.show(fm, "Cart");
@@ -228,17 +225,17 @@ public class MainActivity extends AppCompatActivity implements
 
     @Override
     public void removeProduct(int position) {
-        if(this.productosCesta.get(position).getCantidad()<=1){
+        if (this.productosCesta.get(position).getCantidad() <= 1) {
             this.productosCesta.remove(position);
-        }else{
-            int cantidadActual = this.productosCesta.get(position).getCantidad()-1;
+        } else {
+            int cantidadActual = this.productosCesta.get(position).getCantidad() - 1;
             this.productosCesta.get(position).setCantidad(cantidadActual);
         }
     }
 
     @Override
     public void addProduct(int position) {
-        int cantidadActual = this.productosCesta.get(position).getCantidad()+1;
+        int cantidadActual = this.productosCesta.get(position).getCantidad() + 1;
         this.productosCesta.get(position).setCantidad(cantidadActual);
     }
 
@@ -247,21 +244,21 @@ public class MainActivity extends AppCompatActivity implements
         boolean added = false;
         int can = 0;
         int id = 0;
-        if(productosCesta.isEmpty()){
+        if (productosCesta.isEmpty()) {
             this.productosCesta.add(prod);
-        }else{
-            for(int i=0;i<this.productosCesta.size();i++){
-                if(productosCesta.get(i).getId() == prod.getId()) {
+        } else {
+            for (int i = 0; i < this.productosCesta.size(); i++) {
+                if (productosCesta.get(i).getId() == prod.getId()) {
                     added = true;
-                    if(added){
+                    if (added) {
                         id = productosCesta.get(i).getId();
                     }
                 }
             }
 
-            if(!added) {
+            if (!added) {
                 this.productosCesta.add(prod);
-            }else{
+            } else {
 
                 can = productosCesta.get(id).getCantidad();
                 Product newPro = productosCesta.get(id);
@@ -273,23 +270,23 @@ public class MainActivity extends AppCompatActivity implements
         }
     }
 
-    private void cargarProductosIniciales(){
+    private void cargarProductosIniciales() {
         //    public Product(int id, String nombre, String descripcion, float precio, ArrayList<Integer> imagen, String comentariosAdicionales, String categoria, int cantidad) {
         imagen.add(R.drawable.plato1);
         imagen.add(R.drawable.plato2);
         Product producto = new Product(0, "Spaguettis", "boloñesa, algo más", 2.0, imagen, "pasta", 1);
         //this.productosCesta.add(producto);
         this.productosLista.add(producto);
-        Product producto2 = new Product(1, "Macarrones", "boloñesa, algo más", 3.0, imagen,  "pasta", 1);
+        Product producto2 = new Product(1, "Macarrones", "boloñesa, algo más", 3.0, imagen, "pasta", 1);
         //this.productosCesta.add(producto2);
         this.productosLista.add(producto2);
-        Product producto3 = new Product(2, "Lubina", "boloñesa, algo más", 5.0, imagen,  "pescado", 1);
+        Product producto3 = new Product(2, "Lubina", "boloñesa, algo más", 5.0, imagen, "pescado", 1);
         //this.productosCesta.add(producto3);
         this.productosLista.add(producto3);
-        Product producto4 = new Product(3, "Tenera", "boloñesa, algo más", 5.0, imagen,  "carne", 1);
+        Product producto4 = new Product(3, "Tenera", "boloñesa, algo más", 5.0, imagen, "carne", 1);
         //this.productosCesta.add(producto4);
         this.productosLista.add(producto4);
-        Product producto5 = new Product(4, "Cereales", "boloñesa, algo más", 1.0, imagen,  "Desayuno", 1);
+        Product producto5 = new Product(4, "Cereales", "boloñesa, algo más", 1.0, imagen, "Desayuno", 1);
         //this.productosCesta.add(producto5);
         this.productosLista.add(producto5);
     }
@@ -302,18 +299,18 @@ public class MainActivity extends AppCompatActivity implements
     @Override
     public double getCestaPrice() {
         double precioTotal = 0.0;
-        for (Product pro: this.productosCesta) {
-            precioTotal += pro.getPrecio()*pro.getCantidad();
+        for (Product pro : this.productosCesta) {
+            precioTotal += pro.getPrecio() * pro.getCantidad();
         }
         return precioTotal;
     }
 
     @Override
     public User getUser() {
-      return  this.userLogged;
+        return this.userLogged;
     }
 
-    private void loadFragment(){
+    private void loadFragment() {
         fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
         ft.replace(R.id.fragment, new ListProductFragment());
@@ -344,7 +341,6 @@ public class MainActivity extends AppCompatActivity implements
     }
 
 
-
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -355,12 +351,12 @@ public class MainActivity extends AppCompatActivity implements
         if (id == R.id.nav_miperfil) {
             ft.replace(R.id.fragment, UsuarioFragment.newInstance()).addToBackStack("MY_FRAGMENT");
             toolbar.setBackgroundColor(ContextCompat.getColor(this, R.color.colorSecondaryDarkWaneat));
-        }else if(id == R.id.inicio){
+        } else if (id == R.id.inicio) {
             ft.replace(R.id.fragment, ListProductFragment.newInstance()).addToBackStack("MY_FRAGMENT");
             toolbar.setBackgroundColor(ContextCompat.getColor(this, android.R.color.transparent));
 
-        }else if (id == R.id.nav_mispedidos) {
-            ft.replace(R.id.fragment, OrderList.newInstance(null,null)).addToBackStack("MY_FRAGMENT");
+        } else if (id == R.id.nav_mispedidos) {
+            ft.replace(R.id.fragment, OrderList.newInstance(null, null)).addToBackStack("MY_FRAGMENT");
             toolbar.setBackgroundColor(ContextCompat.getColor(this, R.color.colorSecondaryDarkWaneat));
 
         } else if (id == R.id.nav_qr) {
@@ -386,13 +382,17 @@ public class MainActivity extends AppCompatActivity implements
     public void showFloatingActionButton() {
         fab.show();
         fab_cat.show();
-    };
+    }
+
+    ;
 
     @Override
     public void hideFloatingActionButton() {
         fab.hide();
         fab_cat.hide();
-    };
+    }
+
+    ;
 
 
     @Override
@@ -400,8 +400,8 @@ public class MainActivity extends AppCompatActivity implements
         if (requestCode == PICK_CONTACT_REQUEST) {
             if (resultCode == RESULT_OK) {
                 Bundle bundle = new Bundle();
-                String result=data.getStringExtra("read_qr");
-                bundle.putString("qr",result);
+                String result = data.getStringExtra("read_qr");
+                bundle.putString("qr", result);
                 ListProductFragment main = ListProductFragment.newInstance();
                 main.setArguments(bundle);
 
@@ -421,3 +421,5 @@ public class MainActivity extends AppCompatActivity implements
         ft.commit();
     }
 }
+
+

@@ -33,11 +33,12 @@
 
 
             <TextView
+                android:id="@+id/tagProfile"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:padding="10dp"
-                android:text="Mi perfil:"
+                android:text="@string/tagProfile"
                 android:textColor="@color/colorSecondaryDarkWaneat"
                 android:textSize="30dp"
                 android:textStyle="bold" />
@@ -57,7 +58,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center_vertical"
-                    android:text="Nombre"
+                    android:text="@string/tagNombre"
                     android:textAlignment="inherit"
                     android:textColor="@android:color/black"
                     android:textSize="16dp" />
@@ -88,7 +89,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center_vertical"
-                    android:text="Apellidos"
+                    android:text="@string/tagApellidos"
                     android:textColor="@android:color/black"
                     android:textSize="16sp" />
 
@@ -118,7 +119,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center_vertical"
-                    android:text="Correo"
+                    android:text="@string/tagCorreo"
                     android:textColor="@android:color/black"
                     android:textSize="16sp" />
 
@@ -148,7 +149,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center_vertical"
-                    android:text="Teléfono"
+                    android:text="@string/tagTlf"
                     android:textColor="@android:color/black"
                     android:textSize="16sp" />
 
@@ -178,7 +179,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center_vertical"
-                    android:text="Dirección"
+                    android:text="@string/tagDir"
                     android:textColor="@android:color/black"
                     android:textSize="16sp" />
 
@@ -208,7 +209,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center_vertical"
-                    android:text="Ciudad"
+                    android:text="@string/tagCiudad"
                     android:textColor="@android:color/black"
                     android:textSize="16sp" />
 
@@ -238,7 +239,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center_vertical"
-                    android:text="País"
+                    android:text="@string/tagPais"
                     android:textColor="@android:color/black"
                     android:textSize="16sp" />
 
@@ -268,7 +269,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center_vertical"
-                    android:text="Codigo Postal"
+                    android:text="@string/tagCod"
                     android:textColor="@android:color/black"
                     android:textSize="16sp" />
 
@@ -302,7 +303,7 @@
             android:background="@drawable/border_radius"
             android:gravity="center_vertical|center"
             android:padding="5dp"
-            android:text="GUARDAR CAMBIOS" />
+            android:text="@string/buttonCambios" />
 
     </LinearLayout>
 

@@ -1,19 +1,14 @@
 package florida.com.waneat.Fragments;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.AppBarLayout;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,6 +18,7 @@ import java.util.ArrayList;
 import florida.com.waneat.Adapters.AdapterItemList;
 import florida.com.waneat.Models.Product;
 import florida.com.waneat.R;
+import florida.com.waneat.akexorcist.localizationactivity.ui.LocalizationActivity;
 
 public class ListProductFragment extends Fragment {
 
@@ -30,6 +26,8 @@ public class ListProductFragment extends Fragment {
 
     private RecyclerView recyclerView;
     private AdapterItemList productAdapter;
+    private TextView text,text1;
+
 
     public ListProductFragment() {
     }
@@ -42,7 +40,12 @@ public class ListProductFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        text = (TextView) text.findViewById(R.id.txtEng);
+        text1 = (TextView) text1.findViewById(R.id.txtEsp);
+
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -50,6 +53,8 @@ public class ListProductFragment extends Fragment {
         View v =  inflater.inflate(R.layout.fragment_list_product, container, false);
 
         mListener.showFloatingActionButton();
+
+
 
         String idRestaurante = "";
 
@@ -65,12 +70,14 @@ public class ListProductFragment extends Fragment {
         RatingBar ratingRestaurante = v.findViewById(R.id.ruleRatingBar);
 
         //Incluimos la info del restaurante
-        tituloRestaurante.setText("Restaaurante");
+        tituloRestaurante.setText("Restaurante");
         direccionRestaurante.setText("Calle Alginet");
         ratingRestaurante.setRating(3);
 
 
         this.recyclerView = (RecyclerView) v.findViewById(R.id.my_recycler_view);
+
+
 
         productAdapter = new AdapterItemList(mListener.getProductos(), new AdapterItemList.RecyclerViewOnItemClickListener() {
             @Override
@@ -116,3 +123,34 @@ public class ListProductFragment extends Fragment {
 
 
 }
+class Language extends LocalizationActivity implements View.OnClickListener {
+    public Language(ListProductFragment listProductFragment) {
+        super(listProductFragment);
+
+    }
+
+    @Override
+    public void onClick(View v) {
+
+        switch (v.getId()) {
+
+            case R.id.txtEsp:
+                setLanguage("es");
+                Toast toast1 = Toast.makeText(getApplicationContext(), "Idioma cambiado", Toast.LENGTH_SHORT);
+                toast1.show();
+                break;
+
+            case R.id.txtEng:
+                setLanguage("en");
+                Toast toast2 = Toast.makeText(getApplicationContext(), "Idioma cambiado", Toast.LENGTH_SHORT);
+                toast2.show();
+
+
+                break;
+        }
+    }
+}
+
+
+
+

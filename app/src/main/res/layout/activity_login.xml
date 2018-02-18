@@ -29,7 +29,7 @@
             android:inputType="textEmailAddress"
             android:background="@drawable/layout_edittext"
             android:padding="10dp"
-            android:hint="Correo electronico"/>
+            android:hint="@string/editLogMail"/>
         <EditText
             android:id="@+id/editLogPass"
             android:layout_width="match_parent"
@@ -38,7 +38,7 @@
             android:layout_margin="10dp"
             android:background="@drawable/layout_edittext"
             android:padding="10dp"
-            android:hint="Contraseña"/>
+            android:hint="@string/editLogPass"/>
     </LinearLayout>
 
     <Button
@@ -56,7 +56,7 @@
         android:layout_height="wrap_content"
         android:gravity="center_vertical|center_horizontal"
         android:layout_marginTop="20dp"
-        android:text="¿Aún no tienes cuenta? ¡Regístrate aquí!"
+        android:text="@string/registerLabel"
         android:textColor="@android:color/white" />
 
 </LinearLayout>

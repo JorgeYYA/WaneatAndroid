@@ -26,7 +26,7 @@
             android:layout_margin="10dp"
             android:background="@drawable/layout_edittext"
             android:padding="10dp"
-            android:hint="Tu nombre"/>
+            android:hint="@string/nombreRegister"/>
         <EditText
             android:id="@+id/emailRegister"
             android:layout_width="match_parent"
@@ -35,7 +35,7 @@
             android:inputType="textEmailAddress"
             android:background="@drawable/layout_edittext"
             android:padding="10dp"
-            android:hint="Correo electronico"/>
+            android:hint="@string/emailRegister"/>
         <EditText
             android:id="@+id/passwordRegister"
             android:layout_width="match_parent"
@@ -44,7 +44,7 @@
             android:layout_margin="10dp"
             android:background="@drawable/layout_edittext"
             android:padding="10dp"
-            android:hint="Contraseña"/>
+            android:hint="@string/passwordRegister"/>
     </LinearLayout>
 
     <Button
@@ -59,7 +59,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="¿Ya estás registrado? Accede a tu cuenta"
+        android:text="@string/alreadyRegistered"
         android:textColor="#ffff" />
 
 

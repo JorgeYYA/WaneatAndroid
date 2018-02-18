@@ -37,5 +37,19 @@
     <string name="tagCorreo">Correo</string>
     <string name="tagTlf">Teléfono</string>
     <string name="buttonCambios">GUARDAR CAMBIOS</string>
+    <string name="textViewEmpty">La cesta está vacía</string>
+    <string name="myOrders">Mis pedidos:</string>
+    <string name="creditCardHolderName">NOMBRE APELLIDO APELLIDO</string>
+    <string name="tagProfile">Mi perfil:</string>
+    <string name="tagDir">Dirección</string>
+    <string name="tagCiudad">Ciudad</string>
+    <string name="tagPais">País</string>
+    <string name="tagCod">Código Postal</string>
+    <string name="nav_miperfil">Mi perfil</string>
+    <string name="nav_mispedidos">Mis pedidos</string>
+    <string name="nav_qr">Escanear QR</string>
+    <string name="nav_mistarjetas">Mis tarjetas</string>
+    <string name="nav_logout">Cerrar sesión</string>
+    <string name="inicio">Inicio</string>
 
 </resources>

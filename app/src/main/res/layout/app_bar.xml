@@ -74,6 +74,7 @@
                             />
                     </LinearLayout>
                 </RelativeLayout>
+
             </FrameLayout>
 
             <android.support.v7.widget.Toolbar
@@ -83,6 +84,35 @@
                 android:padding="3dp"
                 app:layout_collapseMode="pin"
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+
+
+            <TextView
+                android:id="@+id/txtEng"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:clickable="true"
+                android:drawableLeft="@drawable/united_kingdom_icon"
+                android:drawablePadding="5dp"
+                android:onClick="onClick"
+                android:paddingRight="70dp"
+                android:paddingTop="10dp"
+                android:singleLine="true" />
+
+
+
+            <TextView
+                android:id="@+id/txtEsp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:clickable="true"
+                android:drawableLeft="@drawable/spain_icon"
+                android:drawablePadding="5dp"
+                android:onClick="onClick"
+                android:paddingRight="10dp"
+                android:paddingTop="10dp"
+                android:singleLine="true" />
 
 
         </android.support.design.widget.CollapsingToolbarLayout>

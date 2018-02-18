@@ -8,29 +8,29 @@
         <item
             android:id="@+id/inicio"
             android:icon="@drawable/border_radius"
-            android:title="Inicio">
+            android:title="@string/inicio">
 
         </item>
         <item
             android:id="@+id/nav_miperfil"
             android:icon="@drawable/miperfil"
-            android:title="Mi perfil" />
+            android:title="@string/nav_miperfil" />
         <item
             android:id="@+id/nav_mispedidos"
             android:icon="@drawable/mispedidos"
-            android:title="Mis pedidos" />
+            android:title="@string/nav_mispedidos" />
         <item
             android:id="@+id/nav_qr"
             android:icon="@drawable/qr"
-            android:title="Escanear QR" />
+            android:title="@string/nav_qr" />
         <item
             android:id="@+id/nav_mistarjetas"
             android:icon="@drawable/tarjetas"
-            android:title="Mis tarjetas" />
+            android:title="@string/nav_mistarjetas" />
         <item
             android:id="@+id/nav_logout"
             android:icon="@drawable/exit"
-            android:title="Cerrar Sesión" />
+            android:title="@string/nav_logout" />
     </group>
 
 </menu>
