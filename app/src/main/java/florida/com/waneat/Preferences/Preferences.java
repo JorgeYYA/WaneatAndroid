@@ -22,6 +22,7 @@ public class Preferences {
     public static final String RESTAURANT_KEY  = "restaurant";
     public static final String PREFERRED_CREDIT_CARD = "preferred_card";
     public static final String CREDIT_CARD = "credit_cards";
+    public static final String ACTUAL_LOCALE = "";
 
 
 

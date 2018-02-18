@@ -102,8 +102,20 @@ public class DataWebService extends DataStrategy  {
     }
 
     @Override
-    public void insertRating(DataRestaurantRating data, InteractDispacherRestaurantRating dispacher) {
+    public void insertRating(final DataRestaurantRating data, final InteractDispacherRestaurantRating dispacher) {
+        ObjectInsertRating inserter = retrofit.create(ObjectInsertRating.class);
+        Call call = inserter.insertRating(data);
+        call.enqueue(new Callback() {
+            @Override
+            public void onResponse(Call call, Response response) {
 
+            }
+
+            @Override
+            public void onFailure(Call call, Throwable t) {
+                dispacher.isError(t);
+            }
+        });
     }
 
     @Override

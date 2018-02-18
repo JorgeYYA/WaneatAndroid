@@ -22,6 +22,7 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -119,6 +120,14 @@ public class MainActivity extends AppCompatActivity implements
         });
 
     }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        finish();
+        startActivity(getIntent());
+    }
+
 
     @Override
     public void callQRActivity() {
@@ -284,6 +293,8 @@ public class MainActivity extends AppCompatActivity implements
             startActivity(new Intent(MainActivity.this, LoginActivity.class));
         } else if (id == R.id.nav_about) {
             ft.replace(R.id.fragment, AboutFragment.newInstance()).addToBackStack("MY_FRAGMENT");
+        }else if(id == R.id.ajustes){
+            startActivity(new Intent(MainActivity.this, AjustesActivity.class));
         }
 
         ft.commit();

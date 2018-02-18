@@ -41,4 +41,8 @@
     <string name="tagTlf">Teléfono</string>
     <string name="buttonCambios">GUARDAR CAMBIOS</string>
     <string name="profile">Perfil</string>
+    <string name="preffered_lang">Tu idioma favorito:</string>
+    <string name="idioma1">Español</string>
+    <string name="idioma2">Inglés</string>
+    <string name="hacer_pedido">Hacer pedido</string>
 </resources>

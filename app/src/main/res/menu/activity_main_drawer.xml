@@ -9,12 +9,12 @@
         <item
             android:id="@+id/nav_qr"
             android:icon="@drawable/qr"
-            android:title="Hacer pedido" />
+            android:title="@string/hacer_pedido" />
 
         <item
             android:id="@+id/nav_miperfil"
             android:icon="@drawable/miperfil"
-            android:title="Mi perfil" />
+            android:title="@string/profile" />
 
         <item
             android:id="@+id/nav_mispedidos"
@@ -37,6 +37,11 @@
 
     <group android:checkableBehavior="single"
         android:id="@+id/secondgrupo">
+
+        <item
+            android:id="@+id/ajustes"
+            android:icon="@drawable/about"
+            android:title="Ajustes" />
 
         <item
             android:id="@+id/nav_about"
