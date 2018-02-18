@@ -79,6 +79,14 @@
     <string name="fail">Login failed</string>
     <string name="failRegistro">Registry failure</string>
     <string name="modificarCorrecto">The information has been updated correctly</string>
+    <string name="cambiar_tarjeta">Change card</string>
+    <string name="pay">Go to pay</string>
+    <string name="tramitar">PROCESS ORDER</string>
+    <string name="otra_tarjeta">Add other card</string>
+    <string name="empty_cart">The cart is empty</string>
+    <string name="last_datos">FINISH WITH YOUR PERSONAL INFORMATION</string>
+    <string name="name">Name</string>
+    <string name="nif">NIF</string>
 
 
 </resources>

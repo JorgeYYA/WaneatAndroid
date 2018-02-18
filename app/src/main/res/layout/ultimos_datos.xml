@@ -11,7 +11,7 @@
         android:layout_marginTop="5dp"
         android:layout_weight="1"
         android:gravity="center"
-        android:text="TERMINE DE INTRODUCIR SUS DATOS"
+        android:text="@string/last_datos"
         android:textColor="@color/colorSecondaryDarkWaneat"
         android:textSize="18sp" />
 
@@ -22,7 +22,7 @@
         android:layout_margin="2dp"
         android:layout_weight="1"
         android:ems="10"
-        android:hint="Nombre"
+        android:hint="@string/name"
         android:inputType="textPersonName" />
 
     <EditText
@@ -32,7 +32,7 @@
         android:layout_margin="2dp"
         android:layout_weight="1"
         android:ems="10"
-        android:hint="NIF"
+        android:hint="@string/nif"
         android:inputType="textPersonName" />
 
     <EditText
@@ -42,6 +42,6 @@
         android:layout_margin="2dp"
         android:layout_weight="1"
         android:ems="10"
-        android:hint="Teléfono"
+        android:hint="@string/tagTlf"
         android:inputType="number" />
 </LinearLayout>

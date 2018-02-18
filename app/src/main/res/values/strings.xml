@@ -67,10 +67,8 @@
     <string name="addCard">Añadir tarjeta</string>
     <string name="changeCard">Cambiar tarjeta</string>
     <string name="guardar">Guardar</string>
-    <string name="cargandoTarda">Cargando...
-        (Podría tardar un rato)</string>
-    <string name="noConex">No se ha podido conectar,
-        comprueba tu conexión a internet</string>
+    <string name="cargandoTarda">Cargando... (Podría tardar un rato)</string>
+    <string name="noConex">No se ha podido conectar, comprueba tu conexión a internet</string>
     <string name="noPedidos">No hay pedidos registrados</string>
     <string name="todosLosDatos">Introduce todos los campos, por favor!</string>
     <string name="pedidoCorrecto">El pedido ha sido tramitado correctamente</string>
@@ -82,4 +80,12 @@
     <string name="fail">Fallo en inicio de sesión</string>
     <string name="failRegistro">Fallo en el registro</string>
     <string name="modificarCorrecto">Se ha actualizado la información correctamente</string>
+    <string name="cambiar_tarjeta">Cambiar tarjeta</string>
+    <string name="pay">Ir a pagar</string>
+    <string name="tramitar">TRAMITAR PEDIDO</string>
+    <string name="otra_tarjeta">Añadir otra tarjeta</string>
+    <string name="empty_cart">La cesta esta vacia</string>
+    <string name="last_datos"> TERMINE DE INTRODUCIR SUS DATOS</string>
+    <string name="name">Nombre</string>
+    <string name="nif">NIF</string>
 </resources>

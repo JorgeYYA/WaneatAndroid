@@ -61,7 +61,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="La cesta está vacía"
+                android:text="@string/empty_cart"
                 android:textAlignment="center"
                 android:textColor="@android:color/background_dark"
                 android:textSize="18sp"
@@ -96,7 +96,7 @@
                 android:layout_columnSpan="2"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
-                android:text="Tarjeta de crédito:"
+                android:text="@string/credit_card"
                 android:textColor="@android:color/black"
                 android:textSize="15sp"
                 android:visibility="visible" />
@@ -131,7 +131,7 @@
                 android:layout_weight="3"
                 android:background="@color/colorPrimaryDarkWaneat"
                 android:padding="5dp"
-                android:text="Cambiar tarjeta"
+                android:text="@string/cambiar_tarjeta"
                 android:visibility="visible" />
 
 
@@ -143,7 +143,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@color/colorPrimaryDarkWaneat"
-            android:text="IR A PAGAR"
+            android:text="@string/pay"
             android:visibility="gone" />
 
         <Button
@@ -152,7 +152,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@color/colorPrimaryDarkWaneat"
-            android:text="Tramitar Pedido"
+            android:text="@string/tramitar"
             android:visibility="gone" />
 
         <Button
@@ -161,7 +161,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@color/colorPrimaryDarkWaneat"
-            android:text="Añadir otra tarjeta"
+            android:text="@string/otra_tarjeta"
             android:visibility="gone" />
     </LinearLayout>
 </FrameLayout>

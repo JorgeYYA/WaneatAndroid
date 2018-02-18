@@ -80,6 +80,13 @@
     <string name="fail">Fallo en inicio de sesión</string>
     <string name="failRegistro">Fallo en el registro</string>
     <string name="modificarCorrecto">Se ha actualizado la información correctamente</string>
-
+    <string name="pay">Ir a pagar</string>
+    <string name="tramitar">TRAMITAR PEDIDO</string>
+    <string name="otra_tarjeta">Añadir otra tarjeta</string>
+    <string name="empty_cart">La cesta esta vacia</string>
+    <string name="last_datos"> TERMINE DE INTRODUCIR SUS DATOS</string>
+    <string name="name">Nombre</string>
+    <string name="nif">NIF</string>
+    <string name="cambiar_tarjeta">Cambiar tarjeta</string>
 
 </resources>
