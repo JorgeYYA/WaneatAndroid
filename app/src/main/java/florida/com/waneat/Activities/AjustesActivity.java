@@ -61,14 +61,20 @@ public class AjustesActivity extends AppCompatActivity {
 
     private void checkSelectedLang(){
         RadioGroup radioGroupLanguages2 = (RadioGroup) findViewById(R.id.radioGroupLang);
-        switch (Preferences.getString(this, Preferences.ACTUAL_LOCALE)) {
-            case "en":
-                (radioGroupLanguages2).check(R.id.english);
-                break;
-            case "es":
-                (radioGroupLanguages2).check(R.id.spanish);
-                break;
+        String locale = Preferences.getString(this, Preferences.ACTUAL_LOCALE);
+        if (locale != null) {
+            switch (locale) {
+                case "en":
+                    (radioGroupLanguages2).check(R.id.english);
+                    break;
+                case "es":
+                    (radioGroupLanguages2).check(R.id.spanish);
+                    break;
+            }
+        }else{
+
         }
+
     }
 
     private void exitApp(){
@@ -78,6 +84,10 @@ public class AjustesActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+        //ejemplo
+        getResources().getString(R.string.alreadyRegistered);
+
     }
 
     public void changeLanguage(String iso, Activity context) {

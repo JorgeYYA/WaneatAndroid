@@ -60,4 +60,26 @@
     <string name="nav_logout">Cerrar sesión</string>
     <string name="inicio">Inicio</string>
     <string name="informacion">Información</string>
+    <string name="error">Ha ocurrido un error</string>
+    <string name="infoRes">Información del restaurante recuperada correctamente</string>
+    <string name="conexFail">Ha fallado la conexión</string>
+    <string name="tarjetaNoGuardada">No tienes tarjetas guardadas</string>
+    <string name="addCard">Añadir tarjeta</string>
+    <string name="changeCard">Cambiar tarjeta</string>
+    <string name="guardar">Guardar</string>
+    <string name="cargandoTarda">Cargando...
+        (Podría tardar un rato)</string>
+    <string name="noConex">No se ha podido conectar,
+        comprueba tu conexión a internet</string>
+    <string name="noPedidos">No hay pedidos registrados</string>
+    <string name="todosLosDatos">Introduce todos los campos, por favor!</string>
+    <string name="pedidoCorrecto">El pedido ha sido tramitado correctamente</string>
+    <string name="add">Añadido: </string>
+    <string name="correct"> a la cesta correctamente</string>
+    <string name="datosIncorrectosTarjeta">Los datos de la tarjeta no son correctos</string>
+    <string name="cambiosGuardados">Cambios guardados</string>
+    <string name="datosIncorrectos">Datos incorrectos</string>
+    <string name="fail">Fallo en inicio de sesión</string>
+    <string name="failRegistro">Fallo en el registro</string>
+    <string name="modificarCorrecto">Se ha actualizado la información correctamente</string>
 </resources>
