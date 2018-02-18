@@ -70,6 +70,16 @@
     <string name="noConex">No se ha podido conectar,
         comprueba tu conexión a internet</string>
     <string name="noPedidos">No hay pedidos registrados</string>
+    <string name="todosLosDatos">Introduce todos los campos, por favor!</string>
+    <string name="pedidoCorrecto">El pedido ha sido tramitado correctamente</string>
+    <string name="add">Añadido: </string>
+    <string name="correct"> a la cesta correctamente</string>
+    <string name="datosIncorrectosTarjeta">Los datos de la tarjeta no son correctos</string>
+    <string name="cambiosGuardados">Cambios guardados</string>
+    <string name="datosIncorrectos">Datos incorrectos</string>
+    <string name="fail">Fallo en inicio de sesión</string>
+    <string name="failRegistro">Fallo en el registro</string>
+    <string name="modificarCorrecto">Se ha actualizado la información correctamente</string>
 
 
 </resources>

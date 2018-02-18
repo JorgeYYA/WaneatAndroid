@@ -69,5 +69,16 @@
     <string name="noConex">Unable to connect,
         check your internet connection</string>
     <string name="noPedidos">No orders registered</string>
+    <string name="todosLosDatos"> Enter all fields, please!</string>
+    <string name="pedidoCorrecto">The order has been processed correctly</string>
+    <string name="add">Add: </string>
+    <string name="correct"> to the basket correctly</string>
+    <string name="datosIncorrectosTarjeta">The data on the card is not correct</string>
+    <string name="cambiosGuardados">Changes saved</string>
+    <string name="datosIncorrectos">Incorrect data</string>
+    <string name="fail">Login failed</string>
+    <string name="failRegistro">Registry failure</string>
+    <string name="modificarCorrecto">The information has been updated correctly</string>
+
 
 </resources>

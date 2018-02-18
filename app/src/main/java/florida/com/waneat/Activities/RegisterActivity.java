@@ -1,15 +1,13 @@
 package florida.com.waneat.Activities;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import org.w3c.dom.Text;
 
 import florida.com.waneat.R;
 import florida.com.waneat.Services.UserService;
@@ -55,7 +53,7 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                if(nombreRegister.getText().toString() == "" || emailRegister.getText().toString() == "" || pwdRegister.getText().toString() == ""){
-                   Toast.makeText(RegisterActivity.this, "Introduce todos los campos, por favor!", Toast.LENGTH_SHORT).show();
+                   Toast.makeText(RegisterActivity.this, getResources().getString(R.string.todosLosDatos), Toast.LENGTH_SHORT).show();
                }else{
                    service.registerIn(nombreRegister.getText().toString(),emailRegister.getText().toString(),pwdRegister.getText().toString());
                    finish();

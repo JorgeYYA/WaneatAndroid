@@ -306,7 +306,7 @@ public class DialogFragment extends android.support.v4.app.DialogFragment{
 
         bbdd.child("pedido_"+clave).setValue(o);
 
-        Toast to = Toast.makeText(getActivity(), "El pedido ha sido tramitado correctamente", Toast.LENGTH_SHORT);
+        Toast to = Toast.makeText(getActivity(), getResources().getString(R.string.pedidoCorrecto), Toast.LENGTH_SHORT);
 
         to.setGravity(Gravity.CENTER,Gravity.CENTER,Gravity.CENTER);
 

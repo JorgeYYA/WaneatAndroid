@@ -93,11 +93,11 @@ public class UsuarioFragment extends android.support.v4.app.Fragment {
                 //actualizamos el usuario del json
                 Preferences.gsonToString(getContext(), user);
 
-                Toast.makeText(v.getContext(), "Cambios guardados", Toast.LENGTH_SHORT).show();
+                Toast.makeText(v.getContext(), getResources().getString(R.string.cambiosGuardados), Toast.LENGTH_SHORT).show();
             }
         });
 
-        getActivity().setTitle("Mi perfil");
+        getActivity().setTitle(getResources().getString(R.string.profile_header));
 
         return v;
     }

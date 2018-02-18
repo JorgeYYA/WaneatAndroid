@@ -3,28 +3,19 @@ package florida.com.waneat.Services;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
-import com.google.gson.reflect.TypeToken;
-
-import org.json.JSONObject;
-
-import java.lang.reflect.Type;
-
 import florida.com.waneat.Activities.LoginActivity;
 import florida.com.waneat.Activities.MainActivity;
-import florida.com.waneat.Activities.RegisterActivity;
 import florida.com.waneat.Api.DataLogin;
 import florida.com.waneat.Api.DataStrategy;
 import florida.com.waneat.Api.DataWebService;
 import florida.com.waneat.Api.RegisterData;
 import florida.com.waneat.Models.User;
 import florida.com.waneat.Preferences.Preferences;
+import florida.com.waneat.R;
 
 /**
  * Created by sergiomoreno on 6/2/18.
@@ -67,7 +58,6 @@ public class UserService {
      * Método que nos permite cerrar sesión del usuario
      */
     public void signOut(){
-        Toast.makeText(context, "Cerrando sesión", Toast.LENGTH_SHORT).show();
         Preferences.clean(context);
         FragmentManager fragmentManager = activity.getSupportFragmentManager();
         fragmentManager.popBackStackImmediate("MY_FRAGMENT", FragmentManager.POP_BACK_STACK_INCLUSIVE);
@@ -83,20 +73,19 @@ public class UserService {
                 public void login(User user) {
 
                     if(user.getEmail() != null){
-                        Toast.makeText(context, "Inicio de sesión correcto", Toast.LENGTH_SHORT).show();
                         Preferences.gsonToString(context, user);
                         Preferences.setBoolean(context, Preferences.SIGNED_IN, true);
                         Intent i = new Intent(context,MainActivity.class);
                         i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         context.startActivity(i);
                     }else{
-                        Toast.makeText(context, "Datos incorrectos", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, context.getResources().getString(R.string.datosIncorrectos), Toast.LENGTH_SHORT).show();
                     }
                 }
 
                 @Override
                 public void isError(Throwable t) {
-                    Toast.makeText(context, "Fallo en inicio de sesión", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, context.getResources().getString(R.string.fail), Toast.LENGTH_SHORT).show();
                     Log.d("TAG", "login: no entra");
 
                 }
@@ -116,13 +105,12 @@ public class UserService {
             api.register(new RegisterData(nombre, correo, contraseña), new DataStrategy.InteractDispacherRegister() {
                 @Override
                 public void register(User user) {
-                    Toast.makeText(context, "Registro completado", Toast.LENGTH_SHORT).show();
                     context.startActivity(new Intent(context, LoginActivity.class));
                 }
 
                 @Override
                 public void isError(Throwable t) {
-                    Toast.makeText(context, "Fallo en el registro", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, context.getResources().getString(R.string.failRegistro), Toast.LENGTH_SHORT).show();
                 }
             });
 
@@ -137,12 +125,12 @@ public class UserService {
             api.update(user, new DataStrategy.InteractDispacherUpdate() {
                 @Override
                 public void update(User user) {
-                    Toast.makeText(context, "Se ha actualizado la información correctamente", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, context.getResources().getString(R.string.modificarCorrecto), Toast.LENGTH_SHORT).show();
                 }
 
                 @Override
                 public void isError(Throwable t) {
-                    Toast.makeText(context, "La actualización ha fallado", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, context.getResources().getString(R.string.error), Toast.LENGTH_SHORT).show();
                 }
             });
         }catch(Exception e){

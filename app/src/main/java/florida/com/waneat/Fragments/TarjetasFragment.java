@@ -187,7 +187,7 @@ public class TarjetasFragment extends Fragment {
 
         }else{
 
-            Toast.makeText(getActivity(), "Los datos de la tarjeta no son correctos", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), getResources().getString(R.string.datosIncorrectosTarjeta), Toast.LENGTH_SHORT).show();
 
         }
 
