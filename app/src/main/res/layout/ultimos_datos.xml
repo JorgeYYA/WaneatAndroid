@@ -23,6 +23,7 @@
         android:layout_weight="1"
         android:ems="10"
         android:hint="@string/name"
+        android:text="@string/name"
         android:inputType="textPersonName" />
 
     <EditText
@@ -33,6 +34,7 @@
         android:layout_weight="1"
         android:ems="10"
         android:hint="@string/nif"
+        android:text="@string/nif"
         android:inputType="textPersonName" />
 
     <EditText
@@ -43,5 +45,6 @@
         android:layout_weight="1"
         android:ems="10"
         android:hint="@string/tagTlf"
+        android:text="@string/tagTlf"
         android:inputType="number" />
 </LinearLayout>

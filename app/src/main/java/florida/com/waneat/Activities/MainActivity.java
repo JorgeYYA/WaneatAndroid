@@ -296,10 +296,9 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     @Override
-    protected void onRestart() {
-        super.onRestart();
-        finish();
-        startActivity(getIntent());
+    protected void onResume() {
+        super.onResume();
+
     }
 
     @Override

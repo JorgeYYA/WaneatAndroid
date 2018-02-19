@@ -103,8 +103,7 @@ public class QRActivity extends AppCompatActivity implements QRCodeReaderView.On
             public void getRestaurant(Restaurant restaurant) {
                 Toast.makeText(QRActivity.this, getResources().getString(R.string.infoRes), Toast.LENGTH_SHORT).show();
                 Preferences.restaurantToString(QRActivity.this, restaurant);
-
-                Intent returnIntent = new Intent();
+                Intent returnIntent = new Intent(QRActivity.this, MainActivity.class);
                 returnIntent.putExtra("read_qr","readen");
                 setResult(MainActivity.RESULT_OK,returnIntent);
                 finish();
@@ -126,8 +125,6 @@ public class QRActivity extends AppCompatActivity implements QRCodeReaderView.On
         qrCodeReaderView.setBackCamera();
 
         ActivityCompat.requestPermissions(QRActivity.this, new String[]{Manifest.permission.CAMERA}, 1);
-
-        qrCodeReaderView.startCamera();
 
     }
 

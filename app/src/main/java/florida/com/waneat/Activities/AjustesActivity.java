@@ -82,11 +82,11 @@ public class AjustesActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 finish();
+                Intent intent = new Intent(AjustesActivity.this, MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
             }
         });
-
-        //ejemplo
-        getResources().getString(R.string.alreadyRegistered);
 
     }
 
@@ -112,6 +112,14 @@ public class AjustesActivity extends AppCompatActivity {
         overridePendingTransition(0, 0);
         startActivity(intent);
         finish();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent(AjustesActivity.this, MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
     }
 
 }

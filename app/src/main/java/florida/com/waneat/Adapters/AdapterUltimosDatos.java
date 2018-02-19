@@ -27,7 +27,6 @@ public class AdapterUltimosDatos  extends RecyclerView.Adapter<AdapterUltimosDat
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.ultimos_datos, parent, false);
 
-
         return new MyViewHolder(itemView);
     }
 
